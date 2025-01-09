@@ -1,0 +1,10 @@
+.rd-box {
+    background-color: #FFFFFF;
+    border-radius: 30px;
+}
+
+.vrule {
+    width: 3px;
+    height: 100%;
+    border-radius: 1.5px;
+}

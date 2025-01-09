@@ -19,3 +19,68 @@
     src: url('../assets/fonts/inter-v18-latin-700.woff2') format('woff2');
     /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
+
+.f1 {
+    font-size: 61px;
+    font-weight: 700;
+}
+
+.f2 {
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.f3 {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.f4 {
+    font-size: 27px;
+    font-weight: 400;
+}
+
+.f5 {
+    font-size: 64px;
+    font-weight: 600;
+}
+
+.f6 {
+    font-size: 21px;
+    font-weight: 700;
+}
+
+.f7 {
+    font-size: 47px;
+    font-weight: 500;
+}
+
+.f8 {
+    font-size: 64px;
+    font-weight: 700;
+}
+
+.f9 {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.f10 {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.f11 {
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.f12 {
+    font-size: 23px;
+    font-weight: 400;
+}
+
+.f13 {
+    font-size: 19px;
+    font-weight: 400;
+}

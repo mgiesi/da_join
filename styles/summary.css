@@ -1,0 +1,17 @@
+.summary-box-1 {
+    display: flex;
+    justify-content: center;
+}
+
+.summary-box-icon {
+    width: 69px;
+    height: 69px;
+    border-radius: 50%;
+}
+
+.summary-box-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
