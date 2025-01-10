@@ -1,0 +1,128 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  margin: 0;
+  height: 100vh;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10px 20px;
+}
+
+.logo img {
+  width: 100px;
+  height: 120px;
+}
+
+.login-box {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px 30px;
+  text-align: left;
+}
+
+.login-box h2 {
+  margin: 0;
+  color: #333;
+  text-align: center;
+}
+
+.login-box form {
+  margin-top: 20px;
+}
+
+.login-box input[type="email"],
+.login-box input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.login-box-button {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: none;
+  background-color: #333;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-left: 25px;
+  font-weight: bold;
+}
+
+.login-box-button:hover {
+  background-color: #555;
+}
+
+.login-box-button2 {
+  background-color: #eee;
+  color: #333;
+  border: 1px solid #333;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  margin-right: 25px;
+  font-weight: bold;
+}
+
+.login-box-button2:hover {
+  background-color: #ddd;
+}
+
+footer {
+  font-size: 12px;
+  color: #777;
+  margin-top: 150px;
+  text-align: center;
+}
+
+footer a {
+  color: #777;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+.loginBtn {
+  display: flex;
+  gap: 35px;
+}
+
+.NotAJoinUser-box {
+  display: flex;
+  width: 280px;
+  height: 50px;
+  margin: 24px;
+}
+
+.NotAJoinUser-box p {
+  margin: 0;
+  padding-top: 12px;
+}
+
+.NotAJoinUser-box button {
+  width: 80px;
+}
+
+.navLogIn {
+  display: flex;
+  justify-content: space-between;
+}
