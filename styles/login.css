@@ -46,6 +46,7 @@ body {
 }
 
 .login-box input[type="email"],
+.login-box input[type="text"],
 .login-box input[type="password"] {
   width: 95%;
   padding: 10px;
@@ -111,6 +112,7 @@ footer a:hover {
 .loginBtn {
   display: flex;
   gap: 35px;
+  margin-top: 36px;
 }
 
 .NotAJoinUser-box {
@@ -141,4 +143,56 @@ footer a:hover {
 }
 #inputLock {
   background: white url(/assets/icons/lock.png) right no-repeat;
+}
+#inputName {
+  background: white url(/assets/icons/person.png) right no-repeat;
+}
+
+.formWidth {
+  width: 400px;
+}
+
+.checkBoxPP {
+  display: flex;
+}
+
+.underSignUp {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.signUpBtn {
+  margin-bottom: 10px;
+  border: none;
+  background-color: #333;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-left: 25px;
+  font-weight: bolder;
+  padding: 12px;
+  margin: 10px;
+}
+
+.signUpBtn:hover {
+  background-color: #29abe2;
+  box-shadow: 0px 3px 3px #33333359;
+}
+
+.checkBoxPP a {
+  color: #29abe2;
+  text-decoration: none;
+}
+.checkBoxPP input {
+  margin-right: 12px;
+}
+
+.checkBoxPP a:hover {
+  text-decoration: underline;
+}
+
+.footerSignUp {
+  margin-top: 150px;
 }
