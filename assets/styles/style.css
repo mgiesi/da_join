@@ -1,7 +1,5 @@
 body {
-    font-family: "Inter", serif;
-
+    font-family: "Inter", serif !important;
     background-color: #F6F7F8;
-
     margin: 0;
 }
