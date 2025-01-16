@@ -1,0 +1,86 @@
+{
+    "tasks": {
+        "1": {
+            "title": "Title 1",
+            "description": "Description 1",
+            "assignedTo": {
+                "contact1": "1",
+                "contact2": "2"
+            },
+            "dueDate": "2025-01-30",
+            "prio": "urgent",
+            "category": "task",
+            "subtasks": {
+                "subtask1": {
+                    "name": "Sub Task 1",
+                    "done": false
+                },
+                "subtask2": {
+                    "name": "Sub Task 2",
+                    "done": false
+                }
+            }
+        },
+        "2": {
+            "title": "Title 2",
+            "description": "Description 2",
+            "assignedTo": {
+                "contact1": "2"
+            },
+            "dueDate": "2025-02-02",
+            "prio": "low",
+            "category": "userstory",
+            "subtasks": {
+                "subtask1": {
+                    "name": "Sub Task 1",
+                    "done": true
+                }
+            }
+        },
+        "3": {
+            "title": "Title 3",
+            "description": "Description 3",
+            "assignedTo": {
+                "contact1": "2"
+            },
+            "dueDate": "2025-02-12",
+            "prio": "medium",
+            "category": "userstory",
+            "subtasks": {}
+        }
+    },
+    "boards": {
+        "todo": {
+            "tasks": {
+                "task1": "1",
+                "task2": "4",
+                "task3": "5"
+            }
+        },
+        "inprogress": {
+            "tasks": {
+                "task1": "2"
+            }
+        },
+        "awaitfeedback": {
+            "tasks": {
+                "task1": "3"
+            }
+        },
+        "done": {
+            "tasks": {}
+        }
+    },
+    "contacts": {
+        "contact1": {
+            "name": "Anton Mayer",
+            "phone": "+49 111 222 3333",
+            "email": "antonm@gmail.com"
+        },
+        "contact2": {
+            "name": "David Bergmann",
+            "phone": "+49 111 222 4444",
+            "email": "davidberg@gmail.com"
+        }
+    }
+}
