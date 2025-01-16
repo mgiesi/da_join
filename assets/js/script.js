@@ -69,3 +69,33 @@ function addMenuClickListeners() {
         });
     });
 }
+
+function validateFormField(inputElement) {
+    const formGroup = inputElement.closest('.form-group');
+
+    if (!inputElement.value.trim()) {
+        formGroup.classList.add('error');
+        return false;
+    } else {
+        formGroup.classList.remove('error');
+        return true;
+    }
+}
+
+// Example usage
+document.addEventListener('DOMContentLoaded', () => {
+    const titleInput = document.getElementById('title');
+
+    titleInput.addEventListener('blur', (e) => {
+        validateFormField(e.target);
+    });
+
+    // For form submission
+    document.querySelector('.add-task-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const isValid = validateFormField(titleInput);
+        if (isValid) {
+            // Proceed with form submission
+        }
+    });
+});
