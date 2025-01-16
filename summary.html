@@ -15,9 +15,10 @@
     <link rel="stylesheet" href="./assets/styles/summary.css">
 
     <script src="./assets/js/script.js"></script>
+    <script src="./assets/js/summary.js"></script>
 </head>
 
-<body onload="init()">
+<body onload="init(); initSummary()">
     <header w3-include-html=".\assets\templates\header.html"></header>
     <div class="main-container">
         <div w3-include-html=".\assets\templates\side-menu.html"></div>
@@ -88,8 +89,8 @@
                     </div>
                 </div>
                 <div class="summary-greeting">
-                    <span class="f7">Good morning,</span>
-                    <span class="f8 tc-blue">Markus Giesinger</span>
+                    <span id="summary-greeting-text" class="f7">Good morning,</span>
+                    <span id="summary-greeting-name" class="f8 tc-blue">Markus Giesinger</span>
                 </div>
             </div>
         </div>
