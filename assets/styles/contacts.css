@@ -1,8 +1,4 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+
 
 a {
   font-family: 'Inter', sans-serif;
@@ -18,12 +14,7 @@ h2 {
   text-decoration-skip-ink: none;
 }
 
-.main-container {
-  display: flex;
-  padding-left: 232px;
-  background: rgba(246, 247, 248, 1);
-  height: calc(100vh - 70px);
-}
+
 
 .contacts-content {
   display: flex;
