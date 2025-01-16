@@ -12,28 +12,12 @@
     <link rel="stylesheet" href="./assets/styles/fonts.css">
     <link rel="stylesheet" href="./assets/styles/components.css">
     <link rel="stylesheet" href="./assets/styles/layout.css">
+
     <link rel="stylesheet" href="./assets/styles/summary.css">
 
-    <script>
-        async function includeHTML() {
-            let includeElements = document.querySelectorAll('[w3-include-html]');
-
-            for (let i = 0; i < includeElements.length; i++) {
-                const element = includeElements[i];
-                file = element.getAttribute('w3-include-html');
-                let resp = await fetch(file);
-
-                if (resp.ok) {
-                    element.innerHTML = await resp.text();
-                } else {
-                    element.innerHTML = 'Page not found';
-                }
-            }
-        }
-    </script>
 </head>
 
-<body onload="includeHTML()">
+<body onload="init()">
     <header w3-include-html=".\assets\templates\header.html"></header>
 
     <div class="main-container">
@@ -58,6 +42,9 @@
             </div>
         </div>
     </div>
+
+    <script src="./assets/js/script.js"></script>
+
 </body>
 
 </html>

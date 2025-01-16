@@ -2,4 +2,5 @@ body {
     font-family: "Inter", serif !important;
     background-color: #F6F7F8;
     margin: 0;
+    height: 100vh;
 }
