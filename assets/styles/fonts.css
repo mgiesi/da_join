@@ -5,7 +5,7 @@
   font-family: "Inter";
   font-style: normal;
   font-weight: 400;
-  src: url("../assets/fonts/inter-v18-latin-regular.woff2") format("woff2");
+  src: url("./../fonts/inter-v18-latin-regular.woff2") format("woff2");
   /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
@@ -16,11 +16,15 @@
   font-family: "Inter";
   font-style: normal;
   font-weight: 700;
-  src: url("../assets/fonts/inter-v18-latin-700.woff2") format("woff2");
+  src: url("./../fonts/inter-v18-latin-700.woff2") format("woff2");
   /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
-.f1 .f1 {
+.text-center {
+  text-align: center;
+}
+
+.f1 {
   font-size: 61px;
   font-weight: 700;
 }
