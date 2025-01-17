@@ -1,10 +1,24 @@
+.bgc-gray {
+    background-color: #2A3647;
+}
+
+.bgc-light-gray {
+    background-color: #D1D1D1;
+}
+
+.bgc-blue {
+    background-color: #29ABE2;
+}
+
+.bgc-red {
+    background-color: #FF3D00;
+}
+
+.tc-blue {
+    color: #29ABE2;
+}
+
 .rd-box {
     background-color: #FFFFFF;
     border-radius: 30px;
-}
-
-.vrule {
-    width: 3px;
-    height: 100%;
-    border-radius: 1.5px;
 }

@@ -3,12 +3,17 @@ body {
     background-color: #F6F7F8;
     margin: 0;
 }
+
+a {
+    font-family: 'Inter', sans-serif;
+}
+
 .side-menu {
     position: fixed;
     left: 0;
     top: 0;
     width: 232px;
-    height: 85vh;
+    height: 100vh;
     background-color: #2A3647;
     display: flex;
     flex-direction: column;
@@ -69,6 +74,7 @@ body {
 }
 
 .footer-links a {
+    font-family: 'Inter', sans-serif !important;
     color: #A8A8A8;
     text-decoration: none;
     padding: 8px;

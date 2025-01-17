@@ -1,51 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contact</title>
-    <link rel="stylesheet" href="./styles/contacts.css" />
-    <link rel="stylesheet" href="./styles/fonts.css" />
-  </head>
-  <body>
-    <div class="contact-list">
-      <button class="addNewCon f6">
-        Add new Contact
-        <img class="btnImg" src="./assets/icons/person_add.png" alt="" />
-      </button>
-      <h2>Contacts</h2>
-      <div class="contact active">
-        <div class="">AM</div>
-        <div>
-          <strong>Anton Mayer</strong>
-          <p>anton@gmail.com</p>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacts - Join</title>
+
+  <link rel="shortcut icon" href="./assets/icons/favicon.png" type="image/x-icon">
+  <link rel="stylesheet" href="./assets/styles/style.css">
+  <link rel="stylesheet" href="./assets/styles/fonts.css">
+  <link rel="stylesheet" href="./assets/styles/components.css">
+  <link rel="stylesheet" href="./assets/styles/layout.css">
+  <link rel="stylesheet" href="./assets/styles/contacts.css">
+
+  <script src="./assets/js/script.js"></script>
+</head>
+
+<body onload="init()">
+  <header w3-include-html=".\assets\templates\header.html"></header>
+  <div class="main-container">
+    <div w3-include-html=".\assets\templates\side-menu.html"></div>
+
+    <div class="contacts-content">
+      <!-- Contact List Section -->
+      <div class="contact-list">
+        <button class="add-contact-btn">
+          Add new contact
+          <img src="./assets/icons/person_add.png" alt="Add contact">
+        </button>
+
+        <!-- Alphabetical Sections -->
+        <div class="contact-sections">
+          <div class="contact-section">
+            <div class="section-header">A</div>
+            <div class="contact-divider"></div>
+
+            <div class="contact">
+              <div class="contact-avatar" style="background-color: #FF7A00">
+                <span>AM</span>
+              </div>
+              <div class="contact-details">
+                <span class="contact-name">Anton Mayer</span>
+                <span class="contact-email">anton@gmail.com</span>
+              </div>
+            </div>
+
+            <div class="contact">
+              <div class="contact-avatar" style="background-color: #9327FF">
+                <span>AS</span>
+              </div>
+              <div class="contact-details">
+                <span class="contact-name">Anja Schulz</span>
+                <span class="contact-email">schulz@hotmail.com</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-section">
+            <div class="section-header">B</div>
+            <div class="contact-divider"></div>
+
+            <div class="contact">
+              <div class="contact-avatar" style="background-color: #6E52FF">
+                <span>BZ</span>
+              </div>
+              <div class="contact-details">
+                <span class="contact-name">Benedikt Ziegler</span>
+                <span class="contact-email">benedikt@gmail.com</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="contact">
-        <div class="">AS</div>
-        <div>
-          <strong>Anja Schulz</strong>
-          <p>schulz@hotmail.com</p>
+
+      <!-- Contact Info Section -->
+      <div class="contact-info">
+        <!-- Header -->
+        <div class="contact-info-header">
+          <h1>Contacts</h1>
+          <div class="header-divider"></div>
+          <span class="header-subtitle">Better with a team</span>
         </div>
-      </div>
-      <div class="contact">
-        <div class="">BZ</div>
-        <div>
-          <strong>Benedikt Ziegler</strong>
-          <p>benedikt@gmail.com</p>
+
+        <!-- Contact Details -->
+        <div class="contact-details">
+          <!-- Profile Section -->
+          <div class="profile-section">
+            <div class="contact-avatar large" style="background-color: #FF7A00">
+              <span>AM</span>
+            </div>
+
+            <div class="profile-info">
+              <h2>Anton Mayer</h2>
+              <div class="profile-actions">
+                <button class="action-link" onclick="editContact()">
+                  <img src="./assets/icons/edit.svg" alt="" class="action-icon">
+                  Edit
+                </button>
+                <button class="action-link">
+                  <img src="./assets/icons/delete.svg" alt="" class="action-icon">
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact Information -->
+          <div class="contact-information">
+            <h3>Contact Information</h3>
+
+            <div class="info-group">
+              <label class="info-label">Email</label>
+              <a href="mailto:anton@gmail.com" class="info-value">antom@gmail.com</a>
+            </div>
+
+            <div class="info-group">
+              <label class="info-label">Phone</label>
+              <a href="tel:+491111111111" class="info-value phone">+49 1111 111 11 1</a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <div class="contact-info">
-      <h1>Contacts <span>| Better with a team</span></h1>
-      <div class="avatar">AM</div>
-      <h2>Anton Mayer</h2>
-      <button>Edit</button>
-      <button>Delete</button>
-      <div>
-        <p><strong>Email:</strong> anton@gmail.com</p>
-        <p><strong>Phone:</strong> +49 1111 111 11 1</p>
-      </div>
-    </div>
-  </body>
+  </div>
+</body>
+
 </html>
