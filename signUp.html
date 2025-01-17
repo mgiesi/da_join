@@ -6,6 +6,7 @@
     <title>Join</title>
     <link rel="stylesheet" href="./assets/styles/login.css">
     <link rel="stylesheet" href="./assets/styles/fonts.css">
+    <script src="./assets/js/login.js"></script>
   </head>
 
   <body>
@@ -14,14 +15,16 @@
       <img src="./assets/icons/Capa 2.png" alt="Logo" />
     </div>
 </div>
-<div class="overlay" id="overlay">
+<div class="overlay dNone" id="overlay">
   <div class="message">
     You signed up successfully
   </div>
 </div>
     <div class="container">
       <div class="login-box">
-        <h2 class="f1 loginFont">Sign up</h2>
+        <div class="topBox">
+        <img class="imgArrow" onclick="navigateToIndex()" src="./assets/icons/arrow-left-line.svg" alt="">
+        <h2 class="f1 loginFont">Sign up</h2></div>
         <form class="formWidth">
           <input id="inputName" type="text" placeholder="Name">
           <input id="inputMail" type="email" placeholder="Email">
