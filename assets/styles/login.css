@@ -55,6 +55,16 @@ body {
   border-radius: 5px;
 }
 
+input[type="email"]:focus {
+  outline-width: 0;
+  border: 2px solid #29abe2;
+}
+
+input[type="password"]:focus {
+  outline-width: 0;
+  border: 2px solid #29abe2;
+}
+
 .login-box-button {
   width: 50%;
   margin-bottom: 10px;
@@ -140,12 +150,18 @@ footer a:hover {
 
 #inputMail {
   background: white url(/assets/icons/mail.png) right no-repeat;
+  background-position: calc(100% - 15px) center;
+  padding-right: 20px;
 }
 #inputLock {
   background: white url(/assets/icons/lock.png) right no-repeat;
+  background-position: calc(100% - 15px) center;
+  padding-right: 20px;
 }
 #inputName {
   background: white url(/assets/icons/person.png) right no-repeat;
+  background-position: calc(100% - 15px) center;
+  padding-right: 20px;
 }
 
 .formWidth {
