@@ -10,7 +10,8 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
-  width: 100%;
+  width: 652px;
+  height: 449px;
 }
 
 .logo {
@@ -23,16 +24,25 @@ body {
 }
 
 .logo img {
-  width: 100px;
-  height: 120px;
+  width: 80px;
+  height: 100px;
 }
 
 .login-box {
   background-color: #ffffff;
-  border-radius: 8px;
+  border-radius: 16px;
   padding: 20px 30px;
   text-align: left;
   margin-top: 36px;
+  padding-right: 100px;
+  padding-left: 100px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.borderSign {
+  padding-right: 50px;
+  padding-left: 50px;
 }
 
 .login-box h2 {
@@ -83,7 +93,7 @@ input[type="password"]:focus {
 }
 
 .login-box-button2 {
-  background-color: #eee;
+  background-color: white;
   color: #333;
   border: 1px solid #333;
   width: 100%;
@@ -103,7 +113,7 @@ input[type="password"]:focus {
 footer {
   font-size: 16px;
   color: #777;
-  margin-top: 300px;
+  margin-top: 60px;
   text-align: center;
 }
 
@@ -131,7 +141,7 @@ footer a:hover {
   height: 50px;
   margin: 24px;
   margin-top: 50px;
-  margin-right: 50px;
+  margin-right: 175px;
 }
 
 .NotAJoinUser-box p {
@@ -210,7 +220,7 @@ footer a:hover {
 }
 
 .footerSignUp {
-  margin-top: 150px;
+  margin-top: 50px;
 }
 
 .overlay {
@@ -262,4 +272,9 @@ footer a:hover {
 
 .imgArrow {
   cursor: pointer;
+}
+
+.flexCenter {
+  display: flex;
+  justify-content: center;
 }
