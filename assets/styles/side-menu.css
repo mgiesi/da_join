@@ -12,12 +12,14 @@ a {
     position: fixed;
     left: 0;
     top: 0;
-    width: 232px;
+    width: 170px;
+    /* Reduced from 232px to match design */
     height: 100vh;
     background-color: #2A3647;
     display: flex;
     flex-direction: column;
-    padding: 64px 0;
+    padding: 32px 0;
+    /* Reduced top padding */
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -25,28 +27,48 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 103px;
+    margin-bottom: 64px;
+    /* Reduced spacing */
+    padding: 0 16px;
+}
+
+.logo img {
+    width: 100px;
+    /* Adjust logo size */
+    height: auto;
 }
 
 .menu-items {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 8px;
+    /* Reduced gap between items */
 }
 
 .menu-button {
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 8px 56px;
+    gap: 12px;
+    padding: 8px 32px;
+    /* Adjusted padding */
     text-decoration: none;
     color: #CDCDCD;
-    height: 46px;
+    height: 40px;
+    /* Reduced height */
     transition: all 0.2s ease-in-out;
 }
 
-.menu-button a{
-        font-family: "Inter", serif;
+.menu-button img {
+    width: 24px;
+    /* Reduced icon size */
+    height: 24px;
+    object-fit: contain;
+}
+
+.menu-button span {
+    font-size: 14px;
+    /* Added font size */
+    white-space: nowrap;
 }
 
 .menu-button:hover {
@@ -59,25 +81,22 @@ a {
     color: white;
 }
 
-.menu-button img {
-    width: 30px;
-    height: 30px;
-    object-fit: contain;
-}
-
 .footer-links {
     margin-top: auto;
     display: flex;
     flex-direction: column;
-    gap: 4px;
-    padding-left: 52px;
+    gap: 8px;
+    padding: 0 32px;
+    /* Adjusted padding */
 }
 
 .footer-links a {
     font-family: 'Inter', sans-serif !important;
     color: #A8A8A8;
     text-decoration: none;
-    padding: 8px;
+    font-size: 14px;
+    /* Added font size */
+    padding: 4px 0;
     transition: color 0.2s ease-in-out;
 }
 

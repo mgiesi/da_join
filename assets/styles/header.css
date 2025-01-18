@@ -1,24 +1,19 @@
 .header {
-    position: relative;
-        left: 0;
-        top: 0;
-        bottom: 0;
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 10px 40px 10px 348px;
-        width: -webkit-fill-available;
-        height: 70px;
-        background-color: #FFFFFF;
-        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    position: fixed;
+    left: 170px;
+    top: 0;
+    right: 0;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    background-color: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+    z-index: 100;
 }
 
 .header-title {
-    font-family: 'Inter', sans-serif;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 24px;
     color: #000000;
 }
 
@@ -34,42 +29,49 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
+}
+
+.icon-help img {
+    width: 24px;
+    height: 24px;
 }
 
 .user-profile {
     position: relative;
-    width: 56px;
-    height: 56px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Inter', sans-serif;
-}
-
-.user-profile-initials {
-    width: 48px;
-    height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    position: absolute;
-    top: 4px;
-    left: 6px;
-    font-family: 'Inter', sans-serif;
-    font-weight: 700;
-}
-
-.user-profile-initials svg {
-    width: 34px;
-    height: 25px;
-    fill: #29ABE2;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
 }
 
 .user-profile-border {
-    width: 56px;
-    height: 56px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     border: 3px solid #2A3647;
+    /* Increased border width and adjusted color */
+    border-radius: 50%;
+    box-shadow: 0 0 0 2px white;
+    /* Added white outline to make border stand out */
+}
+
+.user-profile-initials {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 50%;
     background-color: white;
+}
+
+.user-profile-initials span {
+    color: #29ABE2;
+    font-weight: 700;
+    font-size: 14px;
 }
