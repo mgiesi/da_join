@@ -12,7 +12,7 @@
   <body>
     <div class="navLogIn">
     <div class="logo">
-      <img src="./assets/icons/Capa 2.png" alt="Logo" />
+      <img id="logo" src="./assets/icons/Capa 2.png" alt="Logo" />
     </div>
 </div>
 <div class="overlay dNone" id="overlay">
@@ -26,13 +26,13 @@
         <img class="imgArrow" onclick="navigateToIndex()" src="./assets/icons/arrow-left-line.svg" alt="">
         <h2 class="f1 loginFont">Sign up</h2></div>
         <form class="formWidth">
-          <input id="inputName" type="text" placeholder="Name">
+          <input id="inputName" type="email" placeholder="Name">
           <input id="inputMail" type="email" placeholder="Email">
           <input id="inputLock" type="password" placeholder="Password">
           <input id="inputLock" type="password" placeholder="Confirm Password">
           <div class="underSignUp">
           <div class="checkBoxPP"> <input type="checkbox"><p>I accept the <a href="">Privacy Policy</a></p></div> 
-          <button onclick="showMessage()" class="f6 signUpBtn" type="submit">Sign up</button>
+          <button onclick="showMessage(event)" class="f6 signUpBtn">Sign up</button>
         </div>
         </form>
     </div>

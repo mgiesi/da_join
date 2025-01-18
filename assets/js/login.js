@@ -10,6 +10,11 @@ function navigateToSummary() {
   window.location.href = "summary.html";
 }
 
-function showMessage() {
+function showMessage(event) {
+  event.preventDefault();
   document.getElementById("overlay").classList.remove("dNone");
+  overlay.classList.add("animate");
+  setTimeout(function () {
+    window.location.href = "index.html";
+  }, 2000);
 }

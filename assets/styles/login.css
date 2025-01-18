@@ -214,9 +214,10 @@ footer a:hover {
 }
 
 .overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
+  position: absolute;
+  bottom: -50px;
+  left: 50%;
+  transform: translateX(-50%);
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.2);
@@ -232,6 +233,21 @@ footer a:hover {
   padding: 20px;
   background-color: #222;
   border-radius: 10px;
+}
+
+.overlay.animate {
+  animation: slideIn 1s forwards;
+}
+
+@keyframes slideIn {
+  from {
+    bottom: -50px;
+    opacity: 0;
+  }
+  to {
+    bottom: 0%;
+    opacity: 1;
+  }
 }
 
 .dNone {
