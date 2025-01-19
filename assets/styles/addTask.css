@@ -5,17 +5,13 @@
     background-color: rgb(246, 247, 248);
     position: relative;
     padding-left: 232px;
-    /* Width of sidebar */
     padding-top: 96px;
-    /* Height of header */
 }
 
 .add-task-content {
     width: 100%;
     padding: 32px;
     max-width: 1208px;
-    /* 1440px - 232px sidebar */
-    margin: 0 auto;
 }
 
 .add-task-header {
@@ -34,7 +30,6 @@ h1 {
 
 .add-task-form {
     max-width: 1000px;
-    margin: 0 auto;
 }
 
 .form-columns {
@@ -118,6 +113,7 @@ h1 {
 
 .priority-btn:hover {
     transform: scale(1.02);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3);
 }
 
 .priority-btn.active[data-priority="urgent"] {
