@@ -342,6 +342,20 @@ h2 {
   border-radius: 10px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   overflow: hidden;
+  border-radius: 30px;
+}
+
+.overlay-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
 }
 
 .overlay-left {
@@ -383,19 +397,23 @@ h2 {
   margin-left: 10px;
 }
 
-.overlay-left h1 {
+.overlay-left {
   font-size: 36px;
   margin: 0;
 }
 
-.overlay-left p {
+.overlay-left {
   font-size: 16px;
-  margin: 10px 0 30px;
+}
+
+.hrStyle {
+  width: 50%;
 }
 
 .overlay-left hr {
-  width: 100%;
-  border: 1px solid #354250;
+  width: 25%;
+  border: 1px solid #29abe2;
+  margin-top: 16px;
 }
 
 .overlay-right {
@@ -411,37 +429,36 @@ h2 {
   font-size: 24px;
   color: #333;
   cursor: pointer;
+  margin: 24px;
 }
 
 .form-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: center;
   align-items: center;
+  gap: 70px;
+  margin-top: 110px;
 }
 
 .avatar {
-  width: 100px;
-  height: 100px;
-  background: #f4f4f4;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 50px;
-  color: #bbb;
-  margin-bottom: 30px;
+  margin-bottom: 100px;
+}
+
+.form-container img {
+  width: 120px;
+  height: 120px;
 }
 
 .form-group {
   position: relative;
-  width: 100%;
-  max-width: 400px;
-  margin-bottom: 20px;
+  width: 422px;
+  margin-bottom: 24px;
 }
 
 .form-group input {
   width: 100%;
-  padding: 10px 40px;
+  padding: 16px;
   border: 1px solid #ddd;
   border-radius: 5px;
   font-size: 16px;
@@ -456,14 +473,50 @@ h2 {
   color: #bbb;
 }
 
+input[type="text"]:focus {
+  outline-width: 0;
+  border: 2px solid #29abe2;
+}
+
+#inputMail {
+  background: white url(/assets/icons/mail.png) right no-repeat;
+  background-position: calc(100% - 15px) center;
+  padding-right: 20px;
+}
+
+#inputName {
+  background: white url(/assets/icons/person.png) right no-repeat;
+  background-position: calc(100% - 15px) center;
+  padding-right: 20px;
+}
+
+#inputCall {
+  background: white url(/assets/icons/call.svg) right no-repeat;
+  background-position: calc(100% - 15px) center;
+  padding-right: 20px;
+}
+
 .button-group {
   display: flex;
-  justify-content: space-between;
+  gap: 30px;
   width: 100%;
-  max-width: 400px;
+  margin-top: 60px;
+}
+
+.button-group button {
+  font-size: 24px;
+  border-radius: 14px;
+}
+
+.button-group img {
+  width: 24px;
+  height: 24px;
+  margin-left: 8px;
 }
 
 .cancel-btn {
+  display: flex;
+  align-items: center;
   background: none;
   border: 1px solid #ddd;
   color: #333;
@@ -472,7 +525,14 @@ h2 {
   cursor: pointer;
 }
 
+.cancel-btn:hover {
+  border-color: #29abe2;
+  color: #29abe2;
+}
+
 .create-btn {
+  display: flex;
+  align-items: center;
   background: #1e2a38;
   color: white;
   border: none;
@@ -482,5 +542,5 @@ h2 {
 }
 
 .create-btn:hover {
-  background: #354250;
+  background: #29abe2;
 }
