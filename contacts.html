@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="./assets/styles/style.css" />
 
     <script src="./assets/js/script.js"></script>
-    <script type="module" src="./assets/js/contacts.js"></script>
+    <script src="./assets/js/contacts.js"></script>
   </head>
 
   <body onload="init()">
@@ -93,7 +93,7 @@
               <div class="profile-info">
                 <h2>Anton Mayer</h2>
                 <div class="profile-actions">
-                  <button class="action-link" onclick="editContact()">
+                  <button class="action-link" onclick="displayContacts()">
                     <img
                       src="./assets/icons/edit.svg"
                       alt=""
@@ -133,5 +133,6 @@
         </div>
       </div>
     </div>
+    <div id="contactsContainer"></div>
   </body>
 </html>

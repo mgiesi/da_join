@@ -69,120 +69,35 @@ function getOverlay() {
         </div>
       `;
 }
+//const Base_URL =
+//  "https://joinusercontacts-default-rtdb.europe-west1.firebasedatabase.app/";
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
-import {
-  getDatabase,
-  ref,
-  push,
-  set,
-  get,
-  onValue,
-} from "https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js";
-const firebaseConfig = {
-  databaseURL:
-    "https://joinusercontacts-default-rtdb.europe-west1.firebasedatabase.app/",
-};
-const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
+//async function test() {
+//  let response = await fetch(Base_URL,
+//  );
+//  let responseToJson = await response.json();
+//  console.log(responseToJson);
+//}
 
-import {
-  getDatabase,
-  ref,
-  get,
-  child,
-  set,
-} from "https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js";
+async function getAllInformations() {
+  let response = await fetch(`./doc/db-structure.json`);
+  let responseToJson = await response.json();
+  return responseToJson;
+}
 
-window.addContact = async function () {
-  console.log("Funktion wurde aufgerufen");
-  const database = getDatabase();
-  const dbRef = ref(database);
-  const name = document.getElementById("inputName").value;
-  const mail = document.getElementById("inputMail").value;
-  const call = document.getElementById("inputCall").value;
-
-  try {
-    const snapshot = await get(child(dbRef, "contacts"));
-    const contacts = snapshot.val();
-    const contactCount = contacts ? Object.keys(contacts).length : 0;
-    const newContactKey = `contact${contactCount + 1}`;
-    await set(ref(database, `contacts/${newContactKey}`), {
-      name: name,
-      email: mail,
-      phone: call,
-    });
-
-    console.log(`Kontakt ${newContactKey} erfolgreich hinzugefügt.`);
-  } catch (error) {
-    console.error("Fehler beim Hinzufügen des Kontakts:", error);
+async function displayContacts() {
+  const data = await getAllInformations();
+  const contacts = data.contacts;
+  const contactsContainer = document.getElementById("contactsContainer");
+  for (const contactId in contacts) {
+    const contact = contacts[contactId];
+    const contactElement = document.createElement("div");
+    contactElement.classList.add("contact");
+    contactElement.innerHTML = `
+      <h3>${contact.name}</h3>
+      <p>Phone: ${contact.phone}</p>
+      <p>Email: ${contact.email}</p>
+    `;
+    contactsContainer.appendChild(contactElement);
   }
-};
-
-async function addContact() {
-  console.log("Funktion wurde aufgerufen");
-  const database = getDatabase();
-  const dbRef = ref(database);
-  const name = document.getElementById("inputName").value;
-  const mail = document.getElementById("inputMail").value;
-  const call = document.getElementById("inputCall").value;
-
-  try {
-    const snapshot = await get(child(dbRef, "contacts"));
-    const contacts = snapshot.val();
-    const contactCount = contacts ? Object.keys(contacts).length : 0;
-    const newContactKey = `contact${contactCount + 1}`;
-    await set(ref(database, `contacts/${newContactKey}`), {
-      name: name,
-      email: mail,
-      phone: call,
-    });
-
-    console.log(`Kontakt ${newContactKey} erfolgreich hinzugefügt.`);
-  } catch (error) {
-    console.error("Fehler beim Hinzufügen des Kontakts:", error);
-  }
-}
-
-function fetchContacts() {
-  const contactsRef = ref(database, "contacts");
-  onValue(
-    contactsRef,
-    (snapshot) => {
-      if (snapshot.exists()) {
-        const data = snapshot.val();
-        console.log("Kontakte:", data);
-      } else {
-        console.log("Keine Kontakte gefunden.");
-      }
-    },
-    (error) => {
-      console.error("Fehler beim Abrufen der Kontakte: ", error);
-    }
-  );
-}
-
-// Kontakte abrufen
-fetchContacts();
-
-function updateContact(contactId, updatedData) {
-  const contactRef = ref(database, `contacts/${contactId}`); // Referenz auf den spezifischen Kontakt
-  set(contactRef, updatedData)
-    .then(() => {
-      console.log("Kontakt erfolgreich aktualisiert!");
-    })
-    .catch((error) => {
-      console.error("Fehler beim Aktualisieren des Kontakts: ", error);
-    });
-}
-
-function deleteContact(contactId) {
-  const contactRef = ref(database, `contacts/${contactId}`);
-  set(contactRef, null)
-    .then(() => {
-      console.log("Kontakt erfolgreich gelöscht!");
-    })
-    .catch((error) => {
-      console.error("Fehler beim Löschen des Kontakts: ", error);
-    });
 }
