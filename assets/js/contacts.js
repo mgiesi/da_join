@@ -59,7 +59,7 @@ function getOverlay() {
                   >
                     Cancel<img src="./assets/icons/cancel.svg" />
                   </button>
-                  <button id="addContactButton" onclick="addContact()" type="button" class="create-btn">
+                  <button id="addContactButton" onclick="addNewContact()" type="button" class="create-btn">
                     Create contact <img src="./assets/icons/check.svg" alt="" />
                   </button>
                 </div>
@@ -69,35 +69,89 @@ function getOverlay() {
         </div>
       `;
 }
-//const Base_URL =
-//  "https://joinusercontacts-default-rtdb.europe-west1.firebasedatabase.app/";
-
-//async function test() {
-//  let response = await fetch(Base_URL,
-//  );
-//  let responseToJson = await response.json();
-//  console.log(responseToJson);
-//}
-
-async function getAllInformations() {
-  let response = await fetch(`./doc/db-structure.json`);
-  let responseToJson = await response.json();
-  return responseToJson;
-}
 
 async function displayContacts() {
-  const data = await getAllInformations();
-  const contacts = data.contacts;
-  const contactsContainer = document.getElementById("contactsContainer");
-  for (const contactId in contacts) {
-    const contact = contacts[contactId];
-    const contactElement = document.createElement("div");
-    contactElement.classList.add("contact");
-    contactElement.innerHTML = `
-      <h3>${contact.name}</h3>
-      <p>Phone: ${contact.phone}</p>
-      <p>Email: ${contact.email}</p>
-    `;
-    contactsContainer.appendChild(contactElement);
+  try {
+    const response = await fetch(
+      "https://joinusercontacts-default-rtdb.europe-west1.firebasedatabase.app/contacts.json"
+    );
+
+    if (!response.ok) {
+      throw new Error(`Fehler beim Abrufen der Kontakte: ${response.status}`);
+    }
+
+    const contacts = await response.json();
+    if (!contacts) {
+      document.getElementById("contactsContainer").innerHTML =
+        "<p>Keine Kontakte vorhanden.</p>";
+      return;
+    }
+    let contactHTML = "<ul>";
+    for (const [key, contact] of Object.entries(contacts)) {
+      contactHTML += `
+        <li>
+          <strong>${key}:</strong>
+          <ul>
+            <li><strong>Name:</strong> ${contact.name}</li>
+            <li><strong>Email:</strong> ${contact.email}</li>
+            <li><strong>Telefon:</strong> ${contact.phone}</li>
+          </ul>
+        </li>
+      `;
+    }
+    contactHTML += "</ul>";
+    document.getElementById("contactsContainer").innerHTML = contactHTML;
+  } catch (error) {
+    console.error("Fehler beim Anzeigen der Kontakte:", error);
+    document.getElementById("contactsContainer").innerHTML =
+      "<p>Es ist ein Fehler aufgetreten. Kontakte konnten nicht geladen werden.</p>";
+  }
+}
+
+async function addNewContact() {
+  const name = document.getElementById("inputName").value;
+  const email = document.getElementById("inputMail").value;
+  const phone = document.getElementById("inputCall").value;
+  if (!name || !email || !phone) {
+    alert("Bitte alle Felder ausfüllen!");
+    return;
+  }
+  try {
+    const response = await fetch(
+      "https://joinusercontacts-default-rtdb.europe-west1.firebasedatabase.app/contacts.json"
+    );
+
+    if (!response.ok) {
+      throw new Error(`Fehler beim Abrufen der Kontakte: ${response.status}`);
+    }
+    const existingContacts = await response.json();
+    const contactNumber = existingContacts
+      ? Object.keys(existingContacts).length + 1
+      : 1;
+    const contactKey = `contact${contactNumber}`;
+    const newContact = {
+      name: name,
+      email: email,
+      phone: phone,
+    };
+    const addResponse = await fetch(
+      `https://joinusercontacts-default-rtdb.europe-west1.firebasedatabase.app/contacts/${contactKey}.json`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newContact),
+      }
+    );
+
+    if (!addResponse.ok) {
+      throw new Error(
+        `Fehler beim Hinzufügen des Kontakts: ${addResponse.status}`
+      );
+    }
+  } catch (error) {
+    console.error("Fehler:", error);
+    alert("Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.");
   }
 }
