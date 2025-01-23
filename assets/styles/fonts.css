@@ -99,3 +99,7 @@
 .dNone {
   display: none;
 }
+
+.text-center {
+  text-align: center;
+}

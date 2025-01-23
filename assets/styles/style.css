@@ -10,7 +10,12 @@ body {
   margin: 0;
 }
 
-.main-content-position{
+a {
+  text-decoration: none;
+  color: #000000;
+}
+
+.main-content-position {
   position: relative;
   left: 170px;
   height: calc(100vh - 70px);

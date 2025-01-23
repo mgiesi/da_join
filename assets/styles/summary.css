@@ -1,3 +1,9 @@
+.main-container {
+    margin-left: 150px;
+    margin-top: 70px;
+    height: calc(100vh - 96px);
+}
+
 .summary-content {
     margin-left: 96px;
     margin-top: 110px;
@@ -22,6 +28,34 @@
     align-items: center;
     gap: 18px;
     margin-right: 32px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.summary-box:hover {
+    background: #2c3747;
+    color: #ffffff;
+    transform: scale(1.02);
+}
+
+.summary-box:hover .summary-box-icon {
+    background-color: #FFFFFF;
+}
+
+.summary-box:hover .summary-box-icon_red {
+    background-color: #FF3D00;
+}
+
+.summary-box:hover .summary-box-icon_todo {
+    content: url('../icons/edit.svg');
+    color: #ffffff;
+    transform: scale(1.02);
+}
+
+.summary-box:hover .summary-box-icon_done {
+    content: url('../icons/done.svg');
+    color: #ffffff;
+    transform: scale(1.02);
 }
 
 .summary-box-1 {
@@ -43,6 +77,14 @@
     width: 69px;
     height: 69px;
     border-radius: 50%;
+    background-color: #2A3647;
+}
+
+.summary-box-icon_red {
+    width: 69px;
+    height: 69px;
+    border-radius: 50%;
+    background-color: #FF3D00;
 }
 
 .summary-box-text {
@@ -50,6 +92,11 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.summary-box-text span {
+    margin-left: 18px;
+    margin-right: 18px;
 }
 
 .summary-box-deadline {

@@ -34,7 +34,7 @@ function refreshGreetingName(username = "") {
 
 function getUserName() {
   //todo read current logged in user from internal storage
-  return "Markus Giesinger";
+  return null;
 }
 
 function refreshBoardInfos() {
