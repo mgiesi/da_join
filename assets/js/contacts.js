@@ -132,8 +132,10 @@ async function addNewContact() {
     const newContact = {
       name: name,
       email: email,
-      phone: phone,
+      phone: phone || "Keine Telefonnummer",
+      avatarColor: getRandomColor(),
     };
+
     const addResponse = await fetch(
       `https://joinusercontacts-default-rtdb.europe-west1.firebasedatabase.app/contacts/${contactKey}.json`,
       {
@@ -168,7 +170,8 @@ async function addNewContactToFirebase() {
   const newContact = {
     name: name,
     email: email,
-    phone: phone,
+    phone: phone || "Keine Telefonnummer",
+    avatarColor: getRandomColor(),
   };
 
   try {
@@ -200,7 +203,7 @@ async function addNewContactToFirebase() {
         `Fehler beim Speichern des Kontakts: ${saveResponse.status}`
       );
     }
-    addContactToDOM(newContact);
+    await loadContactsFromFirebase();
     alert("Kontakt erfolgreich hinzugefügt!");
   } catch (error) {
     console.error("Fehler beim Hinzufügen des Kontakts:", error);
@@ -212,7 +215,8 @@ async function addNewContactToFirebase() {
 
 function addContactToDOM(contact) {
   const contactSections = document.querySelector(".contact-sections");
-  const { name, email } = contact;
+  const { name, email, phone, avatarColor } = contact;
+
   const initials = name
     .split(" ")
     .map((word) => word[0].toUpperCase())
@@ -238,12 +242,37 @@ function addContactToDOM(contact) {
     section.appendChild(sectionDivider);
     contactSections.appendChild(section);
   }
+
   const contactDiv = document.createElement("div");
   contactDiv.classList.add("contact");
+  document
+    .querySelector(".contact-sections")
+    .addEventListener("click", (event) => {
+      const contactDiv = event.target.closest(".contact");
+      if (contactDiv) {
+        const contactName =
+          contactDiv.querySelector(".contact-name").textContent;
+        console.log("Kontakt angeklickt:", contactName);
+
+        // Optional: Kontaktinformationen auslesen und weitergeben
+        const contactEmail =
+          contactDiv.querySelector(".contact-email").textContent;
+        const contact = {
+          name: contactName,
+          email: contactEmail,
+          // Optional: Weitere Daten können hier hinzugefügt werden
+        };
+
+        displayContactDetails(contact);
+      }
+    });
 
   const avatarDiv = document.createElement("div");
   avatarDiv.classList.add("contact-avatar");
-  avatarDiv.style.backgroundColor = getRandomColor();
+
+  // Verwende entweder die gespeicherte Farbe oder generiere eine neue
+  const color = avatarColor || getRandomColor();
+  avatarDiv.style.backgroundColor = color;
   avatarDiv.innerHTML = `<span>${initials}</span>`;
 
   const detailsDiv = document.createElement("div");
@@ -256,10 +285,87 @@ function addContactToDOM(contact) {
   contactDiv.appendChild(avatarDiv);
   contactDiv.appendChild(detailsDiv);
   section.appendChild(contactDiv);
+
+  // Falls die Farbe neu generiert wurde, speichere sie
+  if (!avatarColor) {
+    contact.avatarColor = color;
+    saveContactToFirebase(contact); // Speichere den Kontakt mit der Farbe
+  }
 }
+
+function displayContactDetails(contact) {
+  const contactInfoContainer = document.querySelector(".contact-info");
+  if (!contactInfoContainer) {
+    console.error("Der Container '.contact-info' wurde nicht gefunden!");
+    return;
+  }
+
+  const {
+    name,
+    email,
+    phone = "Keine Telefonnummer",
+    avatarColor = getRandomColor(),
+  } = contact;
+
+  if (!name || !email) {
+    console.error("Einige Kontaktinformationen fehlen:", contact);
+    return;
+  }
+
+  const detailsHTML = `
+    <div class="contact-info-header">
+      <h1>Contacts</h1>
+      <div class="header-divider"></div>
+      <span class="header-subtitle">Better with a team</span>
+    </div>
+    <div class="contact-details">
+      <div class="profile-section">
+        <div
+          class="contact-avatar large"
+          style="background-color: ${avatarColor}">
+          <span>${name
+            .split(" ")
+            .map((n) => n.charAt(0).toUpperCase())
+            .join("")}</span>
+        </div>
+
+        <div class="profile-info">
+          <h2>${name}</h2>
+          <div class="profile-actions">
+            <button class="action-link" onclick="editContact('${name}')">
+              <img src="./assets/icons/edit.svg" alt="" class="action-icon" />
+              Edit
+            </button>
+            <button onclick="deleteContact('${name}')" class="action-link">
+              <img src="./assets/icons/delete.svg" alt="" class="action-icon" />
+              Delete
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="contact-information">
+        <h3>Contact Information</h3>
+        <div class="info-group">
+          <label class="info-label">Email</label>
+          <a href="mailto:${email}" class="info-value">${email}</a>
+        </div>
+        <div class="info-group">
+          <label class="info-label">Phone</label>
+          <a href="tel:${phone}" class="info-value phone">${phone}</a>
+        </div>
+      </div>
+    </div>
+  `;
+
+  contactInfoContainer.innerHTML = detailsHTML;
+  console.log("Details wurden erfolgreich eingefügt.");
+}
+
 function getRandomColor() {
-  const colors = ["#ff7a00", "#ff006e", "#8338ec", "#3a86ff", "#06d6a0"];
-  return colors[Math.floor(Math.random() * colors.length)];
+  const colors = ["#273DB4", "#C50900", "#F95CA4", "#ED7845", "#124E66"];
+  const color = colors[Math.floor(Math.random() * colors.length)];
+  console.log("Assigned color:", color);
+  return color;
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -281,10 +387,15 @@ async function loadContactsFromFirebase() {
       console.log("Keine Kontakte in der Datenbank gefunden.");
       return;
     }
-    const contactSections = document.querySelector(".contact-sections");
 
-    Object.keys(contacts).forEach((key) => {
-      const contact = contacts[key];
+    const sortedContacts = Object.entries(contacts).sort(([_, a], [__, b]) =>
+      a.name.localeCompare(b.name)
+    );
+
+    const contactSections = document.querySelector(".contact-sections");
+    contactSections.innerHTML = "";
+
+    sortedContacts.forEach(([key, contact]) => {
       const firstLetter = contact.name.charAt(0).toUpperCase();
       let section = document.querySelector(
         `.contact-section[data-letter="${firstLetter}"]`
@@ -302,14 +413,21 @@ async function loadContactsFromFirebase() {
 
         contactSections.appendChild(section);
       }
+
       const avatarInitials = contact.name
         .split(" ")
         .map((n) => n.charAt(0).toUpperCase())
         .join("");
 
+      let color = localStorage.getItem(`avatarColor-${contact.name}`);
+      if (!color) {
+        color = getRandomColor();
+        localStorage.setItem(`avatarColor-${contact.name}`, color);
+      }
+
       const contactHTML = `
         <div class="contact">
-          <div class="contact-avatar" style="background-color: #ff7a00">
+          <div class="contact-avatar" style="background-color: ${color}">
             <span>${avatarInitials}</span>
           </div>
           <div class="contact-details">
@@ -324,3 +442,32 @@ async function loadContactsFromFirebase() {
     console.error("Fehler beim Laden der Kontakte:", error);
   }
 }
+
+function saveContactToFirebase(contact) {
+  firebase.firestore().collection("contacts").add(contact);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const contactSections = document.querySelector(".contact-sections");
+
+  if (!contactSections) {
+    console.error("Das Element '.contact-sections' wurde nicht gefunden!");
+    return;
+  }
+
+  contactSections.addEventListener("click", (event) => {
+    const contactDiv = event.target.closest(".contact");
+    if (contactDiv) {
+      const contactName = contactDiv.querySelector(".contact-name").textContent;
+      const contactEmail =
+        contactDiv.querySelector(".contact-email").textContent;
+
+      const contact = {
+        name: contactName,
+        email: contactEmail,
+      };
+
+      displayContactDetails(contact);
+    }
+  });
+});
