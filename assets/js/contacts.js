@@ -132,7 +132,7 @@ async function addNewContact() {
     const newContact = {
       name: name,
       email: email,
-      phone: phone || "Keine Telefonnummer",
+      phone: phone,
       avatarColor: getRandomColor(),
     };
 
@@ -161,16 +161,17 @@ async function addNewContact() {
 async function addNewContactToFirebase() {
   const name = document.getElementById("inputName").value;
   const email = document.getElementById("inputMail").value;
-  const phone = document.getElementById("inputCall").value;
+  const phone = document.getElementById("inputCall").value; // Telefonnummer korrekt abholen
+
   if (!name || !email || !phone) {
     alert("Bitte alle Felder ausfüllen!");
     return;
   }
 
   const newContact = {
-    name: name,
-    email: email,
-    phone: phone || "Keine Telefonnummer",
+    name,
+    email,
+    phone,
     avatarColor: getRandomColor(),
   };
 
@@ -187,6 +188,7 @@ async function addNewContactToFirebase() {
     const contactKeys = contacts ? Object.keys(contacts) : [];
     const nextNumber = contactKeys.length + 1;
     const newContactKey = `contact${nextNumber}`;
+
     const saveResponse = await fetch(
       `https://joinusercontacts-default-rtdb.europe-west1.firebasedatabase.app/contacts/${newContactKey}.json`,
       {
@@ -194,7 +196,7 @@ async function addNewContactToFirebase() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(newContact),
+        body: JSON.stringify(newContact), // Das korrekte Objekt übergeben
       }
     );
 
@@ -203,7 +205,7 @@ async function addNewContactToFirebase() {
         `Fehler beim Speichern des Kontakts: ${saveResponse.status}`
       );
     }
-    await loadContactsFromFirebase();
+    await loadContactsFromFirebase(); // Aktualisiere die Anzeige
     alert("Kontakt erfolgreich hinzugefügt!");
   } catch (error) {
     console.error("Fehler beim Hinzufügen des Kontakts:", error);
@@ -245,33 +247,23 @@ function addContactToDOM(contact) {
 
   const contactDiv = document.createElement("div");
   contactDiv.classList.add("contact");
-  document
-    .querySelector(".contact-sections")
-    .addEventListener("click", (event) => {
-      const contactDiv = event.target.closest(".contact");
-      if (contactDiv) {
-        const contactName =
-          contactDiv.querySelector(".contact-name").textContent;
-        console.log("Kontakt angeklickt:", contactName);
-
-        // Optional: Kontaktinformationen auslesen und weitergeben
-        const contactEmail =
-          contactDiv.querySelector(".contact-email").textContent;
-        const contact = {
-          name: contactName,
-          email: contactEmail,
-          // Optional: Weitere Daten können hier hinzugefügt werden
-        };
-
-        displayContactDetails(contact);
-      }
-    });
+  contactDiv.innerHTML = `
+  <button onclick="displayContactDetails()">
+    <div class="contact-avatar" style="background-color: ${color}">
+      <span>${avatarInitials}</span>
+    </div>
+    <div class="contact-details">
+      <span class="contact-name" onclick="displayContactDetails(${JSON.stringify(
+        contact
+      )})">${contact.name}</span>
+      <span class="contact-email">${contact.email}</span>
+    </div></button>
+  `;
+  section.appendChild(contactDiv);
 
   const avatarDiv = document.createElement("div");
   avatarDiv.classList.add("contact-avatar");
-
-  // Verwende entweder die gespeicherte Farbe oder generiere eine neue
-  const color = avatarColor || getRandomColor();
+  const color = avatarColor;
   avatarDiv.style.backgroundColor = color;
   avatarDiv.innerHTML = `<span>${initials}</span>`;
 
@@ -285,32 +277,17 @@ function addContactToDOM(contact) {
   contactDiv.appendChild(avatarDiv);
   contactDiv.appendChild(detailsDiv);
   section.appendChild(contactDiv);
-
-  // Falls die Farbe neu generiert wurde, speichere sie
-  if (!avatarColor) {
-    contact.avatarColor = color;
-    saveContactToFirebase(contact); // Speichere den Kontakt mit der Farbe
-  }
 }
 
 function displayContactDetails(contact) {
   const contactInfoContainer = document.querySelector(".contact-info");
+
   if (!contactInfoContainer) {
     console.error("Der Container '.contact-info' wurde nicht gefunden!");
     return;
   }
 
-  const {
-    name,
-    email,
-    phone = "Keine Telefonnummer",
-    avatarColor = getRandomColor(),
-  } = contact;
-
-  if (!name || !email) {
-    console.error("Einige Kontaktinformationen fehlen:", contact);
-    return;
-  }
+  const { name, email, phone, avatarColor = getRandomColor() } = contact;
 
   const detailsHTML = `
     <div class="contact-info-header">
@@ -358,7 +335,6 @@ function displayContactDetails(contact) {
   `;
 
   contactInfoContainer.innerHTML = detailsHTML;
-  console.log("Details wurden erfolgreich eingefügt.");
 }
 
 function getRandomColor() {
@@ -426,7 +402,7 @@ async function loadContactsFromFirebase() {
       }
 
       const contactHTML = `
-        <div class="contact">
+        <div class="contact" onclick="displayContactDetails()">
           <div class="contact-avatar" style="background-color: ${color}">
             <span>${avatarInitials}</span>
           </div>
@@ -446,28 +422,3 @@ async function loadContactsFromFirebase() {
 function saveContactToFirebase(contact) {
   firebase.firestore().collection("contacts").add(contact);
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-  const contactSections = document.querySelector(".contact-sections");
-
-  if (!contactSections) {
-    console.error("Das Element '.contact-sections' wurde nicht gefunden!");
-    return;
-  }
-
-  contactSections.addEventListener("click", (event) => {
-    const contactDiv = event.target.closest(".contact");
-    if (contactDiv) {
-      const contactName = contactDiv.querySelector(".contact-name").textContent;
-      const contactEmail =
-        contactDiv.querySelector(".contact-email").textContent;
-
-      const contact = {
-        name: contactName,
-        email: contactEmail,
-      };
-
-      displayContactDetails(contact);
-    }
-  });
-});
