@@ -217,7 +217,7 @@ async function addNewContactToFirebase() {
 
 function addContactToDOM(contact) {
   const contactSections = document.querySelector(".contact-sections");
-  const { name, email, phone, avatarColor } = contact;
+  const { name, email, avatarColor } = contact;
 
   const initials = name
     .split(" ")
@@ -249,7 +249,7 @@ function addContactToDOM(contact) {
   contactDiv.classList.add("contact");
   contactDiv.innerHTML = `
   <button onclick="displayContactDetails()">
-    <div class="contact-avatar" style="background-color: ${color}">
+    <div class="contact-avatar" style="background-color: ${avatarColor}">
       <span>${avatarInitials}</span>
     </div>
     <div class="contact-details">
@@ -279,15 +279,15 @@ function addContactToDOM(contact) {
   section.appendChild(contactDiv);
 }
 
-function displayContactDetails(contact) {
+function displayContactDetails({ name, email, phone, avatarColor }) {
   const contactInfoContainer = document.querySelector(".contact-info");
 
-  if (!contactInfoContainer) {
-    console.error("Der Container '.contact-info' wurde nicht gefunden!");
+  if (!name || !email || !phone) {
+    console.error("Kontaktinformationen unvollständig.");
     return;
   }
 
-  const { name, email, phone, avatarColor = getRandomColor() } = contact;
+  avatarColor = avatarColor;
 
   const detailsHTML = `
     <div class="contact-info-header">
@@ -389,30 +389,28 @@ async function loadContactsFromFirebase() {
 
         contactSections.appendChild(section);
       }
-
       const avatarInitials = contact.name
         .split(" ")
         .map((n) => n.charAt(0).toUpperCase())
         .join("");
+      const color = contact.avatarColor || "#CCCCCC";
 
-      let color = localStorage.getItem(`avatarColor-${contact.name}`);
-      if (!color) {
-        color = getRandomColor();
-        localStorage.setItem(`avatarColor-${contact.name}`, color);
-      }
-
-      const contactHTML = `
-        <div class="contact" onclick="displayContactDetails()">
-          <div class="contact-avatar" style="background-color: ${color}">
-            <span>${avatarInitials}</span>
-          </div>
-          <div class="contact-details">
-            <span class="contact-name">${contact.name}</span>
-            <span class="contact-email">${contact.email}</span>
-          </div>
+      const contactDiv = document.createElement("div");
+      contactDiv.classList.add("contact");
+      contactDiv.innerHTML = `
+        <div class="contact-avatar" style="background-color: ${color}">
+          <span>${avatarInitials}</span>
+        </div>
+        <div class="contact-details">
+          <span class="contact-name">${contact.name}</span>
+          <span class="contact-email">${contact.email}</span>
         </div>
       `;
-      section.innerHTML += contactHTML;
+      contactDiv.addEventListener("click", () =>
+        displayContactDetails(contact)
+      );
+
+      section.appendChild(contactDiv);
     });
   } catch (error) {
     console.error("Fehler beim Laden der Kontakte:", error);
