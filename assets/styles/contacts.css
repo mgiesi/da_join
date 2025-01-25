@@ -21,7 +21,6 @@ h2 {
 .contacts-content {
   display: flex;
   width: 100%;
-  overflow: hidden;
 }
 
 .contact-list {
@@ -152,6 +151,10 @@ h2 {
   display: flex;
 }
 
+.profile-info h2 {
+  margin-bottom: 16px;
+}
+
 .contact-name {
   font-size: 20px;
   color: #000;
@@ -174,6 +177,8 @@ h2 {
   padding: 48px;
   height: 100%;
   overflow-y: auto;
+  position: sticky;
+  top: 50px;
 }
 
 .contact-info-header {

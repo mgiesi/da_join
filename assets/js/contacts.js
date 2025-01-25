@@ -4,10 +4,31 @@ function toggleOverlay() {
   overlay.innerHTML = getOverlay();
 }
 
-function toggleEditOverlay() {
-  let overlay = document.getElementById("overlayEditContact");
+function toggleEditOverlay(contactId) {
+  const overlay = document.getElementById("overlayEditContact");
   overlay.classList.toggle("dNone");
-  overlay.innerHTML = getEditOverlay();
+  overlay.innerHTML = getEditOverlay(contactId);
+}
+
+async function loadContactDataForEdit(contactId) {
+  try {
+    const response = await fetch(
+      `https://joinusercontacts-default-rtdb.europe-west1.firebasedatabase.app/contacts/${contactId}.json`
+    );
+
+    if (!response.ok) {
+      throw new Error(`Fehler beim Abrufen des Kontakts: ${response.status}`);
+    }
+
+    const contact = await response.json();
+    if (contact) {
+      document.getElementById("inputEditName").value = contact.name || "";
+      document.getElementById("inputEditMail").value = contact.email || "";
+      document.getElementById("inputEditCall").value = contact.phone || "";
+    }
+  } catch (error) {
+    console.error("Fehler beim Laden der Kontaktdaten:", error);
+  }
 }
 
 function getOverlay() {
@@ -76,7 +97,7 @@ function getOverlay() {
       `;
 }
 
-function getEditOverlay() {
+function getEditOverlay(contactId) {
   return `
         <div class="overlay">
           <div class="overlay-left">
@@ -91,13 +112,13 @@ function getEditOverlay() {
             <hr />
           </div>
           <div class="overlay-right">
-            <div onclick="toggleEditOverlay()" class="close-btn">×</div>
+            <div onclick="toggleEditOverlay('${contactId}')" class="close-btn">×</div>
             <div class="form-container">
               <img class="avatar" src="./assets/icons/Group 13.svg" alt="" />
               <form>
                 <div class="form-group">
                   <input
-                    id="inputName"
+                    id="inputEditName"
                     type="text"
                     placeholder="Name"
                     required
@@ -106,7 +127,7 @@ function getEditOverlay() {
                 </div>
                 <div class="form-group">
                   <input
-                    id="inputMail"
+                    id="inputEditMail"
                     type="text"
                     placeholder="Email"
                     required
@@ -115,7 +136,7 @@ function getEditOverlay() {
                 </div>
                 <div class="form-group">
                   <input
-                    id="inputCall"
+                    id="inputEditCall"
                     type="text"
                     placeholder="Phone"
                     required
@@ -124,13 +145,13 @@ function getEditOverlay() {
                 </div>
                 <div class="button-group">
                   <button
-                    onclick="toggleEditOverlay()"
+                    onclick="toggleEditOverlay('${contactId}')"
                     type="button"
                     class="cancel-btn"
                   >
                     Delete<img src="./assets/icons/cancel.svg" />
                   </button>
-                  <button id="addContactButton" onclick="" type="button" class="create-btn">
+                  <button id="addContactButton" onclick="updateContactDataInFirebase('${contactId}')" type="button" class="create-btn">
                     Save <img src="./assets/icons/check.svg" alt="" />
                   </button>
                 </div>
@@ -350,7 +371,7 @@ function addContactToDOM(contact) {
   section.appendChild(contactDiv);
 }
 
-function displayContactDetails({ name, email, phone, avatarColor }) {
+function displayContactDetails({ name, email, phone, avatarColor, contactId }) {
   const contactInfoContainer = document.querySelector(".contact-info");
 
   if (!name || !email || !phone) {
@@ -380,7 +401,7 @@ function displayContactDetails({ name, email, phone, avatarColor }) {
         <div class="profile-info">
           <h2>${name}</h2>
           <div class="profile-actions">
-            <button class="action-link" onclick="toggleEditOverlay()">
+            <button class="action-link" onclick="toggleEditOverlay('${contactId}')">
               <img src="./assets/icons/edit.svg" alt="" class="action-icon" />
               Edit
             </button>
@@ -490,4 +511,50 @@ async function loadContactsFromFirebase() {
 
 function saveContactToFirebase(contact) {
   firebase.firestore().collection("contacts").add(contact);
+}
+
+async function updateContactDataInFirebase(contactId) {
+  const updatedName = document.getElementById("inputEditName").value;
+  const updatedMail = document.getElementById("inputEditMail").value;
+  const updatedPhone = document.getElementById("inputEditCall").value;
+
+  // Überprüfen, ob alle Felder ausgefüllt sind
+  if (!updatedName || !updatedMail || !updatedPhone) {
+    alert("Bitte alle Felder ausfüllen!");
+    return;
+  }
+
+  // Objekt mit den geänderten Daten erstellen
+  const updatedContact = {
+    name: updatedName,
+    email: updatedMail,
+    phone: updatedPhone,
+  };
+
+  try {
+    // Firebase Realtime Database Referenz zum Kontakt
+    const response = await fetch(
+      `https://joinusercontacts-default-rtdb.europe-west1.firebasedatabase.app/contacts/${contactId}.json`,
+      {
+        method: "PATCH", // PATCH wird verwendet, um nur die geänderten Felder zu aktualisieren
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedContact),
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(
+        `Fehler beim Aktualisieren des Kontakts: ${response.status}`
+      );
+    }
+
+    alert("Kontakt erfolgreich aktualisiert!");
+    toggleEditOverlay(contactId); // Overlay nach dem Update schließen
+    await loadContactsFromFirebase(); // Kontakte neu laden, um die Änderungen anzuzeigen
+  } catch (error) {
+    console.error("Fehler beim Aktualisieren des Kontakts:", error);
+    alert("Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.");
+  }
 }
