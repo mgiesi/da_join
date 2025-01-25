@@ -4,6 +4,12 @@ function toggleOverlay() {
   overlay.innerHTML = getOverlay();
 }
 
+function toggleEditOverlay() {
+  let overlay = document.getElementById("overlayEditContact");
+  overlay.classList.toggle("dNone");
+  overlay.innerHTML = getEditOverlay();
+}
+
 function getOverlay() {
   return `
         <div class="overlay">
@@ -61,6 +67,71 @@ function getOverlay() {
                   </button>
                   <button id="addContactButton" onclick="addNewContactToFirebase()" type="button" class="create-btn">
                     Create contact <img src="./assets/icons/check.svg" alt="" />
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      `;
+}
+
+function getEditOverlay() {
+  return `
+        <div class="overlay">
+          <div class="overlay-left">
+            <div class="logo1">
+              <img
+                class="logoInnerOverlay"
+                src="./assets/icons/Logo-side-bar.png"
+                alt=""
+              />
+            </div>
+            <h1 class="f1">Edit contact</h1>
+            <hr />
+          </div>
+          <div class="overlay-right">
+            <div onclick="toggleEditOverlay()" class="close-btn">×</div>
+            <div class="form-container">
+              <img class="avatar" src="./assets/icons/Group 13.svg" alt="" />
+              <form>
+                <div class="form-group">
+                  <input
+                    id="inputName"
+                    type="text"
+                    placeholder="Name"
+                    required
+                  />
+                  <i class="icon-user"></i>
+                </div>
+                <div class="form-group">
+                  <input
+                    id="inputMail"
+                    type="text"
+                    placeholder="Email"
+                    required
+                  />
+                  <i class="icon-email"></i>
+                </div>
+                <div class="form-group">
+                  <input
+                    id="inputCall"
+                    type="text"
+                    placeholder="Phone"
+                    required
+                  />
+                  <i class="icon-phone"></i>
+                </div>
+                <div class="button-group">
+                  <button
+                    onclick="toggleEditOverlay()"
+                    type="button"
+                    class="cancel-btn"
+                  >
+                    Delete<img src="./assets/icons/cancel.svg" />
+                  </button>
+                  <button id="addContactButton" onclick="" type="button" class="create-btn">
+                    Save <img src="./assets/icons/check.svg" alt="" />
                   </button>
                 </div>
               </form>
@@ -309,7 +380,7 @@ function displayContactDetails({ name, email, phone, avatarColor }) {
         <div class="profile-info">
           <h2>${name}</h2>
           <div class="profile-actions">
-            <button class="action-link" onclick="editContact('${name}')">
+            <button class="action-link" onclick="toggleEditOverlay()">
               <img src="./assets/icons/edit.svg" alt="" class="action-icon" />
               Edit
             </button>
