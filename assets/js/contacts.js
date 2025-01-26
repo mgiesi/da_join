@@ -4,13 +4,24 @@ function toggleOverlay() {
   overlay.innerHTML = getOverlay();
 }
 
+let contactId = null;
+
+function setContactId() {
+  const contactId = `contact${id}`;
+
+  const selectedContact = window[contactId];
+
+  console.log(`Kontakt ${contactId}:`, selectedContact);
+}
+
 function toggleEditOverlay(contactId) {
   const overlay = document.getElementById("overlayEditContact");
   overlay.classList.toggle("dNone");
+  loadContactDataForEdit(contactId);
   overlay.innerHTML = getEditOverlay(contactId);
 }
 
-async function loadContactDataForEdit(contactId) {
+async function loadContactDataForEdit() {
   try {
     const response = await fetch(
       `https://joinusercontacts-default-rtdb.europe-west1.firebasedatabase.app/contacts/${contactId}.json`
@@ -253,7 +264,7 @@ async function addNewContact() {
 async function addNewContactToFirebase() {
   const name = document.getElementById("inputName").value;
   const email = document.getElementById("inputMail").value;
-  const phone = document.getElementById("inputCall").value; // Telefonnummer korrekt abholen
+  const phone = document.getElementById("inputCall").value;
 
   if (!name || !email || !phone) {
     alert("Bitte alle Felder ausfüllen!");
@@ -288,7 +299,7 @@ async function addNewContactToFirebase() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(newContact), // Das korrekte Objekt übergeben
+        body: JSON.stringify(newContact),
       }
     );
 
@@ -297,7 +308,7 @@ async function addNewContactToFirebase() {
         `Fehler beim Speichern des Kontakts: ${saveResponse.status}`
       );
     }
-    await loadContactsFromFirebase(); // Aktualisiere die Anzeige
+    await loadContactsFromFirebase();
     alert("Kontakt erfolgreich hinzugefügt!");
   } catch (error) {
     console.error("Fehler beim Hinzufügen des Kontakts:", error);
@@ -339,35 +350,20 @@ function addContactToDOM(contact) {
 
   const contactDiv = document.createElement("div");
   contactDiv.classList.add("contact");
+
+  const contactId = contact.id;
   contactDiv.innerHTML = `
-  <button onclick="displayContactDetails()">
+  <button onclick="setContactId(${contactId})">
     <div class="contact-avatar" style="background-color: ${avatarColor}">
-      <span>${avatarInitials}</span>
+      <span>${initials}</span>
     </div>
     <div class="contact-details">
-      <span class="contact-name" onclick="displayContactDetails(${JSON.stringify(
-        contact
-      )})">${contact.name}</span>
+      <span class="contact-name">${contact.name}</span>
       <span class="contact-email">${contact.email}</span>
-    </div></button>
-  `;
-  section.appendChild(contactDiv);
-
-  const avatarDiv = document.createElement("div");
-  avatarDiv.classList.add("contact-avatar");
-  const color = avatarColor;
-  avatarDiv.style.backgroundColor = color;
-  avatarDiv.innerHTML = `<span>${initials}</span>`;
-
-  const detailsDiv = document.createElement("div");
-  detailsDiv.classList.add("contact-details");
-  detailsDiv.innerHTML = `
-    <span class="contact-name">${name}</span>
-    <span class="contact-email">${email}</span>
+    </div>
+  </button>
   `;
 
-  contactDiv.appendChild(avatarDiv);
-  contactDiv.appendChild(detailsDiv);
   section.appendChild(contactDiv);
 }
 
@@ -511,50 +507,4 @@ async function loadContactsFromFirebase() {
 
 function saveContactToFirebase(contact) {
   firebase.firestore().collection("contacts").add(contact);
-}
-
-async function updateContactDataInFirebase(contactId) {
-  const updatedName = document.getElementById("inputEditName").value;
-  const updatedMail = document.getElementById("inputEditMail").value;
-  const updatedPhone = document.getElementById("inputEditCall").value;
-
-  // Überprüfen, ob alle Felder ausgefüllt sind
-  if (!updatedName || !updatedMail || !updatedPhone) {
-    alert("Bitte alle Felder ausfüllen!");
-    return;
-  }
-
-  // Objekt mit den geänderten Daten erstellen
-  const updatedContact = {
-    name: updatedName,
-    email: updatedMail,
-    phone: updatedPhone,
-  };
-
-  try {
-    // Firebase Realtime Database Referenz zum Kontakt
-    const response = await fetch(
-      `https://joinusercontacts-default-rtdb.europe-west1.firebasedatabase.app/contacts/${contactId}.json`,
-      {
-        method: "PATCH", // PATCH wird verwendet, um nur die geänderten Felder zu aktualisieren
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updatedContact),
-      }
-    );
-
-    if (!response.ok) {
-      throw new Error(
-        `Fehler beim Aktualisieren des Kontakts: ${response.status}`
-      );
-    }
-
-    alert("Kontakt erfolgreich aktualisiert!");
-    toggleEditOverlay(contactId); // Overlay nach dem Update schließen
-    await loadContactsFromFirebase(); // Kontakte neu laden, um die Änderungen anzuzeigen
-  } catch (error) {
-    console.error("Fehler beim Aktualisieren des Kontakts:", error);
-    alert("Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.");
-  }
 }
