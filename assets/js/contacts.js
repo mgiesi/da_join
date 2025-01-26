@@ -4,14 +4,12 @@ function toggleOverlay() {
   overlay.innerHTML = getOverlay();
 }
 
-let contactId = null;
+function setContactId(id) {
+  contactId = id;
+  const contactKey = `contact${id}`; // Dynamischer Kontakt-Schlüssel (z.B. "contact1")
 
-function setContactId() {
-  const contactId = `contact${id}`;
-
-  const selectedContact = window[contactId];
-
-  console.log(`Kontakt ${contactId}:`, selectedContact);
+  const selectedContact = window[contactKey]; // Zugriff auf das globale Objekt
+  console.log(`Kontakt ${id}:`, selectedContact);
 }
 
 function toggleEditOverlay(contactId) {
@@ -21,11 +19,12 @@ function toggleEditOverlay(contactId) {
   overlay.innerHTML = getEditOverlay(contactId);
 }
 
-async function loadContactDataForEdit() {
+async function loadContactDataForEdit(contactId) {
   try {
     const response = await fetch(
-      `https://joinusercontacts-default-rtdb.europe-west1.firebasedatabase.app/contacts/${contactId}.json`
+      `https://joinusercontacts-default-rtdb.europe-west1.firebasedatabase.app/contacts/contact${contactId}.json`
     );
+    console.log(contactId);
 
     if (!response.ok) {
       throw new Error(`Fehler beim Abrufen des Kontakts: ${response.status}`);
@@ -317,6 +316,7 @@ async function addNewContactToFirebase() {
     );
   }
 }
+const BASE_URL = `https://joinusercontacts-default-rtdb.europe-west1.firebasedatabase.app/`;
 
 function addContactToDOM(contact) {
   const contactSections = document.querySelector(".contact-sections");
@@ -351,7 +351,7 @@ function addContactToDOM(contact) {
   const contactDiv = document.createElement("div");
   contactDiv.classList.add("contact");
 
-  const contactId = contact.id;
+  const contactId = `contact${id}`;
   contactDiv.innerHTML = `
   <button onclick="setContactId(${contactId})">
     <div class="contact-avatar" style="background-color: ${avatarColor}">
