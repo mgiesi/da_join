@@ -6,9 +6,9 @@ function toggleOverlay() {
 
 function setContactId(id) {
   contactId = id;
-  const contactKey = `contact${id}`; // Dynamischer Kontakt-Schlüssel (z.B. "contact1")
+  const contactKey = `contact${id}`;
 
-  const selectedContact = window[contactKey]; // Zugriff auf das globale Objekt
+  const selectedContact = window[contactKey];
   console.log(`Kontakt ${id}:`, selectedContact);
 }
 
@@ -107,7 +107,7 @@ function getOverlay() {
       `;
 }
 
-function getEditOverlay(contactId) {
+function getEditOverlay() {
   return `
         <div class="overlay">
           <div class="overlay-left">
@@ -122,7 +122,7 @@ function getEditOverlay(contactId) {
             <hr />
           </div>
           <div class="overlay-right">
-            <div onclick="toggleEditOverlay('${contactId}')" class="close-btn">×</div>
+            <div onclick="toggleEditOverlay()" class="close-btn">×</div>
             <div class="form-container">
               <img class="avatar" src="./assets/icons/Group 13.svg" alt="" />
               <form>
@@ -155,13 +155,13 @@ function getEditOverlay(contactId) {
                 </div>
                 <div class="button-group">
                   <button
-                    onclick="toggleEditOverlay('${contactId}')"
+                    onclick="toggleEditOverlay()"
                     type="button"
                     class="cancel-btn"
                   >
                     Delete<img src="./assets/icons/cancel.svg" />
                   </button>
-                  <button id="addContactButton" onclick="updateContactDataInFirebase('${contactId}')" type="button" class="create-btn">
+                  <button id="addContactButton" onclick="updateContactDataInFirebase()" type="button" class="create-btn">
                     Save <img src="./assets/icons/check.svg" alt="" />
                   </button>
                 </div>
@@ -320,7 +320,7 @@ const BASE_URL = `https://joinusercontacts-default-rtdb.europe-west1.firebasedat
 
 function addContactToDOM(contact) {
   const contactSections = document.querySelector(".contact-sections");
-  const { name, email, avatarColor } = contact;
+  const { name, email, avatarColor, id } = contact;
 
   const initials = name
     .split(" ")
@@ -351,9 +351,9 @@ function addContactToDOM(contact) {
   const contactDiv = document.createElement("div");
   contactDiv.classList.add("contact");
 
-  const contactId = `contact${id}`;
+  setContactId();
   contactDiv.innerHTML = `
-  <button onclick="setContactId(${contactId})">
+  <button onclick="displayContactDetails()">
     <div class="contact-avatar" style="background-color: ${avatarColor}">
       <span>${initials}</span>
     </div>
