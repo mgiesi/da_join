@@ -10,6 +10,11 @@ function toggleEditOverlay() {
   overlay.innerHTML = getEditOverlay();
 }
 
+function initPlus() {
+  init();
+  loadContactsFromFirebase();
+}
+
 async function addNewContactToFirebase() {
   const name = document.getElementById("inputName").value;
   const email = document.getElementById("inputMail").value;
@@ -32,10 +37,6 @@ async function addNewContactToFirebase() {
     const response = await fetch(
       "https://joinusercontacts-default-rtdb.europe-west1.firebasedatabase.app/contacts.json"
     );
-
-    if (!response.ok) {
-      throw new Error(`Fehler beim Abrufen der Kontakte: ${response.status}`);
-    }
 
     const contacts = await response.json();
     const contactKeys = contacts ? Object.keys(contacts) : [];
@@ -74,26 +75,13 @@ function getRandomColor() {
   return color;
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  loadContactsFromFirebase();
-});
-
 async function loadContactsFromFirebase() {
   try {
     const response = await fetch(
       "https://joinusercontacts-default-rtdb.europe-west1.firebasedatabase.app/contacts.json"
     );
 
-    if (!response.ok) {
-      throw new Error(`Fehler beim Abrufen der Kontakte: ${response.status}`);
-    }
-
     const contacts = await response.json();
-    if (!contacts) {
-      console.log("Keine Kontakte in der Datenbank gefunden.");
-      return;
-    }
-
     const sortedContacts = Object.entries(contacts).sort(([_, a], [__, b]) =>
       a.name.localeCompare(b.name)
     );
