@@ -22,3 +22,71 @@
     background-color: #FFFFFF;
     border-radius: 30px;
 }
+
+/* Date Input Field Styles */
+.date-field-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    padding: 0;
+}
+
+.date-field-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.87);
+    font-weight: 400;
+}
+
+.date-field-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.date-field-input {
+    width: 100%;
+    height: 51px;
+    padding: 13px 21px;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.87);
+    background: white;
+    cursor: pointer;
+}
+
+.date-field-input::placeholder {
+    color: rgba(0, 0, 0, 0.54);
+}
+
+.date-field-input::-webkit-calendar-picker-indicator {
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+}
+
+.date-field-input:hover {
+    border-color: rgba(0, 0, 0, 0.87);
+}
+
+.date-field-input:focus {
+    border-color: #29ABE2;
+    outline: none;
+}
+
+.date-field-icon {
+    position: absolute;
+    right: 21px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    pointer-events: none;
+    color: rgba(0, 0, 0, 0.54);
+}

@@ -1,0 +1,153 @@
+.subtask-form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 440px;
+}
+
+.label {
+    font-family: 'Inter', serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    color: rgb(42, 54, 71);
+}
+
+.input-container {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    background: #FFFFFF;
+    border: 1px solid rgb(209, 209, 209);
+    min-height: 48px;
+}
+
+.input-container.active {
+    border-color: rgb(41, 171, 226);
+}
+
+.input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-family: 'Inter', serif;
+    font-size: 20px;
+    line-height: 24px;
+    color: #000000;
+}
+
+.input::placeholder {
+    color: rgb(209, 209, 209);
+}
+
+.icon-container {
+    display: flex;
+    align-items: center;
+}
+
+.default-actions,
+.edit-actions {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.hidden {
+    display: none;
+}
+
+.icon-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+}
+
+.divider {
+    width: 1px;
+    height: 24px;
+    background-color: rgb(167, 167, 167);
+}
+
+.subtasks-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.subtask-item {
+    background: #FFFFFF;
+    padding: 6px 16px;
+}
+
+.subtask-content,
+.edit-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.edit-container.active {
+    border: 1px solid rgb(41, 171, 226);
+    padding: 4px 16px;
+}
+
+.subtask-text {
+    font-family: 'Inter', serif;
+    font-size: 16px;
+    line-height: 19.2px;
+    color: #000000;
+}
+
+.edit-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-family: 'Inter', serif;
+    font-size: 16px;
+    line-height: 19.2px;
+    color: #000000;
+}
+
+.subtask-actions,
+.edit-actions {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+@media (max-width: 480px) {
+    .subtask-form {
+        width: 100%;
+    }
+}
+
+.default-actions,
+.edit-actions {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.hidden {
+    display: none;
+}
+
+.edit-actions {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.edit-actions:not(.hidden) {
+    opacity: 1;
+    visibility: visible;
+}

@@ -12,6 +12,7 @@
     width: 100%;
     padding: 32px;
     max-width: 1208px;
+    height: calc(100vh - 96px);
 }
 
 .add-task-header {
@@ -48,13 +49,14 @@ h1 {
     flex-direction: column;
     gap: 8px;
     margin-bottom: 24px;
+    padding: 8px;
 }
 
 .form-group label {
-    color: rgb(42, 54, 71);
-    font-size: 20px;
-    line-height: 24px;
-    font-weight: 400;
+    color: rgba(0, 0, 0, 0.87);
+    font-size: 16px;
+    margin-bottom: 8px;
+    display: block;
 }
 
 .form-group input,
@@ -113,7 +115,7 @@ h1 {
 
 .priority-btn:hover {
     transform: scale(1.02);
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .priority-btn.active[data-priority="urgent"] {
@@ -140,22 +142,72 @@ h1 {
     align-items: center;
 }
 
-.subtask-input input {
-    flex: 1;
+.subtask-input .input-wrapper {
+    position: relative;
+    width: 100%;
 }
 
-.add-subtask-btn {
-    min-width: 48px;
-    height: 48px;
-    border: none;
+.subtask-input .input-wrapper input {
+    width: 100%;
+    padding: 12px 21px;
+    padding-right: 50px;
+    border: 1px solid rgb(209, 209, 209);
     border-radius: 10px;
-    background: rgb(42, 54, 71);
-    color: white;
-    font-size: 24px;
+    font-size: 20px;
+    line-height: 24px;
+    transition: border-color 0.3s ease;
+}
+
+.subtask-input .input-wrapper input.active {
+    border-color: #29ABE2;
+}
+
+.subtask-actions {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    gap: 8px;
+}
+
+.edit-actions {
+    display: none;
+}
+
+.edit-actions.active {
+    display: flex;
+}
+
+.edit-actions img {
+    width: 24px;
+    height: 24px;
     cursor: pointer;
+}
+
+.plus-icon {
+    display: flex;
+    cursor: pointer;
+}
+
+.plus-icon.hidden {
+    display: none;
+}
+
+.subtasks-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.subtask-item {
     display: flex;
     align-items: center;
-    justify-content: center;
+    padding: 8px 12px;
+    background: #F6F7F8;
+    border-radius: 10px;
+    font-size: 16px;
 }
 
 .form-actions {
@@ -208,6 +260,47 @@ h1 {
     color: black;
 }
 
+.date-input-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.date-input-wrapper input[type="date"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    color: rgba(0, 0, 0, 0.87);
+    cursor: pointer;
+}
+
+.date-input-wrapper input[type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+}
+
+.date-input-wrapper input[type="date"]:invalid {
+    color: rgba(0, 0, 0, 0.38);
+}
+
+.calendar-icon {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    pointer-events: none;
+    fill: rgba(0, 0, 0, 0.54);
+}
+
 @media (max-width: 1200px) {
     .main-container {
         padding-left: 200px;
@@ -233,4 +326,77 @@ h1 {
         font-size: 47px;
         line-height: 56px;
     }
+}
+
+/* Input fields hover and focus styles */
+.form-group input:hover,
+.form-group textarea:hover,
+.form-group select:hover,
+.subtask-input input:hover {
+    border-color: #29ABE2;
+    cursor: pointer;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus,
+.subtask-input input:focus {
+    border-color: #29ABE2;
+    outline: none;
+}
+
+/* Button hover effects */
+.btn-primary:hover {
+    background: #29ABE2;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    transform: scale(1.02);
+}
+
+.btn-secondary:hover {
+    border-color: #29ABE2;
+    color: #29ABE2;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    transform: scale(1.02);
+}
+
+/* Subtask action buttons hover effect */
+.subtask-actions img:hover,
+.plus-icon:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+/* Add transition for smooth effects */
+.form-group input,
+.form-group textarea,
+.form-group select,
+.subtask-input input,
+.btn-primary,
+.btn-secondary,
+.priority-btn,
+.subtask-actions img,
+.plus-icon {
+    transition: all 0.2s ease-in-out;
+}
+
+/* Active state for input fields */
+.form-group input.active,
+.form-group textarea.active,
+.form-group select.active,
+.subtask-input input.active {
+    border-color: #29ABE2;
+}
+
+.action-btn-img:hover {
+    filter: invert(67%) sepia(98%) saturate(4401%) hue-rotate(165deg) brightness(99%) contrast(101%);
+}
+
+svg:hover {
+    color: #29ABE2 !important;
+}
+
+.btn-secondary:hover .action-btn-img,
+.btn-secondary:hover svg {
+    filter: invert(67%) sepia(98%) saturate(4401%) hue-rotate(165deg) brightness(99%) contrast(101%);
+    color: #29ABE2 !important;
 }
