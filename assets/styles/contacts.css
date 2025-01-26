@@ -553,3 +553,8 @@ input[type="text"]:focus {
 .create-btn:hover {
   background: #29abe2;
 }
+
+.addFont {
+  color: red;
+  margin-left: 24px;
+}
