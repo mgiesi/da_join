@@ -1,0 +1,15 @@
+.main-container {
+    margin-left: 150px;
+    margin-top: 70px;
+    height: calc(100vh - 126px);
+}
+
+.board-content {
+    margin-left: 96px;
+    margin-top: 110px;
+}
+
+.board-title {
+    margin-bottom: 56px;
+    gap: 28px;
+}

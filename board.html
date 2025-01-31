@@ -7,14 +7,16 @@
     <title>Contacts - Join</title>
 
     <link rel="shortcut icon" href="./assets/icons/favicon.png" type="image/x-icon">
-    <link rel="stylesheet" href="./assets/styles/style.css">
     <link rel="stylesheet" href="./assets/styles/fonts.css">
+    <link rel="stylesheet" href="./assets/styles/style.css">
     <link rel="stylesheet" href="./assets/styles/components.css">
     <link rel="stylesheet" href="./assets/styles/layout.css">
     
     <link rel="stylesheet" href="./assets/styles/board.css">
 
     <script src="./assets/js/script.js"></script>
+    <script src="./assets/js/db.js"></script>
+    <script src="./assets/js/db.board.js"></script>
 </head>
 
 <body onload="init()">
@@ -23,7 +25,24 @@
         <div w3-include-html=".\assets\templates\side-menu.html"></div>
 
         <div class="board-content">
+            <div class="board-title d-flex align-items-center">
+                <span class="f1">Board</span>
+                <div class="board-title-search">
+                    <input type="search">
+                    <div class="board-title-"></div>
+                </div>
+            </div>
+            <div id="boards-container" class="board-contents">
+                <div class="board-container">
+                    <div class="board-container-title">
+                        <span>To do</span>
+                        <div class="board-btn-addtask">+</div>
+                    </div>
+                    <div class="board-container-tasks">
 
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </body>

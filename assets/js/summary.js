@@ -40,6 +40,7 @@ function getUserName() {
 function refreshBoardInfos() {
   refreshTasksCount("todo", "summary-taskscount-todo");
   refreshTasksCount("done", "summary-taskscount-done");
+  refreshTasksCount("urgent", "summary-taskscount-urgent");
   refreshTasksCount("inprogress", "summary-taskscount-inprogress");
   refreshTasksCount("awaitfeedback", "summary-taskscount-awaitingfeedback");
 }
