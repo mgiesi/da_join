@@ -1,5 +1,108 @@
-function displayBoard(board) {
+async function displayBoard(board) {
+    const boardTasksContent = await displayBoardTasks(board);
     return `
-        
+        <div class="board-container">
+            <div class="board-container-titlebox d-flex justify-content-between">
+                <span class="board-container-titlebox-title f10">${board.name}</span>
+                <div class="board-container-titlebox-addtask d-flex justify-content-center align-items-center">+
+                </div>
+            </div>
+            <div class="board-container-tasks">
+                ${boardTasksContent}
+            </div>
+        </div>
     `;
+}
+
+async function displayBoardTasks(board) {
+    const taskCount = board && board.tasks
+        ? Object.keys(board.tasks).length
+        : 0;
+    if (taskCount <= 0) {
+        return displayEmptyBoard(board);
+    } else {
+        return await displayTasks(board, taskCount);
+    }
+}
+
+function displayEmptyBoard(board) {
+    return `
+            <div class="board-tasks-notasks d-flex justify-content-center align-items-center f3">
+                No tasks ${board.name}
+            </div>
+        `;
+}
+
+async function displayTasks(board, taskCount) {
+    let htmlContent = "";
+
+    for (let taskIdx = 0; taskIdx < taskCount; taskIdx++) {
+        const task = await getTask(board.tasks["task" + (taskIdx + 1)]);
+        if (task === undefined || task === null) {
+            continue;
+        }
+        htmlContent += `
+            <div class="board-task-container">
+                <div class="d-flex mb-24">
+                    ${displayTaskType(task.category)}
+                </div>
+                <div class="mb-24">
+                    <div class="mb-8">
+                        <span class="f9">${task.title}</span>
+                    </div>
+                    <p class="board-task-descr f3">
+                        ${task.description}
+                    </p>
+                </div>
+                ${displaySubTasks(task)}
+                <div class="board-task-footer d-flex justify-content-between">
+                    <div class="board-task-contacts">
+                        <div class="task-contact f11">DE</div>
+                        <div class="task-contact f11">BZ</div>
+                        <div class="task-contact f11">AS</div>
+                    </div>
+                    <img class="board-task-category" src="./assets/icons/prio-${task.prio}.svg" alt="">
+                </div>
+            </div>
+        `;
+    }
+    return htmlContent;
+}
+
+function displayTaskType(taskCategory) {
+    if ("userstory" === taskCategory) {
+        return `<div class="board-task-type task-type-userstory f3">User Story</div>`;
+    } else {
+        return `<div class="board-task-type task-type-technicaltask f3">Technical Task</div>`;
+    }
+}
+
+function displaySubTasks(task) {
+    const subTasksCount = task && task.subtasks
+        ? Object.keys(task.subtasks).length
+        : 0;
+    if (subTasksCount <= 0) {
+        return "";
+    } else {
+        const subTasksDone = getSubTasksDoneCount(task, subTasksCount);
+        const subTasksDonePercent = subTasksDone / subTasksCount * 100;
+        return `
+            <div class="board-task-subtasks mb-24 d-flex align-items-center">
+                <div class="board-subtasks-bar">
+                    <div style="width: ${subTasksDonePercent}%" class="board-subtasks-bar-value"></div>
+                </div>
+                <span id="class="f11">${subTasksDone}/${subTasksCount} Subtasks</span>
+            </div>
+        `;
+    }
+}
+
+function getSubTasksDoneCount(task, subTasksCount) {
+    let subTasksDoneCount = 0;
+    for (let subTaskIdx = 0; subTaskIdx < subTasksCount; subTaskIdx++) {
+        if (task.subtasks["subtask" + (subTaskIdx + 1)].done) {
+            subTasksDoneCount++;
+        }
+    }
+    return subTasksDoneCount;
 }

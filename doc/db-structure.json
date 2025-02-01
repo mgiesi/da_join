@@ -47,10 +47,33 @@
             "prio": "medium",
             "category": "userstory",
             "subtasks": {}
+        },
+        "4": {
+            "title": "Title 4",
+            "description": "Description 4",
+            "assignedTo": {
+                "contact1": "2"
+            },
+            "dueDate": "2025-02-12",
+            "prio": "medium",
+            "category": "userstory",
+            "subtasks": {}
+        },
+        "5": {
+            "title": "Title 5",
+            "description": "Description 5",
+            "assignedTo": {
+                "contact1": "2"
+            },
+            "dueDate": "2025-02-12",
+            "prio": "medium",
+            "category": "userstory",
+            "subtasks": {}
         }
     },
     "boards": {
         "todo": {
+            "name": "To do",
             "tasks": {
                 "task1": "1",
                 "task2": "4",
@@ -58,16 +81,19 @@
             }
         },
         "inprogress": {
+            "name": "In progress",
             "tasks": {
                 "task1": "2"
             }
         },
         "awaitfeedback": {
+            "name": "Await feedback",
             "tasks": {
                 "task1": "3"
             }
         },
         "done": {
+            "name": "Done",
             "tasks": {}
         }
     },

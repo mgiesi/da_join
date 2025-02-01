@@ -7,3 +7,9 @@ async function getTasksCount(boardname) {
         ? Object.keys(responseToJson.tasks).length
         : 0;
 }
+
+async function getBoard(boardname) {
+    let response = await fetch(BOARD_URL + boardname + ".json");
+    let responseToJson = await response.json();
+    return responseToJson;
+}

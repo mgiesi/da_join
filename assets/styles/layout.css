@@ -10,6 +10,18 @@
     justify-content: start;
 }
 
+.justify-content-between {
+    justify-content: space-between;
+}
+
 .align-items-center {
     align-items: center;
+}
+
+.mb-8 {
+    margin-bottom: 8px;
+}
+
+.mb-24 {
+    margin-bottom: 24px;
 }

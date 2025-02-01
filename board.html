@@ -4,22 +4,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contacts - Join</title>
+    <title>Board - Join</title>
 
     <link rel="shortcut icon" href="./assets/icons/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="./assets/styles/fonts.css">
     <link rel="stylesheet" href="./assets/styles/style.css">
     <link rel="stylesheet" href="./assets/styles/components.css">
     <link rel="stylesheet" href="./assets/styles/layout.css">
-    
+
     <link rel="stylesheet" href="./assets/styles/board.css">
 
     <script src="./assets/js/script.js"></script>
     <script src="./assets/js/db.js"></script>
     <script src="./assets/js/db.board.js"></script>
+    <script src="./assets/js/db.tasks.js"></script>
+    <script src="./assets/js/board.js"></script>
+    <script src="./assets/templates/boardTemplate.js"></script>
 </head>
 
-<body onload="init()">
+<body onload="init(); initBoard()">
     <header w3-include-html=".\assets\templates\header.html"></header>
     <div class="main-container">
         <div w3-include-html=".\assets\templates\side-menu.html"></div>
@@ -29,19 +32,61 @@
                 <span class="f1">Board</span>
                 <div class="board-title-search">
                     <input type="search">
-                    <div class="board-title-"></div>
+                    <div class="button-dark f6">Add task +</div>
                 </div>
             </div>
-            <div id="boards-container" class="board-contents">
+            <div id="boards-container" class="board-contents d-flex justify-content-start">
                 <div class="board-container">
-                    <div class="board-container-title">
-                        <span>To do</span>
-                        <div class="board-btn-addtask">+</div>
+                    <div class="board-container-titlebox d-flex justify-content-between">
+                        <span class="board-container-titlebox-title f10">To do</span>
+                        <div class="board-container-titlebox-addtask d-flex justify-content-center align-items-center">+
+                        </div>
                     </div>
                     <div class="board-container-tasks">
-
+                        <div class="board-tasks-notasks d-flex justify-content-center align-items-center f3">
+                            No tasks To do
+                        </div>
                     </div>
                 </div>
+
+                <div class="board-container">
+                    <div class="board-container-titlebox d-flex justify-content-between">
+                        <span class="board-container-titlebox-title f10">In progress</span>
+                        <div class="board-container-titlebox-addtask d-flex justify-content-center align-items-center">+
+                        </div>
+                    </div>
+                    <div class="board-container-tasks">
+                        <div class="board-task-container">
+                            <div class="d-flex mb-24">
+                                <div class="board-task-type task-type-userstory f3">User Story</div>
+                            </div>
+                            <div class="mb-24">
+                                <div class="mb-8">
+                                    <span class="f9">Kochwelt Page & Recipe Recommender</span>
+                                </div>
+                                <p class="board-task-descr f3">
+                                    Build start page with recipe recommendation and
+                                    some other text.
+                                </p>
+                            </div>
+                            <div class="board-task-subtasks mb-24 d-flex align-items-center">
+                                <div class="board-subtasks-bar">
+                                    <div class="board-subtasks-bar-value"></div>
+                                </div>
+                                <span id="class=" f11">1/2 Subtasks</span>
+                            </div>
+                            <div class="board-task-footer d-flex justify-content-between">
+                                <div class="board-task-contacts">
+                                    <div class="task-contact f11">DE</div>
+                                    <div class="task-contact f11">BZ</div>
+                                    <div class="task-contact f11">AS</div>
+                                </div>
+                                <img class="board-task-category" src="./assets/icons/prio-urgent.svg" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
