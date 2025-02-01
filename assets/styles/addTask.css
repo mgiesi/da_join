@@ -400,3 +400,10 @@ svg:hover {
     filter: invert(67%) sepia(98%) saturate(4401%) hue-rotate(165deg) brightness(99%) contrast(101%);
     color: #29ABE2 !important;
 }
+
+.footer-add-task-html {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-inline: 8px;
+}

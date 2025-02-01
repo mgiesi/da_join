@@ -14,11 +14,8 @@
     <link rel="stylesheet" href="./assets/styles/layout.css">
 
     <link rel="stylesheet" href="./assets/styles/addTask.css">
-    <link rel="stylesheet" href="./assets/styles/subtask-form.css">
-    <link rel="stylesheet" href="./assets/styles/calendar.css">
 
     <script src="./assets/js/script.js"></script>
-    <script src="./assets/js/subtask-form.js"></script>
 </head>
 
 <body onload="init()">
@@ -129,19 +126,20 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="form-actions">
-                    <button type="button" class="btn-secondary">
-                        Clear
-                        <img class="action-btn-img" src="./assets/icons/cancel.svg" alt="Clear form">
-                    </button>
-                    <button type="submit" class="btn-primary">
-                        Create Task
-                        <img src="./assets/icons/check.svg" alt="Create task">
-                    </button>
-                </div>
-                <div class="required-note">
-                    <span class="required">*</span><span class="span_txt">This field is required</span>
+                <div class="footer-add-task-html">
+                    <div class="required-note">
+                        <span class="required">*</span><span class="span_txt">This field is required</span>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary">
+                            Clear
+                            <img class="action-btn-img" src="./assets/icons/cancel.svg" alt="Clear form">
+                        </button>
+                        <button type="submit" class="btn-primary">
+                            Create Task
+                            <img src="./assets/icons/check.svg" alt="Create task">
+                        </button>
+                    </div>
                 </div>
             </form>
         </main>
