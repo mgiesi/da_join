@@ -50,6 +50,7 @@ h1 {
     gap: 8px;
     margin-bottom: 24px;
     padding: 8px;
+    position: relative;
 }
 
 .form-group label {
@@ -71,6 +72,38 @@ h1 {
     font-family: 'Inter', sans-serif;
     background: white;
     width: 100%;
+}
+
+/* Remove these rules as they show immediately */
+input:required {
+    border-color: initial;
+    /* Reset to default */
+}
+
+input:required:invalid {
+    border-color: initial;
+    /* Reset to default */
+}
+
+/* Keep the error styles for JavaScript control */
+.form-group input.error,
+.form-group select.error {
+    border-color: #FF3D00;
+}
+
+.error-message {
+    color: #FF3D00;
+    font-size: 12px;
+    position: absolute;
+    bottom: -20px;
+    left: 8px;
+    display: none;
+    margin: 0;
+    padding: 0;
+}
+
+.error-message.visible {
+    display: block;
 }
 
 .form-group textarea {
@@ -108,9 +141,14 @@ h1 {
     font-size: 20px;
     line-height: 24px;
     font-weight: 400;
-    background: white;
+    background-color: white;
+    color: black;
     cursor: pointer;
-    transition: transform 0.2s;
+    transition: all 0.2s ease-in-out;
+}
+
+.priority-btn img {
+    transition: filter 0.2s ease-in-out;
 }
 
 .priority-btn:hover {
@@ -118,22 +156,26 @@ h1 {
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-.priority-btn.active[data-priority="urgent"] {
-    background: #FF3D00;
-    color: white;
-    border: none;
+.priority-btn[data-priority="urgent"].active {
+    background-color: #FF3D00 !important;
+    color: white !important;
+    border-color: #FF3D00 !important;
 }
 
-.priority-btn.active[data-priority="medium"] {
-    background: #FFA800;
-    color: white;
-    border: none;
+.priority-btn[data-priority="medium"].active {
+    background-color: #FFA800 !important;
+    color: white !important;
+    border-color: #FFA800 !important;
 }
 
-.priority-btn.active[data-priority="low"] {
-    background: #7AE229;
-    color: white;
-    border: none;
+.priority-btn[data-priority="low"].active {
+    background-color: #7AE229 !important;
+    color: white !important;
+    border-color: #7AE229 !important;
+}
+
+.priority-btn.active img {
+    filter: brightness(0) invert(1) !important;
 }
 
 .subtask-input {
@@ -238,7 +280,7 @@ h1 {
 }
 
 .btn-secondary {
-    background: rgb(246, 247, 248);
+    background: white;
     color: rgb(42, 54, 71);
     border: 1px solid rgb(42, 54, 71);
 }

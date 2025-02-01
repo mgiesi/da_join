@@ -1,126 +1,97 @@
 function init() {
+    includeHTML().then(() => {
+        initializeAll();
+    });
+}
+
+function initializeAll() {
     initFormValidation();
-    initSubtasks();
-    initDateHandling();
+    setupPrioritySystem();
+}
+
+function setupPrioritySystem() {
+    window.handlePriorityClick = function (buttonElement) {
+        const buttons = document.querySelectorAll('.priority-btn');
+
+        buttons.forEach(btn => {
+            btn.classList.remove('active');
+            btn.style.backgroundColor = '';
+            btn.style.color = '';
+            btn.style.borderColor = '';
+        });
+
+        buttonElement.classList.add('active');
+        const priority = buttonElement.getAttribute('data-priority');
+    };
+}
+
+async function includeHTML() {
+    const elements = document.querySelectorAll('[w3-include-html]');
+    for (let element of elements) {
+        const file = element.getAttribute('w3-include-html');
+        try {
+            const response = await fetch(file);
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            const html = await response.text();
+            element.innerHTML = html;
+            element.removeAttribute('w3-include-html');
+        } catch (error) {
+            console.error('Error loading HTML:', error);
+        }
+    }
 }
 
 function initFormValidation() {
     const form = document.querySelector('.add-task-form');
+    const requiredFields = form.querySelectorAll('[required]');
+
+    form.setAttribute('novalidate', '');
+
+    requiredFields.forEach(field => {
+        if (!field.parentNode.querySelector('.error-message')) {
+            const errorMessage = document.createElement('div');
+            errorMessage.className = 'error-message';
+            errorMessage.textContent = 'This field is required';
+            field.parentNode.appendChild(errorMessage);
+        }
+
+        field.oninput = function () {
+            if (field.value.trim()) {
+                field.style.borderColor = '';
+                const errorMessage = field.parentNode.querySelector('.error-message');
+                if (errorMessage) {
+                    errorMessage.style.display = 'none';
+                }
+            }
+        };
+    });
+
     form.onsubmit = function (e) {
         e.preventDefault();
-        return validateForm();
+        validateForm(requiredFields);
     };
-
-    // Add click handlers for inputs
-    const inputs = document.querySelectorAll('input, textarea, select');
-    for (let input of inputs) {
-        input.onclick = function () {
-            setActiveInput(input);
-        };
-    }
 }
 
-function setActiveInput(activeInput) {
-    const inputs = document.querySelectorAll('input, textarea, select');
-    for (let input of inputs) {
-        input.classList.remove('active');
-    }
-    activeInput.classList.add('active');
-}
-
-function validateForm() {
-    const requiredFields = document.querySelectorAll('[required]');
+function validateForm(requiredFields) {
     let isValid = true;
 
-    for (let field of requiredFields) {
-        if (!validateField(field)) {
+    requiredFields.forEach(field => {
+        field.style.borderColor = '';
+        const errorMessage = field.parentNode.querySelector('.error-message');
+        if (errorMessage) {
+            errorMessage.style.display = 'none';
+        }
+
+        if (!field.value.trim()) {
+            field.style.borderColor = '#FF3D00';
+            if (errorMessage) {
+                errorMessage.style.display = 'block';
+            }
             isValid = false;
         }
-    }
+    });
 
     if (isValid) {
-        console.log('Form is valid, submitting...');
-        // Add your form submission logic here
-    }
-    return false;
-}
-
-function validateField(field) {
-    const formGroup = field.closest('.form-group');
-    if (!field.value.trim()) {
-        formGroup.classList.add('error');
-        return false;
-    }
-    formGroup.classList.remove('error');
-    return true;
-}
-
-function initDateHandling() {
-    const dateInput = document.getElementById('dueDate');
-    const calendarIcon = document.querySelector('.calendar-icon');
-
-    dateInput.onkeyup = function () {
-        formatDateInput(this);
-    };
-
-    dateInput.onblur = function () {
-        validateDateInput(this);
-    };
-
-    calendarIcon.onclick = function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        toggleCalendar();
-    };
-}
-
-function formatDateInput(input) {
-    let value = input.value.replace(/\D/g, '');
-
-    if (value.length > 8) {
-        value = value.slice(0, 8);
-    }
-
-    if (value.length >= 4) {
-        value = value.slice(0, 2) + '/' + value.slice(2, 4) + '/' + value.slice(4);
-    } else if (value.length >= 2) {
-        value = value.slice(0, 2) + '/' + value.slice(2);
-    }
-
-    input.value = value;
-}
-
-function validateDateInput(input) {
-    const value = input.value;
-    if (!value) return;
-
-    const parts = value.split('/');
-    if (parts.length !== 3) {
-        input.value = '';
-        alert('Please enter the date in dd/mm/yyyy format');
-        return;
-    }
-
-    const day = parseInt(parts[0], 10);
-    const month = parseInt(parts[1], 10);
-    const year = parseInt(parts[2], 10);
-    const date = new Date(year, month - 1, day);
-
-    const isValid = date.getDate() === day &&
-        date.getMonth() === month - 1 &&
-        date.getFullYear() === year &&
-        year >= new Date().getFullYear();
-
-    if (!isValid) {
-        input.value = '';
-        alert('Please enter a valid future date in dd/mm/yyyy format');
+        // Form submission logic will go here
     }
 }
-
-function toggleCalendar() {
-    const dateInput = document.getElementById('dueDate');
-    const calendar = new Calendar(dateInput);
-    calendar.toggle();
-}
-
-window.onload = init;
