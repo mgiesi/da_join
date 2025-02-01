@@ -50,6 +50,7 @@ h1 {
     gap: 8px;
     margin-bottom: 24px;
     padding: 8px;
+    position: relative;
 }
 
 .form-group label {
@@ -71,6 +72,34 @@ h1 {
     font-family: 'Inter', sans-serif;
     background: white;
     width: 100%;
+}
+
+input:required {
+    border-color: initial;
+}
+
+input:required:invalid {
+    border-color: initial;
+}
+
+.form-group input.error,
+.form-group select.error {
+    border-color: #FF3D00;
+}
+
+.error-message {
+    color: #FF3D00;
+    font-size: 12px;
+    position: absolute;
+    bottom: -20px;
+    left: 8px;
+    display: none;
+    margin: 0;
+    padding: 0;
+}
+
+.error-message.visible {
+    display: block;
 }
 
 .form-group textarea {
@@ -108,9 +137,14 @@ h1 {
     font-size: 20px;
     line-height: 24px;
     font-weight: 400;
-    background: white;
+    background-color: white;
+    color: black;
     cursor: pointer;
-    transition: transform 0.2s;
+    transition: all 0.2s ease-in-out;
+}
+
+.priority-btn img {
+    transition: filter 0.2s ease-in-out;
 }
 
 .priority-btn:hover {
@@ -118,22 +152,26 @@ h1 {
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-.priority-btn.active[data-priority="urgent"] {
-    background: #FF3D00;
-    color: white;
-    border: none;
+.priority-btn[data-priority="urgent"].active {
+    background-color: #FF3D00 !important;
+    color: white !important;
+    border-color: #FF3D00 !important;
 }
 
-.priority-btn.active[data-priority="medium"] {
-    background: #FFA800;
-    color: white;
-    border: none;
+.priority-btn[data-priority="medium"].active {
+    background-color: #FFA800 !important;
+    color: white !important;
+    border-color: #FFA800 !important;
 }
 
-.priority-btn.active[data-priority="low"] {
-    background: #7AE229;
-    color: white;
-    border: none;
+.priority-btn[data-priority="low"].active {
+    background-color: #7AE229 !important;
+    color: white !important;
+    border-color: #7AE229 !important;
+}
+
+.priority-btn.active img {
+    filter: brightness(0) invert(1) !important;
 }
 
 .subtask-input {
@@ -238,7 +276,7 @@ h1 {
 }
 
 .btn-secondary {
-    background: rgb(246, 247, 248);
+    background: white;
     color: rgb(42, 54, 71);
     border: 1px solid rgb(42, 54, 71);
 }
@@ -328,7 +366,6 @@ h1 {
     }
 }
 
-/* Input fields hover and focus styles */
 .form-group input:hover,
 .form-group textarea:hover,
 .form-group select:hover,
@@ -345,7 +382,6 @@ h1 {
     outline: none;
 }
 
-/* Button hover effects */
 .btn-primary:hover {
     background: #29ABE2;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -359,14 +395,12 @@ h1 {
     transform: scale(1.02);
 }
 
-/* Subtask action buttons hover effect */
 .subtask-actions img:hover,
 .plus-icon:hover {
     transform: scale(1.1);
     cursor: pointer;
 }
 
-/* Add transition for smooth effects */
 .form-group input,
 .form-group textarea,
 .form-group select,
@@ -379,7 +413,6 @@ h1 {
     transition: all 0.2s ease-in-out;
 }
 
-/* Active state for input fields */
 .form-group input.active,
 .form-group textarea.active,
 .form-group select.active,
@@ -399,4 +432,11 @@ svg:hover {
 .btn-secondary:hover svg {
     filter: invert(67%) sepia(98%) saturate(4401%) hue-rotate(165deg) brightness(99%) contrast(101%);
     color: #29ABE2 !important;
+}
+
+.footer-add-task-html {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-inline: 8px;
 }
