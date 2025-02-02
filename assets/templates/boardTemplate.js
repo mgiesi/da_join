@@ -57,9 +57,7 @@ async function displayTasks(board, taskCount) {
                 ${displaySubTasks(task)}
                 <div class="board-task-footer d-flex justify-content-between">
                     <div class="board-task-contacts">
-                        <div class="task-contact f11">DE</div>
-                        <div class="task-contact f11">BZ</div>
-                        <div class="task-contact f11">AS</div>
+                        ${await displayAssignedTo(task)}
                     </div>
                     <img class="board-task-category" src="./assets/icons/prio-${task.prio}.svg" alt="">
                 </div>
@@ -105,4 +103,31 @@ function getSubTasksDoneCount(task, subTasksCount) {
         }
     }
     return subTasksDoneCount;
+}
+
+async function displayAssignedTo(task) {
+    const contactsCount = task && task.assignedTo
+        ? Object.keys(task.assignedTo).length
+        : 0;
+    if (contactsCount <= 0) {
+        return "";
+    } else {
+        let contactsContent = "";
+        for (let contactIdx = 0; contactIdx < contactsCount; contactIdx++) {
+            const contact = await getContact(task.assignedTo["contact" + (contactIdx + 1)]);
+            if (contact === undefined || contact === null) {
+                continue;
+            } else {
+                contactsContent += displayContact(contact);
+            }
+        }
+
+        return contactsContent;
+    }
+}
+
+function displayContact(contact) {
+    return `
+        <div class="task-contact f11">${getShortcutName(contact)}</div >
+        `;
 }

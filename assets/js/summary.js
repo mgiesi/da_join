@@ -38,15 +38,31 @@ function getUserName() {
 }
 
 function refreshBoardInfos() {
-  refreshTasksCount("todo", "summary-taskscount-todo");
-  refreshTasksCount("done", "summary-taskscount-done");
-  refreshTasksCount("urgent", "summary-taskscount-urgent");
-  refreshTasksCount("inprogress", "summary-taskscount-inprogress");
-  refreshTasksCount("awaitfeedback", "summary-taskscount-awaitingfeedback");
+  for (const boardName of boardNames) {
+    refreshTasksCount(boardName, "summary-taskscount-" + boardName);
+  }
+  refreshTasksCount4Urgent();
+  refreshTasksInBoard();
 }
 
 async function refreshTasksCount(board, textId) {
-  const tasksCount = await getTasksCount(board);
+  const tasksCount = await getBoardTasksCount(board);
   const textRef = document.getElementById(textId);
   textRef.innerHTML = tasksCount + "";
+}
+
+async function refreshTasksCount4Urgent() {
+  let taskCount = await getTasksCount("urgent");
+  const textRef = document.getElementById("summary-taskscount-urgent");
+  textRef.innerHTML = taskCount + "";
+}
+
+async function refreshTasksInBoard() {
+  let taskCount = 0;
+  for (const boardName of boardNames) {
+    taskCount += await getBoardTasksCount(boardName);
+  }
+
+  const textRef = document.getElementById("summary-taskscount-board");
+  textRef.innerHTML = taskCount + "";
 }

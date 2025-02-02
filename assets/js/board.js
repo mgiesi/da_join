@@ -1,6 +1,7 @@
+const boardNames = ["todo", "inprogress", "awaitfeedback", "done"];
+
 async function initBoard() {
     cleanBoardView();
-    const boardNames = ["todo", "inprogress", "awaitfeedback", "done"];
     for (const boardName of boardNames) {
         await readBoardContent(boardName);
     }
