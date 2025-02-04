@@ -28,7 +28,9 @@ function displayContactDetails({ name, email, phone, avatarColor }) {
           <div class="profile-info">
             <h2>${name}</h2>
             <div class="profile-actions">
-              <button class="action-link" onclick="toggleEditOverlay()">
+              <button class="action-link" onclick="toggleEditOverlay(${
+                (name, email, phone)
+              })">
                 <img src="./assets/icons/edit.svg" alt="" class="action-icon" />
                 Edit
               </button>
@@ -177,10 +179,11 @@ function getEditOverlay() {
                     >
                       Delete<img src="./assets/icons/cancel.svg" />
                     </button>
-                    <button id="addContactButton" onclick="updateContactDataInFirebase()" type="button" class="create-btn">
+                    <button id="addContactButton" onclick="UpdateNewContactToFirebase()" type="button" class="create-btn">
                       Save <img src="./assets/icons/check.svg" alt="" />
                     </button>
                   </div>
+                  <div><h2 id="addFont" class="f2 dNone addFont">Bitte alle Felder ausfüllen!</h2></div>
                 </form>
               </div>
             </div>

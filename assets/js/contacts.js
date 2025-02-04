@@ -69,6 +69,60 @@ async function addNewContactToFirebase() {
   }
 }
 
+async function UpdateNewContactToFirebase() {
+  const name = document.getElementById("inputEditName").value;
+  const email = document.getElementById("inputEditMail").value;
+  const phone = document.getElementById("inputEditCall").value;
+
+  if (!name || !email || !phone) {
+    let addDialog = document.getElementById("addFont");
+    addDialog.classList.remove("dNone");
+    return;
+  }
+
+  const UpdatedContact = {
+    name,
+    email,
+    phone,
+    avatarColor: getRandomColor(),
+  };
+
+  try {
+    const response = await fetch(
+      "https://joinusercontacts-default-rtdb.europe-west1.firebasedatabase.app/contacts.json"
+    );
+
+    const contacts = await response.json();
+    const contactKeys = contacts ? Object.keys(contacts) : [];
+    const nextNumber = contactKeys.length;
+    const UpKeys = `contact${nextNumber}`;
+
+    const saveResponse = await fetch(
+      `https://joinusercontacts-default-rtdb.europe-west1.firebasedatabase.app/contacts/${UpKeys}.json`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(UpdatedContact),
+      }
+    );
+
+    if (!saveResponse.ok) {
+      throw new Error(
+        `Fehler beim Speichern des Kontakts: ${saveResponse.status}`
+      );
+    }
+    await loadContactsFromFirebase();
+    alert("Kontakt erfolgreich hinzugefügt!");
+  } catch (error) {
+    console.error("Fehler beim Hinzufügen des Kontakts:", error);
+    alert(
+      "Es ist ein Fehler aufgetreten. Kontakt konnte nicht hinzugefügt werden."
+    );
+  }
+}
+
 function getRandomColor() {
   const colors = ["#273DB4", "#C50900", "#F95CA4", "#ED7845", "#124E66"];
   const color = colors[Math.floor(Math.random() * colors.length)];
