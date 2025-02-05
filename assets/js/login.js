@@ -39,6 +39,5 @@ function addUser() {
     email: email.value,
     password: password.value,
   });
-  //window.location.href = "index.html";
   console.log(users);
 }
