@@ -34,7 +34,9 @@ function displayContactDetails({ name, email, phone, avatarColor }) {
                 <img src="./assets/icons/edit.svg" alt="" class="action-icon" />
                 Edit
               </button>
-              <button onclick="deleteContact('${name}')" class="action-link">
+              <button onclick="deleteContactToFirebase(${
+                (name, email, phone)
+              })" class="action-link">
                 <img src="./assets/icons/delete.svg" alt="" class="action-icon" />
                 Delete
               </button>

@@ -60,12 +60,9 @@ async function addNewContactToFirebase() {
       );
     }
     await loadContactsFromFirebase();
-    alert("Kontakt erfolgreich hinzugefügt!");
+    toggleOverlay();
   } catch (error) {
     console.error("Fehler beim Hinzufügen des Kontakts:", error);
-    alert(
-      "Es ist ein Fehler aufgetreten. Kontakt konnte nicht hinzugefügt werden."
-    );
   }
 }
 
@@ -114,12 +111,42 @@ async function UpdateNewContactToFirebase() {
       );
     }
     await loadContactsFromFirebase();
-    alert("Kontakt erfolgreich hinzugefügt!");
+    toggleEditOverlay();
   } catch (error) {
     console.error("Fehler beim Hinzufügen des Kontakts:", error);
-    alert(
-      "Es ist ein Fehler aufgetreten. Kontakt konnte nicht hinzugefügt werden."
+  }
+}
+
+async function deleteContactToFirebase() {
+  try {
+    const response = await fetch(
+      "https://joinusercontacts-default-rtdb.europe-west1.firebasedatabase.app/contacts.json"
     );
+
+    const contacts = await response.json();
+    const contactKeys = contacts ? Object.keys(contacts) : [];
+    const nextNumber = contactKeys.length;
+    const UpKeys = `contact${nextNumber}`;
+
+    const saveResponse = await fetch(
+      `https://joinusercontacts-default-rtdb.europe-west1.firebasedatabase.app/contacts/${UpKeys}.json`,
+      {
+        method: "Delete",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(),
+      }
+    );
+
+    if (!saveResponse.ok) {
+      throw new Error(
+        `Fehler beim Speichern des Kontakts: ${saveResponse.status}`
+      );
+    }
+    await loadContactsFromFirebase();
+  } catch (error) {
+    console.error("Fehler beim Hinzufügen des Kontakts:", error);
   }
 }
 
