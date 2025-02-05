@@ -1,3 +1,7 @@
+let users = [
+  { name: "Markus Giesinger", email: "test@web.de", password: "test" },
+];
+
 function navigateToSignUp() {
   window.location.href = "signUp.html";
 }
@@ -24,4 +28,17 @@ function showMessage(event) {
   } else {
     dialogSignUp.classList.remove("dNone");
   }
+}
+
+function addUser() {
+  let name = document.getElementById("inputName");
+  let email = document.getElementById("inputMail");
+  let password = document.getElementById("inputLock");
+  users.push({
+    name: name.value,
+    email: email.value,
+    password: password.value,
+  });
+  //window.location.href = "index.html";
+  console.log(users);
 }
