@@ -1,4 +1,6 @@
-const TASKS_URL = DB_BASE_URL + "tasks/";
+// const TASKS_URL = DB_BASE_URL + "tasks/";
+
+const TASKS_URL = "https://join-bf239-default-rtdb.europe-west1.firebasedatabase.app/";
 
 async function getTask(taskid) {
     let response = await fetch(TASKS_URL + taskid + ".json");
