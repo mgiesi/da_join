@@ -1,7 +1,7 @@
 async function displayBoard(board) {
     const boardTasksContent = await displayBoardTasks(board);
     return `
-        <div class="board-container">
+        <div class="board-container" ondrop="moveTaskTo(${board.name})" ondragover="allowDrop(event)">
             <div class="board-container-titlebox d-flex justify-content-between">
                 <span class="board-container-titlebox-title f10">${board.name}</span>
                 <div class="board-container-titlebox-addtask d-flex justify-content-center align-items-center">+
@@ -42,7 +42,7 @@ async function displayTasks(board, taskCount) {
             continue;
         }
         htmlContent += `
-            <div class="board-task-container">
+            <div class="board-task-container" draggable="true" ondragstart="startTaskDragging(${board.name}, "task" + ${taskIdx})">
                 <div class="d-flex mb-24">
                     ${displayTaskType(task.category)}
                 </div>
