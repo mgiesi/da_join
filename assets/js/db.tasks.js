@@ -1,6 +1,4 @@
-// const TASKS_URL = DB_BASE_URL + "tasks/";
-
-const TASKS_URL = "https://join-bf239-default-rtdb.europe-west1.firebasedatabase.app/";
+const TASKS_URL = DB_BASE_URL + "tasks/";
 
 async function getTasks() {
     let response = await fetch(TASKS_URL + ".json");
@@ -23,16 +21,11 @@ async function getTasksCount(prio) {
     }
 
     let filteredTasksCount = 0;
-    const tasksCount = Object.keys(responseToJson).length;
-    for (let taskIdx = 0; taskIdx < tasksCount; taskIdx++) {
-        if (responseToJson[taskIdx] === null) {
-            continue;
-        }
-        if (responseToJson[taskIdx].prio === prio) {
+    Object.keys(responseToJson).forEach(task => {
+        if (responseToJson[task].prio === prio) {
             filteredTasksCount++;
         }
-
-    }
+    });
 
     return filteredTasksCount;
 }

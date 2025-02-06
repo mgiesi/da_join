@@ -1,1 +1,2 @@
-const DB_BASE_URL = "https://da-join-629d2-default-rtdb.europe-west1.firebasedatabase.app/";
+const DB_BASE_URL = "https://da-join-629d2-default-rtdb.europe-west1.firebasedatabase.app/"; // URL von Markus
+//const DB_BASE_URL = "https://join-bf239-default-rtdb.europe-west1.firebasedatabase.app/";    // URL von Andrei

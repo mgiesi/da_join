@@ -1,14 +1,13 @@
-function displayBoard(board, tasks, contacts) {
-    const boardTasksContent = displayBoardTasks(board, tasks, contacts);
+function displayBoardContainer(board) {
+    let addTaskContent = board.addtasks ? `<div class="board-container-titlebox-addtask d-flex justify-content-center align-items-center">+</div>` : "";
     return `
         <div class="board-container" ondrop="moveTaskTo('${board.id}')" ondragover="allowDrop(event)">
             <div class="board-container-titlebox d-flex justify-content-between">
                 <span class="board-container-titlebox-title f10">${board.name}</span>
-                <div class="board-container-titlebox-addtask d-flex justify-content-center align-items-center">+
-                </div>
+                ${addTaskContent}
             </div>
-            <div class="board-container-tasks">
-                ${boardTasksContent}
+            <div id="board-container-${board.id}" class="board-container-tasks">
+                
             </div>
         </div>
     `;

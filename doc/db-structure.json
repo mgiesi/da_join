@@ -75,6 +75,7 @@
         "todo": {
             "id": "todo",
             "name": "To do",
+            "addtasks": true,
             "tasks": {
                 "fireBaseKey1": true,
                 "fireBaseKey4": true,
@@ -84,6 +85,7 @@
         "inprogress": {
             "id": "inprogress",
             "name": "In progress",
+            "addtasks": true,
             "tasks": {
                 "fireBaseKey2": true
             }
@@ -91,6 +93,7 @@
         "awaitfeedback": {
             "id": "awaitfeedback",
             "name": "Await feedback",
+            "addtasks": true,
             "tasks": {
                 "fireBaseKey3": true
             }
@@ -98,6 +101,7 @@
         "done": {
             "id": "done",
             "name": "Done",
+            "addtasks": false,
             "tasks": {
                 "fireBaseKey4": true
             }
