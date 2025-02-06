@@ -1,8 +1,24 @@
 const boardNames = ["todo", "inprogress", "awaitfeedback", "done"];
 
+let filterText;
+
 async function initBoard() {
+    filterText = "";
     await renderBoardContainer();
     await renderTasks();
+}
+
+function updateFilter() {
+    const filterInputRef = document.getElementById("board-filter-text");
+    filterText = filterInputRef.value;
+    renderTasks();
+}
+
+function resetFilter() {
+    const filterInputRef = document.getElementById("board-filter-text");
+    filterInputRef.value = "";
+    filterText = ""
+    renderTasks();
 }
 
 async function renderBoardContainer() {
@@ -17,7 +33,7 @@ async function renderBoardContainer() {
 async function renderTasks() {
     const [boards, tasks, contacts] = await Promise.all([
         getBoards(),
-        getTasks(),
+        getTasks(filterText),
         getContacts()
     ]);
     for (const boardName of boardNames) {

@@ -1,9 +1,25 @@
 const TASKS_URL = DB_BASE_URL + "tasks/";
 
-async function getTasks() {
+async function getTasks(filterText) {
     let response = await fetch(TASKS_URL + ".json");
     let responseToJson = await response.json();
-    return responseToJson;
+
+    if (!filterText || filterText.trim() === "") {
+        return responseToJson;
+    }
+
+    const lowerCaseFilterText = filterText.toLowerCase();
+    const filteredTasks = {};
+    for (const [key, task] of Object.entries(responseToJson)) {
+        const title = task.title ? task.title.toLowerCase() : "";
+        const descr = task.description ? task.description.toLowerCase() : "";
+
+        if (title.includes(lowerCaseFilterText) || descr.includes(lowerCaseFilterText)) {
+            filteredTasks[key] = task;
+        }
+    }
+
+    return filteredTasks;
 }
 
 async function getTask(taskid) {
@@ -16,7 +32,7 @@ async function getTasksCount(prio) {
     let response = await fetch(TASKS_URL + ".json");
     let responseToJson = await response.json();
 
-    if (responseToJson === undefined || response === null) {
+    if (!responseToJson) {
         return 0;
     }
 
