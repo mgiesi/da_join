@@ -34,14 +34,22 @@ h1 {
 }
 
 .form-columns {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 32px;
+    display: flex;
+    gap: 0;
     margin-bottom: 24px;
 }
 
+.form-left-column,
+.form-right-column {
+    flex: 1;
+    max-width: calc(50% - 16px);
+}
+
 .separator {
-    display: none;
+    width: 1px;
+    background-color: rgb(209, 209, 209);
+    margin: 0 32px;
+    display: block;
 }
 
 .form-group {
@@ -72,14 +80,15 @@ h1 {
     font-family: 'Inter', sans-serif;
     background: white;
     width: 100%;
+    transition: all 0.2s ease-in-out, border-color 0.2s ease-in-out;
 }
 
 input:required {
-    border-color: initial;
+    border-color: rgb(209, 209, 209);
 }
 
 input:required:invalid {
-    border-color: initial;
+    border-color: rgb(209, 209, 209);
 }
 
 .form-group input.error,
@@ -109,15 +118,46 @@ input:required:invalid {
 
 .select-wrapper {
     position: relative;
+    width: 100%;
+}
+
+.select-wrapper::after {
+    content: '';
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%) rotate(0deg);
+    width: 16px;
+    height: 7px;
+    background-image: url('../icons/arrow_drop_down.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    pointer-events: none;
+    transition: transform 0.2s ease-in-out;
+}
+
+.select-wrapper:has(select:focus)::after {
+    transform: translateY(-50%) rotate(180deg);
+}
+
+.select-wrapper.focused::after {
+    transform: translateY(-50%) rotate(180deg);
 }
 
 .select-wrapper select {
     width: 100%;
     padding: 12px 16px;
+    padding-right: 40px;
     appearance: none;
-    background-image: url('./assets/icons/arrow_drop_down.svg');
-    background-repeat: no-repeat;
-    background-position: right 16px center;
+    border: 1px solid rgb(209, 209, 209);
+    border-radius: 10px;
+    font-size: 20px;
+    line-height: 24px;
+    font-family: 'Inter', sans-serif;
+    background-color: white;
+    color: rgba(0, 0, 0, 0.87);
+    cursor: pointer;
 }
 
 .priority-buttons {
@@ -193,7 +233,7 @@ input:required:invalid {
     border-radius: 10px;
     font-size: 20px;
     line-height: 24px;
-    transition: border-color 0.3s ease;
+    transition: all 0.2s ease-in-out, border-color 0.2s ease-in-out;
 }
 
 .subtask-input .input-wrapper input.active {
@@ -289,7 +329,7 @@ input:required:invalid {
 }
 
 .required {
-    color: rgb(255, 128, 143);
+    color: rgb(255, 128, 143) !important;
 }
 
 .span_txt {
@@ -339,47 +379,33 @@ input:required:invalid {
     fill: rgba(0, 0, 0, 0.54);
 }
 
-@media (max-width: 1200px) {
-    .main-container {
-        padding-left: 200px;
-    }
-
-    .form-columns {
-        grid-template-columns: 1fr;
-        gap: 24px;
-    }
-}
-
-@media (max-width: 768px) {
-    .main-container {
-        padding-left: 0;
-        padding-top: 80px;
-    }
-
-    .add-task-content {
-        padding: 20px;
-    }
-
-    h1 {
-        font-size: 47px;
-        line-height: 56px;
-    }
-}
-
 .form-group input:hover,
 .form-group textarea:hover,
 .form-group select:hover,
-.subtask-input input:hover {
-    border-color: #29ABE2;
+.subtask-input .input-wrapper input:hover,
+.select-wrapper select:hover {
+    border-color: #29ABE2 !important;
     cursor: pointer;
 }
 
 .form-group input:focus,
 .form-group textarea:focus,
 .form-group select:focus,
-.subtask-input input:focus {
-    border-color: #29ABE2;
+.subtask-input .input-wrapper input:focus,
+.select-wrapper select:focus {
+    border-color: #29ABE2 !important;
     outline: none;
+}
+
+.form-group input:active,
+.form-group textarea:active,
+.form-group select:active,
+.subtask-input input:active,
+.form-group input.active,
+.form-group textarea.active,
+.form-group select.active,
+.subtask-input input.active {
+    border-color: #29ABE2;
 }
 
 .btn-primary:hover {
@@ -439,4 +465,35 @@ svg:hover {
     justify-content: space-between;
     align-items: flex-end;
     padding-inline: 8px;
+}
+
+@media (max-width: 1200px) {
+    .form-columns {
+        flex-direction: column;
+    }
+
+    .form-left-column,
+    .form-right-column {
+        max-width: 100%;
+    }
+
+    .separator {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-container {
+        padding-left: 0;
+        padding-top: 80px;
+    }
+
+    .add-task-content {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 47px;
+        line-height: 56px;
+    }
 }

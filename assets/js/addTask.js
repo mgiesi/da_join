@@ -7,6 +7,23 @@ function init() {
 function initializeAll() {
     initFormValidation();
     setupPrioritySystem();
+    setupSelectArrows(); 
+}
+
+function setupSelectArrows() {
+    const selectWrappers = document.querySelectorAll('.select-wrapper');
+
+    selectWrappers.forEach(wrapper => {
+        const select = wrapper.querySelector('select');
+
+        select.onfocus = function () {
+            wrapper.classList.add('focused');
+        };
+
+        select.onblur = function () {
+            wrapper.classList.remove('focused');
+        };
+    });
 }
 
 function setupPrioritySystem() {
