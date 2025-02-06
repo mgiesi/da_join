@@ -1,11 +1,11 @@
 {
     "tasks": {
-        "1": {
+        "fireBaseKey1": {
             "title": "Title 1",
             "description": "Description 1",
             "assignedTo": {
-                "contact1": "1",
-                "contact2": "2"
+                "contact1": true,
+                "contact2": true
             },
             "dueDate": "2025-01-30",
             "prio": "urgent",
@@ -21,11 +21,11 @@
                 }
             }
         },
-        "2": {
+        "fireBaseKey2": {
             "title": "Title 2",
             "description": "Description 2",
             "assignedTo": {
-                "contact1": "2"
+                "contact2": true
             },
             "dueDate": "2025-02-02",
             "prio": "low",
@@ -37,33 +37,33 @@
                 }
             }
         },
-        "3": {
+        "fireBaseKey3": {
             "title": "Title 3",
             "description": "Description 3",
             "assignedTo": {
-                "contact1": "2"
+                "contact2": true
             },
             "dueDate": "2025-02-12",
             "prio": "medium",
             "category": "userstory",
             "subtasks": {}
         },
-        "4": {
+        "fireBaseKey4": {
             "title": "Title 4",
             "description": "Description 4",
             "assignedTo": {
-                "contact1": "2"
+                "contact2": true
             },
             "dueDate": "2025-02-12",
             "prio": "medium",
             "category": "userstory",
             "subtasks": {}
         },
-        "5": {
+        "fireBaseKey5": {
             "title": "Title 5",
             "description": "Description 5",
             "assignedTo": {
-                "contact1": "2"
+                "contact2": true
             },
             "dueDate": "2025-02-12",
             "prio": "medium",
@@ -73,28 +73,34 @@
     },
     "boards": {
         "todo": {
+            "id": "todo",
             "name": "To do",
             "tasks": {
-                "task1": "1",
-                "task2": "4",
-                "task3": "5"
+                "fireBaseKey1": true,
+                "fireBaseKey4": true,
+                "fireBaseKey5": true
             }
         },
         "inprogress": {
+            "id": "inprogress",
             "name": "In progress",
             "tasks": {
-                "task1": "2"
+                "fireBaseKey2": true
             }
         },
         "awaitfeedback": {
+            "id": "awaitfeedback",
             "name": "Await feedback",
             "tasks": {
-                "task1": "3"
+                "fireBaseKey3": true
             }
         },
         "done": {
+            "id": "done",
             "name": "Done",
-            "tasks": {}
+            "tasks": {
+                "fireBaseKey4": true
+            }
         }
     },
     "contacts": {

@@ -1,7 +1,7 @@
-async function displayBoard(board) {
-    const boardTasksContent = await displayBoardTasks(board);
+function displayBoard(board, tasks, contacts) {
+    const boardTasksContent = displayBoardTasks(board, tasks, contacts);
     return `
-        <div class="board-container" ondrop="moveTaskTo(${board.name})" ondragover="allowDrop(event)">
+        <div class="board-container" ondrop="moveTaskTo('${board.id}')" ondragover="allowDrop(event)">
             <div class="board-container-titlebox d-flex justify-content-between">
                 <span class="board-container-titlebox-title f10">${board.name}</span>
                 <div class="board-container-titlebox-addtask d-flex justify-content-center align-items-center">+
@@ -14,14 +14,14 @@ async function displayBoard(board) {
     `;
 }
 
-async function displayBoardTasks(board) {
+function displayBoardTasks(board, tasks, contacts) {
     const taskCount = board && board.tasks
         ? Object.keys(board.tasks).length
         : 0;
     if (taskCount <= 0) {
         return displayEmptyBoard(board);
     } else {
-        return await displayTasks(board, taskCount);
+        return displayTasks(board, tasks, contacts);
     }
 }
 
@@ -33,16 +33,16 @@ function displayEmptyBoard(board) {
         `;
 }
 
-async function displayTasks(board, taskCount) {
+function displayTasks(board, tasks, contacts) {
     let htmlContent = "";
 
-    for (let taskIdx = 0; taskIdx < taskCount; taskIdx++) {
-        const task = await getTask(board.tasks["task" + (taskIdx + 1)]);
+    Object.keys(board.tasks).forEach(taskId => {
+        const task = tasks[taskId];
         if (task === undefined || task === null) {
-            continue;
+            return;
         }
         htmlContent += `
-            <div class="board-task-container" draggable="true" ondragstart="startTaskDragging(${board.name}, "task" + ${taskIdx})">
+            <div class="board-task-container" draggable="true" ondragstart="startTaskDragging('${board.id}', '${taskId}')">
                 <div class="d-flex mb-24">
                     ${displayTaskType(task.category)}
                 </div>
@@ -57,13 +57,13 @@ async function displayTasks(board, taskCount) {
                 ${displaySubTasks(task)}
                 <div class="board-task-footer d-flex justify-content-between">
                     <div class="board-task-contacts">
-                        ${await displayAssignedTo(task)}
+                        ${displayAssignedTo(task, contacts)}
                     </div>
                     <img class="board-task-category" src="./assets/icons/prio-${task.prio}.svg" alt="">
                 </div>
             </div>
         `;
-    }
+    });
     return htmlContent;
 }
 
@@ -105,7 +105,7 @@ function getSubTasksDoneCount(task, subTasksCount) {
     return subTasksDoneCount;
 }
 
-async function displayAssignedTo(task) {
+function displayAssignedTo(task, contacts) {
     const contactsCount = task && task.assignedTo
         ? Object.keys(task.assignedTo).length
         : 0;
@@ -113,14 +113,14 @@ async function displayAssignedTo(task) {
         return "";
     } else {
         let contactsContent = "";
-        for (let contactIdx = 0; contactIdx < contactsCount; contactIdx++) {
-            const contact = await getContact(task.assignedTo["contact" + (contactIdx + 1)]);
+        Object.keys(task.assignedTo).forEach(contactId => {
+            const contact = contacts[contactId];
             if (contact === undefined || contact === null) {
-                continue;
+                return;
             } else {
                 contactsContent += displayContact(contact);
             }
-        }
+        });
 
         return contactsContent;
     }

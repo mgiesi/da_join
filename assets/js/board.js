@@ -1,12 +1,12 @@
 const boardNames = ["todo", "inprogress", "awaitfeedback", "done"];
 
-let dragStartBoard;
-let dragStartTask;
-
 async function initBoard() {
     cleanBoardView();
+    const boards = await getBoards();
+    const tasks = await getTasks();
+    const contacts = await getContacts();
     for (const boardName of boardNames) {
-        await readBoardContent(boardName);
+        readBoardContent(boards[boardName], tasks, contacts);
     }
 }
 
@@ -15,27 +15,8 @@ function cleanBoardView() {
     boardContent.innerHTML = "";
 }
 
-async function readBoardContent(boardName) {
+function readBoardContent(board, tasks, contacts) {
     const boardContent = document.getElementById("boards-container");
-    const board = await getBoard(boardName);
 
-    boardContent.innerHTML += await displayBoard(board);
-}
-
-function startTaskDragging(board, taskId) {
-    dragStartBoard = board;
-    dragStartTask = taskId;
-}
-
-function allowDrop(event) {
-    event.preventDefault();
-}
-
-function moveTaskTo(board) {
-    if (!board || dragTask === undefined || dragTask === null) {
-        return;
-    }
-
-    let tasks = board.tasks;
-    if (!(task))
+    boardContent.innerHTML += displayBoard(board, tasks, contacts);
 }
