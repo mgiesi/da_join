@@ -35,7 +35,7 @@ async function addNewContactToFirebase() {
 
   try {
     const response = await fetch(
-      "https://joinusercontacts-default-rtdb.europe-west1.firebasedatabase.app/contacts.json"
+      "https://da-join-629d2-default-rtdb.europe-west1.firebasedatabase.app//contacts.json"
     );
 
     const contacts = await response.json();
@@ -44,7 +44,7 @@ async function addNewContactToFirebase() {
     const newContactKey = `contact${nextNumber}`;
 
     const saveResponse = await fetch(
-      `https://joinusercontacts-default-rtdb.europe-west1.firebasedatabase.app/contacts/${newContactKey}.json`,
+      `https://da-join-629d2-default-rtdb.europe-west1.firebasedatabase.app//contacts/${newContactKey}.json`,
       {
         method: "PUT",
         headers: {
@@ -86,7 +86,7 @@ async function UpdateNewContactToFirebase() {
 
   try {
     const response = await fetch(
-      "https://joinusercontacts-default-rtdb.europe-west1.firebasedatabase.app/contacts.json"
+      "https://da-join-629d2-default-rtdb.europe-west1.firebasedatabase.app//contacts.json"
     );
 
     const contacts = await response.json();
@@ -95,7 +95,7 @@ async function UpdateNewContactToFirebase() {
     const UpKeys = `contact${nextNumber}`;
 
     const saveResponse = await fetch(
-      `https://joinusercontacts-default-rtdb.europe-west1.firebasedatabase.app/contacts/${UpKeys}.json`,
+      `https://da-join-629d2-default-rtdb.europe-west1.firebasedatabase.app//contacts/${UpKeys}.json`,
       {
         method: "PUT",
         headers: {
@@ -120,7 +120,7 @@ async function UpdateNewContactToFirebase() {
 async function deleteContactToFirebase() {
   try {
     const response = await fetch(
-      "https://joinusercontacts-default-rtdb.europe-west1.firebasedatabase.app/contacts.json"
+      "https://da-join-629d2-default-rtdb.europe-west1.firebasedatabase.app//contacts.json"
     );
 
     const contacts = await response.json();
@@ -129,7 +129,7 @@ async function deleteContactToFirebase() {
     const UpKeys = `contact${nextNumber}`;
 
     const saveResponse = await fetch(
-      `https://joinusercontacts-default-rtdb.europe-west1.firebasedatabase.app/contacts/${UpKeys}.json`,
+      `https://da-join-629d2-default-rtdb.europe-west1.firebasedatabase.app//contacts/${UpKeys}.json`,
       {
         method: "Delete",
         headers: {
@@ -159,7 +159,7 @@ function getRandomColor() {
 async function loadContactsFromFirebase() {
   try {
     const response = await fetch(
-      "https://joinusercontacts-default-rtdb.europe-west1.firebasedatabase.app/contacts.json"
+      "https://da-join-629d2-default-rtdb.europe-west1.firebasedatabase.app/contacts.json"
     );
 
     const contacts = await response.json();

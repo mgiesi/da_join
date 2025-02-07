@@ -30,14 +30,49 @@ function showMessage(event) {
   }
 }
 
-function addUser() {
-  let name = document.getElementById("inputName");
-  let email = document.getElementById("inputMail");
-  let password = document.getElementById("inputLock");
-  users.push({
-    name: name.value,
-    email: email.value,
-    password: password.value,
-  });
-  console.log(users);
+async function addUser() {
+  let name = document.getElementById("inputName").value;
+  let email = document.getElementById("inputMail").value;
+  let password = document.getElementById("inputLock").value;
+
+  if (!name || !email || !password) {
+    let addDialog = document.getElementById("addFont");
+    addDialog.classList.remove("dNone");
+    return;
+  }
+
+  const newUser = {
+    name,
+    email,
+    password,
+  };
+
+  try {
+    const response = await fetch(
+      "https://da-join-629d2-default-rtdb.europe-west1.firebasedatabase.app//user.json"
+    );
+    const user = await response.json();
+    const userKeys = user ? Object.keys(user) : [];
+    const nextUser = userKeys.length + 1;
+    const newUserKey = `user${nextUser}`;
+
+    const saveResponse = await fetch(
+      `https://da-join-629d2-default-rtdb.europe-west1.firebasedatabase.app//user/${newUserKey}.json`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newUser),
+      }
+    );
+
+    if (!saveResponse.ok) {
+      throw new Error(
+        `Fehler beim Speichern des Kontakts: ${saveResponse.status}`
+      );
+    }
+  } catch (error) {
+    console.error("Fehler beim Hinzufügen des Kontakts:", error);
+  }
 }
