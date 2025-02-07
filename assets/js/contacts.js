@@ -39,7 +39,7 @@ async function addNewContactToFirebase() {
     const nextNumber = contactKeys.length + 1;
     const newContactKey = `contact${nextNumber}`;
 
-    const saveResponse = await addContact(newContactKey, newContact);
+    const saveResponse = await addOrUpdateContact(newContactKey, newContact);
     if (!saveResponse.ok) {
       throw new Error(
         `Fehler beim Speichern des Kontakts: ${saveResponse.status}`
@@ -76,7 +76,7 @@ async function UpdateNewContactToFirebase() {
     const nextNumber = contactKeys.length;
     const UpKeys = `contact${nextNumber}`;
 
-    const saveResponse = await updateContact(UpKeys, UpdatedContact);
+    const saveResponse = await addOrUpdateContact(UpKeys, UpdatedContact);
     if (!saveResponse.ok) {
       throw new Error(
         `Fehler beim Speichern des Kontakts: ${saveResponse.status}`
@@ -93,7 +93,7 @@ async function deleteContactToFirebase() {
   try {
     const contacts = await getContacts();
     const contactKeys = contacts ? Object.keys(contacts) : [];
-    const nextNumber = contactKeys.length;
+    const nextNumber = contactKeys;
     const UpKeys = `contact${nextNumber}`;
 
     const saveResponse = await deleteContact(UpKeys);
