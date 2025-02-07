@@ -35,11 +35,11 @@ async function addUser() {
   let email = document.getElementById("inputMail").value;
   let password = document.getElementById("inputLock").value;
 
-  if (!name || !email || !password) {
-    let addDialog = document.getElementById("addFont");
-    addDialog.classList.remove("dNone");
-    return;
-  }
+  //if (!name || !email || !password) {
+  //  let addDialog = document.getElementById("FieldsSignUp");
+  //  addDialog.classList.remove("dNone");
+  //  return;
+  //}
 
   const newUser = {
     name,
@@ -51,6 +51,7 @@ async function addUser() {
     const response = await fetch(
       "https://da-join-629d2-default-rtdb.europe-west1.firebasedatabase.app//user.json"
     );
+
     const user = await response.json();
     const userKeys = user ? Object.keys(user) : [];
     const nextUser = userKeys.length + 1;
@@ -66,6 +67,7 @@ async function addUser() {
         body: JSON.stringify(newUser),
       }
     );
+    //showMessage();
 
     if (!saveResponse.ok) {
       throw new Error(
