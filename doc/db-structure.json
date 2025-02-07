@@ -109,14 +109,64 @@
     },
     "contacts": {
         "contact1": {
-            "name": "Anton Mayer",
-            "phone": "+49 111 222 3333",
-            "email": "antonm@gmail.com"
+            "avatarColor": "#124E66",
+            "email": "AndrejCiobanita@google.com",
+            "name": "Andrej Ciobanita",
+            "phone": "0178827283821"
+        },
+        "contact10": {
+            "avatarColor": "#124E66",
+            "email": "WinnieZoey@yahoo.com",
+            "name": "Zoey Winchester",
+            "phone": "0163532738362"
         },
         "contact2": {
-            "name": "David Bergmann",
-            "phone": "+49 111 222 4444",
-            "email": "davidberg@gmail.com"
+            "avatarColor": "#ED7845",
+            "email": "mgiesi@dev.de",
+            "name": "Markus Giesinger",
+            "phone": "015276768099"
+        },
+        "contact3": {
+            "avatarColor": "#ED7845",
+            "email": "max.heuft@yahoo.com",
+            "name": "Maximilian Heuft",
+            "phone": "0162598876"
+        },
+        "contact4": {
+            "avatarColor": "#ED7845",
+            "email": "AntoniM@gmx.de",
+            "name": "Anton Mayer",
+            "phone": "017661217751"
+        },
+        "contact5": {
+            "avatarColor": "#273DB4",
+            "email": "benedikt@gmail.com",
+            "name": "Benedikt Ziegler",
+            "phone": "017888989821"
+        },
+        "contact6": {
+            "avatarColor": "#273DB4",
+            "email": "Davidoff@yahoo.com",
+            "name": "David Eisenherz",
+            "phone": "01767676890"
+        },
+        "contact7": {
+            "avatarColor": "#F95CA4",
+            "email": "Schulzi003@gmx.com",
+            "name": "Oliver Schulz",
+            "phone": "0162627286"
+        },
+        "contact8": {
+            "avatarColor": "#ED7845",
+            "email": "PPMaster@web.de",
+            "name": "Patrick Petersen",
+            "phone": "017661848722"
+        },
+        "contact9": {
+            "avatarColor": "#124E66",
+            "email": "WernerMöller@t-online.de",
+            "name": "Werner Möller",
+            "phone": "030/567729283"
         }
     }
 }

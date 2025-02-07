@@ -1,54 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contacts - Join</title>
 
-    <link
-      rel="shortcut icon"
-      href="./assets/icons/favicon.png"
-      type="image/x-icon"
-    />
-    <link rel="stylesheet" href="./assets/styles/fonts.css" />
-    <link rel="stylesheet" href="./assets/styles/components.css" />
-    <link rel="stylesheet" href="./assets/styles/layout.css" />
-    <link rel="stylesheet" href="./assets/styles/contacts.css" />
-    <link rel="stylesheet" href="./assets/styles/style.css" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contacts - Join</title>
 
-    <script src="./assets/js/script.js"></script>
-    <script src="./assets/js/contacts.js"></script>
-    <script src="./assets/templates/contactTemplate.js"></script>
-    <script src=""></script>
-    
-  </head>
+  <link rel="shortcut icon" href="./assets/icons/favicon.png" type="image/x-icon" />
+  <link rel="stylesheet" href="./assets/styles/fonts.css" />
+  <link rel="stylesheet" href="./assets/styles/components.css" />
+  <link rel="stylesheet" href="./assets/styles/layout.css" />
+  <link rel="stylesheet" href="./assets/styles/contacts.css" />
+  <link rel="stylesheet" href="./assets/styles/style.css" />
 
-  <body onload="initPlus()">
-    <header w3-include-html=".\assets\templates\header.html"></header>
-    <div class="main-container">
-      <div w3-include-html=".\assets\templates\side-menu.html"></div>
+  <script src="./assets/js/script.js"></script>
+  <script src="./assets/js/db.js"></script>
+  <script src="./assets/js/db.contacts.js"></script>
+  <script src="./assets/js/contacts.js"></script>
+  <script src="./assets/templates/contactTemplate.js"></script>
+  <script src=""></script>
 
-      <div id="overlayAddContact" class="overlay-background dNone"></div>
-      <div id="overlayEditContact" class="overlay-background dNone"></div>
+</head>
 
-      <div class="contacts-content">
-        <div class="contact-list">
-          <button onclick="toggleOverlay()" class="add-contact-btn">
-            Add new contact
-            <img src="./assets/icons/person_add.png" alt="Add contact" />
-          </button>
-          <div class="contact-sections">
-            <div class="contact-section"></div>
-          </div>
+<body onload="initPlus()">
+  <header w3-include-html=".\assets\templates\header.html"></header>
+  <div class="main-container">
+    <div w3-include-html=".\assets\templates\side-menu.html"></div>
+
+    <div id="overlayAddContact" class="overlay-background dNone"></div>
+    <div id="overlayEditContact" class="overlay-background dNone"></div>
+
+    <div class="contacts-content">
+      <div class="contact-list">
+        <button onclick="toggleOverlay()" class="add-contact-btn">
+          Add new contact
+          <img src="./assets/icons/person_add.png" alt="Add contact" />
+        </button>
+        <div class="contact-sections">
+          <div class="contact-section"></div>
         </div>
-        <div class="contact-info">
-          <div class="contact-info-header">
-            <h1>Contacts</h1>
-            <div class="header-divider"></div>
-            <span class="header-subtitle">Better with a team</span>
-          </div>
-          
-    </div>
-    <div id="contactsContainer"></div>
-  </body>
+      </div>
+      <div class="contact-info">
+        <div class="contact-info-header">
+          <h1>Contacts</h1>
+          <div class="header-divider"></div>
+          <span class="header-subtitle">Better with a team</span>
+        </div>
+
+      </div>
+      <div id="contactsContainer"></div>
+</body>
+
 </html>

@@ -34,26 +34,12 @@ async function addNewContactToFirebase() {
   };
 
   try {
-    const response = await fetch(
-      "https://da-join-629d2-default-rtdb.europe-west1.firebasedatabase.app//contacts.json"
-    );
-
-    const contacts = await response.json();
+    const contacts = await getContacts();
     const contactKeys = contacts ? Object.keys(contacts) : [];
     const nextNumber = contactKeys.length + 1;
     const newContactKey = `contact${nextNumber}`;
 
-    const saveResponse = await fetch(
-      `https://da-join-629d2-default-rtdb.europe-west1.firebasedatabase.app//contacts/${newContactKey}.json`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newContact),
-      }
-    );
-
+    const saveResponse = await addContact(newContactKey, newContact);
     if (!saveResponse.ok) {
       throw new Error(
         `Fehler beim Speichern des Kontakts: ${saveResponse.status}`
@@ -85,26 +71,12 @@ async function UpdateNewContactToFirebase() {
   };
 
   try {
-    const response = await fetch(
-      "https://da-join-629d2-default-rtdb.europe-west1.firebasedatabase.app//contacts.json"
-    );
-
-    const contacts = await response.json();
+    const contacts = await getContacts();
     const contactKeys = contacts ? Object.keys(contacts) : [];
     const nextNumber = contactKeys.length;
     const UpKeys = `contact${nextNumber}`;
 
-    const saveResponse = await fetch(
-      `https://da-join-629d2-default-rtdb.europe-west1.firebasedatabase.app//contacts/${UpKeys}.json`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(UpdatedContact),
-      }
-    );
-
+    const saveResponse = await updateContact(UpKeys, UpdatedContact);
     if (!saveResponse.ok) {
       throw new Error(
         `Fehler beim Speichern des Kontakts: ${saveResponse.status}`
@@ -119,26 +91,12 @@ async function UpdateNewContactToFirebase() {
 
 async function deleteContactToFirebase() {
   try {
-    const response = await fetch(
-      "https://da-join-629d2-default-rtdb.europe-west1.firebasedatabase.app//contacts.json"
-    );
-
-    const contacts = await response.json();
+    const contacts = await getContacts();
     const contactKeys = contacts ? Object.keys(contacts) : [];
     const nextNumber = contactKeys.length;
     const UpKeys = `contact${nextNumber}`;
 
-    const saveResponse = await fetch(
-      `https://da-join-629d2-default-rtdb.europe-west1.firebasedatabase.app//contacts/${UpKeys}.json`,
-      {
-        method: "Delete",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(),
-      }
-    );
-
+    const saveResponse = await deleteContact(UpKeys);
     if (!saveResponse.ok) {
       throw new Error(
         `Fehler beim Speichern des Kontakts: ${saveResponse.status}`
@@ -158,11 +116,7 @@ function getRandomColor() {
 
 async function loadContactsFromFirebase() {
   try {
-    const response = await fetch(
-      "https://da-join-629d2-default-rtdb.europe-west1.firebasedatabase.app/contacts.json"
-    );
-
-    const contacts = await response.json();
+    const contacts = await getContacts();
     const sortedContacts = Object.entries(contacts).sort(([_, a], [__, b]) =>
       a.name.localeCompare(b.name)
     );
