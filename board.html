@@ -12,7 +12,9 @@
     <link rel="stylesheet" href="./assets/styles/components.css">
     <link rel="stylesheet" href="./assets/styles/layout.css">
 
+
     <link rel="stylesheet" href="./assets/styles/board.css">
+    <link rel="stylesheet" href="./assets/styles/addTaskForBoard.css">
 
     <script src="./assets/js/script.js"></script>
     <script src="./assets/js/db.js"></script>
@@ -29,15 +31,20 @@
     <div class="main-container">
         <div w3-include-html=".\assets\templates\side-menu.html"></div>
 
+        <div id="overlayAddTask" class="overlay-addTask dNone"></div>
+
         <div class="board-content">
             <div class="board-title d-flex align-items-center">
                 <span class="f1">Board</span>
-                <div class="board-title-search">
-                    <input oninput="updateFilter()" id="board-filter-text" type="search">
-                    <img onclick="resetFilter()" src="./assets/icons/search.svg" alt="">
-                    <div class="button-dark f6">Add task +</div>
+                <div class="dFlex">
+                <div class="board-title-search"> 
+                    <input oninput="updateFilter()" id="board-filter-text" type="search" placeholder="Find Task" class="search-input">
+                    <img onclick="resetFilter()" src="./assets/icons/search.svg" alt="" class="search-icon">
+                    
                 </div>
+                <div><button onclick="toggleAddTaskOverlay()" class="addTaskBtn f6">Add task <img src="./assets/icons/add.svg" class="boardIconAdd" alt=""></button></div>
             </div>
+        </div>
             <div id="boards-container" class="board-contents d-flex justify-content-start">
                 <div class="board-container">
                     <div class="board-container-titlebox d-flex justify-content-between">

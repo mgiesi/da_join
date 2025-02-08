@@ -93,7 +93,7 @@ async function deleteContactToFirebase() {
   try {
     const contacts = await getContacts();
     const contactKeys = contacts ? Object.keys(contacts) : [];
-    const nextNumber = contactKeys;
+    const nextNumber = contactKeys.length;
     const UpKeys = `contact${nextNumber}`;
 
     const saveResponse = await deleteContact(UpKeys);
