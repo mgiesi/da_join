@@ -85,3 +85,34 @@ async function getTasksCount(prio) {
 
     return filteredTasksCount;
 }
+
+/**
+ * Retrieves the next upcoming due date from a collection of tasks, excluding those marked as completed.
+ *
+ * This function iterates over each task in the `tasks` object, skipping tasks that are already present in the `done` board.
+ * For each remaining task, it compares the task's due date to find the earliest one. The due date is expected to be stored
+ * in a property called `dueDate` in each task object.
+ *
+ * @function getNextUpcomingDate
+ * @param {Object} tasks - An object containing task objects keyed by task IDs. Each task object should have a `dueDate` property.
+ * @param {Object} boardDone - An object with a `tasks` property (an object) that holds task IDs for tasks that have been completed.
+ * @returns {Date|undefined} The earliest upcoming due date as a Date object, or `undefined` if no applicable due date is found.
+ */
+function getNextUpcomingDate(tasks, boardDone) {
+    let nextTaskDate;
+    Object.keys(tasks).forEach(taskId => {
+        if (Object.keys(boardDone.tasks).includes(taskId)) {
+            return;
+        }
+
+        let taskDate = new Date(tasks[taskId].dueDate);
+        if (!nextTaskDate) {
+            nextTaskDate = taskDate;
+        } else {
+            if (nextTaskDate.getTime() > taskDate.getTime()) {
+                nextTaskDate = taskDate;
+            }
+        }
+    });
+    return nextTaskDate;
+}

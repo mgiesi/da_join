@@ -37,16 +37,20 @@ function getUserName() {
   return null;
 }
 
-function refreshBoardInfos() {
+async function refreshBoardInfos() {
+  let boardCounts = await getBoardTasksCountList();
+  let totalTasks = 0;
   for (const boardName of boardNames) {
-    refreshTasksCount(boardName, "summary-taskscount-" + boardName);
+    refreshTasksCount(boardCounts[boardName], "summary-taskscount-" + boardName);
+    totalTasks += boardCounts[boardName];
   }
-  refreshTasksCount4Urgent();
-  refreshTasksInBoard();
+  refreshTasksCount(totalTasks, "summary-taskscount-board");
+
+  await refreshTasksCount4Urgent();
+  refreshUpcomingDeadline();
 }
 
-async function refreshTasksCount(board, textId) {
-  const tasksCount = await getBoardTasksCount(board);
+function refreshTasksCount(tasksCount, textId) {
   const textRef = document.getElementById(textId);
   textRef.innerHTML = tasksCount + "";
 }
@@ -57,12 +61,12 @@ async function refreshTasksCount4Urgent() {
   textRef.innerHTML = taskCount + "";
 }
 
-async function refreshTasksInBoard() {
-  let taskCount = 0;
-  for (const boardName of boardNames) {
-    taskCount += await getBoardTasksCount(boardName);
-  }
+async function refreshUpcomingDeadline() {
+  const tasks = await getTasks();
+  const board = await getBoard("done");
+  let nextTaskDate = getNextUpcomingDate(tasks, board);
 
-  const textRef = document.getElementById("summary-taskscount-board");
-  textRef.innerHTML = taskCount + "";
+  const textRef = document.getElementById("summary-upcoming-deadline");
+  var options = { year: 'numeric', month: 'long', day: 'numeric' };
+  textRef.innerHTML = nextTaskDate.toLocaleDateString("en-US", options);
 }

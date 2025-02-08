@@ -39,6 +39,17 @@ async function getBoardTasksCount(boardname) {
         : 0;
 }
 
+
+async function getBoardTasksCountList() {
+    let response = await fetch(BOARD_URL + ".json");
+    let responseToJson = await response.json();
+    let boardCounts = {};
+    Object.keys(responseToJson).forEach(board => {
+        boardCounts[board] = responseToJson[board].tasks ? Object.keys(responseToJson[board].tasks).length : 0;
+    });
+    return boardCounts;
+}
+
 /**
  * Retrieves the details of a specific board.
  *
