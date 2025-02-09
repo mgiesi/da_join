@@ -35,11 +35,11 @@ async function addUser() {
   let email = document.getElementById("inputMail").value;
   let password = document.getElementById("inputLock").value;
 
-  //if (!name || !email || !password) {
-  // let addDialog = document.getElementById("FieldsSignUp");
-  // addDialog.classList.remove("dNone");
-  // return;
-  //
+  if (!name || !email || !password) {
+    let addDialog = document.getElementById("FieldsSignUp");
+    addDialog.classList.remove("dNone");
+    return;
+  }
 
   const newUser = {
     name,
