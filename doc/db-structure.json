@@ -69,6 +69,76 @@
             "prio": "medium",
             "category": "userstory",
             "subtasks": {}
+        },
+        "fireBaseKey6": {
+            "title": "Kochwelt Page & Recipe Recommender",
+            "description": "Build start page with recipe recommendation.",
+            "assignedTo": {
+                "contact4": true,
+                "contact6": true,
+                "contact8": true
+            },
+            "dueDate": "2025-02-12",
+            "prio": "medium",
+            "category": "userstory",
+            "subtasks": {
+                "subtask1": {
+                    "name": "Implement Recipe Recommendation",
+                    "done": true
+                },
+                "subtask2": {
+                    "name": "Start Page Layout",
+                    "done": false
+                }
+            }
+        },
+        "fireBaseKey7": {
+            "title": "HTML Base Template Creation",
+            "description": "Create reusable HTML base templates for basic structure.",
+            "assignedTo": {
+                "contact5": true,
+                "contact7": true,
+                "contact9": true
+            },
+            "dueDate": "2025-02-12",
+            "prio": "low",
+            "category": "task",
+            "subtasks": {}
+        },
+        "fireBaseKey8": {
+            "title": "Daily Kochwelt Recipe",
+            "description": "Implement daile recipe and portion calculation for the daily recipe.",
+            "assignedTo": {
+                "contact4": true
+            },
+            "dueDate": "2025-02-12",
+            "prio": "medium",
+            "category": "userstory",
+            "subtasks": {}
+        },
+        "fireBaseKey9": {
+            "title": "CSS Architecture Planning",
+            "description": "Define CSS naming, conventions and structure of css files.",
+            "assignedTo": {
+                "contact4": true
+            },
+            "dueDate": "2025-02-01",
+            "prio": "urgent",
+            "category": "userstory",
+            "subtasks": {
+                "subtask1": {
+                    "name": "Define CSS naming",
+                    "done": true
+                },
+                "subtask2": {
+                    "name": "Define conventions",
+                    "done": true
+                },
+                "subtask3": {
+                    "name": "Define css file structure",
+                    "done": true
+                }
+            }
         }
     },
     "boards": {
@@ -87,7 +157,8 @@
             "name": "In progress",
             "addtasks": true,
             "tasks": {
-                "fireBaseKey2": true
+                "fireBaseKey2": true,
+                "fireBaseKey6": true
             }
         },
         "awaitfeedback": {
@@ -95,7 +166,9 @@
             "name": "Await feedback",
             "addtasks": true,
             "tasks": {
-                "fireBaseKey3": true
+                "fireBaseKey3": true,
+                "fireBaseKey7": true,
+                "fireBaseKey8": true
             }
         },
         "done": {
@@ -103,7 +176,8 @@
             "name": "Done",
             "addtasks": false,
             "tasks": {
-                "fireBaseKey4": true
+                "fireBaseKey4": true,
+                "fireBaseKey9": true
             }
         }
     },
