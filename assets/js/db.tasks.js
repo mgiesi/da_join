@@ -116,3 +116,72 @@ function getNextUpcomingDate(tasks, boardDone) {
     });
     return nextTaskDate;
 }
+
+/**
+ * Creates a new task in the database.
+ *
+ * @async
+ * @function createTask
+ * @param {Object} taskData - The task data to be saved
+ * @param {string} taskData.title - The title of the task
+ * @param {string} taskData.description - The description of the task
+ * @param {string} taskData.assignedTo - The assigned person
+ * @param {string} taskData.dueDate - The due date of the task
+ * @param {string} taskData.prio - The priority of the task
+ * @param {string} taskData.category - The category of the task
+ * @param {Array} taskData.subtasks - Array of subtask objects
+ * @returns {Promise<Object>} A promise that resolves to the created task data
+ */
+async function createTask(taskData) {
+    try {
+        const response = await fetch(TASKS_URL + ".json", {
+            method: 'POST',
+            body: JSON.stringify({
+                title: taskData.title,
+                description: taskData.description,
+                assignedTo: taskData.assignedTo,
+                dueDate: taskData.dueDate,
+                prio: taskData.prio,
+                category: taskData.category,
+                subtasks: taskData.subtasks
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to create task');
+        }
+
+        const result = await response.json();
+
+        // After creating the task, add it to the "todo" board
+        await addTaskToBoard('todo', result.name); // result.name contains the Firebase key
+
+        return result;
+    } catch (error) {
+        console.error('Error creating task:', error);
+        throw error;
+    }
+}
+
+/**
+ * Adds a task to a specific board
+ * @param {string} boardId - The ID of the board
+ * @param {string} taskId - The ID of the task
+ */
+async function addTaskToBoard(boardId, taskId) {
+    try {
+        const response = await fetch(`${DB_BASE_URL}boards/${boardId}/tasks/${taskId}.json`, {
+            method: 'PUT',
+            body: JSON.stringify(true)
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to add task to board');
+        }
+
+        return await response.json();
+    } catch (error) {
+        console.error('Error adding task to board:', error);
+        throw error;
+    }
+}

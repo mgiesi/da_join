@@ -1,7 +1,7 @@
 .main-container {
     display: flex;
     width: 100%;
-    min-height: 100vh;
+    max-height: calc(100vh - 20px);
     background-color: rgb(246, 247, 248);
     position: relative;
     padding-left: 232px;
@@ -460,40 +460,34 @@ svg:hover {
     color: #29ABE2 !important;
 }
 
-.footer-add-task-html {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    padding-inline: 8px;
+.task-added-notification {
+    position: fixed;
+    bottom: 480px;
+    right: 1000px;
+    background-color: #2A3647;
+    color: white;
+    padding: 16px;
+    border-radius: 8px;
+    display: none; /* Hidden by default */
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    animation: slideIn 0.5s ease-in-out;
 }
 
-@media (max-width: 1200px) {
-    .form-columns {
-        flex-direction: column;
-    }
-
-    .form-left-column,
-    .form-right-column {
-        max-width: 100%;
-    }
-
-    .separator {
-        display: none;
-    }
+.task-added-notification img {
+    width: 24px;
+    height: 24px;
 }
 
-@media (max-width: 768px) {
-    .main-container {
-        padding-left: 0;
-        padding-top: 80px;
+@keyframes slideIn {
+    from {
+        transform: translateY(100px);
+        opacity: 0;
     }
-
-    .add-task-content {
-        padding: 20px;
-    }
-
-    h1 {
-        font-size: 47px;
-        line-height: 56px;
+    to {
+        transform: translateY(0);
+        opacity: 1;
     }
 }
