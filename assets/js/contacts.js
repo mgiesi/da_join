@@ -7,7 +7,7 @@ function toggleOverlay() {
 function toggleEditOverlay(name, email, phone) {
   const overlay = document.getElementById("overlayEditContact");
   overlay.classList.toggle("dNone");
-  overlay.innerHTML = getEditOverlay();
+  overlay.innerHTML = getEditOverlay(name, email, phone);
 }
 
 function initPlus() {
@@ -71,21 +71,64 @@ async function UpdateNewContactToFirebase() {
   };
 
   try {
-    const contacts = await getContacts();
+    const response = await fetch(
+      "https://da-join-629d2-default-rtdb.europe-west1.firebasedatabase.app/contacts.json"
+    );
+
+    const contacts = await response.json();
     const contactKeys = contacts ? Object.keys(contacts) : [];
     const nextNumber = contactKeys.length;
     const UpKeys = `contact${nextNumber}`;
 
-    const saveResponse = await addOrUpdateContact(UpKeys, UpdatedContact);
+    const saveResponse = await fetch(
+      `https://da-join-629d2-default-rtdb.europe-west1.firebasedatabase.app/contacts/${UpKeys}.json`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(UpdatedContact),
+      }
+    );
+
     if (!saveResponse.ok) {
       throw new Error(
         `Fehler beim Speichern des Kontakts: ${saveResponse.status}`
       );
     }
     await loadContactsFromFirebase();
-    toggleEditOverlay();
+    alert("Kontakt erfolgreich hinzugefügt!");
   } catch (error) {
     console.error("Fehler beim Hinzufügen des Kontakts:", error);
+    alert(
+      "Es ist ein Fehler aufgetreten. Kontakt konnte nicht hinzugefügt werden."
+    );
+  }
+}
+
+async function findContactKey(name, email, phone) {
+  try {
+    const response = await fetch(
+      "https://da-join-629d2-default-rtdb.europe-west1.firebasedatabase.app//contacts.json"
+    );
+    const contacts = await response.json();
+
+    if (!contacts) return null;
+
+    for (const key in contacts) {
+      if (
+        contacts[key].name === name &&
+        contacts[key].email === email &&
+        contacts[key].phone === phone
+      ) {
+        return key;
+      }
+    }
+
+    return null;
+  } catch (error) {
+    console.error("Fehler beim Suchen des Kontakts:", error);
+    return null;
   }
 }
 

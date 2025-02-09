@@ -35,11 +35,11 @@ async function addUser() {
   let email = document.getElementById("inputMail").value;
   let password = document.getElementById("inputLock").value;
 
-  if (!name || !email || !password) {
-    let addDialog = document.getElementById("FieldsSignUp");
-    addDialog.classList.remove("dNone");
-    return;
-  }
+  //if (!name || !email || !password) {
+  // let addDialog = document.getElementById("FieldsSignUp");
+  // addDialog.classList.remove("dNone");
+  // return;
+  //
 
   const newUser = {
     name,
@@ -48,17 +48,23 @@ async function addUser() {
   };
 
   try {
-    let response = await fetch(
+    const response = await fetch(
       "https://da-join-629d2-default-rtdb.europe-west1.firebasedatabase.app/user.json"
     );
 
-    let user = await response.json();
-    let userKeys = user ? Object.keys(user) : [];
-    let nextUser = userKeys.length + 1;
-    let newUserKey = `user${nextUser}`;
+    if (!response.ok) {
+      throw new Error(
+        `Fehler beim Abrufen der Benutzerdaten: ${response.status}`
+      );
+    }
+
+    const user = await response.json();
+    const userKeys = user ? Object.keys(user) : [];
+    const nextUser = userKeys.length + 1;
+    const newUserKey = `user${nextUser}`;
 
     const saveResponse = await fetch(
-      `https://da-join-629d2-default-rtdb.europe-west1.firebasedatabase.app//user/${newUserKey}.json`,
+      `https://da-join-629d2-default-rtdb.europe-west1.firebasedatabase.app/user/${newUserKey}.json`,
       {
         method: "PUT",
         headers: {

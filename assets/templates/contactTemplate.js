@@ -1,11 +1,6 @@
 function displayContactDetails({ name, email, phone, avatarColor }) {
   const contactInfoContainer = document.querySelector(".contact-info");
 
-  if (!name || !email || !phone) {
-    console.error("Kontaktinformationen unvollständig.");
-    return;
-  }
-
   avatarColor = avatarColor;
 
   const detailsHTML = `
@@ -28,9 +23,7 @@ function displayContactDetails({ name, email, phone, avatarColor }) {
           <div class="profile-info">
             <h2>${name}</h2>
             <div class="profile-actions">
-              <button class="action-link" onclick="toggleEditOverlay(${
-                (name, email, phone)
-              })">
+              <button class="action-link" onclick="toggleEditOverlay(['${name}', '${email}', '${phone}'])">
                 <img src="./assets/icons/edit.svg" alt="" class="action-icon" />
                 Edit
               </button>
@@ -127,7 +120,7 @@ function getOverlay() {
         `;
 }
 
-function getEditOverlay() {
+function getEditOverlay(name, email, phone) {
   return `
           <div class="overlay">
             <div class="overlay-left">
@@ -181,7 +174,7 @@ function getEditOverlay() {
                     >
                       Delete<img src="./assets/icons/cancel.svg" />
                     </button>
-                    <button id="addContactButton" onclick="UpdateNewContactToFirebase()" type="button" class="create-btn">
+                    <button id="addContactButton" onclick="UpdateNewContactToFirebase(['${name}', '${email}', '${phone}'])" type="button" class="create-btn">
                       Save <img src="./assets/icons/check.svg" alt="" />
                     </button>
                   </div>
