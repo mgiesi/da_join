@@ -4,7 +4,7 @@ function toggleOverlay() {
   overlay.innerHTML = getOverlay();
 }
 
-function toggleEditOverlay() {
+function toggleEditOverlay(name, email, phone) {
   const overlay = document.getElementById("overlayEditContact");
   overlay.classList.toggle("dNone");
   overlay.innerHTML = getEditOverlay();

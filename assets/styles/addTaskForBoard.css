@@ -1,5 +1,16 @@
 .add-task-header {
-  margin-bottom: 48px;
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.close-btn {
+  font-size: 24px;
+  cursor: pointer;
+}
+.close-btn:hover {
+  color: #29abe2;
 }
 
 h1 {
@@ -19,7 +30,6 @@ h1 {
 .form-columns {
   display: flex;
   gap: 0;
-  margin-bottom: 24px;
 }
 
 .form-left-column,

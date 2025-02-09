@@ -56,13 +56,14 @@ function toggleAddTaskOverlay() {
 
 function getAddTaskOverlay() {
   return `
-  <div class="overlay">
+  <div class="overlay-addTask">
             
         <div w3-include-html=".\assets\templates\side-menu.html"></div>
 
         <main class="add-task-content">
             <div class="add-task-header">
                 <h1>Add Task</h1>
+                <div onclick="toggleAddTaskOverlay()" class="close-btn">×</div>
             </div>
 
             <form class="add-task-form">
