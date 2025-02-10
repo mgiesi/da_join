@@ -1,13 +1,15 @@
 function init() {
-    includeHTML().then(() => {
-        initializeAll();
-    });
+    includeHTML();
+    fetchContacts();
+    initializeAll();
 }
 
 function initializeAll() {
     initFormValidation();
     setupPrioritySystem();
     setupSelectArrows();
+    initializeContactDropdown();
+    loadContacts(); // Add this line
 }
 
 function setupSelectArrows() {
@@ -67,7 +69,6 @@ function initFormValidation() {
         };
     });
 
-    // Connect the form submission to the handleFormSubmit function
     form.onsubmit = function (e) {
         e.preventDefault();
         validateAndSubmitForm(e);
@@ -81,7 +82,6 @@ async function validateAndSubmitForm(event) {
     const requiredFields = form.querySelectorAll('[required]');
     let isValid = true;
 
-    // Validate all required fields
     requiredFields.forEach(field => {
         if (!field.value.trim()) {
             isValid = false;
@@ -97,23 +97,19 @@ async function validateAndSubmitForm(event) {
         return false;
     }
 
-    // If validation passes, prepare the task data
     const title = document.getElementById('title').value;
     const description = document.getElementById('description').value;
-    const assignedSelect = document.getElementById('assigned');
     const dueDate = document.getElementById('dueDate').value;
     const category = document.getElementById('category').value;
 
     const selectedPrioBtn = document.querySelector('.priority-btn.selected');
     const priority = selectedPrioBtn ? selectedPrioBtn.getAttribute('data-priority') : 'medium';
 
-    // Transform assigned contacts into the required format
     const assignedTo = {};
-    if (assignedSelect.value) {
-        assignedTo[assignedSelect.value] = true;
-    }
+    selectedContacts.forEach(id => {
+        assignedTo[id] = true;
+    });
 
-    // Get subtasks
     const subtasksContainer = document.querySelector('.subtasks-list');
     const subtasks = {};
     if (subtasksContainer) {
@@ -127,11 +123,9 @@ async function validateAndSubmitForm(event) {
         });
     }
 
-    // Transform date from dd/mm/yyyy to yyyy-mm-dd format
     const [day, month, year] = dueDate.split('/');
     const formattedDate = `${year}-${month}-${day}`;
 
-    // Create task data object
     const taskData = {
         title,
         description,
@@ -143,15 +137,11 @@ async function validateAndSubmitForm(event) {
     };
 
     try {
-        // Use the createTask function from db.tasks.js
         await createTask(taskData);
-
-        // Show success notification
         showNotification();
-
-        // Reset form
         resetForm();
-
+        selectedContacts.clear();
+        updateSelectedContactsDisplay();
         return false;
     } catch (error) {
         console.error('Error creating task:', error);
@@ -163,7 +153,6 @@ function showNotification() {
     const notification = document.getElementById('taskAddedNotification');
     notification.style.display = 'flex';
 
-    // After 3 seconds, hide the notification and redirect
     setTimeout(() => {
         notification.style.display = 'none';
         window.location.href = 'board.html';
@@ -171,11 +160,22 @@ function showNotification() {
 }
 
 function resetForm() {
-    document.getElementById('title').value = '';
-    document.getElementById('description').value = '';
-    document.getElementById('assigned').value = '';
-    document.getElementById('dueDate').value = '';
-    document.getElementById('category').value = '';
+    const form = document.querySelector('.add-task-form');
+    const inputs = form.querySelectorAll('input, textarea');
+    inputs.forEach(input => {
+        input.value = '';
+        input.style.borderColor = '';
+        const errorMessage = input.parentNode.querySelector('.error-message');
+        if (errorMessage) {
+            errorMessage.style.display = 'none';
+        }
+    });
+
+    const selects = form.querySelectorAll('select');
+    selects.forEach(select => {
+        select.value = '';
+        select.style.borderColor = '';
+    });
 
     const priorityButtons = document.querySelectorAll('.priority-btn');
     priorityButtons.forEach(btn => {
@@ -189,16 +189,91 @@ function resetForm() {
     if (subtasksContainer) {
         subtasksContainer.innerHTML = '';
     }
+
+    const subtaskInput = document.getElementById('subtaskInput');
+    if (subtaskInput) {
+        subtaskInput.value = '';
+    }
 }
 
-// Make sure handlePriorityClick is available globally
-window.handlePriorityClick = function (button) {
-    document.querySelectorAll('.priority-btn').forEach(btn => {
-        btn.classList.remove('active', 'selected');
-        btn.style.backgroundColor = '';
-        btn.style.color = '';
-        btn.style.borderColor = '';
-    });
+let contacts = {}; // Store all contacts
+let selectedContacts = []; // Store selected contact IDs
 
-    button.classList.add('active', 'selected');
-};
+async function fetchContacts() {
+    try {
+        const response = await fetch('https://da-join-629d2-default-rtdb.europe-west1.firebasedatabase.app/contacts.json');
+        if (!response.ok) {
+            throw new Error('Failed to fetch contacts');
+        }
+        const data = await response.json();
+        contacts = data || {}; // Ensure we have an object even if data is null
+        renderContactsList();
+    } catch (error) {
+        console.error('Error fetching contacts:', error);
+    }
+}
+
+function toggleContactDropdown() {
+    const list = document.getElementById('contactList');
+    list.style.display = list.style.display === 'block' ? 'none' : 'block';
+}
+
+function renderContactsList() {
+    const contactList = document.getElementById('contactList');
+    contactList.innerHTML = '';
+
+    // Convert contacts object to array and sort by name
+    const sortedContacts = Object.entries(contacts)
+        .filter(([_, contact]) => contact && contact.name)
+        .sort((a, b) => a[1].name.localeCompare(b[1].name));
+
+    sortedContacts.forEach(([id, contact]) => {
+        const initials = getInitials(contact.name);
+        const contactDiv = `
+            <div class="contact-item" onclick="toggleContactSelection('${id}')">
+                <div class="contact-info-container">
+                    <div class="contact-avatar" style="background-color: ${contact.avatarColor || '#000000'}">
+                        ${initials}
+                    </div>
+                    <div class="contact-name">${contact.name}</div>
+                </div>
+                <input type="checkbox" class="contact-checkbox" ${selectedContacts.includes(id) ? 'checked' : ''}>
+            </div>
+        `;
+        contactList.innerHTML += contactDiv;
+    });
+}
+
+function toggleContactSelection(contactId) {
+    const index = selectedContacts.indexOf(contactId);
+    if (index === -1) {
+        selectedContacts.push(contactId);
+    } else {
+        selectedContacts.splice(index, 1);
+    }
+
+    renderContactsList();
+    updateSelectedDisplay();
+}
+
+function updateSelectedDisplay() {
+    const input = document.getElementById('contactSearch');
+    const selectedNames = selectedContacts
+        .map(id => contacts[id]?.name)
+        .filter(name => name)
+        .join(', ');
+
+    input.value = selectedNames || 'Select contacts to assign';
+}
+
+function getInitials(name) {
+    if (!name) return '';
+    return name
+        .split(' ')
+        .map(word => word[0])
+        .join('')
+        .toUpperCase();
+}
+
+// Add this CSS to your stylesheet
+// ... existing code ...

@@ -14,11 +14,15 @@
     <link rel="stylesheet" href="./assets/styles/layout.css">
 
     <link rel="stylesheet" href="./assets/styles/addTask.css">
+    <!-- <link rel="stylesheet" href="./assets/styles/contact-dropdown.css"> -->
 
     <script src="./assets/js/script.js"></script>
     <script src="./assets/js/addTask.js"></script>
     <script src="./assets/js/db.js"></script>
     <script src="./assets/js/db.tasks.js"></script>
+    <script src="./assets/js/db.contacts.js"></script>
+    <!-- <script src="./assets/js/contact-dropdown.js"></script> -->
+
 </head>
 
 <body onload="init()">
@@ -46,13 +50,16 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="assigned">Assigned to</label>
-                            <div class="select-wrapper">
-                                <select id="assigned">
-                                    <option value="">Select contacts to assign</option>
-                                </select>
+                            <label for="contacts">Assigned to<span class="required">*</span></label>
+                            <div class="contact-dropdown">
+                                <div class="select-wrapper" onclick="toggleContactDropdown()">
+                                    <input type="text" id="contactSearch" class="contact-select"
+                                        placeholder="Select contacts to assign" readonly>
+                                </div>
+                                <div id="contactList" class="contact-dropdown-list"></div>
                             </div>
                         </div>
+
                     </div>
 
                     <div class="separator"></div>
@@ -61,11 +68,12 @@
                         <div class="form-group">
                             <label for="dueDate">Due date<span class="required">*</span></label>
                             <div class="date-input-wrapper">
-                                <input type="text" id="dueDate" placeholder="dd/mm/yyyy" pattern="\d{2}/\d{2}/\d{4}"
-                                    required maxlength="10" inputmode="numeric">
+                            <input type="text" id="dueDate" placeholder="dd/mm/yyyy" pattern="\d{2}/\d{2}/\d{4}" required maxlength="10"
+                                inputmode="numeric">
                                 <img src="./assets/icons/calendar.svg" alt="Calendar" class="calendar-icon">
                             </div>
                         </div>
+
                         <div class="form-group">
                             <label>Prio</label>
                             <div class="priority-buttons">
@@ -116,7 +124,7 @@
                         <span class="required">*</span><span class="span_txt">This field is required</span>
                     </div>
                     <div class="form-actions">
-                        <button type="button" class="btn-secondary">
+                        <button type="button" class="btn-secondary" onclick="resetForm()">
                             Clear
                             <img class="action-btn-img" src="./assets/icons/cancel.svg" alt="Clear form">
                         </button>
