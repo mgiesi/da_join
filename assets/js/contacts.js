@@ -4,10 +4,12 @@ function toggleOverlay() {
   overlay.innerHTML = getOverlay();
 }
 
-function toggleEditOverlay(name, email, phone) {
+function toggleEditOverlay(contactKey, name, email, phone) {
   const overlay = document.getElementById("overlayEditContact");
   overlay.classList.toggle("dNone");
-  overlay.innerHTML = getEditOverlay(name, email, phone);
+  overlay.innerHTML = getEditOverlay(contactKey, name, email, phone);
+  localStorage.setItem("editingContactKey", contactKey);
+  console.log("Gespeicherter contactKey:", contactKey);
 }
 
 function initPlus() {
@@ -63,7 +65,15 @@ async function UpdateNewContactToFirebase() {
     return;
   }
 
-  const UpdatedContact = {
+  const contactKey = localStorage.getItem("editingContactKey"); // Lade den gespeicherten Key
+
+  if (!contactKey) {
+    console.error("Fehler: Kein gültiger contactKey gefunden!");
+    alert("Fehler: Kein gültiger Kontakt zum Bearbeiten gefunden.");
+    return;
+  }
+
+  const updatedContact = {
     name,
     email,
     phone,
@@ -71,23 +81,14 @@ async function UpdateNewContactToFirebase() {
   };
 
   try {
-    const response = await fetch(
-      "https://da-join-629d2-default-rtdb.europe-west1.firebasedatabase.app/contacts.json"
-    );
-
-    const contacts = await response.json();
-    const contactKeys = contacts ? Object.keys(contacts) : [];
-    const nextNumber = contactKeys.length;
-    const UpKeys = `contact${nextNumber}`;
-
     const saveResponse = await fetch(
-      `https://da-join-629d2-default-rtdb.europe-west1.firebasedatabase.app/contacts/${UpKeys}.json`,
+      `https://da-join-629d2-default-rtdb.europe-west1.firebasedatabase.app/contacts/${contactKey}.json`,
       {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(UpdatedContact),
+        body: JSON.stringify(updatedContact),
       }
     );
 
@@ -96,12 +97,14 @@ async function UpdateNewContactToFirebase() {
         `Fehler beim Speichern des Kontakts: ${saveResponse.status}`
       );
     }
+
     await loadContactsFromFirebase();
-    alert("Kontakt erfolgreich hinzugefügt!");
+    alert("Kontakt erfolgreich aktualisiert!");
+    localStorage.removeItem("editingContactKey"); // Nach dem Update den Key entfernen
   } catch (error) {
-    console.error("Fehler beim Hinzufügen des Kontakts:", error);
+    console.error("Fehler beim Aktualisieren des Kontakts:", error);
     alert(
-      "Es ist ein Fehler aufgetreten. Kontakt konnte nicht hinzugefügt werden."
+      "Es ist ein Fehler aufgetreten. Kontakt konnte nicht aktualisiert werden."
     );
   }
 }
@@ -160,6 +163,7 @@ function getRandomColor() {
 async function loadContactsFromFirebase() {
   try {
     const contacts = await getContacts();
+
     const sortedContacts = Object.entries(contacts).sort(([_, a], [__, b]) =>
       a.name.localeCompare(b.name)
     );

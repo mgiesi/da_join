@@ -15,9 +15,9 @@ const CONTACTS_URL = DB_BASE_URL + "contacts/";
  * @returns {Promise<Object>} A promise that resolves to an object containing all contacts.
  */
 async function getContacts() {
-    let response = await fetch(CONTACTS_URL + ".json");
-    let responseToJson = await response.json();
-    return responseToJson;
+  let response = await fetch(CONTACTS_URL + ".json");
+  let responseToJson = await response.json();
+  return responseToJson;
 }
 
 /**
@@ -32,9 +32,9 @@ async function getContacts() {
  * @returns {Promise<Object>} A promise that resolves to an object containing the contact details.
  */
 async function getContact(contactId) {
-    let response = await fetch(CONTACTS_URL + "contact" + contactId + ".json");
-    let responseToJson = await response.json();
-    return responseToJson;
+  let response = await fetch(CONTACTS_URL + "contact" + contactId + ".json");
+  let responseToJson = await response.json();
+  return responseToJson;
 }
 
 /**
@@ -50,17 +50,14 @@ async function getContact(contactId) {
  * @returns {Promise<Response>} A promise that resolves to the response object of the PUT request.
  */
 async function addOrUpdateContact(contactKey, contact) {
-    const response = await fetch(
-        `${CONTACTS_URL}/${contactKey}.json`,
-        {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(contact),
-        }
-    );
-    return response;
+  const response = await fetch(`${CONTACTS_URL}/${contactKey}.json`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(contact),
+  });
+  return response;
 }
 
 /**
@@ -75,17 +72,14 @@ async function addOrUpdateContact(contactKey, contact) {
  * @returns {Promise<Response>} A promise that resolves to the response of the DELETE request.
  */
 async function deleteContact(contactKey) {
-    const response = await fetch(
-        `${CONTACTS_URL}/${contactKey}.json`,
-        {
-            method: "Delete",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(),
-        }
-    );
-    return response;
+  const response = await fetch(`${CONTACTS_URL}/${contactKey}.json`, {
+    method: "Delete",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(),
+  });
+  return response;
 }
 
 /**
@@ -99,12 +93,12 @@ async function deleteContact(contactKey) {
  * @returns {string} A string representing the initials of the contact's name, or an empty string if the contact is null.
  */
 function getShortcutName(contact) {
-    if (contact === null) {
-        return "";
-    }
+  if (contact === null) {
+    return "";
+  }
 
-    return contact.name
-        .split(" ")
-        .map((n) => n.charAt(0).toUpperCase())
-        .join("");
+  return contact.name
+    .split(" ")
+    .map((n) => n.charAt(0).toUpperCase())
+    .join("");
 }
