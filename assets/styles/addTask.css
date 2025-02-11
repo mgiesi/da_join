@@ -600,3 +600,28 @@ svg:hover {
 .contact-dropdown-list::-webkit-scrollbar-thumb:hover {
     background: #888;
 }
+
+.avatarDiv {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+    flex-wrap: wrap;
+    min-height: 32px;
+}
+
+.contact-avatar-selected {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 12px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+}
+
+.contact-avatar-selected:hover {
+    transform: scale(1.1);
+}

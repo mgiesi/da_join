@@ -9,7 +9,7 @@ function initializeAll() {
     setupPrioritySystem();
     setupSelectArrows();
     initializeContactDropdown();
-    loadContacts(); // Add this line
+    loadContacts();
 }
 
 function setupSelectArrows() {
@@ -194,6 +194,17 @@ function resetForm() {
     if (subtaskInput) {
         subtaskInput.value = '';
     }
+
+    // Clear selected contacts
+    selectedContacts = [];
+    updateSelectedDisplay();
+    updateSelectedAvatars();
+
+    // Clear the avatar display
+    const avatarDiv = document.getElementById('selectedContactsAvatar');
+    if (avatarDiv) {
+        avatarDiv.innerHTML = '';
+    }
 }
 
 let contacts = {}; // Store all contacts
@@ -254,16 +265,42 @@ function toggleContactSelection(contactId) {
 
     renderContactsList();
     updateSelectedDisplay();
+    updateSelectedAvatars(); // Add this line
 }
 
 function updateSelectedDisplay() {
-    const input = document.getElementById('contactSearch');
-    const selectedNames = selectedContacts
-        .map(id => contacts[id]?.name)
-        .filter(name => name)
-        .join(', ');
+    const searchInput = document.getElementById('contactSearch');
+    // Always keep the placeholder text, regardless of selection
+    searchInput.value = '';
+    searchInput.placeholder = 'Select contacts to assign';
+}
 
-    input.value = selectedNames || 'Select contacts to assign';
+function updateSelectedAvatars() {
+    const avatarDiv = document.getElementById('selectedContactsAvatar');
+    if (!avatarDiv) return;
+
+    avatarDiv.innerHTML = '';
+
+    selectedContacts.forEach(contactId => {
+        const contact = contacts[contactId];
+        if (contact) {
+            const initials = getInitials(contact.name);
+            const avatarElement = document.createElement('div');
+            avatarElement.className = 'contact-avatar-selected';
+            avatarElement.style.backgroundColor = contact.avatarColor || '#000000';
+            avatarElement.style.width = '32px';
+            avatarElement.style.height = '32px';
+            avatarElement.style.borderRadius = '50%';
+            avatarElement.style.display = 'flex';
+            avatarElement.style.alignItems = 'center';
+            avatarElement.style.justifyContent = 'center';
+            avatarElement.style.color = 'white';
+            avatarElement.style.fontSize = '12px';
+            avatarElement.style.fontWeight = '400';
+            avatarElement.textContent = initials;
+            avatarDiv.appendChild(avatarElement);
+        }
+    });
 }
 
 function getInitials(name) {
@@ -274,6 +311,3 @@ function getInitials(name) {
         .join('')
         .toUpperCase();
 }
-
-// Add this CSS to your stylesheet
-// ... existing code ...
