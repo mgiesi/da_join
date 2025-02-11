@@ -1,4 +1,4 @@
-function displayContactDetails({ name, email, phone, avatarColor }) {
+function displayContactDetails(key, name, email, phone, avatarColor) {
   const contactInfoContainer = document.querySelector(".contact-info");
 
   avatarColor = avatarColor;
@@ -23,13 +23,11 @@ function displayContactDetails({ name, email, phone, avatarColor }) {
           <div class="profile-info">
             <h2>${name}</h2>
             <div class="profile-actions">
-              <button class="action-link" onclick="toggleEditOverlay(['${name}', '${email}', '${phone}'])">
+              <button class="action-link" onclick="toggleEditOverlay('${key}','${name}', '${email}', '${phone}')">
                 <img src="./assets/icons/edit.svg" alt="" class="action-icon" />
                 Edit
               </button>
-              <button onclick="deleteContactToFirebase(${
-                (name, email, phone)
-              })" class="action-link">
+              <button onclick="deleteContactToFirebase('${key}')" class="action-link">
                 <img src="./assets/icons/delete.svg" alt="" class="action-icon" />
                 Delete
               </button>
@@ -120,7 +118,7 @@ function getOverlay() {
         `;
 }
 
-function getEditOverlay(name, email, phone) {
+function getEditOverlay(key, name, email, phone) {
   return `
           <div class="overlay">
             <div class="overlay-left">
@@ -141,6 +139,7 @@ function getEditOverlay(name, email, phone) {
                 <form>
                   <div class="form-group">
                     <input
+                      value="${name}"
                       id="inputEditName"
                       type="text"
                       placeholder="Name"
@@ -150,6 +149,7 @@ function getEditOverlay(name, email, phone) {
                   </div>
                   <div class="form-group">
                     <input
+                      value="${email}"
                       id="inputEditMail"
                       type="text"
                       placeholder="Email"
@@ -159,6 +159,7 @@ function getEditOverlay(name, email, phone) {
                   </div>
                   <div class="form-group">
                     <input
+                      value="${phone}"
                       id="inputEditCall"
                       type="text"
                       placeholder="Phone"
@@ -174,7 +175,7 @@ function getEditOverlay(name, email, phone) {
                     >
                       Delete<img src="./assets/icons/cancel.svg" />
                     </button>
-                    <button id="addContactButton" onclick="UpdateNewContactToFirebase(['${name}', '${email}', '${phone}'])" type="button" class="create-btn">
+                    <button id="addContactButton" onclick="UpdateNewContactToFirebase('${key}')" name="submit" type="button" class="create-btn">
                       Save <img src="./assets/icons/check.svg" alt="" />
                     </button>
                   </div>

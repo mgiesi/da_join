@@ -4,10 +4,10 @@ function toggleOverlay() {
   overlay.innerHTML = getOverlay();
 }
 
-function toggleEditOverlay(contactKey, name, email, phone) {
+function toggleEditOverlay(key, name, email, phone) {
   const overlay = document.getElementById("overlayEditContact");
   overlay.classList.toggle("dNone");
-  overlay.innerHTML = getEditOverlay(contactKey, name, email, phone);
+  overlay.innerHTML = getEditOverlay(key, name, email, phone);
 }
 
 function initPlus() {
@@ -52,7 +52,7 @@ async function addNewContactToFirebase() {
   }
 }
 
-async function UpdateNewContactToFirebase() {
+async function UpdateNewContactToFirebase(contactKey) {
   const name = document.getElementById("inputEditName").value;
   const email = document.getElementById("inputEditMail").value;
   const phone = document.getElementById("inputEditCall").value;
@@ -103,22 +103,17 @@ async function UpdateNewContactToFirebase() {
   }
 }
 
-async function deleteContactToFirebase() {
+async function deleteContactToFirebase(key) {
   try {
-    const contacts = await getContacts();
-    const contactKeys = contacts ? Object.keys(contacts) : [];
-    const nextNumber = contactKeys.length;
-    const UpKeys = `contact${nextNumber}`;
-
-    const saveResponse = await deleteContact(UpKeys);
+    const saveResponse = await deleteContact(key);
     if (!saveResponse.ok) {
       throw new Error(
-        `Fehler beim Speichern des Kontakts: ${saveResponse.status}`
+        `Fehler beim Löschen des Kontakts: ${saveResponse.status}`
       );
     }
     await loadContactsFromFirebase();
   } catch (error) {
-    console.error("Fehler beim Hinzufügen des Kontakts:", error);
+    console.error("Fehler beim Löschen des Kontakts:", error);
   }
 }
 
@@ -175,7 +170,13 @@ async function loadContactsFromFirebase() {
         </div>
       `;
       contactDiv.addEventListener("click", () =>
-        displayContactDetails(contact)
+        displayContactDetails(
+          key,
+          contact.name,
+          contact.email,
+          contact.phone,
+          contact.avatarColor
+        )
       );
 
       section.appendChild(contactDiv);
