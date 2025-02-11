@@ -34,8 +34,9 @@ async function addUser() {
   let name = document.getElementById("inputName").value;
   let email = document.getElementById("inputMail").value;
   let password = document.getElementById("inputLock").value;
+  let confirmPassword = document.getElementById("inputConfirm").value;
 
-  if (!name || !email || !password) {
+  if (!name || !email || !password || !confirmPassword) {
     let addDialog = document.getElementById("FieldsSignUp");
     addDialog.classList.remove("dNone");
     return;
@@ -45,6 +46,7 @@ async function addUser() {
     name,
     email,
     password,
+    confirmPassword,
   };
 
   try {
@@ -66,7 +68,7 @@ async function addUser() {
     const saveResponse = await fetch(
       `https://da-join-629d2-default-rtdb.europe-west1.firebasedatabase.app/user/${newUserKey}.json`,
       {
-        method: "PUT",
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },

@@ -8,8 +8,6 @@ function toggleEditOverlay(contactKey, name, email, phone) {
   const overlay = document.getElementById("overlayEditContact");
   overlay.classList.toggle("dNone");
   overlay.innerHTML = getEditOverlay(contactKey, name, email, phone);
-  localStorage.setItem("editingContactKey", contactKey);
-  console.log("Gespeicherter contactKey:", contactKey);
 }
 
 function initPlus() {
@@ -65,8 +63,6 @@ async function UpdateNewContactToFirebase() {
     return;
   }
 
-  const contactKey = localStorage.getItem("editingContactKey"); // Lade den gespeicherten Key
-
   if (!contactKey) {
     console.error("Fehler: Kein gültiger contactKey gefunden!");
     alert("Fehler: Kein gültiger Kontakt zum Bearbeiten gefunden.");
@@ -99,39 +95,11 @@ async function UpdateNewContactToFirebase() {
     }
 
     await loadContactsFromFirebase();
-    alert("Kontakt erfolgreich aktualisiert!");
-    localStorage.removeItem("editingContactKey"); // Nach dem Update den Key entfernen
   } catch (error) {
     console.error("Fehler beim Aktualisieren des Kontakts:", error);
     alert(
       "Es ist ein Fehler aufgetreten. Kontakt konnte nicht aktualisiert werden."
     );
-  }
-}
-
-async function findContactKey(name, email, phone) {
-  try {
-    const response = await fetch(
-      "https://da-join-629d2-default-rtdb.europe-west1.firebasedatabase.app//contacts.json"
-    );
-    const contacts = await response.json();
-
-    if (!contacts) return null;
-
-    for (const key in contacts) {
-      if (
-        contacts[key].name === name &&
-        contacts[key].email === email &&
-        contacts[key].phone === phone
-      ) {
-        return key;
-      }
-    }
-
-    return null;
-  } catch (error) {
-    console.error("Fehler beim Suchen des Kontakts:", error);
-    return null;
   }
 }
 

@@ -178,8 +178,14 @@ footer a:hover {
   background-position: calc(100% - 15px) center;
   padding-right: 20px;
 }
+#inputConfirm {
+  background: white url(/assets/icons/lock.png) right no-repeat;
+  background-position: calc(100% - 15px) center;
+  padding-right: 20px;
+}
 
 .formWidth {
+  margin-top: 44px;
   width: 400px;
 }
 
