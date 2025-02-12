@@ -201,6 +201,12 @@
   border-radius: 8px;
   background-color: #fff;
   padding: 0 10px;
+  box-sizing: border-box;
+}
+
+.board-title-search:hover,
+.board-title-search:focus-within {
+  border: 1px solid #29abe2;
 }
 
 .search-icon {
@@ -209,11 +215,13 @@
   margin-right: 10px;
   cursor: pointer;
 }
+
 .dFlex {
   display: flex;
   gap: 40px;
   margin-right: 100px;
 }
+
 .boardIconAdd {
   width: 32px;
   height: 32px;

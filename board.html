@@ -33,20 +33,23 @@
 
         <div id="overlayAddTask" class="overlay-background dNone"></div>
         <div id="taskDetails" class="overlay-taskDetails dNone"></div>
-            
+
 
         <div class="board-content">
             <div class="board-title d-flex align-items-center">
                 <span class="f1">Board</span>
                 <div class="dFlex">
-                <div class="board-title-search"> 
-                    <input oninput="updateFilter()" id="board-filter-text" type="search" placeholder="Find Task" class="search-input">
-                    <img onclick="resetFilter()" src="./assets/icons/search.svg" alt="" class="search-icon">
-                    
+                    <div class="board-title-search">
+                        <input oninput="updateFilter()" id="board-filter-text" type="text" placeholder="Find Task"
+                            class="search-input" autocomplete="off">
+                        <img id="board-filter-text-icon" onclick="resetFilter()" src="./assets/icons/search.svg" alt=""
+                            class="search-icon">
+
+                    </div>
+                    <div><button onclick="toggleAddTaskOverlay()" class="addTaskBtn f6">Add task <img
+                                src="./assets/icons/add.svg" class="boardIconAdd" alt=""></button></div>
                 </div>
-                <div><button onclick="toggleAddTaskOverlay()" class="addTaskBtn f6">Add task <img src="./assets/icons/add.svg" class="boardIconAdd" alt=""></button></div>
             </div>
-        </div>
             <div id="boards-container" class="board-contents d-flex justify-content-start">
                 <div class="board-container">
                     <div class="board-container-titlebox d-flex justify-content-between">
