@@ -1,0 +1,19 @@
+.help-content {
+  padding: 100px;
+  margin: 100px;
+  margin-left: 200px;
+  padding-top: 50px;
+}
+
+.join-text {
+  color: #29ABE2;
+}
+
+td {
+  vertical-align: top;
+  padding-bottom: 16px;
+}
+
+td:nth-child(1) {
+  width: 56px;
+}
