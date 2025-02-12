@@ -67,8 +67,13 @@ function toggleAddTaskOverlay() {
     overlay.innerHTML = getAddTaskOverlay();
 }
 
-function toggleTaskDetails() {
+async function toggleTaskDetails(taskId) {
+    const [task, contacts] = await Promise.all([
+        getTask(taskId),
+        getContacts(),
+    ]);
+
     let overlay = document.getElementById("taskDetails");
     overlay.classList.toggle("dNone");
-    overlay.innerHTML = getTaskDetails();
+    overlay.innerHTML = getTaskDetails(task, contacts);
 }
