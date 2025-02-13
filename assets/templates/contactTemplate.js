@@ -169,7 +169,7 @@ function getEditOverlay(key, name, email, phone) {
                   </div>
                   <div class="button-group">
                     <button
-                      onclick="toggleEditOverlay()"
+                      onclick="deleteContactToFirebaseWithDialogRemove('${key}')""
                       type="button"
                       class="cancel-btn"
                     >

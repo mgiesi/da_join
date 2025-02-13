@@ -93,7 +93,9 @@ async function UpdateNewContactToFirebase(contactKey) {
         `Fehler beim Speichern des Kontakts: ${saveResponse.status}`
       );
     }
-
+    toggleEditOverlay();
+    const contactInfoContainer = document.querySelector(".contact-info");
+    contactInfoContainer.innerHTML = "";
     await loadContactsFromFirebase();
   } catch (error) {
     console.error("Fehler beim Aktualisieren des Kontakts:", error);
@@ -112,6 +114,27 @@ async function deleteContactToFirebase(key) {
       );
     }
     await loadContactsFromFirebase();
+
+    const contactInfoContainer = document.querySelector(".contact-info");
+    contactInfoContainer.innerHTML = "";
+  } catch (error) {
+    console.error("Fehler beim Löschen des Kontakts:", error);
+  }
+}
+
+async function deleteContactToFirebaseWithDialogRemove(key) {
+  try {
+    const saveResponse = await deleteContact(key);
+    if (!saveResponse.ok) {
+      throw new Error(
+        `Fehler beim Löschen des Kontakts: ${saveResponse.status}`
+      );
+    }
+    await loadContactsFromFirebase();
+    const overlay = document.getElementById("overlayEditContact");
+    overlay.classList.add("dNone");
+    const contactInfoContainer = document.querySelector(".contact-info");
+    contactInfoContainer.innerHTML = "";
   } catch (error) {
     console.error("Fehler beim Löschen des Kontakts:", error);
   }

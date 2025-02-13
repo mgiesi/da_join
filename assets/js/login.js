@@ -14,8 +14,7 @@ function navigateToSummary() {
   window.location.href = "summary.html";
 }
 
-function showMessage(event) {
-  event.preventDefault();
+function showMessage() {
   let checkbox = document.getElementById("checkbox");
   let dialogSignUp = document.getElementById("dialogSignUp");
 
@@ -68,14 +67,14 @@ async function addUser() {
     const saveResponse = await fetch(
       `https://da-join-629d2-default-rtdb.europe-west1.firebasedatabase.app/user/${newUserKey}.json`,
       {
-        method: "POST",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(newUser),
       }
     );
-    //showMessage();
+    showMessage();
 
     if (!saveResponse.ok) {
       throw new Error(
