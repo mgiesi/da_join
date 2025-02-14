@@ -29,6 +29,40 @@ function showMessage() {
   }
 }
 
+async function login() {
+  const email = document.getElementById("inputMail").value;
+  const password = document.getElementById("inputLock").value;
+
+  const dbUrl =
+    "https://da-join-629d2-default-rtdb.europe-west1.firebasedatabase.app/user.json";
+
+  try {
+    const response = await fetch(dbUrl);
+    if (!response.ok) {
+      throw new Error("Fehler beim Abrufen der Benutzerdaten");
+    }
+
+    const users = await response.json();
+
+    if (!users) {
+      console.log("Keine Benutzer gefunden.");
+      return;
+    }
+    const user = Object.values(users).find(
+      (u) => u.email === email && u.password === password
+    );
+
+    if (user) {
+      navigateToSummary();
+    } else {
+      let loginDialog = document.getElementById("dialogLogin");
+      loginDialog.classList.remove("dNone");
+    }
+  } catch (error) {
+    console.error("Fehler:", error);
+  }
+}
+
 async function addUser() {
   let name = document.getElementById("inputName").value;
   let email = document.getElementById("inputMail").value;
