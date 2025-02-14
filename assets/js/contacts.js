@@ -47,6 +47,7 @@ async function addNewContactToFirebase() {
     }
     await loadContactsFromFirebase();
     toggleOverlay();
+    showAddMessage();
   } catch (error) {
     console.error("Fehler beim Hinzufügen des Kontakts:", error);
   }
@@ -207,4 +208,12 @@ async function loadContactsFromFirebase() {
   } catch (error) {
     console.error("Fehler beim Laden der Kontakte:", error);
   }
+}
+
+function showAddMessage() {
+  document.getElementById("overlayContactSuccess").classList.remove("dNone");
+  overlayContactSuccess.classList.add("animate");
+  setTimeout(function () {
+    document.getElementById("overlayContactSuccess").classList.add("dNone");
+  }, 2000);
 }

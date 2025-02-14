@@ -21,3 +21,9 @@ async function getUser() {
   let responseToJson = await response.json();
   return responseToJson;
 }
+
+async function getUserName(name) {
+  let response = await fetch(CONTACTS_URL + "user" + name + ".json");
+  let responseToJson = await response.json();
+  return responseToJson;
+}

@@ -558,3 +558,29 @@ input[type="text"]:focus {
   color: red;
   margin-left: 24px;
 }
+
+.contactsucces {
+  width: 326px;
+  height: 74px;
+}
+
+.overlayContactSuccess {
+  position: absolute;
+  top: 350px;
+  left: 800px;
+}
+
+.overlayContactSuccess.animate {
+  animation: slideIn 1s forwards;
+}
+
+@keyframes slideIn {
+  from {
+    bottom: -50px;
+    opacity: 0;
+  }
+  to {
+    bottom: 0%;
+    opacity: 1;
+  }
+}
