@@ -1,5 +1,5 @@
 /**
- * Base URL for contacts, composed of the database base URL and the "contacts/" path.
+ * Base URL for user, composed of the database base URL and the "user/" path.
  * Ensure that DB_BASE_URL is available by including db.js.
  * @constant {string}
  */
@@ -8,13 +8,13 @@ const DB_BASE_URL =
 const USER_URL = DB_BASE_URL + "user/";
 
 /**
- * Retrieves all contacts from the database.
+ * Retrieves all user from the database.
  *
- * This function sends a GET request to the URL that returns all contacts in JSON format.
+ * This function sends a GET request to the URL that returns all user in JSON format.
  *
  * @async
  * @function getContacts
- * @returns {Promise<Object>} A promise that resolves to an object containing all contacts.
+ * @returns {Promise<Object>} A promise that resolves to an object containing all user.
  */
 async function getUser() {
   let response = await fetch(USER_URL + ".json");
