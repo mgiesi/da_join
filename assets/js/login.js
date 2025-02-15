@@ -136,3 +136,14 @@ async function saveToDatabase(user, key) {
   );
   if (!response.ok) throw new Error(`Save error: ${response.status}`);
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  if (!localStorage.getItem("animationPlayed")) {
+    setTimeout(() => {
+      document.getElementById("startOverlay").style.display = "none";
+      localStorage.setItem("animationPlayed", "true");
+    }, 1000);
+  } else {
+    document.getElementById("startOverlay").style.display = "none";
+  }
+});
