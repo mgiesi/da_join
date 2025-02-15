@@ -19,8 +19,8 @@ const TASKS_URL = DB_BASE_URL + "tasks/";
  * matching the filter criteria.
  */
 async function getTasks(filterText) {
-    let response = await fetch(TASKS_URL + ".json");
-    let responseToJson = await response.json();
+    const response = await fetch(TASKS_URL + ".json");
+    const responseToJson = await response.json();
 
     if (!filterText || filterText.trim() === "") {
         return responseToJson;

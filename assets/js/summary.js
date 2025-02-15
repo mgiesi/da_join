@@ -4,8 +4,8 @@ function initSummary() {
   refreshBoardInfos();
 }
 
-function refreshGreeting() {
-  const username = getUserName();
+async function refreshGreeting() {
+  const username = await getUserName();
   refreshGreetingText(username);
   refreshGreetingName(username);
 }
@@ -32,9 +32,18 @@ function refreshGreetingName(username = "") {
   greetingNameRef.innerHTML = username;
 }
 
-function getUserName() {
-  //todo read current logged in user from internal storage
-  return null;
+async function getUserName() {
+  const activeUser = localStorage.getItem("activeUser");
+  if (!activeUser) {
+    return null;
+  }
+
+  const user = await getUser(activeUser);
+  if (!user) {
+    return null;
+  }
+
+  return user.name;
 }
 
 async function refreshBoardInfos() {

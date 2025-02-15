@@ -11,6 +11,7 @@ function navigateToIndex() {
 }
 
 function navigateToSummary() {
+  localStorage.removeItem("activeUser");
   window.location.href = "summary.html";
 }
 
@@ -53,12 +54,15 @@ async function login() {
     );
 
     if (user) {
+      localStorage.setItem("activeUser", user.email);
       navigateToSummary();
     } else {
+      localStorage.removeItem("activeUser");
       let loginDialog = document.getElementById("dialogLogin");
       loginDialog.classList.remove("dNone");
     }
   } catch (error) {
+    localStorage.removeItem("activeUser");
     console.error("Fehler:", error);
   }
 }
