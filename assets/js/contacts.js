@@ -16,41 +16,51 @@ function initPlus() {
 }
 
 async function addNewContactToFirebase() {
-  const name = document.getElementById("inputName").value;
-  const email = document.getElementById("inputMail").value;
-  const phone = document.getElementById("inputCall").value;
+  const { name, email, phone } = getContactInput();
+  if (!validateContactInput(name, email, phone)) return;
 
-  if (!name || !email || !phone) {
-    let addDialog = document.getElementById("addFont");
-    addDialog.classList.remove("dNone");
-    return;
-  }
+  const newContact = createNewContact(name, email, phone);
+  await saveAndLoadContact(newContact);
+}
 
-  const newContact = {
-    name,
-    email,
-    phone,
-    avatarColor: getRandomColor(),
+function getContactInput() {
+  return {
+    name: document.getElementById("inputName").value,
+    email: document.getElementById("inputMail").value,
+    phone: document.getElementById("inputCall").value,
   };
+}
 
+function validateContactInput(name, email, phone) {
+  if (!name || !email || !phone) {
+    document.getElementById("addFont").classList.remove("dNone");
+    return false;
+  }
+  return true;
+}
+
+function createNewContact(name, email, phone) {
+  return { name, email, phone, avatarColor: getRandomColor() };
+}
+
+async function saveAndLoadContact(newContact) {
   try {
-    const contacts = await getContacts();
-    const contactKeys = contacts ? Object.keys(contacts) : [];
-    const nextNumber = contactKeys.length + 1;
-    const newContactKey = `contact${nextNumber}`;
-
+    const newContactKey = await generateContactKey();
     const saveResponse = await addOrUpdateContact(newContactKey, newContact);
-    if (!saveResponse.ok) {
-      throw new Error(
-        `Fehler beim Speichern des Kontakts: ${saveResponse.status}`
-      );
-    }
+    if (!saveResponse.ok) throw new Error(`Fehler: ${saveResponse.status}`);
+
     await loadContactsFromFirebase();
     toggleOverlay();
     showAddMessage();
   } catch (error) {
     console.error("Fehler beim Hinzufügen des Kontakts:", error);
   }
+}
+
+async function generateContactKey() {
+  const contacts = await getContacts();
+  const nextNumber = (contacts ? Object.keys(contacts).length : 0) + 1;
+  return `contact${nextNumber}`;
 }
 
 async function UpdateNewContactToFirebase(contactKey) {
@@ -115,7 +125,6 @@ async function deleteContactToFirebase(key) {
       );
     }
     await loadContactsFromFirebase();
-
     const contactInfoContainer = document.querySelector(".contact-info");
     contactInfoContainer.innerHTML = "";
   } catch (error) {
