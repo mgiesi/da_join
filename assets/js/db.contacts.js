@@ -97,8 +97,5 @@ function getShortcutName(contact) {
     return "";
   }
 
-  return contact.name
-    .split(" ")
-    .map((n) => n.charAt(0).toUpperCase())
-    .join("");
+  return getInitials(contact.name);
 }

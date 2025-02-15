@@ -2,6 +2,8 @@ async function init() {
   await includeHTML();
   setActiveMenuItem();
   addMenuClickListeners();
+  addSubmenuClickListeners();
+  initUser();
 }
 
 async function includeHTML() {
@@ -18,6 +20,30 @@ async function includeHTML() {
       element.innerHTML = "Page not found";
     }
   }
+}
+
+async function initUser() {
+  const userName = await getActiveUserName();
+  const textRef = document.getElementById("user-profile-name");
+  if (!userName) {
+    textRef.innerHTML = "G";
+  } else {
+    textRef.innerHTML = getInitials(userName);
+  }
+}
+
+async function getActiveUserName() {
+  const activeUser = localStorage.getItem("activeUser");
+  if (!activeUser) {
+    return null;
+  }
+
+  const user = await getUser(activeUser);
+  if (!user) {
+    return null;
+  }
+
+  return user.name;
 }
 
 function setActiveMenuItem() {
@@ -70,6 +96,14 @@ function addMenuClickListeners() {
   });
 }
 
+function addSubmenuClickListeners() {
+  document.getElementById('header-submenu').addEventListener('click', function(e) {
+    if (e.target === this) {
+      hideSubmenu();
+    }
+  });
+}
+
 function validateFormField(inputElement) {
   const formGroup = inputElement.closest(".form-group");
 
@@ -80,4 +114,31 @@ function validateFormField(inputElement) {
     formGroup.classList.remove("error");
     return true;
   }
+}
+
+function showSubmenu() {
+  const overlay = document.getElementById("header-submenu");
+  overlay.classList.remove("dNone");
+}
+
+function hideSubmenu() {
+  const overlay = document.getElementById("header-submenu");
+  overlay.classList.add("dNone");
+}
+
+/**
+ * Generates a shortcut name from any string (surename [space] lastname).
+ *
+ * This function takes a name as a string and returns a string composed of the uppercase initials
+ * of each word in the contact's name.
+ *
+ * @function getInitials
+ * @param {string} name - The name as string.
+ * @returns {string} A string representing the initials of the contact's name, or an empty string if the contact is null.
+ */
+function getInitials(name) {
+  return name
+    .split(" ")
+    .map((n) => n.charAt(0).toUpperCase())
+    .join("");
 }

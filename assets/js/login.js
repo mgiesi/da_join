@@ -11,7 +11,6 @@ function navigateToIndex() {
 }
 
 function navigateToSummary() {
-  localStorage.removeItem("activeUser");
   window.location.href = "summary.html";
 }
 
@@ -28,6 +27,11 @@ function showMessage() {
   } else {
     dialogSignUp.classList.remove("dNone");
   }
+}
+
+function loginAsGuest() {
+  localStorage.removeItem("activeUser");
+  navigateToSummary();
 }
 
 async function login() {
