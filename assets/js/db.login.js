@@ -22,6 +22,15 @@ async function getUser() {
   return responseToJson;
 }
 
+/**
+ * Fetches user data from the given URL.
+ *
+ * @async
+ * @function getUserName
+ * @param {string} name - The name of the user.
+ * @returns {Promise<Object>} A promise that resolves to the user data in JSON format.
+ * @throws {Error} If the fetch request fails.
+ */
 async function getUserName(name) {
   let response = await fetch(CONTACTS_URL + "user" + name + ".json");
   let responseToJson = await response.json();

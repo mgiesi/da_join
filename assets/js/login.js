@@ -42,33 +42,43 @@ async function login() {
     "https://da-join-629d2-default-rtdb.europe-west1.firebasedatabase.app/user.json";
 
   try {
-    const response = await fetch(dbUrl);
-    if (!response.ok) {
-      throw new Error("Fehler beim Abrufen der Benutzerdaten");
-    }
+    const users = await fetchUserData(dbUrl);
+    if (!users) return console.log("Keine Benutzer gefunden.");
 
-    const users = await response.json();
-
-    if (!users) {
-      console.log("Keine Benutzer gefunden.");
-      return;
-    }
-    const user = Object.values(users).find(
-      (u) => u.email === email && u.password === password
-    );
-
-    if (user) {
-      localStorage.setItem("activeUser", user.email);
-      navigateToSummary();
-    } else {
-      localStorage.removeItem("activeUser");
-      let loginDialog = document.getElementById("dialogLogin");
-      loginDialog.classList.remove("dNone");
-    }
+    const user = findUser(users, email, password);
+    user ? handleLoginSuccess(user) : handleLoginFailure();
   } catch (error) {
-    localStorage.removeItem("activeUser");
-    console.error("Fehler:", error);
+    handleLoginError(error);
   }
+}
+
+async function fetchUserData(url) {
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error("Fehler beim Abrufen der Benutzerdaten");
+  }
+  return response.json();
+}
+
+function findUser(users, email, password) {
+  return Object.values(users).find(
+    (u) => u.email === email && u.password === password
+  );
+}
+
+function handleLoginSuccess(user) {
+  localStorage.setItem("activeUser", user.email);
+  navigateToSummary();
+}
+
+function handleLoginFailure() {
+  localStorage.removeItem("activeUser");
+  document.getElementById("dialogLogin").classList.remove("dNone");
+}
+
+function handleLoginError(error) {
+  localStorage.removeItem("activeUser");
+  console.error("Fehler:", error);
 }
 
 async function addUser() {
@@ -136,3 +146,14 @@ async function saveToDatabase(user, key) {
   );
   if (!response.ok) throw new Error(`Save error: ${response.status}`);
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  if (!localStorage.getItem("animationPlayed")) {
+    setTimeout(() => {
+      document.getElementById("startOverlay").style.display = "none";
+      localStorage.setItem("animationPlayed", "true");
+    }, 1000);
+  } else {
+    document.getElementById("startOverlay").style.display = "none";
+  }
+});
