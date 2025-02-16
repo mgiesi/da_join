@@ -25,17 +25,38 @@ async function includeHTML() {
 async function initUser() {
   const userName = await getActiveUserName();
   const textRef = document.getElementById("user-profile-name");
+  const iconRef = document.getElementById("header-icons");
+  const menuItemsRef = document.getElementById("menu-items");
+  const backRef = document.getElementById("back_not_loggedin");
   if (!userName) {
-    textRef.innerHTML = "G";
+    iconRef.classList.add("dNone");
+    menuItemsRef.classList.add("dNone");
+    backRef.classList.remove("dNone");
   } else {
+    iconRef.classList.remove("dNone");
+    menuItemsRef.classList.remove("dNone");
     textRef.innerHTML = getInitials(userName);
+    backRef.classList.add("dNone");
   }
+}
+
+function goToStart() {
+  logoutUser();
+  window.location.href = "index.html";
+}
+
+function logoutUser() {
+  localStorage.removeItem("activeUser");
 }
 
 async function getActiveUserName() {
   const activeUser = localStorage.getItem("activeUser");
   if (!activeUser) {
     return null;
+  }
+
+  if (activeUser === "Guest") {
+    return "Guest";
   }
 
   const user = await getUser(activeUser);

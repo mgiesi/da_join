@@ -30,7 +30,7 @@ function showMessage() {
 }
 
 function loginAsGuest() {
-  localStorage.removeItem("activeUser");
+  localStorage.setItem("activeUser", "Guest");
   navigateToSummary();
 }
 

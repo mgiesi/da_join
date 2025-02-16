@@ -271,10 +271,6 @@ footer a:hover {
   }
 }
 
-.dNone {
-  display: none;
-}
-
 .topBox {
   display: flex;
   justify-content: space-around;
