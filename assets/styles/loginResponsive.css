@@ -1,2 +1,50 @@
 @media (max-width: 1200px) {
+  .NotAJoinUser-box {
+    display: none;
+  }
+
+  .NotAJoinUser-boxRes {
+    display: flex;
+    margin: 0;
+    justify-content: center;
+    width: 100%;
+    margin-top: 56px;
+    gap: 24px;
+  }
+  .loginBtn {
+    flex-direction: column;
+    width: 80%;
+    margin-left: 50px;
+  }
+  .login-box-button {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 100%;
+    margin-left: 0;
+    margin-bottom: 0;
+  }
+  footer {
+    margin-top: 48px;
+  }
+  .container {
+    width: 400px;
+  }
+  .login-box {
+    padding-right: 50px;
+    padding-left: 50px;
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+  .logo {
+    margin-top: 24px;
+    margin-left: 36px;
+  }
+
+  .logo img {
+    width: 60px;
+    height: 72px;
+  }
+  .navLogIn {
+    margin-bottom: 56px;
+  }
 }

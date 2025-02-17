@@ -107,6 +107,7 @@ input[type="password"]:focus {
   border-radius: 5px;
   margin-right: 25px;
   font-weight: bold;
+  cursor: pointer;
 }
 
 .login-box-button2:hover {
@@ -155,6 +156,24 @@ footer a:hover {
 }
 
 .NotAJoinUser-box button {
+  width: 80px;
+}
+
+.NotAJoinUser-boxRes {
+  display: none;
+  width: 280px;
+  height: 50px;
+  margin: 24px;
+  margin-top: 50px;
+  margin-right: 175px;
+}
+
+.NotAJoinUser-boxRes p {
+  margin: 0;
+  padding-top: 12px;
+}
+
+.NotAJoinUser-boxRes button {
   width: 80px;
 }
 
