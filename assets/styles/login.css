@@ -182,6 +182,11 @@ footer a:hover {
   justify-content: space-between;
 }
 
+.navSignUp {
+  display: flex;
+  justify-content: space-between;
+}
+
 #inputMail {
   background: white url(/assets/icons/mail.png) right no-repeat;
   background-position: calc(100% - 15px) center;
