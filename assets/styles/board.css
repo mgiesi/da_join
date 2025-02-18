@@ -106,6 +106,12 @@
   background: #555;
 }
 
+.overlay-content-editTaskDetails {
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 24px;
+}
+
 .overlay-background {
   position: fixed;
   top: 0;

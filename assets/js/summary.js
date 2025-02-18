@@ -12,24 +12,31 @@ async function refreshGreeting() {
 
 function refreshGreetingText(username) {
   const greetingTextRef = document.getElementById("summary-greeting-text");
+  const greetingText2Ref = document.getElementById("summary-greeting-text2");
   const hours = new Date().getHours();
 
   if (hours < 11) {
     greetingTextRef.innerHTML = "Good morning";
+    greetingText2Ref.innerHTML = "Good morning";
   } else if (hours < 17) {
     greetingTextRef.innerHTML = "Good afternoon";
+    greetingText2Ref.innerHTML = "Good afternoon";
   } else {
     greetingTextRef.innerHTML = "Good evening";
+    greetingText2Ref.innerHTML = "Good evening";
   }
 
   if (username !== null) {
     greetingTextRef.innerHTML += ",";
+    greetingText2Ref.innerHTML += ",";
   }
 }
 
 function refreshGreetingName(username = "") {
   const greetingNameRef = document.getElementById("summary-greeting-name");
+  const greetingName2Ref = document.getElementById("summary-greeting-name2");
   greetingNameRef.innerHTML = username;
+  greetingName2Ref.innerHTML = username;
 }
 
 async function getUserName() {

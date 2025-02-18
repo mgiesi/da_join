@@ -74,11 +74,13 @@ async function toggleTaskDetails(taskId) {
 
   let overlay = document.getElementById("taskDetails");
   overlay.classList.toggle("dNone");
-  overlay.innerHTML = getTaskDetails(task, contacts);
+  overlay.innerHTML = getTaskDetails(taskId, task, contacts);
 }
 
-function toggleEditTaskDetails() {
+async function toggleEditTaskDetails(taskId) {
+  const [task, contacts] = await Promise.all([getTask(taskId), getContacts()]);
+
   let overlay = document.getElementById("editTaskDetails");
   overlay.classList.toggle("dNone");
-  overlay.innerHTML = getEditTaskDetails();
+  overlay.innerHTML = getEditTaskDetails(taskId, task, contacts);
 }

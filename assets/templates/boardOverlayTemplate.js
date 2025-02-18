@@ -111,110 +111,123 @@ function getAddTaskOverlay() {
           `;
 }
 
-function getEditTaskDetails() {
-  return `
-        <div class="dFlexWithEnd"><div onclick="toggleEditTaskDetails()" class="close-btn">×</div></div>
-       <div class="form-groupEdit">
-                              <label for="title">Title<span class="required">*</span></label>
-                              <input type="text" id="title" placeholder="Enter a title" required>
-                          </div>
-  
-                          <div class="form-groupEdit">
-                              <label for="description">Description</label>
-                              <textarea id="description" placeholder="Enter a Description"></textarea>
-                          </div>
-        <div class="form-groupEdit">
-                              <label for="dueDate">Due date<span class="required">*</span></label>
-                              <div class="date-input-wrapper">
-                                  <input type="text" id="dueDate" placeholder="dd/mm/yyyy" pattern="\d{2}/\d{2}/\d{4}"
-                                      required maxlength="10" inputmode="numeric">
-                                  <img src="./assets/icons/calendar.svg" alt="Calendar" class="calendar-icon">
-                              </div>
-                          </div>
-                          <div class="form-groupEdit">
-                              <label>Prio</label>
-                              <div class="priority-buttons">
-                                  <button type="button" class="priority-btn" data-priority="urgent"
-                                      onclick="handlePriorityClick(this)">
-                                      Urgent
-                                      <img src="./assets/icons/prio-urgent.svg" alt="Urgent">
-                                  </button>
-                                  <button type="button" class="priority-btn" data-priority="medium"
-                                      onclick="handlePriorityClick(this)">
-                                      Medium
-                                      <img src="./assets/icons/prio-medium.svg" alt="Medium">
-                                  </button>
-                                  <button type="button" class="priority-btn" data-priority="low"
-                                      onclick="handlePriorityClick(this)">
-                                      Low
-                                      <img src="./assets/icons/prio-low.svg" alt="Low">
-                                  </button>
-                              </div>
-                          </div>
-                          <div class="form-groupEdit">
-                              <label for="assigned">Assigned to</label>
-                              <div class="select-wrapper">
-                                  <select id="assigned">
-                                      <option value="">Select contacts to assign</option>
-                                  </select>
-                              </div>
-                          </div>
-                          <div class="form-groupEdit">
-                              <label>Subtasks</label>
-                          <div class="subtask-input">
-                              <div class="input-wrapper">
-                                  <input type="text" id="subtaskInput" placeholder="Add new subtask">
-                                  <div class="subtask-actions">
-                                  </div>
-                              </div>
-                          </div>
-                              <div class="subtasks-list"></div>
-                          </div>
-                          <button onclick="toggleEditTaskDetails()" class="checkBtn f6">Ok <img
-                                src="./assets/icons/check.svg" class="boardIconAdd" alt=""></button>
+function getEditTaskDetails(taskId, task, contacts) {
+    return `
+        <div class="overlay-editTaskDetails">
+            <div class="dFlexWithEnd">
+                <div onclick="toggleEditTaskDetails()" class="close-btn">×</div>
+            </div>
+            <div class="overlay-content-editTaskDetails">
+                <div class="form-groupEdit">
+                    <label for="title">Title<span class="required">*</span></label>
+                    <input type="text" id="title" placeholder="Enter a title" value="${task.title}" required>
+                </div>
+        
+                <div class="form-groupEdit">
+                    <label for="description">Description</label>
+                    <textarea id="description" placeholder="Enter a Description">${task.description}</textarea>
+                </div>
+
+                <div class="form-groupEdit">
+                    <label for="dueDate">Due date<span class="required">*</span></label>
+                    <div class="date-input-wrapper">
+                        <input type="text" id="dueDate" placeholder="dd/mm/yyyy" pattern="\d{2}/\d{2}/\d{4}"
+                            required maxlength="10" inputmode="numeric" value="${displayTaskDueDate(task.dueDate)}">
+                        <img src="./assets/icons/calendar.svg" alt="Calendar" class="calendar-icon">
+                    </div>
+                </div>
+
+                <div class="form-groupEdit">
+                    <label>Prio</label>
+                    <div class="priority-buttons">
+                        <button type="button" class="priority-btn" data-priority="urgent"
+                            onclick="handlePriorityClick(this)">
+                            Urgent
+                            <img src="./assets/icons/prio-urgent.svg" alt="Urgent">
+                        </button>
+                        <button type="button" class="priority-btn" data-priority="medium"
+                            onclick="handlePriorityClick(this)">
+                            Medium
+                            <img src="./assets/icons/prio-medium.svg" alt="Medium">
+                        </button>
+                        <button type="button" class="priority-btn" data-priority="low"
+                            onclick="handlePriorityClick(this)">
+                            Low
+                            <img src="./assets/icons/prio-low.svg" alt="Low">
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-groupEdit">
+                    <label for="assigned">Assigned to</label>
+                    <div class="select-wrapper">
+                        <select id="assigned">
+                            <option value="">Select contacts to assign</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-groupEdit">
+                    <label>Subtasks</label>
+                    <div class="subtask-input">
+                        <div class="input-wrapper">
+                            <input type="text" id="subtaskInput" placeholder="Add new subtask">
+                            <div class="subtask-actions">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="subtasks-list"></div>
+                </div>
+            </div>
+
+            <button onclick="toggleEditTaskDetails()" class="checkBtn f6">Ok <img
+                src="./assets/icons/check.svg" class="boardIconAdd" alt=""></button>
+        </div>
     `;
 }
 
-function getTaskDetails(task, contacts) {
-  return `
-        <div class="topDetails">
-                ${displayTaskType(
-                  task.category
-                )}<div onclick="toggleTaskDetails()" class="close-btn">×</div>
-        </div>
-        <div class="taskHeadline">
-            <h1 class="f1">${task.title}</h1>
-        </div>
-        <div class="description f2">
-            <p>${task.description}</p>
-        </div>
-        <div class="dueDate">
-            <p class="f2">Due Date: </p>
-            <p class="f2">${displayTaskDueDate(task.dueDate)}</p>
-        </div>
-        <div class="priority">
-            <p class="f2">Priority: </p>
-            <p class="f2">${
-              task.prio.charAt(0).toUpperCase() + task.prio.slice(1)
-            }</p>
-            <img class="board-task-category" src="./assets/icons/prio-${
-              task.prio
-            }.svg" alt="">
-        </div>
-        <div class="assignedTo">
-            <p class="topAssigned f2">Assigned To:</p>
-            <div class="assignedContacts">
-                ${displayAssignedTo4TaskDetails(task, contacts)}
+function getTaskDetails(taskId, task, contacts) {
+    return `
+        <div class="overlay-taskDetails">
+            <div class="topDetails">
+                    ${displayTaskType(
+                    task.category
+                    )}<div onclick="toggleTaskDetails()" class="close-btn">×</div>
             </div>
-        </div>
-        ${displaySubTasks4TaskDetails(task)}
-        <div class="detailsButton">
-            <button class="endBtn">
-                <img class="detailsImgBtn" src="./assets/icons/delete.svg" alt="">Delete
-            </button>
-            <button onclick="toggleEditTaskDetails()" class="endBtn">
-                <img class="detailsImgBtn" src="./assets/icons/edit.svg" alt="">Edit
-            </button>
+            <div class="taskHeadline">
+                <h1 class="f1">${task.title}</h1>
+            </div>
+            <div class="description f2">
+                <p>${task.description}</p>
+            </div>
+            <div class="dueDate">
+                <p class="f2">Due Date: </p>
+                <p class="f2">${displayTaskDueDate(task.dueDate)}</p>
+            </div>
+            <div class="priority">
+                <p class="f2">Priority: </p>
+                <p class="f2">${
+                task.prio.charAt(0).toUpperCase() + task.prio.slice(1)
+                }</p>
+                <img class="board-task-category" src="./assets/icons/prio-${
+                task.prio
+                }.svg" alt="">
+            </div>
+            <div class="assignedTo">
+                <p class="topAssigned f2">Assigned To:</p>
+                <div class="assignedContacts">
+                    ${displayAssignedTo4TaskDetails(task, contacts)}
+                </div>
+            </div>
+            ${displaySubTasks4TaskDetails(task)}
+            <div class="detailsButton">
+                <button class="endBtn">
+                    <img class="detailsImgBtn" src="./assets/icons/delete.svg" alt="">Delete
+                </button>
+                <button onclick="toggleTaskDetails(); toggleEditTaskDetails('${taskId}')" class="endBtn">
+                    <img class="detailsImgBtn" src="./assets/icons/edit.svg" alt="">Edit
+                </button>
+            </div>
         </div>
     `;
 }
