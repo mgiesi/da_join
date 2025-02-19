@@ -9,8 +9,8 @@
 }
 
 .add-task-content {
-    width: 100%;
-    padding: 32px;
+    flex: 1;
+    padding: 70px;
     max-width: 1208px;
     height: calc(100vh - 96px);
 }
@@ -479,7 +479,6 @@ svg:hover {
     padding: 16px;
     border-radius: 8px;
     display: none;
-    /* Hidden by default */
     align-items: center;
     gap: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
@@ -490,18 +489,6 @@ svg:hover {
 .task-added-notification img {
     width: 24px;
     height: 24px;
-}
-
-@keyframes slideIn {
-    from {
-        transform: translateY(100px);
-        opacity: 0;
-    }
-
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
 }
 
 .contact-dropdown {
@@ -620,8 +607,17 @@ svg:hover {
     font-size: 12px;
     font-family: 'Inter', sans-serif;
     font-weight: 400;
+    background-color: #000000;
 }
 
-.contact-avatar-selected:hover {
-    transform: scale(1.1);
+@keyframes slideIn {
+    from {
+        transform: translateY(100px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }

@@ -1,7 +1,10 @@
 async function init() {
   await includeHTML();
-  setActiveMenuItem();
-  addMenuClickListeners();
+  // Add a small delay to ensure DOM is updated
+  setTimeout(() => {
+    setActiveMenuItem();
+    addMenuClickListeners();
+  }, 100);
   addSubmenuClickListeners();
   initUser();
 }
@@ -61,7 +64,10 @@ function setActiveMenuItem() {
   // Add active class to the button that matches current page
   menuButtons.forEach((button) => {
     const href = button.getAttribute("href");
-    if (href.includes(currentPage)) {
+    // Extract just the filename from the href
+    const hrefPage = href.split("/").pop();
+
+    if (currentPage === hrefPage) {
       button.classList.add("active");
       // Store the active menu item
       localStorage.setItem("activeMenuItem", href);
@@ -69,13 +75,15 @@ function setActiveMenuItem() {
   });
 
   // If no page matches (like on first load), check localStorage
-  const activeMenuItem = localStorage.getItem("activeMenuItem");
-  if (!currentPage && activeMenuItem) {
-    menuButtons.forEach((button) => {
-      if (button.getAttribute("href") === activeMenuItem) {
-        button.classList.add("active");
-      }
-    });
+  if (!currentPage) {
+    const activeMenuItem = localStorage.getItem("activeMenuItem");
+    if (activeMenuItem) {
+      menuButtons.forEach((button) => {
+        if (button.getAttribute("href") === activeMenuItem) {
+          button.classList.add("active");
+        }
+      });
+    }
   }
 }
 
@@ -97,7 +105,7 @@ function addMenuClickListeners() {
 }
 
 function addSubmenuClickListeners() {
-  document.getElementById('header-submenu').addEventListener('click', function(e) {
+  document.getElementById('header-submenu').addEventListener('click', function (e) {
     if (e.target === this) {
       hideSubmenu();
     }
