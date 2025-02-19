@@ -1,7 +1,5 @@
-
-
 function getAddTaskOverlay() {
-    return `
+  return `
     <div class="overlay-addTask">
               
           <div w3-include-html=".\assets\templates\side-menu.html"></div>
@@ -113,98 +111,182 @@ function getAddTaskOverlay() {
           `;
 }
 
-function getTaskDetails(task, contacts) {
+function getEditTaskDetails(taskId, task, contacts) {
     return `
-        <div class="topDetails">
-                ${displayTaskType(task.category)}<div onclick="toggleTaskDetails()" class="close-btn">×</div>
-        </div>
-        <div class="taskHeadline">
-            <h1 class="f1">${task.title}</h1>
-        </div>
-        <div class="description f2">
-            <p>${task.description}</p>
-        </div>
-        <div class="dueDate">
-            <p class="f2">Due Date: </p>
-            <p class="f2">${displayTaskDueDate(task.dueDate)}</p>
-        </div>
-        <div class="priority">
-            <p class="f2">Priority: </p>
-            <p class="f2">${task.prio.charAt(0).toUpperCase() + task.prio.slice(1)}</p>
-            <img class="board-task-category" src="./assets/icons/prio-${task.prio}.svg" alt="">
-        </div>
-        <div class="assignedTo">
-            <p class="topAssigned f2">Assigned To:</p>
-            <div class="assignedContacts">
-                ${displayAssignedTo4TaskDetails(task, contacts)}
+        <div class="overlay-editTaskDetails">
+            <div class="dFlexWithEnd">
+                <div onclick="toggleEditTaskDetails()" class="close-btn">×</div>
             </div>
+            <div class="overlay-content-editTaskDetails">
+                <div class="form-groupEdit">
+                    <label for="title">Title<span class="required">*</span></label>
+                    <input type="text" id="title" placeholder="Enter a title" value="${task.title}" required>
+                </div>
+        
+                <div class="form-groupEdit">
+                    <label for="description">Description</label>
+                    <textarea id="description" placeholder="Enter a Description">${task.description}</textarea>
+                </div>
+
+                <div class="form-groupEdit">
+                    <label for="dueDate">Due date<span class="required">*</span></label>
+                    <div class="date-input-wrapper">
+                        <input type="text" id="dueDate" placeholder="dd/mm/yyyy" pattern="\d{2}/\d{2}/\d{4}"
+                            required maxlength="10" inputmode="numeric" value="${displayTaskDueDate(task.dueDate)}">
+                        <img src="./assets/icons/calendar.svg" alt="Calendar" class="calendar-icon">
+                    </div>
+                </div>
+
+                <div class="form-groupEdit">
+                    <label>Prio</label>
+                    <div class="priority-buttons">
+                        <button type="button" class="priority-btn" data-priority="urgent"
+                            onclick="handlePriorityClick(this)">
+                            Urgent
+                            <img src="./assets/icons/prio-urgent.svg" alt="Urgent">
+                        </button>
+                        <button type="button" class="priority-btn" data-priority="medium"
+                            onclick="handlePriorityClick(this)">
+                            Medium
+                            <img src="./assets/icons/prio-medium.svg" alt="Medium">
+                        </button>
+                        <button type="button" class="priority-btn" data-priority="low"
+                            onclick="handlePriorityClick(this)">
+                            Low
+                            <img src="./assets/icons/prio-low.svg" alt="Low">
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-groupEdit">
+                    <label for="assigned">Assigned to</label>
+                    <div class="select-wrapper">
+                        <select id="assigned">
+                            <option value="">Select contacts to assign</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-groupEdit">
+                    <label>Subtasks</label>
+                    <div class="subtask-input">
+                        <div class="input-wrapper">
+                            <input type="text" id="subtaskInput" placeholder="Add new subtask">
+                            <div class="subtask-actions">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="subtasks-list"></div>
+                </div>
+            </div>
+
+            <button onclick="toggleEditTaskDetails()" class="checkBtn f6">Ok <img
+                src="./assets/icons/check.svg" class="boardIconAdd" alt=""></button>
         </div>
-        ${displaySubTasks4TaskDetails(task)}
-        <div class="detailsButton">
-            <button class="endBtn">
-                <img class="detailsImgBtn" src="./assets/icons/delete.svg" alt="">Delete
-            </button>
-            <button class="endBtn">
-                <img class="detailsImgBtn" src="./assets/icons/edit.svg" alt="">Edit
-            </button>
+    `;
+}
+
+function getTaskDetails(taskId, task, contacts) {
+    return `
+        <div class="overlay-taskDetails">
+            <div class="topDetails">
+                    ${displayTaskType(
+                    task.category
+                    )}<div onclick="toggleTaskDetails()" class="close-btn">×</div>
+            </div>
+            <div class="taskHeadline">
+                <h1 class="f1">${task.title}</h1>
+            </div>
+            <div class="description f2">
+                <p>${task.description}</p>
+            </div>
+            <div class="dueDate">
+                <p class="f2">Due Date: </p>
+                <p class="f2">${displayTaskDueDate(task.dueDate)}</p>
+            </div>
+            <div class="priority">
+                <p class="f2">Priority: </p>
+                <p class="f2">${
+                task.prio.charAt(0).toUpperCase() + task.prio.slice(1)
+                }</p>
+                <img class="board-task-category" src="./assets/icons/prio-${
+                task.prio
+                }.svg" alt="">
+            </div>
+            <div class="assignedTo">
+                <p class="topAssigned f2">Assigned To:</p>
+                <div class="assignedContacts">
+                    ${displayAssignedTo4TaskDetails(task, contacts)}
+                </div>
+            </div>
+            ${displaySubTasks4TaskDetails(task)}
+            <div class="detailsButton">
+                <button class="endBtn">
+                    <img class="detailsImgBtn" src="./assets/icons/delete.svg" alt="">Delete
+                </button>
+                <button onclick="toggleTaskDetails(); toggleEditTaskDetails('${taskId}')" class="endBtn">
+                    <img class="detailsImgBtn" src="./assets/icons/edit.svg" alt="">Edit
+                </button>
+            </div>
         </div>
     `;
 }
 
 function displayTaskDueDate(dueDate) {
-    const date = new Date(dueDate);
-    const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
-    let formattedDate = date.toLocaleDateString('de-DE', options);
-    formattedDate = formattedDate.replace(/\./g, '/');
-    return formattedDate;
+  const date = new Date(dueDate);
+  const options = { day: "2-digit", month: "2-digit", year: "numeric" };
+  let formattedDate = date.toLocaleDateString("de-DE", options);
+  formattedDate = formattedDate.replace(/\./g, "/");
+  return formattedDate;
 }
 
 function displayAssignedTo4TaskDetails(task, contacts) {
-    const contactsCount =
-        task && task.assignedTo ? Object.keys(task.assignedTo).length : 0;
-    if (contactsCount <= 0) {
-        return "";
-    } else {
-        let contactsContent = "";
-        Object.keys(task.assignedTo).forEach((contactId) => {
-            const contact = contacts[contactId];
-            if (contact === undefined || contact === null) {
-                return;
-            } else {
-                contactsContent += displayContact4TaskDetails(contact);
-            }
-        });
+  const contactsCount =
+    task && task.assignedTo ? Object.keys(task.assignedTo).length : 0;
+  if (contactsCount <= 0) {
+    return "";
+  } else {
+    let contactsContent = "";
+    Object.keys(task.assignedTo).forEach((contactId) => {
+      const contact = contacts[contactId];
+      if (contact === undefined || contact === null) {
+        return;
+      } else {
+        contactsContent += displayContact4TaskDetails(contact);
+      }
+    });
 
-        return contactsContent;
-    }
+    return contactsContent;
+  }
 }
 
 function displayContact4TaskDetails(contact) {
-    return `
+  return `
         <div class="d-flex align-items-center detailsAssignToBox">
-            <div class="task-contact task-contact-details f11" style="background: ${contact.avatarColor
-        }">${getShortcutName(contact)}</div >
+            <div class="task-contact task-contact-details f11" style="background: ${
+              contact.avatarColor
+            }">${getShortcutName(contact)}</div >
             <p class="f2">${contact.name}</p>
         </div>
         `;
 }
 
 function displaySubTasks4TaskDetails(task) {
-    const subTasksCount =
-        task && task.subtasks ? Object.keys(task.subtasks).length : 0;
-    if (subTasksCount <= 0) {
-        return "";
-    } else {
-        let subtaskcontent = "";
-        Object.keys(task.subtasks).forEach((subtaskId) => {
-            const subtask = task.subtasks[subtaskId];
-            if (!subtask) {
-                return;
-            } else {
-                subtaskcontent += displaySubTask4TaskDetails(subtask);
-            }
-        });
-        return `
+  const subTasksCount =
+    task && task.subtasks ? Object.keys(task.subtasks).length : 0;
+  if (subTasksCount <= 0) {
+    return "";
+  } else {
+    let subtaskcontent = "";
+    Object.keys(task.subtasks).forEach((subtaskId) => {
+      const subtask = task.subtasks[subtaskId];
+      if (!subtask) {
+        return;
+      } else {
+        subtaskcontent += displaySubTask4TaskDetails(subtask);
+      }
+    });
+    return `
             <div class="subTasks">
                 <p class="topAssigned">Subtasks</p>
                 <div class="checkedSubTasks">
@@ -212,11 +294,11 @@ function displaySubTasks4TaskDetails(task) {
                 </div>
             </div>
         `;
-    }
+  }
 }
 
 function displaySubTask4TaskDetails(subtask) {
-    return `
+  return `
         <div class="oneSubTask">
             <input type="checkbox" ${subtask.done ? "checked" : ""}>
             <p class="f3">${subtask.name}</p>

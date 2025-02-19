@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Header</title>
-    <link rel="stylesheet" href="./assets/styles/fonts.css">
-    <link rel="stylesheet" href="./assets/styles/components.css">
+    <!-- <link rel="stylesheet" href="./assets/styles/fonts.css">
+    <link rel="stylesheet" href="./assets/styles/components.css"> -->
     <link rel="stylesheet" href="./assets/styles/header.css">
 </head>
 
@@ -16,13 +16,13 @@
             <div class="header-overlay-content">
                 <a href="../../legal_notice.html" class="f3">Legal notice</a>
                 <a href="../../privacy-policy.html" class="f3">Privacy Policy</a>
-                <a href="../../index.html" class="f3">Log out</a>
+                <a onclick="logoutUser()" href="../../index.html" class="f3">Log out</a>
             </div>
         </div>
     </div>
     <header class="header">
         <span class="header-title f2">Kanban Project Management Tool</span>
-        <div class="header-icons">
+        <div id="header-icons" class="header-icons">
             <div class="icon-help">
                 <a href="../../help.html">
                     <img src="assets/icons/help.png" alt="Help icon">
