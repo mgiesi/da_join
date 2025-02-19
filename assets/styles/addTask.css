@@ -1,7 +1,5 @@
 .main-container {
     display: flex;
-    width: 100%;
-    max-height: calc(100vh - 20px);
     background-color: rgb(246, 247, 248);
     position: relative;
     padding-left: 232px;
@@ -10,7 +8,8 @@
 
 .add-task-content {
     flex: 1;
-    padding: 70px;
+    padding-top: 90px;
+    padding-left: 90px;
     max-width: 1208px;
     height: calc(100vh - 96px);
 }
@@ -36,7 +35,6 @@ h1 {
 .form-columns {
     display: flex;
     gap: 0;
-    margin-bottom: 24px;
 }
 
 .form-left-column,
