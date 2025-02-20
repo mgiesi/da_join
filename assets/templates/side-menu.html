@@ -1,50 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Side Menu</title>
-    <!-- <link rel="stylesheet" href="./assets/styles/fonts.css" /> -->
-    <link rel="stylesheet" href="./assets/styles/side-menu.css" />
-    <link rel="stylesheet" href="../styles/style.css" />
-    <link rel="stylesheet" href="./assets/styles/components.css" />
-  </head>
 
-  <body>
-    <nav class="side-menu">
-      <!-- Logo section -->
-      <div class="logo">
-        <img src="assets\icons\Logo-side-bar.png" alt="logo" />
-      </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Side Menu</title>
+  <!-- <link rel="stylesheet" href="./assets/styles/fonts.css" /> -->
+  <link rel="stylesheet" href="./assets/styles/side-menu.css" />
+  <link rel="stylesheet" href="../styles/style.css" />
+  <link rel="stylesheet" href="./assets/styles/components.css" />
+</head>
 
-      <!-- Menu items -->
-      <div id="menu-items" class="menu-items">
-        <a href="../../summary.html" class="menu-button f3 active">
-          <img src="../../assets/icons/summary.svg" alt="" />
-          <span>Summary</span>
-        </a>
+<body>
+  <nav class="side-menu">
+    <!-- Logo section -->
+    <div class="logo">
+      <img src="assets\icons\Logo-side-bar.png" alt="logo" />
+    </div>
 
-        <a href="../../add-task.html" class="menu-button f3">
-          <img src="../../assets/icons/add-task.svg" alt="" />
-          <span>Add Task</span>
-        </a>
+    <!-- Menu items -->
+    <div id="menu-items" class="menu-items">
+      <a href="../../summary.html" class="menu-button f3">
+        <img src="../../assets/icons/summary.svg" alt="" />
+        <span>Summary</span>
+      </a>
 
-        <a href="../../board.html" class="menu-button f3">
-          <img src="../../assets/icons/board.svg" alt="" />
-          <span>Board</span>
-        </a>
+      <a href="../../add-task.html" class="menu-button f3">
+        <img src="../../assets/icons/add-task.svg" alt="" />
+        <span>Add Task</span>
+      </a>
 
-        <a href="../../contacts.html" class="menu-button f3">
-          <img src="../../assets/icons/contacts.svg" alt="" />
-          <span>Contacts</span>
-        </a>
-      </div>
+      <a href="../../board.html" class="menu-button f3">
+        <img src="../../assets/icons/board.svg" alt="" />
+        <span>Board</span>
+      </a>
 
-      <!-- Footer links -->
-      <div class="footer-links">
-        <a href="../../legal_notice.html" class="f3">Legal notice</a>
-        <a href="../../privacy_policy.html" class="f3">Privacy Policy</a>
-      </div>
-    </nav>
-  </body>
+      <a href="../../contacts.html" class="menu-button f3">
+        <img src="../../assets/icons/contacts.svg" alt="" />
+        <span>Contacts</span>
+      </a>
+    </div>
+
+    <!-- Footer links -->
+    <div class="footer-links">
+      <a href="../../legal_notice.html" class="f3">Legal notice</a>
+      <a href="../../privacy_policy.html" class="f3">Privacy Policy</a>
+    </div>
+  </nav>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const currentPath = window.location.pathname;
+      const menuButtons = document.querySelectorAll('.menu-button');
+
+      menuButtons.forEach(button => {
+        // Remove any existing active class
+        button.classList.remove('active');
+
+        // Get the href path and compare with current path
+        const buttonPath = button.getAttribute('href');
+        if (currentPath.includes('add-task.html') && buttonPath.includes('add-task.html')) {
+          button.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+
 </html>

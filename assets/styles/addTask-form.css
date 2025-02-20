@@ -1,0 +1,164 @@
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 24px;
+    padding: 8px;
+    position: relative;
+}
+
+.form-group label {
+    color: rgba(0, 0, 0, 0.87);
+    font-size: 16px;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select,
+.subtask-input input {
+    padding: 12px 21px;
+    border: 1px solid rgb(209, 209, 209);
+    border-radius: 10px;
+    font-size: 20px;
+    line-height: 24px;
+    font-family: 'Inter', sans-serif;
+    background: white;
+}
+
+input:required {
+    border-color: rgb(209, 209, 209);
+}
+
+input:required:invalid {
+    border-color: rgb(209, 209, 209);
+}
+
+.form-group input.error,
+.form-group select.error {
+    border-color: #FF3D00;
+}
+
+.error-message {
+    color: #FF3D00;
+    font-size: 12px;
+    position: absolute;
+    bottom: -20px;
+    left: 8px;
+    display: none;
+    margin: 0;
+    padding: 0;
+}
+
+.error-message.visible {
+    display: block;
+}
+
+.form-group textarea {
+    height: 120px;
+    resize: none;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px;
+}
+
+.required-note {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 16px;
+}
+
+.required {
+    color: rgb(255, 128, 143) !important;
+}
+
+.span_txt {
+    font-size: 20px;
+    line-height: 24px;
+    color: black;
+}
+
+.date-input-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.date-input-wrapper input[type="text"] {
+    width: 100%;
+    padding: 12px 21px;
+    border: 1px solid rgb(209, 209, 209);
+    border-radius: 10px;
+    font-size: 20px;
+    line-height: 24px;
+    font-family: 'Inter', sans-serif;
+    background: white;
+    color: rgba(0, 0, 0, 0.87);
+    cursor: pointer;
+}
+
+.date-input-wrapper input[type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+}
+
+.date-input-wrapper input[type="date"]:invalid {
+    color: rgba(0, 0, 0, 0.38);
+}
+
+.calendar-icon {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    pointer-events: none;
+    fill: rgba(0, 0, 0, 0.54);
+}
+
+/* Form interactions */
+.form-group input:hover,
+.form-group textarea:hover,
+.form-group select:hover,
+.subtask-input .input-wrapper input:hover,
+.select-wrapper select:hover {
+    border-color: #29ABE2 !important;
+    cursor: pointer;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus,
+.subtask-input .input-wrapper input:focus,
+.select-wrapper select:focus {
+    border-color: #29ABE2 !important;
+    outline: none;
+}
+
+.form-group input:active,
+.form-group textarea:active,
+.form-group select:active,
+.subtask-input input:active,
+.form-group input.active,
+.form-group textarea.active,
+.form-group select.active,
+.subtask-input input.active {
+    border-color: #29ABE2;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select,
+.subtask-input input {
+    transition: all 0.2s ease-in-out;
+}
