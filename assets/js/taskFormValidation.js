@@ -1,0 +1,199 @@
+/**
+ * Initializes form validation by setting up validation for required fields
+ */
+function initFormValidation() {
+    const form = document.querySelector('.add-task-form');
+    const requiredFields = form.querySelectorAll('[required]');
+    form.setAttribute('novalidate', '');
+    requiredFields.forEach(field => setupFieldValidation(field));
+    form.onsubmit = e => handleFormSubmit(e);
+}
+
+/**
+ * Sets up validation for individual form fields
+ * @param {HTMLElement} field - Form field DOM element to validate
+ */
+function setupFieldValidation(field) {
+    if (!field.parentNode.querySelector('.error-message')) {
+        const errorMessage = document.createElement('div');
+        errorMessage.className = 'error-message';
+        errorMessage.textContent = 'This field is required';
+        field.parentNode.appendChild(errorMessage);
+    }
+    field.oninput = () => validateFieldInput(field);
+}
+
+/**
+ * Validates input on field change and manages error states
+ * @param {HTMLElement} field - Form field DOM element being validated
+ */
+function validateFieldInput(field) {
+    if (field.value.trim()) {
+        field.style.borderColor = '';
+        const errorMessage = field.parentNode.querySelector('.error-message');
+        if (errorMessage) {
+            errorMessage.style.display = 'none';
+        }
+    }
+}
+
+/**
+ * Handles form submission event
+ * @param {Event} e - Form submission event
+ */
+function handleFormSubmit(e) {
+    e.preventDefault();
+    validateAndSubmitForm(e);
+}
+
+/**
+ * Validates form data and submits if valid
+ * @param {Event} event - Form submission event
+ * @returns {boolean} False to prevent default form submission
+ */
+async function validateAndSubmitForm(event) {
+    event.preventDefault();
+    const form = event.target;
+    const requiredFields = form.querySelectorAll('[required]');
+    let isValid = validateRequiredFields(requiredFields);
+    if (!isValid) return false;
+    const taskData = gatherTaskData();
+    try {
+        await createTask(taskData);
+        showNotification();
+        resetForm();
+        selectedContacts.clear();
+        updateSelectedContactsDisplay();
+        return false;
+    } catch (error) {
+        console.error('Error creating task:', error);
+        return false;
+    }
+}
+
+/**
+ * Validates all required fields in the form
+ * @param {NodeList} requiredFields - NodeList of required form fields
+ * @returns {boolean} True if all fields are valid, false otherwise
+ */
+function validateRequiredFields(requiredFields) {
+    let isValid = true;
+    requiredFields.forEach(field => {
+        if (!field.value.trim()) {
+            isValid = false;
+            field.style.borderColor = 'red';
+            const errorMessage = field.parentNode.querySelector('.error-message');
+            if (errorMessage) {
+                errorMessage.style.display = 'block';
+            }
+        }
+    });
+    return isValid;
+}
+
+/**
+ * Collects all task data from the form
+ * @returns {Object} Object containing task data
+ */
+function gatherTaskData() {
+    const title = document.getElementById('title').value;
+    const description = document.getElementById('description').value;
+    const dueDate = document.getElementById('dueDate').value;
+    const category = document.getElementById('category').value;
+    const priority = getSelectedPriority();
+    const assignedTo = getAssignedContacts();
+    const subtasks = getSubtasks();
+    const formattedDate = formatDueDate(dueDate);
+    return {
+        title,
+        description,
+        assignedTo,
+        dueDate: formattedDate,
+        prio: priority,
+        category: category === 'work' ? 'task' : 'userstory',
+        subtasks
+    };
+}
+
+/**
+ * Gets the currently selected priority
+ * @returns {string} Selected priority level
+ */
+function getSelectedPriority() {
+    const selectedPrioBtn = document.querySelector('.priority-btn.selected');
+    return selectedPrioBtn ? selectedPrioBtn.getAttribute('data-priority') : 'medium';
+}
+
+/**
+ * Formats date string to required format
+ * @param {string} dueDate - Date string in DD/MM/YYYY format
+ * @returns {string} Date string in YYYY-MM-DD format
+ */
+function formatDueDate(dueDate) {
+    const [day, month, year] = dueDate.split('/');
+    return `${year}-${month}-${day}`;
+}
+
+/**
+ * Resets the entire form to its initial state
+ */
+function resetForm() {
+    const form = document.querySelector('.add-task-form');
+    resetInputs(form);
+    resetSelects(form);
+    resetPriorityButtons();
+    clearSubtasks();
+    clearSubtaskInput();
+    selectedContacts = [];
+    updateSelectedDisplay();
+    updateSelectedAvatars();
+    clearSelectedAvatars();
+}
+
+/**
+ * Resets all input fields in the form
+ * @param {HTMLElement} form - Form DOM element
+ */
+function resetInputs(form) {
+    const inputs = form.querySelectorAll('input, textarea');
+    inputs.forEach(input => {
+        input.value = '';
+        input.style.borderColor = '';
+        const errorMessage = input.parentNode.querySelector('.error-message');
+        if (errorMessage) {
+            errorMessage.style.display = 'none';
+        }
+    });
+}
+
+/**
+ * Resets all select elements in the form
+ * @param {HTMLElement} form - Form DOM element
+ */
+function resetSelects(form) {
+    const selects = form.querySelectorAll('select');
+    selects.forEach(select => {
+        select.value = '';
+        select.style.borderColor = '';
+    });
+}
+
+/**
+ * Clears all subtasks from the subtasks list
+ */
+function clearSubtasks() {
+    const subtasksContainer = document.querySelector('.subtasks-list');
+    if (subtasksContainer) {
+        subtasksContainer.innerHTML = '';
+    }
+}
+
+/**
+ * Clears the subtask input field
+ */
+function clearSubtaskInput() {
+    const subtaskInput = document.getElementById('subtaskInput');
+    if (subtaskInput) {
+        subtaskInput.value = '';
+    }
+}
