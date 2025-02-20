@@ -1,6 +1,8 @@
 @media (max-width: 1200px) {
   header {
     width: 100%;
+    position: sticky !important;
+    height: 80px !important;
   }
   .side-menu {
     display: none !important;
@@ -13,7 +15,40 @@
   }
   .main-container {
     margin-left: 0;
-    margin-top: 92px;
+    margin-top: 0;
     height: calc(100vh - 96px);
+  }
+  .contact-info {
+    display: none;
+  }
+  .contact-list {
+    width: 100%;
+  }
+  .respIcon {
+    display: flex !important;
+    width: 40px;
+    height: 40px;
+  }
+  .add-contact-btn {
+    display: none;
+  }
+  .respMenu {
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    bottom: 0;
+    width: 428px;
+    height: 80;
+  }
+
+  .respAddIcon {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    bottom: 100px;
+    width: 56px;
+    height: 56px;
+    margin-left: 300px;
   }
 }

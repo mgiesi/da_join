@@ -584,3 +584,11 @@ input[type="text"]:focus {
     opacity: 1;
   }
 }
+
+.respMenu {
+  display: none;
+}
+
+.respAddIcon {
+  display: none;
+}

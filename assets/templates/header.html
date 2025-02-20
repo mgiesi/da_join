@@ -1,41 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Header</title>
     <!-- <link rel="stylesheet" href="./assets/styles/fonts.css">
     <link rel="stylesheet" href="./assets/styles/components.css"> -->
-    <link rel="stylesheet" href="./assets/styles/header.css">
-</head>
+    <link rel="stylesheet" href="./assets/styles/header.css" />
+  </head>
 
-<body>
+  <body>
     <div>
-        <div id="header-submenu" class="header-overlay dNone">
-            <div class="header-overlay-content">
-                <a href="../../legal_notice.html" class="f3">Legal notice</a>
-                <a href="../../privacy-policy.html" class="f3">Privacy Policy</a>
-                <a onclick="logoutUser()" href="../../index.html" class="f3">Log out</a>
-            </div>
+      <div id="header-submenu" class="header-overlay dNone">
+        <div class="header-overlay-content">
+          <a href="../../legal_notice.html" class="f3">Legal notice</a>
+          <a href="../../privacy-policy.html" class="f3">Privacy Policy</a>
+          <a onclick="logoutUser()" href="../../index.html" class="f3"
+            >Log out</a
+          >
         </div>
+      </div>
     </div>
     <header class="header">
-        <span class="header-title f2">Kanban Project Management Tool</span>
-        <div id="header-icons" class="header-icons">
-            <div class="icon-help">
-                <a href="../../help.html">
-                    <img src="assets/icons/help.png" alt="Help icon">
-                </a>
-            </div>
-            <div onclick="showSubmenu()" class="user-profile">
-                <div class="user-profile-border"></div>
-                <div class="user-profile-initials">
-                    <span id="user-profile-name" class="f9">SM</span>
-                </div>
-            </div>
+      <img
+        class="respIcon"
+        src="./assets/templates/respIcons/Capa 1.svg"
+        alt=""
+      />
+      <span class="header-title f2">Kanban Project Management Tool</span>
+      <div id="header-icons" class="header-icons">
+        <div class="icon-help">
+          <a href="../../help.html">
+            <img src="assets/icons/help.png" alt="Help icon" />
+          </a>
         </div>
+        <div onclick="showSubmenu()" class="user-profile">
+          <div class="user-profile-border"></div>
+          <div class="user-profile-initials">
+            <span id="user-profile-name" class="f9">SM</span>
+          </div>
+        </div>
+      </div>
     </header>
-</body>
-
+  </body>
 </html>
