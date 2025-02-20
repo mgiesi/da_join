@@ -1,0 +1,19 @@
+@media (max-width: 1200px) {
+  header {
+    width: 100%;
+  }
+  .side-menu {
+    display: none !important;
+  }
+  .header-title {
+    display: none;
+  }
+  .icon-help {
+    display: none !important;
+  }
+  .main-container {
+    margin-left: 0;
+    margin-top: 92px;
+    height: calc(100vh - 96px);
+  }
+}
