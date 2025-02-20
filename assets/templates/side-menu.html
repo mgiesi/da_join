@@ -47,24 +47,6 @@
       <a href="../../privacy_policy.html" class="f3">Privacy Policy</a>
     </div>
   </nav>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const currentPath = window.location.pathname;
-      const menuButtons = document.querySelectorAll('.menu-button');
-
-      menuButtons.forEach(button => {
-        // Remove any existing active class
-        button.classList.remove('active');
-
-        // Get the href path and compare with current path
-        const buttonPath = button.getAttribute('href');
-        if (currentPath.includes('add-task.html') && buttonPath.includes('add-task.html')) {
-          button.classList.add('active');
-        }
-      });
-    });
-  </script>
 </body>
 
 </html>
