@@ -592,3 +592,7 @@ input[type="text"]:focus {
 .respAddIcon {
   display: none;
 }
+
+.respArrow {
+  display: none;
+}
