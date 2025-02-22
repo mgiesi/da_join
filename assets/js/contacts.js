@@ -13,6 +13,7 @@ function toggleEditOverlay(key, name, email, phone) {
 function initPlus() {
   init();
   loadContactsFromFirebase();
+  addDNoneToResp();
 }
 
 async function addNewContactToFirebase() {
@@ -257,4 +258,18 @@ function showAddMessage() {
 function addDNoneToResp() {
   let info = document.getElementById("contact-info");
   if (window.innerWidth <= 1200) info.classList.add("dNone");
+}
+
+function toggleDropdown() {
+  let dropdown = document.getElementById("dropdownMenu");
+
+  if (window.innerWidth < 1200) {
+    dropdown.classList.toggle("show");
+  }
+}
+
+function scrollToTop() {
+  if (window.innerWidth < 1200) {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
 }

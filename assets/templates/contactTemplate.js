@@ -49,12 +49,15 @@ function displayContactDetails(key, name, email, phone, avatarColor) {
           </div>
         </div>
       </div>
-      <img class="exportMenu" src="./assets/icons/Menu Contact options.svg" alt="">
+      <img onclick="toggleDropdown()" class="exportMenu" src="./assets/icons/Menu Contact options.svg" alt="">
+      <div id="dropdownMenu" class="dropdown-overlay-content "><a onclick="toggleEditOverlay('${key}','${name}', '${email}', '${phone}')">Edit</a>
+      <a onclick="deleteContactToFirebase('${key}')">Delete</a></div>
     `;
 
   contactInfoContainer.innerHTML = detailsHTML;
   let info = document.getElementById("contact-info");
   if (window.innerWidth <= 1200) info.classList.remove("dNone");
+  scrollToTop();
 }
 
 function getOverlay() {
@@ -129,6 +132,7 @@ function getEditOverlay(key, name, email, phone) {
   return `
           <div class="overlay">
             <div class="overlay-left">
+            <div onclick="toggleEditOverlay()" class="respClose-Btn">×</div>
               <div class="logo1">
                 <img
                   class="logoInnerOverlay"

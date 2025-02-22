@@ -603,4 +603,42 @@ input[type="text"]:focus {
 
 .exportMenu {
   display: none;
+  cursor: pointer;
+}
+
+.dropdown-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 101;
+}
+
+.dropdown-overlay-content {
+  position: absolute;
+  top: 800px;
+  right: 200px;
+  display: none;
+  flex-direction: column;
+  background-color: #2a3647;
+  padding: 10px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 0;
+}
+
+.dropdown-overlay-content a {
+  color: white;
+  padding: 10px;
+  text-decoration: none;
+  display: block;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.dropdown-overlay-content a:hover {
+  background-color: #1e2a3a;
 }
