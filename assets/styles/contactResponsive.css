@@ -238,23 +238,6 @@
   }
 }
 
-@media (max-width: 617px) {
-  .overlay {
-    position: absolute;
-    top: 100px;
-    left: 100px;
-    display: flex;
-    flex-direction: column;
-    width: 396px;
-    height: 760px;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    border-radius: 30px;
-  }
-}
-
 @media (max-width: 768px) {
   .overlay {
     position: absolute;
@@ -347,6 +330,38 @@
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     border-radius: 30px;
+  }
+
+  .contact-info {
+    position: absolute;
+    top: 100px;
+    background: white;
+    width: 100%;
+    height: calc(90vh - 80px);
+    padding-left: 0;
+    padding: 16px;
+    padding-bottom: 0;
+  }
+
+  .contact-info-header h1 {
+    font-size: 24px;
+  }
+
+  .respArrow {
+    display: flex !important
+;
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    margin-left: 300px;
+  }
+  .contact-info-header {
+    margin-bottom: 12px;
+  }
+  .exportMenu {
+    display: flex;
+    margin-top: 260px;
+    margin-left: 330px;
   }
 }
 
