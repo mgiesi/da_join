@@ -42,7 +42,7 @@
 .select-wrapper {
     position: relative;
     width: 100%;
-    z-index: 1000;
+    z-index: 2;
 }
 
 .select-wrapper::after {
@@ -245,6 +245,7 @@
     margin-top: -7px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 6px 0;
+    z-index: 1;
 }
 
 .contact-item {
@@ -387,4 +388,41 @@ svg:hover {
 .plus-icon:hover {
     transform: scale(1.1);
     cursor: pointer;
+}
+
+@media (max-width: 1081px) {
+    .form-group {
+        margin-bottom: 16px;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select,
+    .subtask-input input {
+        font-size: 16px;
+        line-height: 20px;
+        padding: 10px 16px;
+    }
+
+    .priority-buttons {
+        gap: 8px;
+    }
+
+    .priority-btn {
+        padding: 12px 8px;
+        font-size: 16px;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        padding: 12px 16px;
+        font-size: 16px;
+        line-height: 20px;
+    }
+
+    .task-added-notification {
+        bottom: 100px;
+        right: 16px;
+        left: 16px;
+    }
 }

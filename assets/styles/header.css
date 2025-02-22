@@ -17,6 +17,7 @@
   margin-left: 76px;
   color: #000000;
 }
+
 .respIcon {
   display: none;
 }
@@ -109,4 +110,23 @@
 .header-overlay-content a {
   color: #ffffff;
   padding: 16px;
+}
+
+@media (max-width: 1081px) {
+  .header {
+    left: 0;
+    padding: 0 16px;
+    height: 80px;
+  }
+
+  .header-title {
+    margin-left: 0;
+    font-size: 16px;
+  }
+
+  .respIcon {
+    display: block;
+    width: 24px;
+    height: 24px;
+  }
 }
