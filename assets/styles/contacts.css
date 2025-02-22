@@ -596,3 +596,11 @@ input[type="text"]:focus {
 .respArrow {
   display: none;
 }
+
+.respClose-Btn {
+  display: none;
+}
+
+.exportMenu {
+  display: none;
+}

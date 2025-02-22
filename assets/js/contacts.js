@@ -253,3 +253,8 @@ function showAddMessage() {
     document.getElementById("overlayContactSuccess").classList.add("dNone");
   }, 2000);
 }
+
+function addDNoneToResp() {
+  let info = document.getElementById("contact-info");
+  if (window.innerWidth <= 1200) info.classList.add("dNone");
+}

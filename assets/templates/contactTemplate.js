@@ -5,9 +5,12 @@ function displayContactDetails(key, name, email, phone, avatarColor) {
 
   const detailsHTML = `
       <div class="contact-info-header">
-        <h1>Contacts</h1>
-        <div class="header-divider"></div>
-        <span class="header-subtitle">Better with a team</span>
+          <h1>Contacts</h1>
+          <div class="header-divider"></div>
+          <span class="header-subtitle">Better with a team</span>
+          
+        </div>
+        <img onclick="addDNoneToResp()" class="respArrow" src="./assets/icons/arrow-left-line.svg" alt="">
       </div>
       <div class="contact-details">
         <div class="profile-section">
@@ -46,15 +49,19 @@ function displayContactDetails(key, name, email, phone, avatarColor) {
           </div>
         </div>
       </div>
+      <img class="exportMenu" src="./assets/icons/Menu Contact options.svg" alt="">
     `;
 
   contactInfoContainer.innerHTML = detailsHTML;
+  let info = document.getElementById("contact-info");
+  if (window.innerWidth <= 1200) info.classList.remove("dNone");
 }
 
 function getOverlay() {
   return `
           <div class="overlay">
             <div class="overlay-left">
+            <div onclick="toggleOverlay()" class="respClose-Btn">×</div>
               <div class="logo1">
                 <img
                   class="logoInnerOverlay"

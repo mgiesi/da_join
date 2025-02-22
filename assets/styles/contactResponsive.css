@@ -19,7 +19,13 @@
     height: calc(100vh - 96px);
   }
   .contact-info {
-    display: none;
+    position: absolute;
+    top: 100px;
+    background: white;
+    width: 100%;
+    height: calc(90vh - 80px);
+    padding-left: 100px;
+    padding-bottom: 0;
   }
   .contact-list {
     width: 100%;
@@ -51,21 +57,23 @@
     height: 56px;
     margin-left: 300px;
   }
-  .contact-info {
-    display: flex;
-    flex-direction: column;
-    height: 80vh !important;
-    order: 1;
+
+  .contact.info {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 400px;
+    background: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    padding: 20px;
+    border-radius: 10px;
   }
-  .contact-info {
-    flex: 0;
-    padding: 0;
-    height: 100%;
-    background-color: white;
-    width: 100%;
-  }
+
   .contact-info-header h1 {
-    font-size: 32px;
+    font-size: 44px;
   }
   .header-divider {
     display: none;
@@ -75,6 +83,8 @@
   }
   .contact-info-header {
     justify-content: space-around;
+
+    flex-direction: column;
     gap: 0;
     padding-left: 24px;
     display: flex;
@@ -97,8 +107,340 @@
   }
   .respArrow {
     display: flex !important;
+    cursor: pointer;
     width: 32px;
     height: 32px;
+    margin-left: 400px;
+  }
+  .exportMenu {
+    display: flex;
+    margin-top: 370px;
+    margin-left: 360px;
+  }
+  .overlay {
+    position: absolute;
+    top: 100px;
+    left: 370px;
+    display: flex;
+    flex-direction: column;
+    width: 396px;
+    height: 760px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    border-radius: 30px;
+  }
+  .overlay-left {
+    padding: 24px;
+    height: 380px;
+    display: flex;
+    justify-content: start;
+  }
+  .overlay-left .logo1 {
+    display: none;
+  }
+  .f1 {
+    font-size: 44px;
+  }
+  .f4 {
+    font-size: 20px;
+  }
+  .close-btn {
+    display: none;
+  }
+  .respClose-Btn {
+    display: flex;
+    font-size: 32px;
+    margin-left: 300px;
     cursor: pointer;
+    margin-bottom: 100px;
+  }
+  .form-container img {
+    display: none;
+  }
+  .form-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 0;
+  }
+  .form-group {
+    position: relative;
+    width: 330px;
+    margin-bottom: 16px;
+  }
+  .cancel-btn {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .overlay {
+    position: absolute;
+    top: 100px;
+    left: 200px;
+    display: flex;
+    flex-direction: column;
+    width: 396px;
+    height: 760px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    border-radius: 30px;
+  }
+  .overlay-left {
+    padding: 24px;
+    height: 380px;
+    display: flex;
+    justify-content: start;
+  }
+  .overlay-left .logo1 {
+    display: none;
+  }
+  .f1 {
+    font-size: 44px;
+  }
+  .f4 {
+    font-size: 20px;
+  }
+  .close-btn {
+    display: none;
+  }
+  .respClose-Btn {
+    display: flex;
+    font-size: 32px;
+    margin-left: 300px;
+    cursor: pointer;
+    margin-bottom: 100px;
+  }
+  .form-container img {
+    display: none;
+  }
+  .form-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 0;
+  }
+  .form-group {
+    position: relative;
+    width: 330px;
+    margin-bottom: 16px;
+  }
+  .cancel-btn {
+    display: none;
+  }
+}
+
+@media (max-width: 617px) {
+  .overlay {
+    position: absolute;
+    top: 100px;
+    left: 100px;
+    display: flex;
+    flex-direction: column;
+    width: 396px;
+    height: 760px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    border-radius: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .overlay {
+    position: absolute;
+    top: 100px;
+    left: 200px;
+    display: flex;
+    flex-direction: column;
+    width: 396px;
+    height: 760px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    border-radius: 30px;
+  }
+  .overlay-left {
+    padding: 24px;
+    height: 380px;
+    display: flex;
+    justify-content: start;
+  }
+  .overlay-left .logo1 {
+    display: none;
+  }
+  .f1 {
+    font-size: 44px;
+  }
+  .f4 {
+    font-size: 20px;
+  }
+  .close-btn {
+    display: none;
+  }
+  .respClose-Btn {
+    display: flex;
+    font-size: 32px;
+    margin-left: 300px;
+    cursor: pointer;
+    margin-bottom: 100px;
+  }
+  .form-container img {
+    display: none;
+  }
+  .form-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 0;
+  }
+  .form-group {
+    position: relative;
+    width: 330px;
+    margin-bottom: 16px;
+  }
+  .cancel-btn {
+    display: none;
+  }
+}
+
+@media (max-width: 617px) {
+  .overlay {
+    position: absolute;
+    top: 100px;
+    left: 100px;
+    display: flex;
+    flex-direction: column;
+    width: 396px;
+    height: 760px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    border-radius: 30px;
+  }
+}
+
+@media (max-width: 430px) {
+  .overlay {
+    position: absolute;
+    top: 50px;
+    left: 24px;
+    display: flex;
+    flex-direction: column;
+    width: 396px;
+    height: 760px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    border-radius: 30px;
+  }
+}
+
+@media (max-width: 414px) {
+  .overlay {
+    position: absolute;
+    top: 50px;
+    left: 12px;
+    display: flex;
+    flex-direction: column;
+    width: 396px;
+    height: 760px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    border-radius: 30px;
+  }
+}
+
+@media (max-width: 390px) {
+  .overlay {
+    position: absolute;
+    top: 50px;
+    left: 12px;
+    display: flex;
+    flex-direction: column;
+    width: 360px;
+    height: 760px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    border-radius: 30px;
+  }
+}
+
+@media (max-width: 375px) {
+  .overlay {
+    position: absolute;
+    top: 10px;
+    left: 12px;
+    display: flex;
+    flex-direction: column;
+    width: 330px;
+    height: 600px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    border-radius: 30px;
+  }
+  .overlay-left {
+    padding: 12px;
+    height: 380px;
+    display: flex;
+    justify-content: start;
+  }
+  .overlay-left .logo1 {
+    display: none;
+  }
+  .f1 {
+    font-size: 44px;
+  }
+  .f4 {
+    font-size: 20px;
+  }
+  .close-btn {
+    display: none;
+  }
+  .respClose-Btn {
+    display: flex;
+    font-size: 32px;
+    margin-left: 280px;
+    cursor: pointer;
+    margin-bottom: 50px;
+  }
+  .form-container img {
+    display: none;
+  }
+  .form-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 0;
+  }
+  .form-group {
+    position: relative;
+    width: 280px;
+    margin-bottom: 16px;
+  }
+  .cancel-btn {
+    display: none;
   }
 }
