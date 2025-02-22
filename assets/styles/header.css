@@ -120,8 +120,7 @@
   }
 
   .header-title {
-    margin-left: 0;
-    font-size: 16px;
+    display: none;
   }
 
   .respIcon {
