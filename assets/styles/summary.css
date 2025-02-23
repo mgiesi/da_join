@@ -20,6 +20,7 @@
     justify-content: center;
     align-items: start;
     gap: 28px;
+    width: 560px;
 }
 
 .summary-box {
@@ -27,9 +28,14 @@
     justify-content: center;
     align-items: center;
     gap: 18px;
-    margin-right: 32px;
     transition: all 0.2s ease;
     cursor: pointer;
+    height: 168px;
+    width: 100%;
+}
+
+.summary-box-row a {
+    flex: 1;
 }
 
 .summary-box:hover {
@@ -58,19 +64,9 @@
     transform: scale(1.02);
 }
 
-.summary-box-1 {
-    width: 264px;
-    height: 168px;
-}
-
-.summary-box-2 {
-    width: 560px;
-    height: 168px;
-}
-
-.summary-box-3 {
-    width: 168px;
-    height: 168px;
+.summary-box-row {
+    width: 100%;
+    gap: 32px;
 }
 
 .summary-box-icon {
@@ -138,7 +134,7 @@
 
 .summary-greeting-overlay {
     position: fixed;
-    display: none;
+    display: flex;
     left: 0;
     right: 0;
     top: 0;

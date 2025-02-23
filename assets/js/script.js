@@ -50,6 +50,7 @@ function goToStart() {
 
 function logoutUser() {
   localStorage.removeItem("activeUser");
+  localStorage.removeItem("greetingShown");
 }
 
 async function getActiveUserName() {

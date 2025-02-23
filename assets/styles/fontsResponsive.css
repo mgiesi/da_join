@@ -70,3 +70,76 @@
         font-weight: 700;
       }      
 }
+
+@media (max-width: 1080px) {
+  .f1 {
+      font-size: 53px;
+      font-weight: 700;
+    }
+    
+    .f2 {
+      font-size: 14px;
+      font-weight: 400;
+    }
+    
+    .f3 {
+      font-family: "Inter", serif !important;
+      font-size: 14px;
+      font-weight: 400;
+    }
+    
+    .f4 {
+      font-size: 24px;
+      font-weight: 400;
+    }
+    
+    .f5 {
+      font-size: 47px;
+      font-weight: 600;
+    }
+    
+    .f6 {
+      font-size: 16px;
+      font-weight: 700;
+    }
+    
+    .f7 {
+      font-size: 41px;
+      font-weight: 500;
+    }
+    
+    .f8 {
+      font-size: 56px;
+      font-weight: 700;
+    }
+    
+    .f9 {
+      font-size: 14px;
+      font-weight: 700;
+    }
+    
+    .f10 {
+      font-size: 18px;
+      font-weight: 700;
+    }
+    
+    .f11 {
+      font-size: 11px;
+      font-weight: 400;
+    }
+    
+    .f12 {
+      font-size: 20px;
+      font-weight: 400;
+    }
+    
+    .f13 {
+      font-size: 17px;
+      font-weight: 400;
+    }
+    
+    .f14 {
+      font-size: 24px;
+      font-weight: 700;
+    }      
+}

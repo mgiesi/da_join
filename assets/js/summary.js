@@ -8,6 +8,17 @@ async function refreshGreeting() {
   const username = await getUserName();
   refreshGreetingText(username);
   refreshGreetingName(username);
+  setGreetingAnimation();
+}
+
+function setGreetingAnimation() {
+  const greetingShown = localStorage.getItem("greetingShown");
+  if (greetingShown || window.innerWidth >= 1080) {
+    const greetingOverlayRef = document.getElementById("summary-greeting-overlay");
+    greetingOverlayRef.style.display = "none";
+  }
+
+  localStorage.setItem("greetingShown", true);
 }
 
 function refreshGreetingText(username) {
