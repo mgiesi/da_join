@@ -311,40 +311,6 @@
   transition: background-color 0.2s;
 }
 
-.checkBtn {
-  position: sticky;
-  bottom: 0;
-  padding: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  width: 90px;
-  height: 48px;
-  padding: 12px 16px;
-  background: #2a3647;
-  border: none;
-  border-radius: 10px;
-  color: white;
-  font-family: "Inter", sans-serif;
-  font-weight: 700;
-  font-size: 21px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-  margin-left: 340px;
-}
-
-.checkBtn:hover {
-  background: #29abe2;
-}
-
-.addTaskBtn:hover {
-  background: #29abe2;
-}
-
-.board-contents {
-  margin-right: 64px;
-}
 
 .form-groupEdit {
   display: flex;
@@ -408,14 +374,55 @@ input:required:invalid {
   resize: none;
 }
 
+.checkBtn {
+  position: sticky;
+  bottom: 0;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 90px;
+  height: 48px;
+  padding: 12px 16px;
+  background: #2a3647;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  font-size: 21px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-left: 340px;
+}
+
+.checkBtn:hover {
+  background: #29abe2;
+}
+
+.addTaskBtn:hover {
+  background: #29abe2;
+}
+
+.board-contents {
+  max-width: 1200px;
+  gap: 24px;
+}
+
 .board-container {
-  width: 252px;
   height: 24px;
-  margin-right: 24px;
+  flex: 1;
+}
+
+.board-container-tasks {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .board-container-titlebox {
-  width: 244px;
+  
 }
 
 .board-container-titlebox-title {
@@ -430,6 +437,7 @@ input:required:invalid {
   height: 24px;
   text-align: center;
   font-weight: bolder;
+  transition: all 0.3s ease-in-out;
 }
 
 .board-container-titlebox-addtask:hover {
@@ -452,7 +460,6 @@ input:required:invalid {
   border-radius: 24px;
   padding: 16px;
   cursor: pointer;
-  margin-bottom: 16px;
 }
 
 .board-task-type {

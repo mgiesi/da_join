@@ -11,9 +11,8 @@
     <link rel="stylesheet" href="./assets/styles/style.css">
     <link rel="stylesheet" href="./assets/styles/components.css">
     <link rel="stylesheet" href="./assets/styles/layout.css">
-
-
     <link rel="stylesheet" href="./assets/styles/board.css">
+    <link rel="stylesheet" href="./assets/styles/boardResponsive.css">
     <link rel="stylesheet" href="./assets/styles/addTaskForBoard.css">
 
     <script src="./assets/js/script.js"></script>
@@ -49,61 +48,14 @@
                             class="search-icon">
 
                     </div>
-                    <div><button onclick="toggleAddTaskOverlay()" class="addTaskBtn f6">Add task <img
-                                src="./assets/icons/add.svg" class="boardIconAdd" alt=""></button></div>
+                    <div>
+                        <button onclick="toggleAddTaskOverlay()" class="addTaskBtn f6">Add task <img
+                                src="./assets/icons/add.svg" class="boardIconAdd" alt=""></button>
+                    </div>
                 </div>
             </div>
             <div id="boards-container" class="board-contents d-flex justify-content-start">
-                <div class="board-container">
-                    <div class="board-container-titlebox d-flex justify-content-between">
-                        <span class="board-container-titlebox-title f10">To do</span>
-                        <div class="board-container-titlebox-addtask d-flex justify-content-center align-items-center">+
-                        </div>
-                    </div>
-                    <div class="board-container-tasks">
-                        <div class="board-tasks-notasks d-flex justify-content-center align-items-center f3">
-                            No tasks To do
-                        </div>
-                    </div>
-                </div>
-
-                <div class="board-container">
-                    <div class="board-container-titlebox d-flex justify-content-between">
-                        <span class="board-container-titlebox-title f10">In progress</span>
-                        <div class="board-container-titlebox-addtask d-flex justify-content-center align-items-center">+
-                        </div>
-                    </div>
-                    <div class="board-container-tasks">
-                        <div class="board-task-container">
-                            <div class="d-flex mb-24">
-                                <div class="board-task-type task-type-userstory f3">User Story</div>
-                            </div>
-                            <div class="mb-24">
-                                <div class="mb-8">
-                                    <span class="f9">Kochwelt Page & Recipe Recommender</span>
-                                </div>
-                                <p class="board-task-descr f3">
-                                    Build start page with recipe recommendation and
-                                    some other text.
-                                </p>
-                            </div>
-                            <div class="board-task-subtasks mb-24 d-flex align-items-center">
-                                <div class="board-subtasks-bar">
-                                    <div class="board-subtasks-bar-value"></div>
-                                </div>
-                                <span id="class=" f11">1/2 Subtasks</span>
-                            </div>
-                            <div class="board-task-footer d-flex justify-content-between">
-                                <div class="board-task-contacts">
-                                    <div class="task-contact f11">DE</div>
-                                    <div class="task-contact f11">BZ</div>
-                                    <div class="task-contact f11">AS</div>
-                                </div>
-                                <img class="board-task-category" src="./assets/icons/prio-urgent.svg" alt="">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
 
             </div>
         </div>

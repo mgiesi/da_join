@@ -4,7 +4,7 @@ function displayBoardContainer(board) {
         : "";
     return `
         <div class="board-container" ondrop="moveTaskTo('${board.id}')" ondragover="allowDrop(event)">
-            <div class="board-container-titlebox d-flex justify-content-between">
+            <div class="board-container-titlebox d-flex justify-content-between align-items-center">
                 <span class="board-container-titlebox-title f10">${board.name}</span>
                 ${addTaskContent}
             </div>

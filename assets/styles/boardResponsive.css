@@ -1,0 +1,57 @@
+@media (max-width: 1500px) {
+    .board-contents {
+        flex-direction: column;
+        
+    }
+
+    .board-content {
+        margin-left: 72px;
+        margin-right: 72px;
+    }
+
+    .board-container {
+        height: 32px;
+        margin-right: 0px;
+    }
+
+    .board-container-titlebox-title {
+        margin-bottom: 16px;
+        font-size: 27px;
+    }
+
+    .board-container-titlebox-addtask {
+        width: 30px;
+        height: 30px;
+    }
+
+    .board-container-tasks {
+        display: flex;
+        flex-direction: row;
+        overflow-x: hidden;
+    }
+
+    .board-container-tasks > * {
+        flex-shrink: 0;
+    }
+
+    .board-task-container {
+        width: 252px;
+    }
+}
+
+@media (max-width: 1080px) {
+    .main-container {
+        margin-left: 0;
+        margin-top: 0;
+        height: calc(100vh - 96px);
+    }
+
+    .board-contents {
+    }
+
+    .board-content {
+        margin-left: 16px;
+        margin-right: 16px;
+        margin-top: 96px;
+    }
+}
