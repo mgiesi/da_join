@@ -1,7 +1,6 @@
 @media (max-width: 1500px) {
     .board-contents {
         flex-direction: column;
-        
     }
 
     .board-content {
@@ -39,6 +38,29 @@
     }
 }
 
+@media (max-width: 1300px) {
+    #board-task-add-1 {
+        display: none;
+    }
+
+    #board-task-add-2 {
+        display: flex;
+    }
+
+    .board-title {
+        margin-right: 0;
+        margin-bottom: 40px;
+    }
+
+    .board-title-search {
+        display: none;
+    }
+
+    .board-title-search2 {
+        display: flex;
+    }
+}
+
 @media (max-width: 1080px) {
     .main-container {
         margin-left: 0;
@@ -46,12 +68,9 @@
         height: calc(100vh - 96px);
     }
 
-    .board-contents {
-    }
-
     .board-content {
         margin-left: 16px;
         margin-right: 16px;
-        margin-top: 96px;
+        margin-top: 32px;
     }
 }

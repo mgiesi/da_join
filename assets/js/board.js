@@ -11,26 +11,38 @@ async function initBoard() {
 function initSearchFilter() {
   const filterInputRef = document.getElementById("board-filter-text");
   filterInputRef.addEventListener("input", updateFilterIcon);
+  const filterInput2Ref = document.getElementById("board-filter-text2");
+  filterInput2Ref.addEventListener("input", updateFilterIcon);
 }
 
 function updateFilterIcon() {
   const filterInputRef = document.getElementById("board-filter-text");
-  const filterInputIconRef = document.getElementById("board-filter-text-icon");
+  const filterInputIconRef = document.getElementById("board-filter-text-icon");  
+  const filterInput2Ref = document.getElementById("board-filter-text2");
+  const filterInputIcon2Ref = document.getElementById("board-filter-text-icon2");
   filterInputIconRef.src = filterInputRef.value
+    ? "./assets/icons/cancel.svg"
+    : "./assets/icons/search.svg";
+  filterInputIcon2Ref.src = filterInput2Ref.value
     ? "./assets/icons/cancel.svg"
     : "./assets/icons/search.svg";
 }
 
-function updateFilter() {
+function updateFilter(event) {
   const filterInputRef = document.getElementById("board-filter-text");
-  filterText = filterInputRef.value;
+  const filterInput2Ref = document.getElementById("board-filter-text2");
+  filterText = event.target.value;
+  filterInputRef.value = filterText;
+  filterInput2Ref.value = filterText;
   updateFilterIcon();
   renderTasks();
 }
 
 function resetFilter() {
   const filterInputRef = document.getElementById("board-filter-text");
+  const filterInput2Ref = document.getElementById("board-filter-text2");
   filterInputRef.value = "";
+  filterInput2Ref.value = "";
   filterText = "";
   updateFilterIcon();
   renderTasks();
