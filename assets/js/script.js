@@ -31,15 +31,14 @@ async function initUser() {
   const iconRef = document.getElementById("header-icons");
   const menuItemsRef = document.getElementById("menu-items");
   const backRef = document.getElementById("back_not_loggedin");
-  if (!userName) {
-    iconRef.classList.add("dNone");
-    menuItemsRef.classList.add("dNone");
-    backRef.classList.remove("dNone");
-  } else {
-    iconRef.classList.remove("dNone");
-    menuItemsRef.classList.remove("dNone");
+
+  const hideElements = !userName;
+  iconRef?.classList.toggle("dNone", hideElements);
+  menuItemsRef?.classList.toggle("dNone", hideElements);
+  backRef?.classList.toggle("dNone", Boolean(userName));
+
+  if (userName) {
     textRef.innerHTML = getInitials(userName);
-    backRef.classList.add("dNone");
   }
 }
 
