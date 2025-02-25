@@ -53,21 +53,23 @@ h1 {
 
 .footer-add-task-html {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     padding-inline: 8px;
 }
 
 @media (max-width: 1081px) {
     .main-container {
         padding-left: 0;
-        padding-top: 96px;
+        padding-top: 82px;
         padding-bottom: 80px;
-        /* Space for bottom navigation */
     }
 
     .add-task-content {
+        position: relative;
         padding: 24px 16px;
         max-width: 100%;
+        height: calc(100dvh - 235px);
+        overflow: auto;
     }
 
     .add-task-header {

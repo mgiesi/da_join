@@ -357,18 +357,6 @@
     height: 24px;
 }
 
-/* Animations */
-@keyframes slideIn {
-    from {
-        transform: translateY(100px);
-        opacity: 0;
-    }
-
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
 
 .action-btn-img:hover {
     filter: invert(67%) sepia(98%) saturate(4401%) hue-rotate(165deg) brightness(99%) contrast(101%);
@@ -392,7 +380,10 @@ svg:hover {
 
 @media (max-width: 1081px) {
     .form-group {
-        margin-bottom: 16px;
+        margin-bottom: 16px !important;
+        gap: 0px !important;
+        padding: 0 !important;
+
     }
 
     .form-group input,
@@ -404,12 +395,21 @@ svg:hover {
         padding: 10px 16px;
     }
 
+    .avatarDiv {
+        margin-top: 8px;
+        min-height: 0px;
+    }
+
+    .separator {
+        display: none;
+    }
+
     .priority-buttons {
         gap: 8px;
     }
 
     .priority-btn {
-        padding: 12px 8px;
+        padding: 6px 8px;
         font-size: 16px;
     }
 

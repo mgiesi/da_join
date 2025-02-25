@@ -14,8 +14,6 @@ function initializeAll() {
     initFormValidation();
     setupPrioritySystem();
     setupSelectArrows();
-    initializeContactDropdown();
-    loadContacts();
 }
 
 /**
@@ -32,6 +30,10 @@ function setupSelectArrows() {
  */
 function setupSelectFocus(wrapper) {
     const select = wrapper.querySelector('select');
+    if (!select) {
+        console.warn('Select element not found in wrapper:', wrapper);
+        return;
+    }
     select.onfocus = () => wrapper.classList.add('focused');
     select.onblur = () => wrapper.classList.remove('focused');
 }

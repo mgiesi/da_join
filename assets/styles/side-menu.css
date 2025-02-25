@@ -124,11 +124,16 @@ a {
     }
 
     .menu-button {
+        display: flex;
         flex-direction: column;
-        padding: 8px;
-        height: auto;
+        padding: 15px;
+        width: 76px;
+        height: 76px;
         gap: 4px;
         font-size: 14px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 16px;
     }
 
     .menu-button img {
