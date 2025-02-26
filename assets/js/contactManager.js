@@ -34,12 +34,36 @@ function getAssignedContacts() {
 }
 
 /**
- * Toggles the visibility of the contact selection dropdown
+ * Toggles the contact dropdown visibility and rotates the arrow
  */
 function toggleContactDropdown() {
-    const list = document.getElementById('contactList');
-    list.style.display = list.style.display === 'block' ? 'none' : 'block';
+    const dropdown = document.querySelector('.contact-dropdown');
+    dropdown.classList.toggle('open');
+    const contactList = document.getElementById('contactList');
+
+    if (dropdown.classList.contains('open')) {
+        contactList.style.display = 'block';
+        // Apply current filter
+        const searchInput = document.getElementById('contactSearch');
+        filterContactsList(searchInput.value);
+    } else {
+        contactList.style.display = 'none';
+    }
 }
+
+/**
+ * Closes the contact dropdown when clicking outside
+ */
+document.addEventListener('click', function (event) {
+    const dropdown = document.querySelector('.contact-dropdown');
+    const selectWrapper = document.querySelector('.select-wrapper');
+
+    if (dropdown && !dropdown.contains(event.target) ||
+        (event.target !== selectWrapper && !selectWrapper.contains(event.target))) {
+        dropdown.classList.remove('open');
+        document.getElementById('contactList').style.display = 'none';
+    }
+});
 
 /**
  * Renders the list of contacts in the dropdown
@@ -163,4 +187,35 @@ function clearSelectedAvatars() {
     if (avatarDiv) {
         avatarDiv.innerHTML = '';
     }
+}
+
+/**
+ * Filters the contacts list based on input text
+ * @param {string} searchText - Text to filter contacts by
+ */
+function filterContactsList(searchText) {
+    // Make sure dropdown is visible when typing
+    const contactList = document.getElementById('contactList');
+    contactList.style.display = 'block';
+
+    // Add open class to dropdown
+    const dropdown = document.querySelector('.contact-dropdown');
+    if (dropdown) {
+        dropdown.classList.add('open');
+    }
+
+    // Get all contacts
+    const contacts = getSortedContacts();
+
+    // Clear the current list
+    contactList.innerHTML = '';
+
+    // Filter contacts and add to list
+    const searchLower = searchText.toLowerCase();
+    contacts.forEach(([id, contact]) => {
+        if (!searchText || (contact && contact.name && contact.name.toLowerCase().includes(searchLower))) {
+            const contactDiv = createContactDiv(id, contact);
+            contactList.innerHTML += contactDiv;
+        }
+    });
 }

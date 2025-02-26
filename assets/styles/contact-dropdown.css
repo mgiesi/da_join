@@ -1,0 +1,51 @@
+/* Styling for contact dropdown */
+.contact-dropdown {
+    position: relative;
+    width: 100%;
+}
+
+.contact-dropdown .select-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.contact-dropdown .contact-select {
+    border: none;
+    background: transparent;
+    width: 100%;
+    outline: none;
+    cursor: pointer;
+}
+
+.contact-dropdown .dropdown-arrow {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: transform 0.2s ease-in-out;
+    pointer-events: none;
+}
+
+/* Rotate arrow when dropdown is open */
+.contact-dropdown.open .dropdown-arrow {
+    transform: translateY(-50%) rotate(180deg);
+}
+
+.contact-dropdown-list {
+    top: 43px;
+    padding-top: 12px;
+    display: none;
+    position: absolute;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: white;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    z-index: 0;
+}

@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="./assets/styles/addTask-layouts.css">
     <link rel="stylesheet" href="./assets/styles/addTask-components.css">
     <link rel="stylesheet" href="./assets/styles/addTask-form.css">
+    <link rel="stylesheet" href="./assets/styles/contact-dropdown.css">
 
     <script src="./assets/js/script.js"></script>
     <script src="assets/js/contactManager.js"></script>
@@ -54,13 +55,17 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="contacts">Assigned to<span class="required">*</span></label>
+                            <label for="contacts">Assigned to</label>
                             <div class="contact-dropdown">
                                 <div class="select-wrapper" onclick="toggleContactDropdown()">
                                     <input type="text" id="contactSearch" class="contact-select"
-                                        placeholder="Select contacts to assign" required>
+                                        placeholder="Select contacts to assign"
+                                        oninput="filterContactsList(this.value)">
+                                    <img src="./assets/icons/arrow_drop_down.svg" alt="Dropdown arrow"
+                                        class="dropdown-arrow">
                                 </div>
-                                <div id="contactList" class="contact-dropdown-list"></div>
+                                <div id="contactList" class="contact-dropdown-list" onclick="event.stopPropagation()">
+                                </div>
                                 <div id="selectedContactsAvatar" class="avatarDiv"></div>
                             </div>
                         </div>

@@ -53,7 +53,6 @@
     transform: translateY(-50%) rotate(0deg);
     width: 16px;
     height: 7px;
-    background-image: url('../icons/arrow_drop_down.svg');
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
@@ -403,23 +402,23 @@ svg:hover {
 
 
 .custom-dropdown.open .custom-dropdown-selected {
-    border-radius: 10px 10px 0 0;
+    z-index: 6;
 }
 
 .custom-dropdown-options {
+    padding-top: 4px;
     position: absolute;
-    top: 100%;
+    top: 82%;
     left: 0;
     width: 100%;
     background: white;
-    border: 1px solid rgb(209, 209, 209);
     border-top: none;
     border-radius: 0 0 10px 10px;
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.3s ease-in-out;
-    z-index: 4;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: -1;
 }
 
 .custom-dropdown.open .custom-dropdown-options {

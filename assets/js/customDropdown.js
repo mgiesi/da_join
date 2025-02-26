@@ -31,7 +31,6 @@ function setupCustomDropdown(dropdown) {
 
             // Update the selected text and hidden input value
             selected.textContent = text;
-            selected.appendChild(createDropdownArrow());
             selected.setAttribute('data-value', value);
 
             if (hiddenInput) {
@@ -51,16 +50,4 @@ function setupCustomDropdown(dropdown) {
             dropdown.classList.remove('open');
         }
     });
-}
-
-/**
- * Creates a dropdown arrow element
- * @returns {HTMLImageElement} The dropdown arrow image element
- */
-function createDropdownArrow() {
-    const arrow = document.createElement('img');
-    arrow.src = './assets/icons/arrow_drop_down.svg';
-    arrow.alt = 'Dropdown arrow';
-    arrow.className = 'dropdown-arrow';
-    return arrow;
 }
