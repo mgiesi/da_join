@@ -14,6 +14,7 @@ function initializeAll() {
     initFormValidation();
     setupPrioritySystem();
     setupSelectArrows();
+    initCustomDropdowns();
 }
 
 /**

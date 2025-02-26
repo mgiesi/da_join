@@ -99,7 +99,8 @@ function gatherTaskData() {
     const title = document.getElementById('title').value;
     const description = document.getElementById('description').value;
     const dueDate = document.getElementById('dueDate').value;
-    const category = document.getElementById('category').value;
+    const categoryElement = document.getElementById('categorySelected');
+    const category = categoryElement ? categoryElement.getAttribute('data-value') : '';
     const priority = getSelectedPriority();
     const assignedTo = getAssignedContacts();
     const subtasks = getSubtasks();
@@ -141,6 +142,7 @@ function resetForm() {
     const form = document.querySelector('.add-task-form');
     resetInputs(form);
     resetSelects(form);
+    resetCustomDropdowns();
     resetPriorityButtons();
     clearSubtasks();
     clearSubtaskInput();
@@ -148,6 +150,27 @@ function resetForm() {
     updateSelectedDisplay();
     updateSelectedAvatars();
     clearSelectedAvatars();
+}
+
+/**
+ * Resets all custom dropdowns to their default state
+ */
+function resetCustomDropdowns() {
+    const dropdowns = document.querySelectorAll('.custom-dropdown');
+    dropdowns.forEach(dropdown => {
+        const selected = dropdown.querySelector('.custom-dropdown-selected');
+        const hiddenInput = dropdown.querySelector('input[type="hidden"]');
+
+        if (selected) {
+            selected.textContent = 'Select task category';
+            selected.appendChild(createDropdownArrow());
+            selected.setAttribute('data-value', '');
+        }
+
+        if (hiddenInput) {
+            hiddenInput.value = '';
+        }
+    });
 }
 
 /**

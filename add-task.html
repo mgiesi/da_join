@@ -26,6 +26,7 @@
     <script src="./assets/js/db.tasks.js"></script>
     <script src="./assets/js/db.contacts.js"></script>
 
+    <script src="assets/js/customDropdown.js"></script>
 </head>
 
 <body onload="init()">
@@ -34,7 +35,7 @@
     <div class="main-container">
         <div w3-include-html=".\assets\templates\side-menu.html"></div>
 
-        <main class="add-task-content">
+        <main id="addTask-html-content" class="add-task-content">
             <div class="add-task-header">
                 <h1>Add Task</h1>
             </div>
@@ -57,7 +58,7 @@
                             <div class="contact-dropdown">
                                 <div class="select-wrapper" onclick="toggleContactDropdown()">
                                     <input type="text" id="contactSearch" class="contact-select"
-                                        placeholder="Select contacts to assign">
+                                        placeholder="Select contacts to assign" required>
                                 </div>
                                 <div id="contactList" class="contact-dropdown-list"></div>
                                 <div id="selectedContactsAvatar" class="avatarDiv"></div>
@@ -101,12 +102,17 @@
 
                         <div class="form-group">
                             <label for="category">Category<span class="required">*</span></label>
-                            <div class="select-wrapper">
-                                <select id="category" required>
-                                    <option value="">Select task category</option>
-                                    <option value="work">Technical Task</option>
-                                    <option value="personal">User Story</option>
-                                </select>
+                            <div class="custom-dropdown" id="categoryDropdown">
+                                <div class="custom-dropdown-selected" id="categorySelected" data-value="">
+                                    Select task category
+                                    <img src="./assets/icons/arrow_drop_down.svg" alt="Dropdown arrow"
+                                        class="dropdown-arrow">
+                                </div>
+                                <div class="custom-dropdown-options">
+                                    <div class="custom-dropdown-option" data-value="work">Technical Task</div>
+                                    <div class="custom-dropdown-option" data-value="personal">User Story</div>
+                                </div>
+                                <input type="hidden" id="category" name="category" required>
                             </div>
                         </div>
 

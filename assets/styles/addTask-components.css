@@ -357,7 +357,6 @@
     height: 24px;
 }
 
-
 .action-btn-img:hover {
     filter: invert(67%) sepia(98%) saturate(4401%) hue-rotate(165deg) brightness(99%) contrast(101%);
 }
@@ -378,12 +377,88 @@ svg:hover {
     cursor: pointer;
 }
 
+/* Custom Dropdown */
+.custom-dropdown {
+    position: relative;
+    width: 100%;
+    z-index: 3;
+}
+
+.custom-dropdown-selected {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid rgb(209, 209, 209);
+    border-radius: 10px;
+    font-size: 20px;
+    line-height: 24px;
+    font-family: 'Inter', sans-serif;
+    background-color: white;
+    color: rgba(0, 0, 0, 0.87);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.2s ease-in-out;
+}
+
+
+.custom-dropdown.open .custom-dropdown-selected {
+    border-radius: 10px 10px 0 0;
+}
+
+.custom-dropdown-options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: white;
+    border: 1px solid rgb(209, 209, 209);
+    border-top: none;
+    border-radius: 0 0 10px 10px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+    z-index: 4;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.custom-dropdown.open .custom-dropdown-options {
+    max-height: 200px;
+}
+
+.custom-dropdown-option {
+    padding: 12px 16px;
+    font-size: 20px;
+    line-height: 24px;
+    cursor: pointer;
+}
+
+.custom-dropdown-option:not(.custom-dropdown-header):hover {
+    background-color: #F6F7F8;
+}
+
+.custom-dropdown-header {
+    background-color: #29ABE2;
+    color: white;
+    font-weight: 500;
+}
+
+.dropdown-arrow {
+    width: 16px;
+    height: 7px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.custom-dropdown.open .dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+/* Adjust existing styles for mobile */
 @media (max-width: 1081px) {
     .form-group {
         margin-bottom: 16px !important;
         gap: 0px !important;
         padding: 0 !important;
-
     }
 
     .form-group input,
@@ -424,5 +499,12 @@ svg:hover {
         bottom: 100px;
         right: 16px;
         left: 16px;
+    }
+
+    .custom-dropdown-selected,
+    .custom-dropdown-option {
+        font-size: 16px;
+        line-height: 20px;
+        padding: 10px 16px;
     }
 }
