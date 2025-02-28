@@ -229,3 +229,52 @@ function redInput() {
     input.style.border = "2px solid #e22929";
   });
 }
+
+/**
+ * Wartet, bis das DOM geladen ist, und startet das Overlay-Handling.
+ */
+document.addEventListener("DOMContentLoaded", initOverlay);
+
+/**
+ * Initialisiert das Overlay, falls die Bildschirmbreite < 1200px ist.
+ */
+function initOverlay() {
+  const overlay = document.getElementById("RespOverlay");
+  const logo = document.getElementById("RespLogo");
+
+  if (window.innerWidth < 1200) {
+    animateLogo(logo);
+    fadeOutOverlay(overlay);
+  } else {
+    hideElement(overlay);
+  }
+}
+
+/**
+ * Startet die Logo-Animation.
+ * @param {HTMLElement} logo - Das Logo-Element.
+ */
+function animateLogo(logo) {
+  setTimeout(() => logo.classList.add("RespLogo-animate"), 500);
+}
+
+/**
+ * Blendet das Overlay langsam aus.
+ * @param {HTMLElement} overlay - Das Overlay-Element.
+ */
+function fadeOutOverlay(overlay) {
+  setTimeout(() => {
+    overlay.style.transition = "opacity 1.5s ease-out";
+    overlay.style.opacity = "0";
+  }, 500);
+
+  setTimeout(() => hideElement(overlay), 2000);
+}
+
+/**
+ * Versteckt ein Element.
+ * @param {HTMLElement} element - Das zu versteckende Element.
+ */
+function hideElement(element) {
+  element.style.display = "none";
+}

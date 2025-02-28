@@ -111,3 +111,28 @@
     margin-top: 48px;
   }
 }
+
+#RespOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #2a3647;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 1;
+  transition: opacity 1.5s ease-out;
+}
+
+#RespLogo {
+  width: 150px; /* Größe des Logos anpassen */
+  transition: transform 1s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+.RespLogo-animate {
+  transform: translate(-45vw, -45vh) scale(0.3);
+  opacity: 0;
+}
