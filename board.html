@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="./assets/styles/components.css">
     <link rel="stylesheet" href="./assets/styles/layout.css">
     <link rel="stylesheet" href="./assets/styles/board.css">
+    <link rel="stylesheet" href="./assets/styles/boardOverlays.css">
     <link rel="stylesheet" href="./assets/styles/boardResponsive.css">
     <link rel="stylesheet" href="./assets/styles/addTaskForBoard.css">
 
@@ -35,7 +36,11 @@
         <div id="overlayAddTask" class="overlay-background dNone"></div>
         <div id="editTaskDetails" class="overlay-background dNone"></div>
         <div id="taskDetails" class="overlay-background dNone"></div>
-
+        <div class="overlay dNone" id="overlay">
+            <div class="message">
+              Task deleted
+            </div>
+        </div>
 
         <div class="board-content">
             <div class="board-title d-flex align-items-center">
