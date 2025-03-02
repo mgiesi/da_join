@@ -1,11 +1,10 @@
 /**
  * Initializes the add task page by loading HTML components, fetching contacts, and setting up functionality
  */
-async function init() {
-  await includeHTML();
+async function initAddTask() {
+  await init();
   fetchContacts();
   initializeAll();
-  initUser();
 }
 /**
  * Sets up all core functionality components for the add task page
