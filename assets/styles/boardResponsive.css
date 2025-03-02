@@ -66,6 +66,7 @@
         margin-left: 0;
         margin-top: 0;
         height: calc(100vh - 96px);
+        padding-top: 80px;
     }
 
     .board-content {

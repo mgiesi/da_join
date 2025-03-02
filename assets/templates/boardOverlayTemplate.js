@@ -187,6 +187,9 @@ function getEditTaskDetails(taskId, task, contacts) {
 }
 
 function getTaskDetails(taskId, task, contacts) {
+    if (!task) {
+        return "";
+    }
     return `
         <div class="overlay-taskDetails">
             <div class="topDetails">
