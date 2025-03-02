@@ -56,17 +56,24 @@ async function validateAndSubmitForm(event) {
     const form = event.target;
     const requiredFields = form.querySelectorAll('[required]');
     let isValid = validateRequiredFields(requiredFields);
+
     if (!isValid) return false;
+
+    // Check if at least one priority is selected
+    const selectedPriority = getSelectedPriority();
+    if (!selectedPriority) {
+        alert('Please select a priority level');
+        return false;
+    }
+
     const taskData = gatherTaskData();
+
     try {
         await createTask(taskData);
-        showNotification();
-        resetForm();
-        selectedContacts.clear();
-        updateSelectedContactsDisplay();
-        return false;
+        return showTaskAddedNotification();
     } catch (error) {
         console.error('Error creating task:', error);
+        alert('Failed to create task. Please try again.');
         return false;
     }
 }
@@ -100,19 +107,31 @@ function gatherTaskData() {
     const description = document.getElementById('description').value;
     const dueDate = document.getElementById('dueDate').value;
     const categoryElement = document.getElementById('categorySelected');
-    const category = categoryElement ? categoryElement.getAttribute('data-value') : '';
+    const categoryValue = categoryElement ? categoryElement.getAttribute('data-value') : '';
+
+    // Map category values to database format
+    let category;
+    if (categoryValue === 'work') {
+        category = 'task';
+    } else if (categoryValue === 'personal') {
+        category = 'userstory';
+    } else {
+        category = 'task'; // Default
+    }
+
     const priority = getSelectedPriority();
     const assignedTo = getAssignedContacts();
-    const subtasks = getSubtasks();
+    const subtasksData = getSubtasks();
     const formattedDate = formatDueDate(dueDate);
+
     return {
         title,
         description,
         assignedTo,
         dueDate: formattedDate,
         prio: priority,
-        category: category === 'work' ? 'task' : 'userstory',
-        subtasks
+        category,
+        subtasks: subtasksData
     };
 }
 
@@ -133,6 +152,29 @@ function getSelectedPriority() {
 function formatDueDate(dueDate) {
     const [day, month, year] = dueDate.split('/');
     return `${year}-${month}-${day}`;
+}
+
+/**
+ * Shows task added notification and redirects to board
+ * @returns {boolean} False to prevent default form submission
+ */
+function showTaskAddedNotification() {
+    const notification = document.getElementById('taskAddedNotification');
+
+    if (!notification) {
+        // Fallback if notification element doesn't exist
+        alert('Task added to board');
+        window.location.href = 'board.html';
+        return false;
+    }
+
+    notification.style.display = 'flex';
+    setTimeout(() => {
+        notification.style.display = 'none';
+        window.location.href = 'board.html';
+    }, 3000);
+
+    return false;
 }
 
 /**

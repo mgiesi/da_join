@@ -15,6 +15,7 @@ function initializeAll() {
     setupPrioritySystem();
     setupSelectArrows();
     initCustomDropdowns();
+    initSubtaskSystem(); // Initialize subtask functionality
 }
 
 /**
@@ -80,13 +81,25 @@ function activatePriorityButton(buttonElement) {
 /**
  * Shows success notification and redirects to board after task creation
  */
-function showNotification() {
+function showTaskAddedNotification() {
     const notification = document.getElementById('taskAddedNotification');
     notification.style.display = 'flex';
     setTimeout(() => {
         notification.style.display = 'none';
         window.location.href = 'board.html';
     }, 3000);
+}
+
+/**
+ * Resets all fields in the add task form to their default state
+ */
+function resetForm() {
+    resetTextInputs();
+    resetContactSelection();
+    resetPrioritySelection();
+    resetCategoryDropdown();
+    clearSubtasks(); // Use our new function
+    resetValidationStyling();
 }
 
 /**
@@ -152,7 +165,7 @@ function resetCategoryDropdown() {
 /**
  * Resets subtasks list and input
  */
-function resetSubtasks() {
+function clearSubtasks() {
     const subtasksList = document.querySelector('.subtasks-list');
     if (subtasksList) subtasksList.innerHTML = '';
 
@@ -173,16 +186,4 @@ function resetValidationStyling() {
 
     const allInputs = document.querySelectorAll('input, textarea, select');
     allInputs.forEach(input => input.style.borderColor = '');
-}
-
-/**
- * Resets all fields in the add task form to their default state
- */
-function resetForm() {
-    resetTextInputs();
-    resetContactSelection();
-    resetPrioritySelection();
-    resetCategoryDropdown();
-    resetSubtasks();
-    resetValidationStyling();
 }
