@@ -222,7 +222,7 @@ function getTaskDetails(taskId, task, contacts) {
                     ${displayAssignedTo4TaskDetails(task, contacts)}
                 </div>
             </div>
-            ${displaySubTasks4TaskDetails(task)}
+            ${displaySubTasks4TaskDetails(taskId, task)}
             <div class="detailsButton">
                 <button class="endBtn">
                     <img class="detailsImgBtn" src="./assets/icons/delete.svg" alt="">Delete
@@ -274,7 +274,7 @@ function displayContact4TaskDetails(contact) {
         `;
 }
 
-function displaySubTasks4TaskDetails(task) {
+function displaySubTasks4TaskDetails(taskId, task) {
   const subTasksCount =
     task && task.subtasks ? Object.keys(task.subtasks).length : 0;
   if (subTasksCount <= 0) {
@@ -286,7 +286,7 @@ function displaySubTasks4TaskDetails(task) {
       if (!subtask) {
         return;
       } else {
-        subtaskcontent += displaySubTask4TaskDetails(subtask);
+        subtaskcontent += displaySubTask4TaskDetails(taskId, task, subtaskId, subtask);
       }
     });
     return `
@@ -300,10 +300,10 @@ function displaySubTasks4TaskDetails(task) {
   }
 }
 
-function displaySubTask4TaskDetails(subtask) {
+function displaySubTask4TaskDetails(taskId, task, subtaskId, subtask) {
   return `
         <div class="oneSubTask">
-            <input type="checkbox" ${subtask.done ? "checked" : ""}>
+            <input class="task-subtasks-checkbox" type="checkbox" onclick="toggleTaskDone('${taskId}', '${subtaskId}')" ${subtask.done ? "checked" : ""}>
             <p class="f3">${subtask.name}</p>
         </div>
     `;

@@ -554,3 +554,9 @@ input:required:invalid {
 .task-contact:not(:first-child) {
   margin-left: -8px;
 }
+
+.task-subtasks-checkbox {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}

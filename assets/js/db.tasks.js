@@ -185,3 +185,31 @@ async function addTaskToBoard(boardId, taskId) {
         throw error;
     }
 }
+
+/**
+ * Toggles the "done" property of a specific subtask stored in Firebase.
+ * The function retrieves the subtask, toggles its "done" value (if true, sets to false; if false, sets to true),
+ * writes the updated subtask back to the database, and returns the updated object.
+ *
+ * @async
+ * @param {string} taskId - The ID of the task.
+ * @param {string} subtaskId - The ID of the subtask to be toggled.
+ * @returns {Promise<Object>} A promise that resolves to the updated subtask object.
+ */
+async function toggleTaskDone(taskId, subtaskId) {
+    let response = await fetch(TASKS_URL + taskId + "/subtasks/" + subtaskId + ".json");
+    let subtask = await response.json();
+  
+    subtask.done = !subtask.done;
+  
+    await fetch(TASKS_URL + taskId + "/subtasks/" + subtaskId + ".json", {
+      method: "PUT", // Alternatively, use "PATCH" to update only the "done" field
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(subtask)
+    });
+
+    renderTasks();
+  }
+  
