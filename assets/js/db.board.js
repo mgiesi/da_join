@@ -39,7 +39,16 @@ async function getBoardTasksCount(boardname) {
         : 0;
 }
 
-
+/**
+ * Retrieves the task counts for each board by fetching board data from a JSON endpoint.
+ * 
+ * The function fetches data from the URL constructed with BOARD_URL, converts the response
+ * into JSON, and then computes the number of tasks for each board. It returns an object
+ * mapping each board name to its respective task count.
+ *
+ * @async
+ * @returns {Promise<Object<string, number>>} A promise that resolves to an object with board names as keys and task counts as values.
+ */
 async function getBoardTasksCountList() {
     let response = await fetch(BOARD_URL + ".json");
     let responseToJson = await response.json();

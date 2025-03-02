@@ -2,12 +2,21 @@ const boardNames = ["todo", "inprogress", "awaitfeedback", "done"];
 
 let filterText;
 
+/**
+ * Initializes the board by setting up search filters, rendering the board container, and resetting the filter.
+ *
+ * @async
+ * @returns {Promise<void>} A promise that resolves when the board initialization is complete.
+ */
 async function initBoard() {
   initSearchFilter();
   await renderBoardContainer();
   resetFilter();
 }
 
+/**
+ * Initializes the search filter by adding input event listeners to the filter text elements.
+ */
 function initSearchFilter() {
   const filterInputRef = document.getElementById("board-filter-text");
   filterInputRef.addEventListener("input", updateFilterIcon);
@@ -15,6 +24,9 @@ function initSearchFilter() {
   filterInput2Ref.addEventListener("input", updateFilterIcon);
 }
 
+/**
+ * Updates the filter icons for both filter input fields based on whether they contain a value.
+ */
 function updateFilterIcon() {
   const filterInputRef = document.getElementById("board-filter-text");
   const filterInputIconRef = document.getElementById("board-filter-text-icon");  
@@ -28,6 +40,12 @@ function updateFilterIcon() {
     : "./assets/icons/search.svg";
 }
 
+/**
+ * Updates the board filter based on user input.
+ * Synchronizes the filter text between two input fields, updates the filter icon, and re-renders tasks.
+ *
+ * @param {Event} event - The input event triggered by the filter text change.
+ */
 function updateFilter(event) {
   const filterInputRef = document.getElementById("board-filter-text");
   const filterInput2Ref = document.getElementById("board-filter-text2");
@@ -38,6 +56,9 @@ function updateFilter(event) {
   renderTasks();
 }
 
+/**
+ * Resets the board filter by clearing both filter input fields, updating the filter icon, and re-rendering tasks.
+ */
 function resetFilter() {
   const filterInputRef = document.getElementById("board-filter-text");
   const filterInput2Ref = document.getElementById("board-filter-text2");
@@ -48,6 +69,12 @@ function resetFilter() {
   renderTasks();
 }
 
+/**
+ * Renders the board container by fetching board data and inserting the generated HTML for each board.
+ *
+ * @async
+ * @returns {Promise<void>} A promise that resolves when the board container has been rendered.
+ */
 async function renderBoardContainer() {
   const boards = await getBoards();
   const boardContent = document.getElementById("boards-container");
@@ -57,6 +84,13 @@ async function renderBoardContainer() {
   }
 }
 
+/**
+ * Renders tasks for each board by fetching boards, tasks (filtered by filterText), and contacts data,
+ * then inserting the generated HTML into each board container.
+ *
+ * @async
+ * @returns {Promise<void>} A promise that resolves when tasks have been rendered on all boards.
+ */
 async function renderTasks() {
   const [boards, tasks, contacts] = await Promise.all([
     getBoards(),
@@ -75,12 +109,24 @@ async function renderTasks() {
   }
 }
 
+/**
+ * Toggles the visibility of the add task overlay.
+ * Updates the overlay content with the add task overlay template.
+ */
 function toggleAddTaskOverlay() {
   let overlay = document.getElementById("overlayAddTask");
   overlay.classList.toggle("dNone");
   overlay.innerHTML = getAddTaskOverlay();
 }
 
+/**
+ * Toggles the task details overlay for a given task.
+ * Fetches the task and contacts data, then updates the overlay content with the task details.
+ *
+ * @async
+ * @param {string|number} taskId - The identifier of the task.
+ * @returns {Promise<void>} A promise that resolves when the task details overlay has been toggled.
+ */
 async function toggleTaskDetails(taskId) {
   const [task, contacts] = await Promise.all([getTask(taskId), getContacts()]);
 
@@ -89,6 +135,14 @@ async function toggleTaskDetails(taskId) {
   overlay.innerHTML = getTaskDetails(taskId, task, contacts);
 }
 
+/**
+ * Toggles the edit task details overlay for a given task.
+ * Fetches the task and contacts data, then updates the overlay content with the edit task template.
+ *
+ * @async
+ * @param {string|number} taskId - The identifier of the task to be edited.
+ * @returns {Promise<void>} A promise that resolves when the edit task details overlay has been toggled.
+ */
 async function toggleEditTaskDetails(taskId) {
   const [task, contacts] = await Promise.all([getTask(taskId), getContacts()]);
 

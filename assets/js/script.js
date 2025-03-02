@@ -1,3 +1,10 @@
+/**
+ * Initializes the join webpage by including external HTML content, setting up menu interactions,
+ * and initializing user-related elements.
+ *
+ * @async
+ * @returns {Promise<void>} A promise that resolves when the initialization is complete.
+ */
 async function init() {
   await includeHTML();
   // Add a small delay to ensure DOM is updated
@@ -9,6 +16,15 @@ async function init() {
   initUser();
 }
 
+/**
+ * Includes external HTML files into the current document.
+ * Searches for elements with the attribute "w3-include-html", fetches the corresponding file
+ * and replaces the element's inner HTML with the fetched content. 
+ * If the fetch fails, displays "Page not found".
+ *
+ * @async
+ * @returns {Promise<void>} A promise that resolves when all external HTML content has been included.
+ */
 async function includeHTML() {
   let includeElements = document.querySelectorAll("[w3-include-html]");
 
@@ -25,6 +41,14 @@ async function includeHTML() {
   }
 }
 
+/**
+ * Initializes user-related elements on the page.
+ * Retrieves the active user's name and updates the UI elements 
+ * accordingly by showing or hiding certain elements.
+ *
+ * @async
+ * @returns {Promise<void>} A promise that resolves when user initialization is complete.
+ */
 async function initUser() {
   const userName = await getActiveUserName();
   const textRef = document.getElementById("user-profile-name");
@@ -42,55 +66,65 @@ async function initUser() {
   }
 }
 
+/**
+ * Logs out the current user and navigates to the start page.
+ */
 function goToStart() {
   logoutUser();
   window.location.href = "index.html";
 }
 
+/**
+ * Logs out the current user by removing user-related information from local storage.
+ */
 function logoutUser() {
   localStorage.removeItem("activeUser");
   localStorage.removeItem("greetingShown");
 }
 
+/**
+ * Retrieves the active user's name from local storage.
+ * If the active user is "Guest", returns "Guest". 
+ * Otherwise, fetches the user object and returns its name.
+ *
+ * @async
+ * @returns {Promise<string|null>} A promise that resolves to the active 
+ * user's name or null if no active user exists.
+ */
 async function getActiveUserName() {
   const activeUser = localStorage.getItem("activeUser");
   if (!activeUser) {
     return null;
   }
-
   if (activeUser === "Guest") {
     return "Guest";
   }
-
   const user = await getUser(activeUser);
   if (!user) {
     return null;
   }
-
   return user.name;
 }
 
+/**
+ * Sets the active menu item based on the current page URL.
+ * Removes the "active" class from all menu buttons and adds it to the 
+ * button whose href matches the current page.
+ * Also stores the active menu item's href in local storage.
+ */
 function setActiveMenuItem() {
-  // Get all menu buttons
   const menuButtons = document.querySelectorAll(".menu-button");
-
-  // Get the current page filename
   const currentPage = window.location.pathname.split("/").pop();
-
-  // Remove active class from all buttons first
   menuButtons.forEach((button) => {
     button.classList.remove("active");
   });
-
   // Add active class to the button that matches current page
   menuButtons.forEach((button) => {
     const href = button.getAttribute("href");
     // Extract just the filename from the href
     const hrefPage = href.split("/").pop();
-
     if (currentPage === hrefPage) {
       button.classList.add("active");
-      // Store the active menu item
       localStorage.setItem("activeMenuItem", href);
     }
   });
@@ -108,6 +142,11 @@ function setActiveMenuItem() {
   }
 }
 
+/**
+ * Adds click event listeners to menu buttons.
+ * When a menu button is clicked, updates the active class and 
+ * stores the active menu item's href in local storage.
+ */
 function addMenuClickListeners() {
   const menuButtons = document.querySelectorAll(".menu-button");
 
@@ -125,6 +164,10 @@ function addMenuClickListeners() {
   });
 }
 
+/**
+ * Adds a click event listener to the header submenu element.
+ * Hides the submenu when the user clicks directly on the submenu overlay.
+ */
 function addSubmenuClickListeners() {
   document.getElementById('header-submenu').addEventListener('click', function (e) {
     if (e.target === this) {
@@ -133,6 +176,13 @@ function addSubmenuClickListeners() {
   });
 }
 
+/**
+ * Validates a form field by checking if the input element has a non-empty value.
+ * Adds or removes an "error" class on the parent form group accordingly.
+ *
+ * @param {HTMLElement} inputElement - The input element to validate.
+ * @returns {boolean} Returns true if the input has a non-empty value; otherwise, returns false.
+ */
 function validateFormField(inputElement) {
   const formGroup = inputElement.closest(".form-group");
 
@@ -145,11 +195,17 @@ function validateFormField(inputElement) {
   }
 }
 
+/**
+ * Displays the header submenu by removing the "dNone" class.
+ */
 function showSubmenu() {
   const overlay = document.getElementById("header-submenu");
   overlay.classList.remove("dNone");
 }
 
+/**
+ * Hides the header submenu by adding the "dNone" class.
+ */
 function hideSubmenu() {
   const overlay = document.getElementById("header-submenu");
   overlay.classList.add("dNone");
