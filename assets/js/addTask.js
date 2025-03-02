@@ -1,4 +1,12 @@
 /**
+ * Initializes the add task page by loading HTML components, fetching contacts, and setting up functionality
+ */
+function init() {
+  includeHTML();
+  fetchContacts();
+  initializeAll();
+}
+/**
  * Sets up all core functionality components for the add task page
  */
 function initializeAll() {
