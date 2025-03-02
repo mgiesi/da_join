@@ -150,3 +150,21 @@ async function toggleEditTaskDetails(taskId) {
   overlay.classList.toggle("dNone");
   overlay.innerHTML = getEditTaskDetails(taskId, task, contacts);
 }
+
+async function doDeleteTask(taskId) {
+  await deleteTask(taskId);
+  renderTasks();
+  toggleTaskDetails();
+  showDeleteMessage()
+}
+
+/**
+ * Shows a information message as toast when deleting a task.
+ */
+function showDeleteMessage() {
+    document.getElementById("overlay").classList.remove("dNone");
+    overlay.classList.add("animate");
+    setTimeout(function () {
+      overlay.classList.add("dNone");
+    }, 2000);
+}

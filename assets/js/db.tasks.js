@@ -213,3 +213,22 @@ async function toggleTaskDone(taskId, subtaskId) {
     renderTasks();
   }
   
+/**
+ * Deletes a task from the database by sending a DELETE request.
+ *
+ * This function sends an HTTP DELETE request to the Firebase database for the specified task ID.
+ * The request targets the task resource at TASKS_URL and removes it from the database.
+ *
+ * @async
+ * @param {string} taskId - The identifier of the task to delete.
+ * @returns {Promise<void>} A promise that resolves when the task has been deleted.
+ */
+  async function deleteTask(taskId) {
+    const response = await fetch(TASKS_URL + "/" + taskId + ".json", {
+        method: "Delete",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(),
+      });
+  }

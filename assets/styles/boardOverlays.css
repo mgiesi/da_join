@@ -1,0 +1,35 @@
+.overlay {
+    position: absolute;
+    bottom: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+  }
+  
+  .overlay .message {
+    color: white;
+    font-size: 24px;
+    text-align: center;
+    padding: 20px;
+    background-color: #222;
+    border-radius: 10px;
+  }
+  
+  .overlay.animate {
+    animation: slideIn 450ms forwards;
+  }
+  
+  @keyframes slideIn {
+    from {
+      bottom: -100px;
+      opacity: 0;
+    }
+    to {
+      bottom: 16px;
+      opacity: 1;
+    }
+  }
