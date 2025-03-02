@@ -49,3 +49,21 @@
     border-radius: 10px;
     z-index: 0;
 }
+
+/* Add styling for selected contacts */
+.contact-item:has(.check-button-container.selected) {
+    background-color: #2A3647;
+    border-radius: 8px;
+}
+
+.contact-item:has(.check-button-container.selected) .contact-name {
+    color: white;
+}
+
+.contact-item:has(.check-button-container.selected) svg rect {
+    stroke: white;
+}
+
+.contact-item:has(.check-button-container.selected) svg path {
+    stroke: white;
+}

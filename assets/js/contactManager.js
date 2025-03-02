@@ -96,6 +96,8 @@ function getSortedContacts() {
  */
 function createContactDiv(id, contact) {
     const initials = getInitials(contact.name);
+    const isSelected = selectedContacts.includes(id);
+
     return `
         <div class="contact-item" onclick="toggleContactSelection('${id}')">
             <div class="contact-info-container">
@@ -104,7 +106,12 @@ function createContactDiv(id, contact) {
                 </div>
                 <div class="contact-name">${contact.name}</div>
             </div>
-            <input type="checkbox" class="contact-checkbox" ${selectedContacts.includes(id) ? 'checked' : ''}>
+            <div class="check-button-container ${isSelected ? 'selected' : ''}">
+                <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="4.38818" y="4" width="16" height="16" rx="3" stroke="#2A3647" stroke-width="2"/>
+                    ${isSelected ? '<path d="M7.38818 12L11.3882 16L17.3882 8" stroke="#2A3647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>' : ''}
+                </svg>
+            </div>
         </div>
     `;
 }

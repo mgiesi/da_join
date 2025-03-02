@@ -253,6 +253,7 @@
     justify-content: space-between;
     padding: 8px 16px;
     cursor: pointer;
+    margin-block: 2px;
 }
 
 .contact-info-container {
