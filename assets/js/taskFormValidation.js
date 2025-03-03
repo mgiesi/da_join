@@ -192,6 +192,7 @@ function resetForm() {
     updateSelectedDisplay();
     updateSelectedAvatars();
     clearSelectedAvatars();
+    subtasks = [];
 }
 
 /**
