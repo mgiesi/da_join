@@ -46,7 +46,7 @@ function transformSubtaskInput(isFocused) {
       <div class="edit-actions active">
         <img src="./assets/icons/cancel.svg" alt="Cancel" onclick="clearSubtaskInput()">
         <div class="vertical-divider"></div>
-        <img src="./assets/icons/check.svg" alt="Confirm" onclick="addSubtask()">
+        <img src="./assets/icons/subtasks_confirm.svg" alt="Confirm" class="" onclick="addSubtask()">
       </div>
     `;
     subtaskInput.classList.add('active');
