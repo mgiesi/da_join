@@ -116,7 +116,8 @@ async function renderTasks() {
 function toggleAddTaskOverlay() {
   let overlay = document.getElementById("overlayAddTask");
   overlay.classList.toggle("dNone");
-  overlay.innerHTML = getAddTaskOverlay();
+  /*overlay.innerHTML = getAddTaskOverlay();
+  includeHTML();*/
 }
 
 /**

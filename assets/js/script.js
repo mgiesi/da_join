@@ -27,17 +27,53 @@ async function init() {
  */
 async function includeHTML() {
   let includeElements = document.querySelectorAll("[w3-include-html]");
-
+  
   for (let i = 0; i < includeElements.length; i++) {
     const element = includeElements[i];
-    file = element.getAttribute("w3-include-html");
-    let resp = await fetch(file);
-
-    if (resp.ok) {
-      element.innerHTML = await resp.text();
-    } else {
-      element.innerHTML = "Page not found";
+    let fileAttr = element.getAttribute("w3-include-html");
+    let filePath = fileAttr;
+    let fragmentSelector = null;
+    
+    // Prüfen, ob ein Fragment angegeben wurde (z.B. side-menu.html#myelement)
+    if (fileAttr.indexOf('#') !== -1) {
+      let parts = fileAttr.split('#');
+      filePath = parts[0];
+      let fragment = parts[1];
+      if (fragment) {
+        fragmentSelector = '#' + fragment; // Sicherstellen, dass es ein gültiger CSS-Selektor ist
+      }
     }
+    
+    try {
+      let resp = await fetch(filePath);
+      
+      if (resp.ok) {
+        let htmlText = await resp.text();
+        
+        if (fragmentSelector) {
+          // HTML in ein Dokument parsen, um gezielt das Fragment auszuwählen
+          let parser = new DOMParser();
+          let doc = parser.parseFromString(htmlText, "text/html");
+          let frag = doc.querySelector(fragmentSelector);
+          
+          if (frag) {
+            element.innerHTML = frag.innerHTML;
+          } else {
+            element.innerHTML = "Can't find fragment";
+          }
+        } else {
+          // Gesamten HTML-Content einfügen
+          element.innerHTML = htmlText;
+        }
+      } else {
+        element.innerHTML = "Page not found";
+      }
+    } catch (error) {
+      element.innerHTML = "Error: " + error;
+    }
+    
+    // Entferne das Attribut, nachdem der Inhalt ersetzt wurde
+    element.removeAttribute("w3-include-html");
   }
 }
 

@@ -11,10 +11,16 @@
     <link rel="stylesheet" href="./assets/styles/style.css">
     <link rel="stylesheet" href="./assets/styles/components.css">
     <link rel="stylesheet" href="./assets/styles/layout.css">
+
+    <link rel="stylesheet" href="./assets/styles/addTask-layouts.css">
+    <link rel="stylesheet" href="./assets/styles/addTask-components.css">
+    <link rel="stylesheet" href="./assets/styles/addTask-form.css">
+    <link rel="stylesheet" href="./assets/styles/contact-dropdown.css">
+
     <link rel="stylesheet" href="./assets/styles/board.css">
     <link rel="stylesheet" href="./assets/styles/boardOverlays.css">
+    <link rel="stylesheet" href="./assets/styles/boardOverlaysResponsive.css">
     <link rel="stylesheet" href="./assets/styles/boardResponsive.css">
-    <link rel="stylesheet" href="./assets/styles/addTaskForBoard.css">
 
     <script src="./assets/js/script.js"></script>
     <script src="./assets/js/db.js"></script>
@@ -26,14 +32,25 @@
     <script src="./assets/js/board.dnd.js"></script>
     <script src="./assets/templates/boardTemplate.js"></script>
     <script src="./assets/templates/boardOverlayTemplate.js"></script>
+
+    <script src="./assets/js/contactManager.js"></script>
+    <script src="./assets/js/subtaskManager.js"></script>
+    <script src="./assets/js/taskFormValidation.js"></script>
+    <script src="./assets/js/addTask.js"></script>
+    <script src="./assets/js/notification.js"></script>
+    <script src="./assets/js/customDropdown.js"></script>
 </head>
 
-<body onload="init(); initBoard()">
+<body onload="initAddTask(); initBoard()">
     <header w3-include-html=".\assets\templates\header.html"></header>
     <div class="main-container">
         <div w3-include-html=".\assets\templates\side-menu.html"></div>
 
-        <div id="overlayAddTask" class="overlay-background dNone"></div>
+        <div id="overlayAddTask" class="overlay-background dNone">
+            <div class="overlay-addTask">
+                <div w3-include-html="./add-task.html#addTask-html-content"></div>
+            </div>
+        </div>
         <div id="editTaskDetails" class="overlay-background dNone"></div>
         <div id="taskDetails" class="overlay-background dNone"></div>
         <div class="overlay dNone" id="overlay">

@@ -57,6 +57,9 @@ function toggleContactDropdown() {
 document.addEventListener('click', function (event) {
     const dropdown = document.querySelector('.contact-dropdown');
     const selectWrapper = document.querySelector('.select-wrapper');
+    if (!selectWrapper) {
+        return;
+    }
 
     if (dropdown && !dropdown.contains(event.target) ||
         (event.target !== selectWrapper && !selectWrapper.contains(event.target))) {

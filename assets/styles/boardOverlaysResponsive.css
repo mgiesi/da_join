@@ -1,0 +1,11 @@
+@media (max-width: 1200px) {
+    .add-task-form {
+        width: 90%;
+    }
+}
+
+@media (max-width: 1081px) {
+    .footer-add-task-html {
+        background-color: #ffffff;
+    }
+}
