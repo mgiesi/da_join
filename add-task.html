@@ -44,7 +44,7 @@
                 <h1>Add Task</h1>
             </div>
 
-            <form class="add-task-form" onsubmit="return handleFormSubmit()">
+            <form class="add-task-form" onsubmit="return handleFormSubmit(event)">
                 <div class="form-columns">
                     <div class="form-left-column">
                         <div class="form-group">
@@ -130,6 +130,8 @@
                                 <div class="input-wrapper">
                                     <input type="text" id="subtaskInput" placeholder="Add new subtask">
                                     <div class="subtask-actions">
+                                        <img src="./assets/icons/Subtasks icons11.svg" alt="Add subtask"
+                                            class="subtask-add-icon" onclick="focusSubtaskInput()">
                                     </div>
                                 </div>
                             </div>

@@ -32,7 +32,6 @@ function setupSelectArrows() {
 function setupSelectFocus(wrapper) {
   const select = wrapper.querySelector("select");
   if (!select) {
-    console.warn("Select element not found in wrapper:", wrapper);
     return;
   }
   select.onfocus = () => wrapper.classList.add("focused");

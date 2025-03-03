@@ -3,6 +3,7 @@
  */
 
 let subtasks = [];
+let isEditingSubtask = false;
 
 /**
  * Initializes subtask functionality
@@ -15,7 +16,7 @@ function initSubtaskSystem() {
   const actionsDiv = inputWrapper.querySelector(".subtask-actions");
 
   actionsDiv.innerHTML = `
-       <img src="./assets/icons/Subtasks\ icons11.svg" alt="Add subtask" class="subtask-add-icon" onclick="addSubtask()">
+       <img src="./assets/icons/Subtasks\ icons11.svg" alt="Add subtask" class="subtask-add-icon" onclick="focusSubtaskInput()">
    `;
 
   subtaskInput.onkeypress = function (e) {
@@ -24,6 +25,46 @@ function initSubtaskSystem() {
       addSubtask();
     }
   };
+
+  subtaskInput.onfocus = function () {
+    transformSubtaskInput(true);
+  };
+}
+
+/**
+ * Transforms the subtask input field to show action buttons
+ * @param {boolean} isFocused - Whether the input is focused
+ */
+function transformSubtaskInput(isFocused) {
+  const subtaskInput = document.getElementById("subtaskInput");
+  const inputWrapper = subtaskInput.parentElement;
+  const actionsDiv = inputWrapper.querySelector(".subtask-actions");
+
+  if (isFocused) {
+    subtaskInput.style.backgroundImage = 'none';
+    actionsDiv.innerHTML = `
+      <div class="edit-actions active">
+        <img src="./assets/icons/cancel.svg" alt="Cancel" onclick="clearSubtaskInput()">
+        <div class="vertical-divider"></div>
+        <img src="./assets/icons/subtasks_confirm.svg" alt="Confirm" class="" onclick="addSubtask()">
+      </div>
+    `;
+    subtaskInput.classList.add('active');
+  } else {
+    subtaskInput.style.backgroundImage = '';
+    actionsDiv.innerHTML = `
+      <img src="./assets/icons/Subtasks\ icons11.svg" alt="Add subtask" class="subtask-add-icon" onclick="focusSubtaskInput()">
+    `;
+    subtaskInput.classList.remove('active');
+  }
+}
+
+/**
+ * Focuses the subtask input field
+ */
+function focusSubtaskInput() {
+  const subtaskInput = document.getElementById("subtaskInput");
+  subtaskInput.focus();
 }
 
 /**
@@ -42,7 +83,19 @@ function addSubtask() {
     });
 
     renderSubtasks();
-    subtaskInput.value = "";
+    clearSubtaskInput();
+    transformSubtaskInput(false);
+  }
+}
+
+/**
+ * Clears the subtask input field
+ */
+function clearSubtaskInput() {
+  const subtaskInput = document.getElementById("subtaskInput");
+  if (subtaskInput) {
+    subtaskInput.value = '';
+    transformSubtaskInput(false);
   }
 }
 
@@ -91,9 +144,13 @@ function editSubtask(index) {
   const subtaskInput = document.getElementById("subtaskInput");
   subtaskInput.value = subtask.name;
   subtaskInput.focus();
+  isEditingSubtask = true;
 
-  subtasks.splice(index, 1);
-  renderSubtasks();
+  // Store the index being edited
+  subtaskInput.dataset.editIndex = index;
+
+  // Transform the input to show action buttons
+  transformSubtaskInput(true);
 }
 
 /**
