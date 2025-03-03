@@ -18,7 +18,12 @@ async function initBoard() {
 function modifyAddTask() {
   addOverlayClickListeners();
   const btnCancel = document.getElementById('btn-add-task-clear');
-  btnCancel.innerHTML = "Cancel";
+  const textNode = Array.from(btnCancel.childNodes).find(node => 
+    node.nodeType === Node.TEXT_NODE && node.textContent.trim() !== ""
+  );
+  if (textNode) {
+    textNode.textContent = "Cancel";
+  }
   btnCancel.onclick = hideOverlays;
 }
 
@@ -133,6 +138,14 @@ async function renderTasks() {
  * Updates the overlay content with the add task overlay template.
  */
 function toggleAddTaskOverlay() {
+  const btnSubmit = document.getElementById('btn-add-task-submit');
+  const textNode = Array.from(btnSubmit.childNodes).find(node => 
+    node.nodeType === Node.TEXT_NODE && node.textContent.trim() !== ""
+  );
+  if (textNode) {
+    textNode.textContent = "Create Task";
+  }
+
   let overlay = document.getElementById("overlayAddTask");
   overlay.classList.toggle("dNone");
 }
@@ -144,6 +157,15 @@ function toggleAddTaskOverlay() {
  */
 function showAddTaskOverlay(boardName) {
   addTaskToBoardName = boardName;
+
+  const btnSubmit = document.getElementById('btn-add-task-submit');
+  const textNode = Array.from(btnSubmit.childNodes).find(node => 
+    node.nodeType === Node.TEXT_NODE && node.textContent.trim() !== ""
+  );
+  if (textNode) {
+    textNode.textContent = "Create Task";
+  }
+
   let overlay = document.getElementById("overlayAddTask");
   overlay.classList.remove("dNone");
 }
@@ -184,10 +206,18 @@ async function toggleTaskDetails(taskId) {
  */
 async function toggleEditTaskDetails(taskId) {
   const [task, contacts] = await Promise.all([getTask(taskId), getContacts()]);
+  //overlay.innerHTML = getEditTaskDetails(taskId, task, contacts);
 
-  let overlay = document.getElementById("editTaskDetails");
+  const btnSubmit = document.getElementById('btn-add-task-submit');
+  const textNode = Array.from(btnSubmit.childNodes).find(node => 
+    node.nodeType === Node.TEXT_NODE && node.textContent.trim() !== ""
+  );
+  if (textNode) {
+    textNode.textContent = "Ok";
+  }
+
+  let overlay = document.getElementById("overlayAddTask");
   overlay.classList.toggle("dNone");
-  overlay.innerHTML = getEditTaskDetails(taskId, task, contacts);
 }
 
 async function doDeleteTask(taskId) {
