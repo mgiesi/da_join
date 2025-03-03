@@ -8,59 +8,59 @@ let subtasks = [];
  * Initializes subtask functionality
  */
 function initSubtaskSystem() {
-    const subtaskInput = document.getElementById('subtaskInput');
-    if (!subtaskInput) return;
+  const subtaskInput = document.getElementById("subtaskInput");
+  if (!subtaskInput) return;
 
-    const inputWrapper = subtaskInput.parentElement;
-    const actionsDiv = inputWrapper.querySelector('.subtask-actions');
+  const inputWrapper = subtaskInput.parentElement;
+  const actionsDiv = inputWrapper.querySelector(".subtask-actions");
 
-    actionsDiv.innerHTML = `
-        <img src="./assets/icons/add.svg" alt="Add subtask" class="subtask-add-icon" onclick="addSubtask()">
-    `;
+  actionsDiv.innerHTML = `
+       <img src="./assets/icons/Subtasks\ icons11.svg" alt="Add subtask" class="subtask-add-icon" onclick="addSubtask()">
+   `;
 
-    subtaskInput.onkeypress = function (e) {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            addSubtask();
-        }
-    };
+  subtaskInput.onkeypress = function (e) {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      addSubtask();
+    }
+  };
 }
 
 /**
  * Adds a new subtask to the list
  */
 function addSubtask() {
-    const subtaskInput = document.getElementById('subtaskInput');
-    const subtaskText = subtaskInput.value.trim();
+  const subtaskInput = document.getElementById("subtaskInput");
+  const subtaskText = subtaskInput.value.trim();
 
-    if (subtaskText) {
-        const subtaskId = 'subtask' + (subtasks.length + 1);
-        subtasks.push({
-            id: subtaskId,
-            name: subtaskText,
-            done: false
-        });
+  if (subtaskText) {
+    const subtaskId = "subtask" + (subtasks.length + 1);
+    subtasks.push({
+      id: subtaskId,
+      name: subtaskText,
+      done: false,
+    });
 
-        renderSubtasks();
-        subtaskInput.value = '';
-    }
+    renderSubtasks();
+    subtaskInput.value = "";
+  }
 }
 
 /**
  * Renders all subtasks in the subtasks list
  */
 function renderSubtasks() {
-    const subtasksList = document.querySelector('.subtasks-list');
-    if (!subtasksList) return;
+  const subtasksList = document.querySelector(".subtasks-list");
+  if (!subtasksList) return;
 
-    subtasksList.innerHTML = '';
+  subtasksList.innerHTML = "";
 
-    subtasks.forEach((subtask, index) => {
-        const subtaskElement = document.createElement('div');
-        subtaskElement.className = 'subtask-item';
-        subtaskElement.innerHTML = createSubtaskHTML(subtask, index);
-        subtasksList.appendChild(subtaskElement);
-    });
+  subtasks.forEach((subtask, index) => {
+    const subtaskElement = document.createElement("div");
+    subtaskElement.className = "subtask-item";
+    subtaskElement.innerHTML = createSubtaskHTML(subtask, index);
+    subtasksList.appendChild(subtaskElement);
+  });
 }
 
 /**
@@ -70,7 +70,7 @@ function renderSubtasks() {
  * @returns {string} HTML string for subtask item
  */
 function createSubtaskHTML(subtask, index) {
-    return `
+  return `
         <div class="subtask-content">
             <span class="subtask-bullet">•</span>
             <span class="subtask-text">${subtask.name}</span>
@@ -87,13 +87,13 @@ function createSubtaskHTML(subtask, index) {
  * @param {number} index - Index of the subtask to edit
  */
 function editSubtask(index) {
-    const subtask = subtasks[index];
-    const subtaskInput = document.getElementById('subtaskInput');
-    subtaskInput.value = subtask.name;
-    subtaskInput.focus();
+  const subtask = subtasks[index];
+  const subtaskInput = document.getElementById("subtaskInput");
+  subtaskInput.value = subtask.name;
+  subtaskInput.focus();
 
-    subtasks.splice(index, 1);
-    renderSubtasks();
+  subtasks.splice(index, 1);
+  renderSubtasks();
 }
 
 /**
@@ -101,8 +101,8 @@ function editSubtask(index) {
  * @param {number} index - Index of the subtask to delete
  */
 function deleteSubtask(index) {
-    subtasks.splice(index, 1);
-    renderSubtasks();
+  subtasks.splice(index, 1);
+  renderSubtasks();
 }
 
 /**
@@ -110,20 +110,20 @@ function deleteSubtask(index) {
  * @returns {Object} Subtasks object for database
  */
 function getSubtasks() {
-    const subtasksObj = {};
-    subtasks.forEach(subtask => {
-        subtasksObj[subtask.id] = {
-            name: subtask.name,
-            done: subtask.done
-        };
-    });
-    return subtasksObj;
+  const subtasksObj = {};
+  subtasks.forEach((subtask) => {
+    subtasksObj[subtask.id] = {
+      name: subtask.name,
+      done: subtask.done,
+    };
+  });
+  return subtasksObj;
 }
 
 /**
  * Clears all subtasks
  */
 function clearSubtasks() {
-    subtasks = [];
-    renderSubtasks();
+  subtasks = [];
+  renderSubtasks();
 }
