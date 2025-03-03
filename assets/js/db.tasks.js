@@ -5,6 +5,9 @@
  */
 const TASKS_URL = DB_BASE_URL + "tasks/";
 
+/** Optional flag to add a task to different board. This flag will be reset after use. */
+let addTaskToBoardName;
+
 /**
  * Retrieves tasks from the database, optionally filtering them based on the provided text.
  *
@@ -154,7 +157,12 @@ async function createTask(taskData) {
         const result = await response.json();
 
         // After creating the task, add it to the "todo" board
-        await addTaskToBoard('todo', result.name); // result.name contains the Firebase key
+        let boardName = addTaskToBoardName;
+        if (!addTaskToBoardName) {
+            boardName = 'todo';
+        }
+        addTaskToBoardName = null;
+        await addTaskToBoard(boardName, result.name); // result.name contains the Firebase key
 
         return result;
     } catch (error) {

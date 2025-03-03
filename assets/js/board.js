@@ -12,6 +12,25 @@ async function initBoard() {
   initSearchFilter();
   await renderBoardContainer();
   resetFilter();
+  modifyAddTask();
+}
+
+function modifyAddTask() {
+  addOverlayClickListeners();
+  const btnCancel = document.getElementById('btn-add-task-clear');
+  btnCancel.innerHTML = "Cancel";
+  btnCancel.onclick = hideOverlays;
+}
+
+function addOverlayClickListeners() {
+  const overlays = document.querySelectorAll('.overlay-background');
+  overlays.forEach(function(overlay) {
+    overlay.addEventListener('click', function (e) {
+      if (e.target === this) {
+        hideOverlays();
+      }
+    });
+  });
 }
 
 /**
@@ -116,8 +135,27 @@ async function renderTasks() {
 function toggleAddTaskOverlay() {
   let overlay = document.getElementById("overlayAddTask");
   overlay.classList.toggle("dNone");
-  /*overlay.innerHTML = getAddTaskOverlay();
-  includeHTML();*/
+}
+
+/**
+ * Shows the add task overlay.
+ * 
+ * @param {string} boardName name of the board where to add the new task
+ */
+function showAddTaskOverlay(boardName) {
+  addTaskToBoardName = boardName;
+  let overlay = document.getElementById("overlayAddTask");
+  overlay.classList.remove("dNone");
+}
+
+/**
+ * Hides all overlays.
+ */
+function hideOverlays() {
+  const overlays = document.querySelectorAll('.overlay-background');
+  overlays.forEach(function(overlay) {
+    overlay.classList.add("dNone");
+  });
 }
 
 /**

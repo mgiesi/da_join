@@ -1,6 +1,6 @@
 function displayBoardContainer(board) {
     let addTaskContent = board.addtasks
-        ? `<div onclick="toggleAddTaskOverlay()" class="board-container-titlebox-addtask d-flex justify-content-center align-items-center">+</div>`
+        ? `<div onclick="showAddTaskOverlay('${board.id}')" class="board-container-titlebox-addtask d-flex justify-content-center align-items-center">+</div>`
         : "";
     return `
         <div class="board-container" ondrop="moveTaskTo('${board.id}')" ondragover="allowDrop(event)">

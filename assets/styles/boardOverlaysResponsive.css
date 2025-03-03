@@ -8,4 +8,13 @@
     .footer-add-task-html {
         background-color: #ffffff;
     }
+
+    .overlay-addTask {
+        padding: 16px;
+        width: 90%;
+    }
+
+    .footer-add-task-html {
+        width: 90%;
+    }
 }
