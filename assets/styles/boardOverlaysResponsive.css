@@ -1,20 +1,68 @@
 @media (max-width: 1200px) {
-    .add-task-form {
-        width: 90%;
-    }
+  .add-task-form {
+    width: 90%;
+  }
 }
 
 @media (max-width: 1081px) {
-    .footer-add-task-html {
-        background-color: #ffffff;
-    }
+  .overlay-addTask {
+    width: 80%;
+    height: 80vh;
+    overflow: auto; /* Scrollbar aktivieren */
+    padding: 32px;
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
 
-    .overlay-addTask {
-        padding: 16px;
-        width: 90%;
-    }
+  .overlay-addTask::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+  }
 
-    .footer-add-task-html {
-        width: 90%;
-    }
+  .footer-add-task-html {
+    position: sticky;
+    bottom: 0;
+  }
+  .add-task-form {
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .add-task-header h1 {
+    font-size: 24px;
+    line-height: 56px;
+  }
+}
+
+@media (max-width: 500px) {
+  .add-task-header h1 {
+    font-size: 24px;
+    line-height: 56px;
+  }
+  .form-group input {
+    font-size: 16px;
+  }
+  .form-group textarea {
+    font-size: 16px;
+  }
+  .input-wrapper input {
+    font-size: 16px !important;
+  }
+  .priority-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  .priority-buttons button {
+    width: 50%;
+  }
+  .btn-primary,
+  .btn-secondary {
+    padding: 10px;
+    font-size: 16px;
+    line-height: 20px;
+  }
+  .form-actions {
+    display: flex;
+    gap: 16px;
+  }
 }
