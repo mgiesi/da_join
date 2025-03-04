@@ -172,6 +172,48 @@ async function createTask(taskData) {
 }
 
 /**
+ * Updates an existing task in the database by overwriting it with the provided data.
+ *
+ * @param {string} taskId - The unique identifier of the task to update.
+ * @param {Object} taskData - The data to update the task with.
+ * @param {string} taskData.title - The title of the task.
+ * @param {string} taskData.description - The description of the task.
+ * @param {string} taskData.assignedTo - The person assigned to the task.
+ * @param {string} taskData.dueDate - The due date of the task.
+ * @param {string} taskData.prio - The priority of the task.
+ * @param {string} taskData.category - The category of the task.
+ * @param {Array} taskData.subtasks - An array of subtasks.
+ * @returns {Promise<Object>} A promise that resolves to the updated task data.
+ * @throws Will throw an error if the task update fails.
+ */
+async function updateTask(taskId, taskData) {
+    try {
+        const response = await fetch(TASKS_URL + "/" + taskId + ".json", {
+            method: 'PUT', // PUT überschreibt den gesamten Eintrag
+            body: JSON.stringify({
+                title: taskData.title,
+                description: taskData.description,
+                assignedTo: taskData.assignedTo,
+                dueDate: taskData.dueDate,
+                prio: taskData.prio,
+                category: taskData.category,
+                subtasks: taskData.subtasks
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to update task');
+        }
+
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        console.error('Error updating task:', error);
+        throw error;
+    }
+}
+
+/**
  * Adds a task to a specific board
  * @param {string} boardId - The ID of the board
  * @param {string} taskId - The ID of the task

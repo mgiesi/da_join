@@ -79,6 +79,48 @@ async function validateAndSubmitForm(event) {
 }
 
 /**
+ * Handles form submission event when editing a task
+ * @param {Event} e - Form submission event
+ * @param {Event} taskId - Id of the task
+ */
+function handleFormSubmit4Edit(e, taskId) {
+    e.preventDefault();
+    validateAndSubmitForm4Edit(e, taskId);
+}
+
+/**
+ * Validates form data and submits if valid when editing a task
+ * @param {Event} event - Form submission event
+ * @returns {boolean} False to prevent default form submission
+ */
+async function validateAndSubmitForm4Edit(event, taskId) {
+    event.preventDefault();
+    const form = event.target;
+    const requiredFields = form.querySelectorAll('[required]');
+    let isValid = validateRequiredFields(requiredFields);
+
+    if (!isValid) return false;
+
+    // Check if at least one priority is selected
+    const selectedPriority = getSelectedPriority();
+    if (!selectedPriority) {
+        alert('Please select a priority level');
+        return false;
+    }
+
+    const taskData = gatherTaskData();
+
+    try {
+        await updateTask(taskId, taskData);
+        return showTaskAddedNotification();
+    } catch (error) {
+        console.error('Error creating task:', error);
+        alert('Failed to create task. Please try again.');
+        return false;
+    }
+}
+
+/**
  * Validates all required fields in the form
  * @param {NodeList} requiredFields - NodeList of required form fields
  * @returns {boolean} True if all fields are valid, false otherwise

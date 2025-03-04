@@ -137,7 +137,7 @@ async function renderTasks() {
  * Toggles the visibility of the add task overlay.
  * Updates the overlay content with the add task overlay template.
  */
-function toggleAddTaskOverlay() {
+function showAddTaskOverlay() {
   const btnSubmit = document.getElementById('btn-add-task-submit');
   const textNode = Array.from(btnSubmit.childNodes).find(node => 
     node.nodeType === Node.TEXT_NODE && node.textContent.trim() !== ""
@@ -145,9 +145,11 @@ function toggleAddTaskOverlay() {
   if (textNode) {
     textNode.textContent = "Create Task";
   }
-
+  const addTaskForm = document.getElementById('add-task-form');
+  addTaskForm.onsubmit = handleFormSubmit;
+  resetTaskDetails();
   let overlay = document.getElementById("overlayAddTask");
-  overlay.classList.toggle("dNone");
+  overlay.classList.remove("dNone");
 }
 
 /**
@@ -165,7 +167,9 @@ function showAddTaskOverlay(boardName) {
   if (textNode) {
     textNode.textContent = "Create Task";
   }
-
+  const addTaskForm = document.getElementById('add-task-form');
+  addTaskForm.onsubmit = handleFormSubmit;
+  resetTaskDetails();
   let overlay = document.getElementById("overlayAddTask");
   overlay.classList.remove("dNone");
 }
@@ -190,7 +194,7 @@ function hideOverlays() {
  */
 async function toggleTaskDetails(taskId) {
   const [task, contacts] = await Promise.all([getTask(taskId), getContacts()]);
-
+  resetTaskDetails();
   let overlay = document.getElementById("taskDetails");
   overlay.classList.toggle("dNone");
   overlay.innerHTML = getTaskDetails(taskId, task, contacts);
@@ -206,8 +210,12 @@ async function toggleTaskDetails(taskId) {
  */
 async function toggleEditTaskDetails(taskId) {
   const [task, contacts] = await Promise.all([getTask(taskId), getContacts()]);
-  //overlay.innerHTML = getEditTaskDetails(taskId, task, contacts);
 
+  loadTaskDetails(taskId, task, contacts);
+  const addTaskForm = document.getElementById('add-task-form');
+  addTaskForm.onsubmit = function(event) {
+    handleFormSubmit4Edit(event, taskId);
+  };
   const btnSubmit = document.getElementById('btn-add-task-submit');
   const textNode = Array.from(btnSubmit.childNodes).find(node => 
     node.nodeType === Node.TEXT_NODE && node.textContent.trim() !== ""
@@ -220,6 +228,12 @@ async function toggleEditTaskDetails(taskId) {
   overlay.classList.toggle("dNone");
 }
 
+/**
+ * Delets a task with the given task id.
+ * 
+ * @async
+ * @param {string} taskId task id for the tast which should be deleted
+ */
 async function doDeleteTask(taskId) {
   await deleteTask(taskId);
   renderTasks();
@@ -236,4 +250,39 @@ function showDeleteMessage() {
     setTimeout(function () {
       overlay.classList.add("dNone");
     }, 2000);
+}
+
+function loadTaskDetails(taskId, task, contacts) {
+  document.getElementById("title").value = task.title;
+  document.getElementById("description").value = task.description;
+  document.getElementById("dueDate").value = displayTaskDueDate(task.dueDate);
+  
+  if (task.prio === "urgent") {
+    document.getElementById("add-task-btn-urgent").classList.add("active", "selected");
+  } else {
+    document.getElementById("add-task-btn-urgent").classList.remove("active", "selected");
+  }
+  if (task.prio === "medium") {
+    document.getElementById("add-task-btn-medium").classList.add("active", "selected");
+  } else {
+    document.getElementById("add-task-btn-medium").classList.remove("active", "selected");
+  }
+  if (task.prio === "low") {
+    document.getElementById("add-task-btn-low").classList.add("active", "selected");
+  } else {
+    document.getElementById("add-task-btn-low").classList.remove("active", "selected");
+  }
+
+  document.getElementById("categorySelected").setAttribute('data-value', task.category === "userstory" ? "personal" : "work");
+  document.getElementById("category").value = task.category === "userstory" ? "User Story" : "Technical Task";
+}
+
+function resetTaskDetails() {
+  document.getElementById("title").value = "";
+  document.getElementById("description").value = "";
+  document.getElementById("dueDate").value = "";
+  
+  document.getElementById("add-task-btn-urgent").classList.remove("active", "selected");
+  document.getElementById("add-task-btn-medium").classList.remove("active", "selected");
+  document.getElementById("add-task-btn-low").classList.remove("active", "selected");
 }
