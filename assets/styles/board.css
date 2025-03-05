@@ -203,7 +203,7 @@
 
 .board-title {
   margin-bottom: 56px;
-  justify-content: space-between; 
+  justify-content: space-between;
   margin-right: 88px;
 }
 
@@ -289,7 +289,6 @@
   cursor: pointer;
   transition: background-color 0.2s;
 }
-
 
 .form-groupEdit {
   display: flex;
@@ -398,10 +397,6 @@ input:required:invalid {
   display: flex;
   flex-direction: column;
   gap: 16px;
-}
-
-.board-container-titlebox {
-  
 }
 
 .board-container-titlebox-title {

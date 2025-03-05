@@ -1,13 +1,13 @@
 function getTaskDetails(taskId, task, contacts) {
-    if (!task) {
-        return "";
-    }
-    return `
+  if (!task) {
+    return "";
+  }
+  return `
         <div class="overlay-taskDetails">
             <div class="topDetails">
                     ${displayTaskType(
-                    task.category
-                    )}<div onclick="toggleTaskDetails()" class="close-btn">×</div>
+                      task.category
+                    )}<div onclick="toggleTaskDetails()" class="close-btn">X</div>
             </div>
             <div class="taskHeadline">
                 <h1 class="f1">${task.title}</h1>
@@ -22,10 +22,10 @@ function getTaskDetails(taskId, task, contacts) {
             <div class="priority">
                 <p class="f2">Priority: </p>
                 <p class="f2">${
-                task.prio.charAt(0).toUpperCase() + task.prio.slice(1)
+                  task.prio.charAt(0).toUpperCase() + task.prio.slice(1)
                 }</p>
                 <img class="board-task-category" src="./assets/icons/prio-${
-                task.prio
+                  task.prio
                 }.svg" alt="">
             </div>
             <div class="assignedTo">
@@ -98,7 +98,12 @@ function displaySubTasks4TaskDetails(taskId, task) {
       if (!subtask) {
         return;
       } else {
-        subtaskcontent += displaySubTask4TaskDetails(taskId, task, subtaskId, subtask);
+        subtaskcontent += displaySubTask4TaskDetails(
+          taskId,
+          task,
+          subtaskId,
+          subtask
+        );
       }
     });
     return `
@@ -115,7 +120,9 @@ function displaySubTasks4TaskDetails(taskId, task) {
 function displaySubTask4TaskDetails(taskId, task, subtaskId, subtask) {
   return `
         <div class="oneSubTask">
-            <input class="task-subtasks-checkbox" type="checkbox" onclick="toggleTaskDone('${taskId}', '${subtaskId}')" ${subtask.done ? "checked" : ""}>
+            <input class="task-subtasks-checkbox" type="checkbox" onclick="toggleTaskDone('${taskId}', '${subtaskId}')" ${
+    subtask.done ? "checked" : ""
+  }>
             <p class="f3">${subtask.name}</p>
         </div>
     `;
