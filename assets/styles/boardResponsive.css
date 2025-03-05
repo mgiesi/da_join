@@ -1,77 +1,96 @@
 @media (max-width: 1500px) {
-    .board-contents {
-        flex-direction: column;
-    }
+  .board-contents {
+    flex-direction: column;
+  }
 
-    .board-content {
-        margin-left: 72px;
-        margin-right: 72px;
-    }
+  .board-content {
+    margin-left: 72px;
+    margin-right: 72px;
+  }
 
-    .board-container {
-        height: 32px;
-        margin-right: 0px;
-    }
+  .board-container {
+    height: 32px;
+    margin-right: 0px;
+  }
 
-    .board-container-titlebox-title {
-        margin-bottom: 16px;
-        font-size: 27px;
-    }
+  .board-container-titlebox-title {
+    margin-bottom: 16px;
+    font-size: 27px;
+  }
 
-    .board-container-titlebox-addtask {
-        width: 30px;
-        height: 30px;
-    }
+  .board-container-titlebox-addtask {
+    width: 30px;
+    height: 30px;
+  }
 
-    .board-container-tasks {
-        display: flex;
-        flex-direction: row;
-        overflow-x: hidden;
-    }
+  .board-container-tasks {
+    display: flex;
+    flex-direction: row;
+    overflow-x: hidden;
+  }
 
-    .board-container-tasks > * {
-        flex-shrink: 0;
-    }
+  .board-container-tasks > * {
+    flex-shrink: 0;
+  }
 
-    .board-task-container {
-        width: 252px;
-    }
+  .board-task-container {
+    width: 252px;
+  }
 }
 
 @media (max-width: 1300px) {
-    #board-task-add-1 {
-        display: none;
-    }
+  #board-task-add-1 {
+    display: none;
+  }
 
-    #board-task-add-2 {
-        display: flex;
-    }
+  #board-task-add-2 {
+    display: flex;
+  }
 
-    .board-title {
-        margin-right: 0;
-        margin-bottom: 40px;
-    }
+  .board-title {
+    margin-right: 0;
+    margin-bottom: 40px;
+  }
 
-    .board-title-search {
-        display: none;
-    }
+  .board-title-search {
+    display: none;
+  }
 
-    .board-title-search2 {
-        display: flex;
-    }
+  .board-title-search2 {
+    display: flex;
+  }
 }
 
-@media (max-width: 1080px) {
-    .main-container {
-        margin-left: 0;
-        margin-top: 0;
-        height: calc(100vh - 96px);
-        padding-top: 80px;
-    }
+@media (max-width: 1081px) {
+  .main-container {
+    margin-left: 0;
+    margin-top: 0;
+    height: calc(100vh - 96px);
+    padding-top: 80px;
+  }
 
-    .board-content {
-        margin-left: 16px;
-        margin-right: 16px;
-        margin-top: 32px;
-    }
+  .board-content {
+    margin-left: 16px;
+    margin-right: 16px;
+    margin-top: 32px;
+  }
+  .board-container-tasks {
+    flex-direction: row;
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
+    gap: 10px;
+    scroll-behavior: smooth;
+  }
+
+  .board-container-tasks > * {
+    flex-shrink: 0;
+  }
+
+  .board-task-container {
+    width: 252px;
+    flex-shrink: 0;
+    padding: 20px;
+    border-radius: 10px;
+  }
 }

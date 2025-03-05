@@ -1,109 +1,112 @@
 .main-container {
-    display: flex;
-    background-color: rgb(246, 247, 248);
-    position: relative;
-    padding-left: 232px;
-    padding-top: 96px;
+  display: flex;
+  background-color: rgb(246, 247, 248);
+  position: relative;
+  padding-left: 232px;
+  padding-top: 96px;
 }
 
 .add-task-content {
-    flex: 1;
-    padding-top: 90px;
-    padding-left: 90px;
-    max-width: 1208px;
+  flex: 1;
+  padding-top: 90px;
+  padding-left: 90px;
+  max-width: 1208px;
 }
 
 .add-task-header {
-    margin-bottom: 48px;
+  margin-bottom: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 h1 {
-    font-family: 'Inter', sans-serif;
-    font-weight: 700;
-    font-size: 61px;
-    line-height: 73.2px;
-    color: rgba(0, 0, 0, 1);
-    margin: 0;
-    padding: 0;
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  font-size: 61px;
+  line-height: 73.2px;
+  color: rgba(0, 0, 0, 1);
+  margin: 0;
+  padding: 0;
 }
 
 .add-task-form {
-    max-width: 1000px;
+  max-width: 1000px;
 }
 
 .form-columns {
-    display: flex;
-    gap: 0;
+  display: flex;
+  gap: 0;
 }
 
 .form-left-column,
 .form-right-column {
-    flex: 1;
-    max-width: calc(50% - 16px);
+  flex: 1;
+  max-width: calc(50% - 16px);
 }
 
 .separator {
-    width: 1px;
-    background-color: rgb(209, 209, 209);
-    margin: 0 32px;
-    display: block;
-    height: 470px;
-    margin-top: 12px;
+  width: 1px;
+  background-color: rgb(209, 209, 209);
+  margin: 0 32px;
+  display: block;
+  height: 470px;
+  margin-top: 12px;
 }
 
 .footer-add-task-html {
-    display: flex;
-    justify-content: flex-end;
-    padding-inline: 8px;
+  display: flex;
+  justify-content: flex-end;
+  padding-inline: 8px;
 }
 
 @media (max-width: 1081px) {
-    .main-container {
-        padding-left: 0;
-        padding-top: 82px;
-        padding-bottom: 80px;
-    }
+  .main-container {
+    padding-left: 0;
+    padding-top: 82px;
+    padding-bottom: 80px;
+  }
 
-    .add-task-content {
-        position: relative;
-        padding: 24px 16px;
-        max-width: 100%;
-        height: calc(100dvh - 235px);
-        overflow: auto;
-    }
+  .add-task-content {
+    position: relative;
+    padding: 24px 16px;
+    max-width: 100%;
+    height: calc(100dvh - 235px);
+    overflow: auto;
+  }
 
-    .add-task-header {
-        margin-bottom: 24px;
-    }
+  .add-task-header {
+    margin-bottom: 24px;
+  }
 
-    .add-task-header h1 {
-        font-size: 47px;
-        line-height: 56px;
-    }
+  .add-task-header h1 {
+    font-size: 47px;
+    line-height: 56px;
+  }
 
-    .form-columns {
-        flex-direction: column;
-        gap: 0;
-    }
+  .form-columns {
+    flex-direction: column;
+    gap: 0;
+  }
 
-    .form-left-column,
-    .form-right-column {
-        max-width: 100%;
-    }
+  .form-left-column,
+  .form-right-column {
+    max-width: 100%;
+  }
 
-    .separator {
-        display: none;
-    }
+  .separator {
+    display: none;
+  }
 
-    .footer-add-task-html {
-        position: fixed;
-        bottom: 80px;
-        left: 0;
-        right: 0;
-        display: flex;
-        justify-content: flex-end;
-        background-color: rgb(246, 247, 248);
-        padding: 16px;
-        z-index: 98;
-    }
+  .footer-add-task-html {
+    position: fixed;
+    bottom: 80px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: flex-end;
+    background-color: rgb(246, 247, 248);
+    padding: 16px;
+    z-index: 98;
+  }
 }

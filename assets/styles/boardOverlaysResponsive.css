@@ -2,6 +2,14 @@
   .add-task-form {
     width: 90%;
   }
+  .add-task-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .respX {
+    display: flex;
+  }
 }
 
 @media (max-width: 1081px) {
@@ -24,6 +32,14 @@
   }
   .add-task-form {
     width: 100%;
+  }
+  .add-task-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .respX {
+    display: flex !important;
   }
 }
 
@@ -64,5 +80,77 @@
   .form-actions {
     display: flex;
     gap: 16px;
+  }
+}
+
+@media (max-width: 431px) {
+  .add-task-header h1 {
+    font-size: 24px;
+    line-height: 56px;
+  }
+  .form-group input {
+    font-size: 16px;
+  }
+  .form-group textarea {
+    font-size: 16px;
+  }
+  .input-wrapper input {
+    font-size: 16px !important;
+  }
+  .priority-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  .priority-buttons button {
+    width: 50%;
+  }
+  .btn-primary,
+  .btn-secondary {
+    padding: 4px;
+    font-size: 16px;
+    line-height: 20px;
+  }
+  .form-actions {
+    display: flex;
+    gap: 16px;
+  }
+  .add-task-header {
+    margin-bottom: 8px;
+  }
+}
+
+@media (max-width: 376px) {
+  .add-task-header h1 {
+    font-size: 24px;
+    line-height: 56px;
+  }
+  .form-group input {
+    font-size: 16px;
+  }
+  .form-group textarea {
+    font-size: 16px;
+  }
+  .input-wrapper input {
+    font-size: 16px !important;
+  }
+  .priority-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  .priority-buttons button {
+    width: 50%;
+  }
+  .btn-primary,
+  .btn-secondary {
+    padding: 4px;
+    font-size: 16px;
+    line-height: 20px;
+  }
+  .form-actions {
+    display: flex;
+    gap: 16px;
+  }
+  .add-task-header {
+    margin-bottom: 8px;
   }
 }

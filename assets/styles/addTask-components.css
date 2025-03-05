@@ -191,7 +191,7 @@
 .vertical-divider {
   width: 1px;
   height: 24px;
-  background-color: #D1D1D1;
+  background-color: #d1d1d1;
   margin: 0 4px;
 }
 
@@ -229,12 +229,12 @@
 
 .subtask-bullet {
   font-size: 18px;
-  color: #2A3647;
+  color: #2a3647;
 }
 
 .subtask-text {
   font-size: 16px;
-  color: #2A3647;
+  color: #2a3647;
 }
 
 .subtask-item-actions {
@@ -385,7 +385,7 @@
   position: fixed;
   top: 50%;
   left: 50%;
-  background-color: #2A3647;
+  background-color: #2a3647;
   color: white;
   padding: 16px 24px;
   border-radius: 8px;
@@ -493,6 +493,14 @@
   background: white url(/assets/icons/Subtasks\ icons11.svg) right no-repeat;
   background-position: calc(100% - 15px) center;
   padding-right: 20px;
+}
+.respX {
+  display: none;
+  cursor: pointer;
+  font-weight: bolder;
+}
+.respX:hover {
+  color: #29abe2;
 }
 
 /* Adjust existing styles for mobile */
