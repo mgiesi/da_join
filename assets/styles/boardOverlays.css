@@ -19,6 +19,18 @@
   border-radius: 10px;
 }
 
+
+.close-btn {
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  transition: all 0.2s ease-in-out;
+}
+.close-btn:hover {
+  background-color: #0c2e621f;
+}
+
 .overlay.animate {
   animation: slideIn 450ms forwards;
 }

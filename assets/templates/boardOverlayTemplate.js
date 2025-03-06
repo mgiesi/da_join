@@ -7,7 +7,8 @@ function getTaskDetails(taskId, task, contacts) {
             <div class="topDetails">
                     ${displayTaskType(
                       task.category
-                    )}<div onclick="toggleTaskDetails()" class="close-btn">X</div>
+                    )}
+                <img onclick="toggleTaskDetails()" class="close-btn" src="./assets/icons/cancel.svg" alt="">
             </div>
             <div class="taskHeadline">
                 <h1 class="f1">${task.title}</h1>
