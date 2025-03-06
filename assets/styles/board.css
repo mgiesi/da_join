@@ -92,7 +92,7 @@
 .topDetails {
   display: flex;
   justify-content: space-between;
-  width: 445px;
+  /* width: 445px; */
   height: 36px;
 }
 

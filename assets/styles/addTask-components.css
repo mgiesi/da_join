@@ -503,11 +503,14 @@
 .respX {
   display: none;
   cursor: pointer;
-  font-weight: bolder;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  transition: all 0.2s ease-in-out;
 }
 
 .respX:hover {
-  color: #29abe2;
+  background-color: #0c2e621f;
 }
 
 /* Adjust existing styles for mobile */

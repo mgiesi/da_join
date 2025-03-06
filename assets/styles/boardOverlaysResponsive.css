@@ -48,6 +48,10 @@
     font-size: 24px;
     line-height: 56px;
   }
+
+  .overlay-addTask {
+    width: 90%;
+  }
 }
 
 @media (max-width: 500px) {
@@ -116,6 +120,10 @@
   }
   .add-task-header {
     margin-bottom: 8px;
+  }
+
+  .overlay-addTask {
+    width: 95%;
   }
 }
 
