@@ -38,6 +38,11 @@
   transform: scale(1.02);
 }
 
+.btn-secondary:hover .action-btn-img,
+.btn-primary:hover .action-btn-img {
+  filter: brightness(0) saturate(100%) invert(56%) sepia(75%) saturate(1648%) hue-rotate(165deg) brightness(96%) contrast(98%);
+}
+
 /* Select Wrapper */
 .select-wrapper {
   position: relative;
@@ -494,11 +499,13 @@
   background-position: calc(100% - 15px) center;
   padding-right: 20px;
 }
+
 .respX {
   display: none;
   cursor: pointer;
   font-weight: bolder;
 }
+
 .respX:hover {
   color: #29abe2;
 }

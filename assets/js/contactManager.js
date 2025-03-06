@@ -1,6 +1,6 @@
-/** @type {Object} Object to store contacts data */
+/** @type {Object<string, {name: string, avatarColor: string}>} Object to store contacts data */
 let contacts = {};
-/** @type {Array} Array to store selected contact IDs */
+/** @type {Array<string>} Array to store selected contact IDs */
 let selectedContacts = [];
 
 /**
@@ -23,7 +23,7 @@ async function fetchContacts() {
 
 /**
  * Gets the list of assigned contacts
- * @returns {Object} Object with contact IDs as keys
+ * @returns {Object<string, boolean>} Object with contact IDs as keys
  */
 function getAssignedContacts() {
     const assignedTo = {};
@@ -35,6 +35,7 @@ function getAssignedContacts() {
 
 /**
  * Toggles the contact dropdown visibility and rotates the arrow
+ * @returns {void}
  */
 function toggleContactDropdown() {
     const dropdown = document.querySelector('.contact-dropdown');
@@ -70,6 +71,7 @@ document.addEventListener('click', function (event) {
 
 /**
  * Renders the list of contacts in the dropdown
+ * @returns {void}
  */
 function renderContactsList() {
     const contactList = document.getElementById('contactList');
@@ -83,7 +85,7 @@ function renderContactsList() {
 
 /**
  * Gets contacts sorted alphabetically by name
- * @returns {Array} Array of sorted contact entries
+ * @returns {Array<[string, {name: string, avatarColor: string}]>} Array of sorted contact entries
  */
 function getSortedContacts() {
     return Object.entries(contacts)
@@ -103,18 +105,41 @@ function createContactDiv(id, contact) {
 
     return `
         <div class="contact-item" onclick="toggleContactSelection('${id}')">
-            <div class="contact-info-container">
-                <div class="contact-avatar" style="background-color: ${contact.avatarColor || '#000000'}">
-                    ${initials}
-                </div>
-                <div class="contact-name">${contact.name}</div>
+            ${createContactInfoHTML(contact, initials)}
+            ${createCheckboxHTML(isSelected)}
+        </div>
+    `;
+}
+
+/**
+ * Creates HTML for contact info section
+ * @param {Object} contact - Contact object with name and avatarColor properties
+ * @param {string} initials - Contact initials
+ * @returns {string} HTML string for contact info
+ */
+function createContactInfoHTML(contact, initials) {
+    return `
+        <div class="contact-info-container">
+            <div class="contact-avatar" style="background-color: ${contact.avatarColor || '#000000'}">
+                ${initials}
             </div>
-            <div class="check-button-container ${isSelected ? 'selected' : ''}">
-                <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="4.38818" y="4" width="16" height="16" rx="3" stroke="#2A3647" stroke-width="2"/>
-                    ${isSelected ? '<path d="M7.38818 12L11.3882 16L17.3882 8" stroke="#2A3647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>' : ''}
-                </svg>
-            </div>
+            <div class="contact-name">${contact.name}</div>
+        </div>
+    `;
+}
+
+/**
+ * Creates HTML for checkbox section
+ * @param {boolean} isSelected - Whether contact is selected
+ * @returns {string} HTML string for checkbox
+ */
+function createCheckboxHTML(isSelected) {
+    return `
+        <div class="check-button-container ${isSelected ? 'selected' : ''}">
+            <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="4.38818" y="4" width="16" height="16" rx="3" stroke="#2A3647" stroke-width="2"/>
+                ${isSelected ? '<path d="M7.38818 12L11.3882 16L17.3882 8" stroke="#2A3647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>' : ''}
+            </svg>
         </div>
     `;
 }
@@ -122,6 +147,7 @@ function createContactDiv(id, contact) {
 /**
  * Toggles selection state of a contact
  * @param {string} contactId - ID of the contact to toggle
+ * @returns {void}
  */
 function toggleContactSelection(contactId) {
     const index = selectedContacts.indexOf(contactId);
@@ -137,6 +163,7 @@ function toggleContactSelection(contactId) {
 
 /**
  * Updates the contact search input display
+ * @returns {void}
  */
 function updateSelectedDisplay() {
     const searchInput = document.getElementById('contactSearch');
@@ -146,6 +173,7 @@ function updateSelectedDisplay() {
 
 /**
  * Updates the display of selected contact avatars
+ * @returns {void}
  */
 function updateSelectedAvatars() {
     const avatarDiv = document.getElementById('selectedContactsAvatar');
@@ -163,7 +191,7 @@ function updateSelectedAvatars() {
 
 /**
  * Creates an avatar element for a contact
- * @param {Object} contact - Contact object
+ * @param {Object} contact - Contact object with name and avatarColor properties
  * @param {string} initials - Contact initials
  * @returns {HTMLElement} Avatar DOM element
  */
@@ -191,6 +219,7 @@ function getInitials(name) {
 
 /**
  * Clears all selected contact avatars
+ * @returns {void}
  */
 function clearSelectedAvatars() {
     const avatarDiv = document.getElementById('selectedContactsAvatar');
@@ -202,25 +231,38 @@ function clearSelectedAvatars() {
 /**
  * Filters the contacts list based on input text
  * @param {string} searchText - Text to filter contacts by
+ * @returns {void}
  */
 function filterContactsList(searchText) {
-    // Make sure dropdown is visible when typing
+    showContactDropdown();
+    const contacts = getSortedContacts();
+    renderFilteredContacts(contacts, searchText);
+}
+
+/**
+ * Shows the contact dropdown
+ * @returns {void}
+ */
+function showContactDropdown() {
     const contactList = document.getElementById('contactList');
     contactList.style.display = 'block';
 
-    // Add open class to dropdown
     const dropdown = document.querySelector('.contact-dropdown');
     if (dropdown) {
         dropdown.classList.add('open');
     }
+}
 
-    // Get all contacts
-    const contacts = getSortedContacts();
-
-    // Clear the current list
+/**
+ * Renders filtered contacts in the list
+ * @param {Array<[string, {name: string, avatarColor: string}]>} contacts - Array of contact entries
+ * @param {string} searchText - Text to filter contacts by
+ * @returns {void}
+ */
+function renderFilteredContacts(contacts, searchText) {
+    const contactList = document.getElementById('contactList');
     contactList.innerHTML = '';
 
-    // Filter contacts and add to list
     const searchLower = searchText.toLowerCase();
     contacts.forEach(([id, contact]) => {
         if (!searchText || (contact && contact.name && contact.name.toLowerCase().includes(searchLower))) {
