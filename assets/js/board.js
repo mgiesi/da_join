@@ -9,6 +9,7 @@ let filterText;
  * @returns {Promise<void>} A promise that resolves when the board initialization is complete.
  */
 async function initBoard() {
+  await initAddTask();
   initSearchFilter();
   await renderBoardContainer();
   resetFilter();

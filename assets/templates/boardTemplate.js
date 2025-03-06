@@ -138,7 +138,10 @@ function displayContact(contact) {
 document.addEventListener("DOMContentLoaded", function () {
   function checkScreenSize() {
     if (window.innerWidth >= 1081) {
-      document.querySelector(".respX").style.display = "none";
+      const ref = document.querySelector(".respX");
+      if (ref) {
+        ref.style.display = "none";
+      }
     }
   }
 
