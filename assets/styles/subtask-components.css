@@ -1,3 +1,7 @@
+.subtask_d_none{
+    display: none !important;
+}
+
 /* Subtask Input Field Styling */
 .subtask-input {
     margin-bottom: 16px;
@@ -72,10 +76,9 @@
     transition: background-color 0.2s ease;
 }
 
-.edit-actions img:hover{
+.edit-actions img:hover {
     background-color: #D1D1D1 !important;
 }
-
 
 .vertical-divider {
     width: 1px;
@@ -99,6 +102,11 @@
     padding: 8px 12px;
     background: #F6F7F8;
     border-radius: 10px;
+    transition: background-color 0.2s ease;
+}
+
+.subtask-item:hover {
+    background-color: #EAEAEA !important;
 }
 
 .subtask-content {
@@ -118,8 +126,12 @@
 }
 
 .subtask-item-actions {
-    display: flex;
+    display: none !important;
     gap: 8px;
+}
+
+.subtask-item:hover .subtask-item-actions {
+    display: flex !important;
 }
 
 .subtask-item-actions img {
