@@ -17,7 +17,10 @@
     width: 80%;
     height: 80vh;
     overflow: auto; /* Scrollbar aktivieren */
-    padding: 32px;
+    padding-top: 32px; 
+    padding-bottom: 8px;
+    padding-left: 32px;
+    padding-right: 32px;
     overflow-y: auto;
     scrollbar-width: none;
   }

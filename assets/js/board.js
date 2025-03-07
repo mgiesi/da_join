@@ -26,6 +26,8 @@ function modifyAddTask() {
     textNode.textContent = "Cancel";
   }
   btnCancel.onclick = hideOverlays;
+
+  document.documentElement.style.setProperty("--footer-add-task-html-bg", "#ffffff");
 }
 
 function addOverlayClickListeners() {
@@ -153,6 +155,7 @@ function showAddTaskOverlay() {
   resetTaskDetails();
   let overlay = document.getElementById("overlayAddTask");
   overlay.classList.remove("dNone");
+  openModal();
 }
 
 /**
@@ -171,6 +174,7 @@ function removeAddTaskOverlay() {
   resetTaskDetails();
   let overlay = document.getElementById("overlayAddTask");
   overlay.classList.add("dNone");
+  closeModal();
 }
 
 /**
@@ -193,6 +197,7 @@ function showAddTaskOverlay(boardName) {
   resetTaskDetails();
   let overlay = document.getElementById("overlayAddTask");
   overlay.classList.remove("dNone");
+  openModal();
 }
 
 /**
@@ -203,6 +208,7 @@ function hideOverlays() {
   overlays.forEach(function (overlay) {
     overlay.classList.add("dNone");
   });
+  closeModal();
 }
 
 /**
@@ -219,6 +225,11 @@ async function toggleTaskDetails(taskId) {
   let overlay = document.getElementById("taskDetails");
   overlay.classList.toggle("dNone");
   overlay.innerHTML = getTaskDetails(taskId, task, contacts);
+  if (overlay.classList.contains("dNone")) {
+    closeModal();
+  } else {
+    openModal();
+  }
 }
 
 /**
@@ -247,6 +258,11 @@ async function toggleEditTaskDetails(taskId) {
 
   let overlay = document.getElementById("overlayAddTask");
   overlay.classList.toggle("dNone");
+  if (overlay.classList.contains("dNone")) {
+    closeModal();
+  } else {
+    openModal();
+  }
 }
 
 /**

@@ -30,3 +30,7 @@ a {
   top: 180px;
   cursor: pointer;
 }
+
+body.modal-open {
+  overflow: hidden;
+}

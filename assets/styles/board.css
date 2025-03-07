@@ -173,12 +173,13 @@
 }
 
 .detailsButton {
-  width: 159px;
+  width: 100%;
   height: 24px;
   gap: 8px;
   display: flex;
-  margin-left: 300px;
-  margin-top: 24px;
+  justify-content: flex-end;
+  align-items: flex-end;
+  flex: 1;
 }
 
 .endBtn {
@@ -190,6 +191,19 @@
   border: none;
   cursor: pointer;
   background-color: white;
+}
+
+.endBtn:hover {
+  color: #29abe2;
+  transition: all 0.2s;
+}
+
+.endBtn:hover .detailsImgBtnDel {
+  content: url('../icons/delete_blue.svg');
+}
+
+.endBtn:hover .detailsImgBtnEdit {
+  content: url('../icons/edit_blue.svg');
 }
 
 .detailsImgBtn {

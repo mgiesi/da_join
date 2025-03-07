@@ -1,3 +1,7 @@
+:root {
+  --footer-add-task-html-bg: rgb(246, 247, 248);
+}
+
 .main-container {
   display: flex;
   background-color: rgb(246, 247, 248);
@@ -105,7 +109,7 @@ h1 {
     right: 0;
     display: flex;
     justify-content: flex-end;
-    background-color: rgb(246, 247, 248);
+    background-color: var(--footer-add-task-html-bg);
     padding: 16px;
     z-index: 98;
   }

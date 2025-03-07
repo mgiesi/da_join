@@ -38,10 +38,10 @@ function getTaskDetails(taskId, task, contacts) {
             ${displaySubTasks4TaskDetails(taskId, task)}
             <div class="detailsButton">
                 <button onclick="doDeleteTask('${taskId}')" class="endBtn">
-                    <img class="detailsImgBtn" src="./assets/icons/delete.svg" alt="">Delete
+                    <img class="detailsImgBtn detailsImgBtnDel" src="./assets/icons/delete.svg" alt="">Delete
                 </button>
                 <button onclick="toggleTaskDetails(); toggleEditTaskDetails('${taskId}')" class="endBtn">
-                    <img class="detailsImgBtn" src="./assets/icons/edit.svg" alt="">Edit
+                    <img class="detailsImgBtn detailsImgBtnEdit" src="./assets/icons/edit.svg" alt="">Edit
                 </button>
             </div>
         </div>

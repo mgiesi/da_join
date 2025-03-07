@@ -237,6 +237,7 @@ function validateFormField(inputElement) {
 function showSubmenu() {
   const overlay = document.getElementById("header-submenu");
   overlay.classList.remove("dNone");
+  openModal();
 }
 
 /**
@@ -245,6 +246,7 @@ function showSubmenu() {
 function hideSubmenu() {
   const overlay = document.getElementById("header-submenu");
   overlay.classList.add("dNone");
+  closeModal();
 }
 
 /**
@@ -262,4 +264,12 @@ function getInitials(name) {
     .split(" ")
     .map((n) => n.charAt(0).toUpperCase())
     .join("");
+}
+
+function openModal() {
+  document.body.classList.add('modal-open');
+}
+
+function closeModal() {
+  document.body.classList.remove('modal-open');
 }
