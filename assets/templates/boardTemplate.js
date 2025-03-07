@@ -91,7 +91,7 @@ function displaySubTasks(task) {
                 <div class="board-subtasks-bar">
                     <div style="width: ${subTasksDonePercent}%" class="board-subtasks-bar-value"></div>
                 </div>
-                <span id="class="f11">${subTasksDone}/${subTasksCount} Subtasks</span>
+                <span class="f11">${subTasksDone}/${subTasksCount} Subtasks</span>
             </div>
         `;
   }
