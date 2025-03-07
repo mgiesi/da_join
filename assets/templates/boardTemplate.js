@@ -100,6 +100,9 @@ function displaySubTasks(task) {
 function getSubTasksDoneCount(task, subTasksCount) {
   let subTasksDoneCount = 0;
   for (let subTaskIdx = 0; subTaskIdx < subTasksCount; subTaskIdx++) {
+    if (!task.subtasks["subtask" + (subTaskIdx + 1)]) {
+      continue;
+    }
     if (task.subtasks["subtask" + (subTaskIdx + 1)].done) {
       subTasksDoneCount++;
     }

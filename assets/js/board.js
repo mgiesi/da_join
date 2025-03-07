@@ -28,6 +28,8 @@ function modifyAddTask() {
   btnCancel.onclick = hideOverlays;
 
   document.documentElement.style.setProperty("--footer-add-task-html-bg", "#ffffff");
+  document.getElementById("add-task-header").classList.add("dNone");
+  document.getElementById("form-group-category").classList.add("dNone");
 }
 
 function addOverlayClickListeners() {
@@ -289,7 +291,7 @@ function showDeleteMessage() {
   }, 2000);
 }
 
-function loadTaskDetails(taskId, task, contacts) {
+function loadTaskDetails(taskId, task, contactsFromDb) {
   document.getElementById("title").value = task.title;
   document.getElementById("description").value = task.description;
   document.getElementById("dueDate").value = displayTaskDueDate(task.dueDate);
@@ -330,6 +332,27 @@ function loadTaskDetails(taskId, task, contacts) {
     );
   document.getElementById("category").value =
     task.category === "userstory" ? "User Story" : "Technical Task";
+  
+  selectedContacts = [];
+  const contactsCount = task && task.assignedTo ? Object.keys(task.assignedTo).length : 0;
+  if (contactsCount > 0) {
+    Object.keys(task.assignedTo).forEach((contactId) => {
+      selectedContacts.push(contactId);
+    });
+  }
+  updateSelectedAvatars();
+  
+  subtasks = [];
+  const subTasksCount =
+    task && task.subtasks ? Object.keys(task.subtasks).length : 0;
+  if (subTasksCount > 0) {
+    Object.keys(task.subtasks).forEach((subtaskId) => {
+      const subtask = task.subtasks[subtaskId];
+      subtask['id'] = subtaskId;
+      subtasks.push(subtask);
+    });
+  }
+  renderSubtasks();
 }
 
 function resetTaskDetails() {
@@ -346,4 +369,10 @@ function resetTaskDetails() {
   document
     .getElementById("add-task-btn-low")
     .classList.remove("active", "selected");
+
+  selectedContacts = [];
+  updateSelectedAvatars();
+    
+  subtasks = [];
+  renderSubtasks();
 }
