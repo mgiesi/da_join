@@ -42,7 +42,7 @@
     <main id="addTask-html-content" class="add-task-content">
       <div id="add-task-header" class="add-task-header">
         <h1>Add Task</h1>
-          <img onclick="removeAddTaskOverlay()" class="respX" src="./assets/icons/cancel.svg" alt="">
+        <img onclick="removeAddTaskOverlay()" class="respX" src="./assets/icons/cancel.svg" alt="">
       </div>
 
       <form class="add-task-form" id="add-task-form" onsubmit="return handleFormSubmit(event)">
@@ -125,13 +125,13 @@
             </div>
 
             <div class="form-group">
-              <label>Subtasks</label>
+              <label class="subtask-header">Subtasks</label>
               <div class="subtask-input">
                 <div class="input-wrapper">
                   <input type="text" id="subtaskInput" placeholder="Add new subtask" />
                   <div class="subtask-actions">
-                    <img src="./assets/icons/Subtasks icons11.svg" alt="Add subtask" class="subtask-add-icon"
-                      onclick="focusSubtaskInput()" />
+                    <img src="./assets/icons/add.svg" alt="Add subtask" class="subtask-add-icon"
+                      onclick="addSubtask()" />
                   </div>
                 </div>
               </div>

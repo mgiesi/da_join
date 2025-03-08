@@ -4,6 +4,7 @@
 
 let subtasks = [];
 let isEditingSubtask = false;
+let editingSubtaskIndex = null;
 
 /**
  * Initializes subtask functionality
@@ -12,13 +13,29 @@ function initSubtaskSystem() {
   const subtaskInput = document.getElementById("subtaskInput");
   if (!subtaskInput) return;
 
+  setupSubtaskInput(subtaskInput);
+  setupSubtaskInputEvents(subtaskInput);
+  styleSubtasksList();
+}
+
+/**
+ * Sets up the subtask input field
+ * @param {HTMLElement} subtaskInput - The subtask input element
+ */
+function setupSubtaskInput(subtaskInput) {
   const inputWrapper = subtaskInput.parentElement;
   const actionsDiv = inputWrapper.querySelector(".subtask-actions");
 
   actionsDiv.innerHTML = `
        <img src="./assets/icons/Subtasks\ icons11.svg" alt="Add subtask" class="subtask-add-icon" onclick="focusSubtaskInput()">
    `;
+}
 
+/**
+ * Sets up event handlers for the subtask input
+ * @param {HTMLElement} subtaskInput - The subtask input element
+ */
+function setupSubtaskInputEvents(subtaskInput) {
   subtaskInput.onkeypress = function (e) {
     if (e.key === "Enter") {
       e.preventDefault();
@@ -32,6 +49,18 @@ function initSubtaskSystem() {
 }
 
 /**
+ * Styles the subtasks list container
+ */
+function styleSubtasksList() {
+  const subtasksList = document.querySelector(".subtasks-list");
+  if (!subtasksList) return;
+
+  subtasksList.style.backgroundColor = '#F6F7F8';
+  subtasksList.style.borderRadius = '10px';
+  subtasksList.style.padding = '4px';
+}
+
+/**
  * Transforms the subtask input field to show action buttons
  * @param {boolean} isFocused - Whether the input is focused
  */
@@ -41,22 +70,40 @@ function transformSubtaskInput(isFocused) {
   const actionsDiv = inputWrapper.querySelector(".subtask-actions");
 
   if (isFocused) {
-    subtaskInput.style.backgroundImage = 'none';
-    actionsDiv.innerHTML = `
-      <div class="edit-actions active">
-        <img src="./assets/icons/cancel.svg" alt="Cancel" onclick="clearSubtaskInput()">
-        <div class="vertical-divider"></div>
-        <img src="./assets/icons/subtasks_confirm.svg" alt="Confirm" class="" onclick="addSubtask()">
-      </div>
-    `;
-    subtaskInput.classList.add('active');
+    setFocusedInputState(subtaskInput, actionsDiv);
   } else {
-    subtaskInput.style.backgroundImage = '';
-    actionsDiv.innerHTML = `
-      <img src="./assets/icons/Subtasks\ icons11.svg" alt="Add subtask" class="subtask-add-icon" onclick="focusSubtaskInput()">
-    `;
-    subtaskInput.classList.remove('active');
+    setUnfocusedInputState(subtaskInput, actionsDiv);
   }
+}
+
+/**
+ * Sets the focused state for the subtask input
+ * @param {HTMLElement} subtaskInput - The subtask input element
+ * @param {HTMLElement} actionsDiv - The actions div element
+ */
+function setFocusedInputState(subtaskInput, actionsDiv) {
+  subtaskInput.style.backgroundImage = 'none';
+  actionsDiv.innerHTML = `
+    <div class="edit-actions active">
+      <img src="./assets/icons/cancel.svg" alt="Cancel" onclick="clearSubtaskInput()">
+      <div class="vertical-divider"></div>
+      <img src="./assets/icons/subtasks_confirm.svg" alt="Confirm" class="" onclick="addSubtask()">
+    </div>
+  `;
+  subtaskInput.classList.add('active');
+}
+
+/**
+ * Sets the unfocused state for the subtask input
+ * @param {HTMLElement} subtaskInput - The subtask input element
+ * @param {HTMLElement} actionsDiv - The actions div element
+ */
+function setUnfocusedInputState(subtaskInput, actionsDiv) {
+  subtaskInput.style.backgroundImage = '';
+  actionsDiv.innerHTML = `
+    <img src="./assets/icons/Subtasks\ icons11.svg" alt="Add subtask" class="subtask-add-icon" onclick="focusSubtaskInput()">
+  `;
+  subtaskInput.classList.remove('active');
 }
 
 /**
@@ -75,17 +122,24 @@ function addSubtask() {
   const subtaskText = subtaskInput.value.trim();
 
   if (subtaskText) {
-    const subtaskId = "subtask" + (subtasks.length + 1);
-    subtasks.push({
-      id: subtaskId,
-      name: subtaskText,
-      done: false,
-    });
-
-    renderSubtasks();
+    addSubtaskToList(subtaskText);
     clearSubtaskInput();
     transformSubtaskInput(false);
   }
+}
+
+/**
+ * Adds a subtask to the list
+ * @param {string} subtaskText - The text of the subtask
+ */
+function addSubtaskToList(subtaskText) {
+  const subtaskId = "subtask" + (subtasks.length + 1);
+  subtasks.push({
+    id: subtaskId,
+    name: subtaskText,
+    done: false,
+  });
+  renderSubtasks();
 }
 
 /**
@@ -107,15 +161,42 @@ function renderSubtasks() {
   if (!subtasksList) return;
 
   subtasksList.innerHTML = "";
-
-  subtasks.forEach((subtask, index) => {
-    const subtaskElement = document.createElement("div");
-    subtaskElement.className = "subtask-item";
-    subtaskElement.innerHTML = createSubtaskHTML(subtask, index);
-    subtasksList.appendChild(subtaskElement);
-  });
+  applySubtasksListStyle(subtasksList);
+  renderSubtaskItems(subtasksList);
 }
 
+/**
+ * Applies styling to the subtasks list
+ * @param {HTMLElement} subtasksList - The subtasks list element
+ */
+function applySubtasksListStyle(subtasksList) {
+  subtasksList.style.backgroundColor = '#F6F7F8';
+  subtasksList.style.borderRadius = '10px';
+  subtasksList.style.padding = '4px';
+}
+
+/**
+ * Renders all subtask items in the list
+ * @param {HTMLElement} subtasksList - The subtasks list element
+ */
+function renderSubtaskItems(subtasksList) {
+  for (let i = 0; i < subtasks.length; i++) {
+    const subtaskElement = document.createElement("div");
+    subtaskElement.className = "subtask-item";
+
+    if (isEditingSubtask && editingSubtaskIndex === i) {
+      subtaskElement.innerHTML = createEditableSubtaskHTML(subtasks[i], i);
+    } else {
+      subtaskElement.innerHTML = createSubtaskHTML(subtasks[i], i);
+      // Add ondblclick to the entire subtask item
+      subtaskElement.ondblclick = function () {
+        editSubtask(i);
+      };
+    }
+
+    subtasksList.appendChild(subtaskElement);
+  }
+}
 /**
  * Creates HTML for a subtask item
  * @param {Object} subtask - Subtask object
@@ -124,7 +205,7 @@ function renderSubtasks() {
  */
 function createSubtaskHTML(subtask, index) {
   return `
-        <div class="subtask-content">
+        <div class="subtask-content" ondblclick="editSubtask(${index})" style="cursor: pointer;">
             <span class="subtask-bullet">•</span>
             <span class="subtask-text">${subtask.name}</span>
         </div>
@@ -136,21 +217,64 @@ function createSubtaskHTML(subtask, index) {
 }
 
 /**
+ * Creates HTML for an editable subtask item
+ * @param {Object} subtask - Subtask object
+ * @param {number} index - Index of the subtask
+ * @returns {string} HTML string for editable subtask item
+ */
+function createEditableSubtaskHTML(subtask, index) {
+  return `
+        <div class="subtask-edit-container">
+            <input type="text" class="subtask-edit-input" value="${subtask.name}" id="subtask-edit-${index}">
+            <div class="subtask-edit-actions">
+                <img src="./assets/icons/delete.svg" alt="Delete" onclick="deleteSubtask(${index})">
+                <img src="./assets/icons/subtasks_confirm.svg" alt="Save" onclick="saveSubtaskEdit(${index})">
+            </div>
+        </div>
+    `;
+}
+
+/**
  * Edits an existing subtask
  * @param {number} index - Index of the subtask to edit
  */
 function editSubtask(index) {
-  const subtask = subtasks[index];
-  const subtaskInput = document.getElementById("subtaskInput");
-  subtaskInput.value = subtask.name;
-  subtaskInput.focus();
   isEditingSubtask = true;
+  editingSubtaskIndex = index;
+  renderSubtasks();
+  focusEditInput(index);
+}
 
-  // Store the index being edited
-  subtaskInput.dataset.editIndex = index;
+/**
+ * Focuses the edit input field
+ * @param {number} index - Index of the subtask being edited
+ */
+function focusEditInput(index) {
+  setTimeout(function () {
+    var editInput = document.getElementById("subtask-edit-" + index);
+    if (editInput) {
+      editInput.focus();
+      var textLength = editInput.value.length;
+      editInput.setSelectionRange(textLength, textLength);
+    }
+  }, 0);
+}
 
-  // Transform the input to show action buttons
-  transformSubtaskInput(true);
+/**
+ * Saves the edited subtask
+ * @param {number} index - Index of the subtask being edited
+ */
+function saveSubtaskEdit(index) {
+  var editInput = document.getElementById("subtask-edit-" + index);
+  var newText = editInput.value.trim();
+
+  if (newText) {
+    subtasks[index].name = newText;
+  }
+
+  isEditingSubtask = false;
+  editingSubtaskIndex = null;
+  renderSubtasks();
 }
 
 /**
@@ -159,28 +283,11 @@ function editSubtask(index) {
  */
 function deleteSubtask(index) {
   subtasks.splice(index, 1);
-  renderSubtasks();
-}
 
-/**
- * Gets subtasks in the format required by the database
- * @returns {Object} Subtasks object for database
- */
-function getSubtasks() {
-  const subtasksObj = {};
-  subtasks.forEach((subtask) => {
-    subtasksObj[subtask.id] = {
-      name: subtask.name,
-      done: subtask.done,
-    };
-  });
-  return subtasksObj;
-}
+  if (isEditingSubtask && editingSubtaskIndex === index) {
+    isEditingSubtask = false;
+    editingSubtaskIndex = null;
+  }
 
-/**
- * Clears all subtasks
- */
-function clearSubtasks() {
-  subtasks = [];
   renderSubtasks();
 }
