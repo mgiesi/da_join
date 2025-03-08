@@ -1,0 +1,54 @@
+/* Responsive styles */
+@media (max-width: 1081px) {
+    .form-group {
+        margin-bottom: 16px !important;
+        gap: 0px !important;
+        padding: 0 !important;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select,
+    .subtask-input input {
+        font-size: 16px;
+        line-height: 20px;
+        padding: 10px 16px;
+    }
+
+    .avatarDiv {
+        margin-top: 8px;
+        min-height: 0px;
+    }
+
+    .separator {
+        display: none;
+    }
+
+    .priority-buttons {
+        gap: 8px;
+    }
+
+    .priority-btn {
+        padding: 6px 8px;
+        font-size: 16px;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        padding: 12px 16px;
+        font-size: 16px;
+        line-height: 20px;
+    }
+
+    .task-added-notification {
+        width: 80%;
+        max-width: 300px;
+    }
+
+    .custom-dropdown-selected,
+    .custom-dropdown-option {
+        font-size: 16px;
+        line-height: 20px;
+        padding: 10px 16px;
+    }
+}

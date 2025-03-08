@@ -84,23 +84,26 @@
 .subtasks-list {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    margin-top: 8px;
     background-color: #F6F7F8;
     border-radius: 10px;
+    padding: 4px;
 }
 
 /* Subtask items */
 .subtask-item {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 8px 10px;
+    justify-content: space-between;
+    background: #f6f7f8;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
     border-radius: 8px;
     transition: background-color 0.2s ease;
 }
 
 .subtask-item:hover {
+    cursor: pointer;
     background-color: #EAEAEA;
 }
 
@@ -110,6 +113,12 @@
     gap: 8px;
     cursor: pointer;
     flex: 1;
+}
+
+.subtask-bullet {
+    font-size: 18px;
+    color: #2A3647;
+    margin-right: 8px;
 }
 
 .subtask-text {
@@ -126,6 +135,7 @@
 }
 
 .subtask-item:hover .subtask-item-actions {
+    cursor: pointer;
     opacity: 1;
 }
 
@@ -138,15 +148,17 @@
 
 /* Editable subtask styling */
 .subtask-edit-container {
+    flex: 1;
     display: flex;
-    width: 100%;
-    align-items: center;
+    flex-direction: row;
     justify-content: space-between;
+    align-items: center;
     border-bottom: 1px solid #29ABE2;
-    padding: 8px 0;
 }
 
 .subtask-edit-input {
+    border-radius: unset;
+    height: 30px;
     flex: 1;
     border: none;
     background: transparent;
@@ -158,6 +170,7 @@
 }
 
 .subtask-edit-actions {
+
     display: flex;
     gap: 16px;
     align-items: center;
@@ -172,11 +185,6 @@
 }
 
 .subtask-edit-actions img:hover {
+    cursor: pointer;
     opacity: 1;
-}
-
-.subtask-bullet {
-    font-size: 18px;
-    color: #2A3647;
-    margin-right: 8px;
 }

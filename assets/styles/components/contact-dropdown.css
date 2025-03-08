@@ -1,0 +1,121 @@
+/* Contact Dropdown */
+.contact-dropdown {
+    position: relative;
+    width: 100%;
+}
+
+.contact-select {
+    width: 100%;
+    padding: 12px 21px;
+    border: 1px solid rgb(209, 209, 209);
+    border-radius: 10px;
+    font-size: 20px;
+    line-height: 24px;
+    font-family: "Inter", sans-serif;
+    background: white;
+    cursor: pointer;
+    padding-right: 40px;
+}
+
+.contact-dropdown-list {
+    position: absolute;
+    display: none;
+    width: 100%;
+    max-height: 180px;
+    overflow-y: auto;
+    background: white;
+    border: 1px solid rgb(209, 209, 209);
+    border-radius: 0px 0px 10px 10px;
+    margin-top: -7px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 6px 0;
+    z-index: 1;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 16px;
+    cursor: pointer;
+    margin-block: 2px;
+}
+
+.contact-info-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.contact-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 12px;
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+    flex-shrink: 0;
+}
+
+.contact-name {
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.87);
+    font-family: "Inter", sans-serif;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.contact-checkbox {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(0, 0, 0, 0.54);
+    border-radius: 3px;
+    cursor: pointer;
+    background-color: white;
+    flex-shrink: 0;
+}
+
+.contact-dropdown-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.contact-dropdown-list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.contact-dropdown-list::-webkit-scrollbar-thumb {
+    background: #a8a8a8;
+    border-radius: 4px;
+}
+
+.contact-dropdown-list::-webkit-scrollbar-thumb:hover {
+    background: #888;
+}
+
+.avatarDiv {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+    flex-wrap: wrap;
+    min-height: 32px;
+}
+
+.contact-avatar-selected {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 12px;
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+    background-color: #000000;
+}

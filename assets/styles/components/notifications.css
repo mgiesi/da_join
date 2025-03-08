@@ -1,0 +1,33 @@
+/* Notification */
+.task-added-notification {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    background-color: #2a3647;
+    color: white;
+    padding: 16px 24px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    transform: translate(-50%, -50%) translateY(100px);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    z-index: 1000;
+}
+
+.task-added-notification.show {
+    transform: translate(-50%, -50%);
+    opacity: 1;
+}
+
+.task-added-notification img {
+    width: 24px;
+    height: 24px;
+}
+
+.task-added-notification span {
+    font-size: 16px;
+    font-weight: 400;
+}

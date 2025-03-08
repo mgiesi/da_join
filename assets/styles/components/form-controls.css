@@ -1,0 +1,44 @@
+/* Select Wrapper */
+.select-wrapper {
+    position: relative;
+    width: 100%;
+    z-index: 2;
+}
+
+.select-wrapper::after {
+    content: "";
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%) rotate(0deg);
+    width: 16px;
+    height: 7px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    pointer-events: none;
+    transition: transform 0.2s ease-in-out;
+}
+
+.select-wrapper:has(select:focus)::after {
+    transform: translateY(-50%) rotate(180deg);
+}
+
+.select-wrapper.focused::after {
+    transform: translateY(-50%) rotate(180deg);
+}
+
+.select-wrapper select {
+    width: 100%;
+    padding: 12px 16px;
+    padding-right: 40px;
+    appearance: none;
+    border: 1px solid rgb(209, 209, 209);
+    border-radius: 10px;
+    font-size: 20px;
+    line-height: 24px;
+    font-family: "Inter", sans-serif;
+    background-color: white;
+    color: rgba(0, 0, 0, 0.87);
+    cursor: pointer;
+}

@@ -1,0 +1,54 @@
+/* Priority Buttons */
+.priority-buttons {
+    display: flex;
+    gap: 16px;
+}
+
+.priority-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 16px 10px;
+    border: 1px solid rgb(209, 209, 209);
+    border-radius: 10px;
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 400;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.priority-btn img {
+    transition: filter 0.2s ease-in-out;
+}
+
+.priority-btn:hover {
+    transform: scale(1.02);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.priority-btn[data-priority="urgent"].active {
+    background-color: #ff3d00 !important;
+    color: white !important;
+    border-color: #ff3d00 !important;
+}
+
+.priority-btn[data-priority="medium"].active {
+    background-color: #ffa800 !important;
+    color: white !important;
+    border-color: #ffa800 !important;
+}
+
+.priority-btn[data-priority="low"].active {
+    background-color: #7ae229 !important;
+    color: white !important;
+    border-color: #7ae229 !important;
+}
+
+.priority-btn.active img {
+    filter: brightness(0) invert(1) !important;
+}

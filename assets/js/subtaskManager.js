@@ -15,7 +15,6 @@ function initSubtaskSystem() {
 
   setupSubtaskInput(subtaskInput);
   setupSubtaskInputEvents(subtaskInput);
-  styleSubtasksList();
 }
 
 /**
@@ -46,18 +45,6 @@ function setupSubtaskInputEvents(subtaskInput) {
   subtaskInput.onfocus = function () {
     transformSubtaskInput(true);
   };
-}
-
-/**
- * Styles the subtasks list container
- */
-function styleSubtasksList() {
-  const subtasksList = document.querySelector(".subtasks-list");
-  if (!subtasksList) return;
-
-  subtasksList.style.backgroundColor = '#F6F7F8';
-  subtasksList.style.borderRadius = '10px';
-  subtasksList.style.padding = '4px';
 }
 
 /**
@@ -161,18 +148,7 @@ function renderSubtasks() {
   if (!subtasksList) return;
 
   subtasksList.innerHTML = "";
-  applySubtasksListStyle(subtasksList);
   renderSubtaskItems(subtasksList);
-}
-
-/**
- * Applies styling to the subtasks list
- * @param {HTMLElement} subtasksList - The subtasks list element
- */
-function applySubtasksListStyle(subtasksList) {
-  subtasksList.style.backgroundColor = '#F6F7F8';
-  subtasksList.style.borderRadius = '10px';
-  subtasksList.style.padding = '4px';
 }
 
 /**
@@ -188,7 +164,6 @@ function renderSubtaskItems(subtasksList) {
       subtaskElement.innerHTML = createEditableSubtaskHTML(subtasks[i], i);
     } else {
       subtaskElement.innerHTML = createSubtaskHTML(subtasks[i], i);
-      // Add ondblclick to the entire subtask item
       subtaskElement.ondblclick = function () {
         editSubtask(i);
       };
@@ -197,6 +172,7 @@ function renderSubtaskItems(subtasksList) {
     subtasksList.appendChild(subtaskElement);
   }
 }
+
 /**
  * Creates HTML for a subtask item
  * @param {Object} subtask - Subtask object
@@ -205,7 +181,7 @@ function renderSubtaskItems(subtasksList) {
  */
 function createSubtaskHTML(subtask, index) {
   return `
-        <div class="subtask-content" ondblclick="editSubtask(${index})" style="cursor: pointer;">
+        <div class="subtask-content" ondblclick="editSubtask(${index})">
             <span class="subtask-bullet">•</span>
             <span class="subtask-text">${subtask.name}</span>
         </div>

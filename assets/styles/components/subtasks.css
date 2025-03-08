@@ -1,0 +1,117 @@
+/* Subtasks */
+.subtask-input {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.subtask-input .input-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.subtask-input .input-wrapper input {
+    width: 100%;
+    padding: 12px 21px;
+    padding-right: 80px;
+    border: 1px solid rgb(209, 209, 209);
+    border-radius: 10px;
+    font-size: 20px;
+    line-height: 24px;
+    transition: all 0.2s ease-in-out, border-color 0.2s ease-in-out;
+}
+
+.subtask-input .input-wrapper input.active {
+    border-color: #29abe2;
+}
+
+.subtask-actions {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    gap: 8px;
+}
+
+.edit-actions {
+    display: none;
+    align-items: center;
+}
+
+.edit-actions.active {
+    display: flex;
+}
+
+.edit-actions img {
+    width: 24px;
+    cursor: pointer;
+}
+
+.vertical-divider {
+    width: 1px;
+    height: 24px;
+    background-color: #d1d1d1;
+    margin: 0 4px;
+}
+
+.plus-icon {
+    display: flex;
+    cursor: pointer;
+}
+
+.plus-icon.hidden {
+    display: none;
+}
+
+.subtasks-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.subtask-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #f6f7f8;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+.subtask-content {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.subtask-bullet {
+    font-size: 18px;
+    color: #2a3647;
+}
+
+.subtask-text {
+    font-size: 16px;
+    color: #2a3647;
+}
+
+.subtask-item-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.subtask-item-actions img {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+#subtaskInput {
+    background: white url(/assets/icons/Subtasks\ icons11.svg) right no-repeat;
+    background-position: calc(100% - 15px) center;
+    padding-right: 50px;
+}
+
+#subtaskInput.active {
+    background-image: none;
+}

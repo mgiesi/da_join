@@ -16,8 +16,7 @@
 
 .form-group input,
 .form-group textarea,
-.form-group select,
-.subtask-input input {
+.form-group select input {
     padding: 12px 21px;
     border: 1px solid rgb(209, 209, 209);
     border-radius: 10px;
@@ -130,7 +129,7 @@ input:required:invalid {
 .form-group input:hover,
 .form-group textarea:hover,
 .form-group select:hover,
-.subtask-input .input-wrapper input:hover,
+.input-wrapper input:hover,
 .select-wrapper select:hover {
     border-color: #29ABE2 !important;
     cursor: pointer;
@@ -139,7 +138,7 @@ input:required:invalid {
 .form-group input:focus,
 .form-group textarea:focus,
 .form-group select:focus,
-.subtask-input .input-wrapper input:focus,
+.input-wrapper input:focus,
 .select-wrapper select:focus {
     border-color: #29ABE2 !important;
     outline: none;
@@ -148,11 +147,11 @@ input:required:invalid {
 .form-group input:active,
 .form-group textarea:active,
 .form-group select:active,
-.subtask-input input:active,
+input:active,
 .form-group input.active,
 .form-group textarea.active,
 .form-group select.active,
-.subtask-input input.active {
+input.active {
     border-color: #29ABE2;
 }
 
