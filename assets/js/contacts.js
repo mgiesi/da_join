@@ -28,6 +28,7 @@ function initPlus() {
   init();
   loadContactsFromFirebase();
   addDNoneToResp();
+  addActiveUserToContacts();
 }
 
 /**
@@ -377,4 +378,21 @@ function scrollToTop() {
   if (window.innerWidth < 1200) {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
+}
+
+/**
+ * Adds the currently logged-in user to the contact list.
+ */
+async function addActiveUserToContacts() {
+  const userName = await getActiveUserName();
+  const userEmail = localStorage.getItem("activeUser");
+  const activeUserKey = "me";
+
+  const userContact = {
+    name: userName,
+    email: userEmail,
+    avatarColor: getRandomColor(),
+  };
+  await addOrUpdateContact(activeUserKey, userContact);
+  await loadContactsFromFirebase();
 }

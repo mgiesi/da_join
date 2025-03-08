@@ -8,17 +8,19 @@ let selectedContacts = [];
  * @returns {Promise<void>}
  */
 async function fetchContacts() {
-    try {
-        const response = await fetch('https://da-join-629d2-default-rtdb.europe-west1.firebasedatabase.app/contacts.json');
-        if (!response.ok) {
-            throw new Error('Failed to fetch contacts');
-        }
-        const data = await response.json();
-        contacts = data || {};
-        renderContactsList();
-    } catch (error) {
-        console.error('Error fetching contacts:', error);
+  try {
+    const response = await fetch(
+      "https://da-join-629d2-default-rtdb.europe-west1.firebasedatabase.app/contacts.json"
+    );
+    if (!response.ok) {
+      throw new Error("Failed to fetch contacts");
     }
+    const data = await response.json();
+    contacts = data || {};
+    renderContactsList();
+  } catch (error) {
+    console.error("Error fetching contacts:", error);
+  }
 }
 
 /**
@@ -26,11 +28,11 @@ async function fetchContacts() {
  * @returns {Object<string, boolean>} Object with contact IDs as keys
  */
 function getAssignedContacts() {
-    const assignedTo = {};
-    selectedContacts.forEach(id => {
-        assignedTo[id] = true;
-    });
-    return assignedTo;
+  const assignedTo = {};
+  selectedContacts.forEach((id) => {
+    assignedTo[id] = true;
+  });
+  return assignedTo;
 }
 
 /**
@@ -38,35 +40,37 @@ function getAssignedContacts() {
  * @returns {void}
  */
 function toggleContactDropdown() {
-    const dropdown = document.querySelector('.contact-dropdown');
-    dropdown.classList.toggle('open');
-    const contactList = document.getElementById('contactList');
+  const dropdown = document.querySelector(".contact-dropdown");
+  dropdown.classList.toggle("open");
+  const contactList = document.getElementById("contactList");
 
-    if (dropdown.classList.contains('open')) {
-        contactList.style.display = 'block';
-        // Apply current filter
-        const searchInput = document.getElementById('contactSearch');
-        filterContactsList(searchInput.value);
-    } else {
-        contactList.style.display = 'none';
-    }
+  if (dropdown.classList.contains("open")) {
+    contactList.style.display = "block";
+    // Apply current filter
+    const searchInput = document.getElementById("contactSearch");
+    filterContactsList(searchInput.value);
+  } else {
+    contactList.style.display = "none";
+  }
 }
 
 /**
  * Closes the contact dropdown when clicking outside
  */
-document.addEventListener('click', function (event) {
-    const dropdown = document.querySelector('.contact-dropdown');
-    const selectWrapper = document.querySelector('.select-wrapper');
-    if (!selectWrapper) {
-        return;
-    }
+document.addEventListener("click", function (event) {
+  const dropdown = document.querySelector(".contact-dropdown");
+  const selectWrapper = document.querySelector(".select-wrapper");
+  if (!selectWrapper) {
+    return;
+  }
 
-    if (dropdown && !dropdown.contains(event.target) ||
-        (event.target !== selectWrapper && !selectWrapper.contains(event.target))) {
-        dropdown.classList.remove('open');
-        document.getElementById('contactList').style.display = 'none';
-    }
+  if (
+    (dropdown && !dropdown.contains(event.target)) ||
+    (event.target !== selectWrapper && !selectWrapper.contains(event.target))
+  ) {
+    dropdown.classList.remove("open");
+    document.getElementById("contactList").style.display = "none";
+  }
 });
 
 /**
@@ -74,13 +78,13 @@ document.addEventListener('click', function (event) {
  * @returns {void}
  */
 function renderContactsList() {
-    const contactList = document.getElementById('contactList');
-    contactList.innerHTML = '';
-    const sortedContacts = getSortedContacts();
-    sortedContacts.forEach(([id, contact]) => {
-        const contactDiv = createContactDiv(id, contact);
-        contactList.innerHTML += contactDiv;
-    });
+  const contactList = document.getElementById("contactList");
+  contactList.innerHTML = "";
+  const sortedContacts = getSortedContacts();
+  sortedContacts.forEach(([id, contact]) => {
+    const contactDiv = createContactDiv(id, contact);
+    contactList.innerHTML += contactDiv;
+  });
 }
 
 /**
@@ -88,9 +92,9 @@ function renderContactsList() {
  * @returns {Array<[string, {name: string, avatarColor: string}]>} Array of sorted contact entries
  */
 function getSortedContacts() {
-    return Object.entries(contacts)
-        .filter(([_, contact]) => contact && contact.name)
-        .sort((a, b) => a[1].name.localeCompare(b[1].name));
+  return Object.entries(contacts)
+    .filter(([_, contact]) => contact && contact.name)
+    .sort((a, b) => a[1].name.localeCompare(b[1].name));
 }
 
 /**
@@ -100,10 +104,10 @@ function getSortedContacts() {
  * @returns {string} HTML string for contact div
  */
 function createContactDiv(id, contact) {
-    const initials = getInitials(contact.name);
-    const isSelected = selectedContacts.includes(id);
+  const initials = getInitials(contact.name);
+  const isSelected = selectedContacts.includes(id);
 
-    return `
+  return `
         <div class="contact-item" onclick="toggleContactSelection('${id}')">
             ${createContactInfoHTML(contact, initials)}
             ${createCheckboxHTML(isSelected)}
@@ -118,9 +122,11 @@ function createContactDiv(id, contact) {
  * @returns {string} HTML string for contact info
  */
 function createContactInfoHTML(contact, initials) {
-    return `
+  return `
         <div class="contact-info-container">
-            <div class="contact-avatar" style="background-color: ${contact.avatarColor || '#000000'}">
+            <div class="contact-avatar" style="background-color: ${
+              contact.avatarColor || "#000000"
+            }">
                 ${initials}
             </div>
             <div class="contact-name">${contact.name}</div>
@@ -134,11 +140,15 @@ function createContactInfoHTML(contact, initials) {
  * @returns {string} HTML string for checkbox
  */
 function createCheckboxHTML(isSelected) {
-    return `
-        <div class="check-button-container ${isSelected ? 'selected' : ''}">
+  return `
+        <div class="check-button-container ${isSelected ? "selected" : ""}">
             <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="4.38818" y="4" width="16" height="16" rx="3" stroke="#2A3647" stroke-width="2"/>
-                ${isSelected ? '<path d="M7.38818 12L11.3882 16L17.3882 8" stroke="#2A3647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>' : ''}
+                ${
+                  isSelected
+                    ? '<path d="M7.38818 12L11.3882 16L17.3882 8" stroke="#2A3647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>'
+                    : ""
+                }
             </svg>
         </div>
     `;
@@ -150,15 +160,15 @@ function createCheckboxHTML(isSelected) {
  * @returns {void}
  */
 function toggleContactSelection(contactId) {
-    const index = selectedContacts.indexOf(contactId);
-    if (index === -1) {
-        selectedContacts.push(contactId);
-    } else {
-        selectedContacts.splice(index, 1);
-    }
-    renderContactsList();
-    updateSelectedDisplay();
-    updateSelectedAvatars();
+  const index = selectedContacts.indexOf(contactId);
+  if (index === -1) {
+    selectedContacts.push(contactId);
+  } else {
+    selectedContacts.splice(index, 1);
+  }
+  renderContactsList();
+  updateSelectedDisplay();
+  updateSelectedAvatars();
 }
 
 /**
@@ -166,9 +176,9 @@ function toggleContactSelection(contactId) {
  * @returns {void}
  */
 function updateSelectedDisplay() {
-    const searchInput = document.getElementById('contactSearch');
-    searchInput.value = '';
-    searchInput.placeholder = 'Select contacts to assign';
+  const searchInput = document.getElementById("contactSearch");
+  searchInput.value = "";
+  searchInput.placeholder = "Select contacts to assign";
 }
 
 /**
@@ -176,17 +186,17 @@ function updateSelectedDisplay() {
  * @returns {void}
  */
 function updateSelectedAvatars() {
-    const avatarDiv = document.getElementById('selectedContactsAvatar');
-    if (!avatarDiv) return;
-    avatarDiv.innerHTML = '';
-    selectedContacts.forEach(contactId => {
-        const contact = contacts[contactId];
-        if (contact) {
-            const initials = getInitials(contact.name);
-            const avatarElement = createAvatarElement(contact, initials);
-            avatarDiv.appendChild(avatarElement);
-        }
-    });
+  const avatarDiv = document.getElementById("selectedContactsAvatar");
+  if (!avatarDiv) return;
+  avatarDiv.innerHTML = "";
+  selectedContacts.forEach((contactId) => {
+    const contact = contacts[contactId];
+    if (contact) {
+      const initials = getInitials(contact.name);
+      const avatarElement = createAvatarElement(contact, initials);
+      avatarDiv.appendChild(avatarElement);
+    }
+  });
 }
 
 /**
@@ -196,11 +206,11 @@ function updateSelectedAvatars() {
  * @returns {HTMLElement} Avatar DOM element
  */
 function createAvatarElement(contact, initials) {
-    const avatarElement = document.createElement('div');
-    avatarElement.className = 'contact-avatar-selected';
-    avatarElement.style.backgroundColor = contact.avatarColor || '#000000';
-    avatarElement.textContent = initials;
-    return avatarElement;
+  const avatarElement = document.createElement("div");
+  avatarElement.className = "contact-avatar-selected";
+  avatarElement.style.backgroundColor = contact.avatarColor || "#000000";
+  avatarElement.textContent = initials;
+  return avatarElement;
 }
 
 /**
@@ -209,12 +219,12 @@ function createAvatarElement(contact, initials) {
  * @returns {string} Initials in uppercase
  */
 function getInitials(name) {
-    if (!name) return '';
-    return name
-        .split(' ')
-        .map(word => word[0])
-        .join('')
-        .toUpperCase();
+  if (!name) return "";
+  return name
+    .split(" ")
+    .map((word) => word[0])
+    .join("")
+    .toUpperCase();
 }
 
 /**
@@ -222,10 +232,10 @@ function getInitials(name) {
  * @returns {void}
  */
 function clearSelectedAvatars() {
-    const avatarDiv = document.getElementById('selectedContactsAvatar');
-    if (avatarDiv) {
-        avatarDiv.innerHTML = '';
-    }
+  const avatarDiv = document.getElementById("selectedContactsAvatar");
+  if (avatarDiv) {
+    avatarDiv.innerHTML = "";
+  }
 }
 
 /**
@@ -234,9 +244,9 @@ function clearSelectedAvatars() {
  * @returns {void}
  */
 function filterContactsList(searchText) {
-    showContactDropdown();
-    const contacts = getSortedContacts();
-    renderFilteredContacts(contacts, searchText);
+  showContactDropdown();
+  const contacts = getSortedContacts();
+  renderFilteredContacts(contacts, searchText);
 }
 
 /**
@@ -244,13 +254,13 @@ function filterContactsList(searchText) {
  * @returns {void}
  */
 function showContactDropdown() {
-    const contactList = document.getElementById('contactList');
-    contactList.style.display = 'block';
+  const contactList = document.getElementById("contactList");
+  contactList.style.display = "block";
 
-    const dropdown = document.querySelector('.contact-dropdown');
-    if (dropdown) {
-        dropdown.classList.add('open');
-    }
+  const dropdown = document.querySelector(".contact-dropdown");
+  if (dropdown) {
+    dropdown.classList.add("open");
+  }
 }
 
 /**
@@ -260,14 +270,19 @@ function showContactDropdown() {
  * @returns {void}
  */
 function renderFilteredContacts(contacts, searchText) {
-    const contactList = document.getElementById('contactList');
-    contactList.innerHTML = '';
+  const contactList = document.getElementById("contactList");
+  contactList.innerHTML = "";
 
-    const searchLower = searchText.toLowerCase();
-    contacts.forEach(([id, contact]) => {
-        if (!searchText || (contact && contact.name && contact.name.toLowerCase().includes(searchLower))) {
-            const contactDiv = createContactDiv(id, contact);
-            contactList.innerHTML += contactDiv;
-        }
-    });
+  const searchLower = searchText.toLowerCase();
+  contacts.forEach(([id, contact]) => {
+    if (
+      !searchText ||
+      (contact &&
+        contact.name &&
+        contact.name.toLowerCase().includes(searchLower))
+    ) {
+      const contactDiv = createContactDiv(id, contact);
+      contactList.innerHTML += contactDiv;
+    }
+  });
 }
