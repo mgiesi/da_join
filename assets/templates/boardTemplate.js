@@ -87,11 +87,12 @@ function displaySubTasks(task) {
     const subTasksDone = getSubTasksDoneCount(task, subTasksCount);
     const subTasksDonePercent = (subTasksDone / subTasksCount) * 100;
     return `
-            <div class="board-task-subtasks mb-24 d-flex align-items-center">
+            <div class="board-task-subtasks mb-24 d-flex align-items-center tooltip">
                 <div class="board-subtasks-bar">
                     <div style="width: ${subTasksDonePercent}%" class="board-subtasks-bar-value"></div>
                 </div>
                 <span class="f11">${subTasksDone}/${subTasksCount} Subtasks</span>
+                <span class="tooltiptext">${subTasksDone} of ${subTasksCount} subtasks done</span>
             </div>
         `;
   }

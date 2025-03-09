@@ -530,3 +530,28 @@ input:required:invalid {
   height: 24px;
   cursor: pointer;
 }
+
+.tooltip {
+  position: relative;
+  /*display: inline-block;
+  border-bottom: 1px dotted black; */
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 180px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  top: 18px;
+  left: 8px;
+  border-radius: 6px;
+ 
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
