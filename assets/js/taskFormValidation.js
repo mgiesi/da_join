@@ -53,21 +53,42 @@ function handleFormSubmit(e) {
  */
 async function validateAndSubmitForm(event) {
     event.preventDefault();
-    const form = event.target;
+    if (!validateFormFields(event.target)) return false;
+    if (!validatePriority()) return false;
+
+    const taskData = gatherTaskData();
+    return await submitNewTask(taskData);
+}
+
+/**
+ * Validates all form fields
+ * @param {HTMLFormElement} form - The form to validate
+ * @returns {boolean} True if all fields are valid
+ */
+function validateFormFields(form) {
     const requiredFields = form.querySelectorAll('[required]');
-    let isValid = validateRequiredFields(requiredFields);
+    return validateRequiredFields(requiredFields);
+}
 
-    if (!isValid) return false;
-
-    // Check if at least one priority is selected
+/**
+ * Validates that a priority is selected
+ * @returns {boolean} True if priority is selected
+ */
+function validatePriority() {
     const selectedPriority = getSelectedPriority();
     if (!selectedPriority) {
         alert('Please select a priority level');
         return false;
     }
+    return true;
+}
 
-    const taskData = gatherTaskData();
-
+/**
+ * Submits a new task to the database
+ * @param {Object} taskData - The task data to submit
+ * @returns {boolean} False to prevent default form submission
+ */
+async function submitNewTask(taskData) {
     try {
         await createTask(taskData);
         return showTaskAddedNotification();
@@ -81,7 +102,7 @@ async function validateAndSubmitForm(event) {
 /**
  * Handles form submission event when editing a task
  * @param {Event} e - Form submission event
- * @param {Event} taskId - Id of the task
+ * @param {string} taskId - Id of the task
  */
 function handleFormSubmit4Edit(e, taskId) {
     e.preventDefault();
@@ -91,31 +112,31 @@ function handleFormSubmit4Edit(e, taskId) {
 /**
  * Validates form data and submits if valid when editing a task
  * @param {Event} event - Form submission event
+ * @param {string} taskId - Id of the task
  * @returns {boolean} False to prevent default form submission
  */
 async function validateAndSubmitForm4Edit(event, taskId) {
     event.preventDefault();
-    const form = event.target;
-    const requiredFields = form.querySelectorAll('[required]');
-    let isValid = validateRequiredFields(requiredFields);
-
-    if (!isValid) return false;
-
-    // Check if at least one priority is selected
-    const selectedPriority = getSelectedPriority();
-    if (!selectedPriority) {
-        alert('Please select a priority level');
-        return false;
-    }
+    if (!validateFormFields(event.target)) return false;
+    if (!validatePriority()) return false;
 
     const taskData = gatherTaskData();
+    return await submitEditedTask(taskData, taskId);
+}
 
+/**
+ * Submits an edited task to the database
+ * @param {Object} taskData - The task data to submit
+ * @param {string} taskId - Id of the task
+ * @returns {boolean} False to prevent default form submission
+ */
+async function submitEditedTask(taskData, taskId) {
     try {
         await updateTask(taskId, taskData);
         return showTaskAddedNotification();
     } catch (error) {
-        console.error('Error creating task:', error);
-        alert('Failed to create task. Please try again.');
+        console.error('Error updating task:', error);
+        alert('Failed to update task. Please try again.');
         return false;
     }
 }
@@ -145,34 +166,59 @@ function validateRequiredFields(requiredFields) {
  * @returns {Object} Object containing task data
  */
 function gatherTaskData() {
+    const basicData = getBasicTaskData();
+    const category = getCategoryValue();
+    const additionalData = getAdditionalTaskData();
+
+    return {
+        ...basicData,
+        category,
+        ...additionalData
+    };
+}
+
+/**
+ * Gets basic task data from form fields
+ * @returns {Object} Basic task data
+ */
+function getBasicTaskData() {
     const title = document.getElementById('title').value;
     const description = document.getElementById('description').value;
     const dueDate = document.getElementById('dueDate').value;
-    const categoryElement = document.getElementById('categorySelected');
-    const categoryValue = categoryElement ? categoryElement.getAttribute('data-value') : '';
-
-    // Map category values to database format
-    let category;
-    if (categoryValue === 'work') {
-        category = 'task';
-    } else if (categoryValue === 'personal') {
-        category = 'userstory';
-    } else {
-        category = 'task'; // Default
-    }
-
-    const priority = getSelectedPriority();
-    const assignedTo = getAssignedContacts();
-    const subtasksData = getSubtasks();
     const formattedDate = formatDueDate(dueDate);
 
     return {
         title,
         description,
-        assignedTo,
-        dueDate: formattedDate,
+        dueDate: formattedDate
+    };
+}
+
+/**
+ * Gets the category value from the form
+ * @returns {string} Category value
+ */
+function getCategoryValue() {
+    const categoryElement = document.getElementById('categorySelected');
+    const categoryValue = categoryElement ? categoryElement.getAttribute('data-value') : '';
+
+    if (categoryValue === 'work') return 'task';
+    if (categoryValue === 'personal') return 'userstory';
+    return 'task'; // Default
+}
+
+/**
+ * Gets additional task data from the form
+ * @returns {Object} Additional task data
+ */
+function getAdditionalTaskData() {
+    const priority = getSelectedPriority();
+    const assignedTo = getAssignedContacts();
+    const subtasksData = getSubtasks();
+
+    return {
         prio: priority,
-        category,
+        assignedTo,
         subtasks: subtasksData
     };
 }
@@ -224,10 +270,25 @@ function showTaskAddedNotification() {
  */
 function resetForm() {
     const form = document.querySelector('.add-task-form');
+    resetFormElements(form);
+    resetContactsAndSubtasks();
+}
+
+/**
+ * Resets form elements to their default state
+ * @param {HTMLElement} form - Form DOM element
+ */
+function resetFormElements(form) {
     resetInputs(form);
     resetSelects(form);
     resetCustomDropdowns();
     resetPriorityButtons();
+}
+
+/**
+ * Resets contacts and subtasks to their default state
+ */
+function resetContactsAndSubtasks() {
     clearSubtasks();
     clearSubtaskInput();
     selectedContacts = [];
@@ -243,19 +304,39 @@ function resetForm() {
 function resetCustomDropdowns() {
     const dropdowns = document.querySelectorAll('.custom-dropdown');
     dropdowns.forEach(dropdown => {
-        const selected = dropdown.querySelector('.custom-dropdown-selected');
-        const hiddenInput = dropdown.querySelector('input[type="hidden"]');
-
-        if (selected) {
-            selected.textContent = 'Select task category';
-            selected.appendChild(createDropdownArrow());
-            selected.setAttribute('data-value', '');
-        }
-
-        if (hiddenInput) {
-            hiddenInput.value = '';
-        }
+        resetSingleDropdown(dropdown);
     });
+}
+
+/**
+ * Resets a single dropdown to its default state
+ * @param {HTMLElement} dropdown - Dropdown DOM element
+ */
+function resetSingleDropdown(dropdown) {
+    const selected = dropdown.querySelector('.custom-dropdown-selected');
+    const hiddenInput = dropdown.querySelector('input[type="hidden"]');
+
+    if (selected) {
+        selected.textContent = 'Select task category';
+        selected.appendChild(createDropdownArrow());
+        selected.setAttribute('data-value', '');
+    }
+
+    if (hiddenInput) {
+        hiddenInput.value = '';
+    }
+}
+
+/**
+ * Creates a dropdown arrow element
+ * @returns {HTMLElement} Dropdown arrow element
+ */
+function createDropdownArrow() {
+    const arrowImg = document.createElement('img');
+    arrowImg.src = './assets/icons/arrow_drop_down.svg';
+    arrowImg.alt = 'Dropdown arrow';
+    arrowImg.className = 'dropdown-arrow';
+    return arrowImg;
 }
 
 /**
