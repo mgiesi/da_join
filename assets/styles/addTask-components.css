@@ -1,11 +1,11 @@
 /* Import component styles */
-@import url('components/buttons.css');
-@import url('components/form-controls.css');
-@import url('components/priority-buttons.css');
-@import url('components/subtasks.css');
-@import url('components/contact-dropdown.css');
-@import url('components/notifications.css');
-@import url('components/custom-dropdown.css');
+@import url('AddTask-components/buttons.css');
+@import url('AddTask-components/form-controls.css');
+@import url('AddTask-components/priority-buttons.css');
+@import url('AddTask-components/subtasks.css');
+@import url('AddTask-components/contact-dropdown.css');
+@import url('AddTask-components/notifications.css');
+@import url('AddTask-components/custom-dropdown.css');
 @import url('responsive.css');
 
 /* Buttons */
