@@ -26,8 +26,8 @@ function setupSubtaskInput(subtaskInput) {
   const actionsDiv = inputWrapper.querySelector(".subtask-actions");
 
   actionsDiv.innerHTML = `
-       <img src="./assets/icons/Subtasks\ icons11.svg" alt="Add subtask" class="subtask-add-icon" onclick="focusSubtaskInput()">
-   `;
+    <img src="./assets/icons/add.svg" alt="Add subtask" class="subtask-add-icon" onclick="addSubtask()">
+  `;
 }
 
 /**
@@ -43,62 +43,14 @@ function setupSubtaskInputEvents(subtaskInput) {
   };
 
   subtaskInput.onfocus = function () {
-    transformSubtaskInput(true);
+    subtaskInput.placeholder = "";
   };
-}
-
-/**
- * Transforms the subtask input field to show action buttons
- * @param {boolean} isFocused - Whether the input is focused
- */
-function transformSubtaskInput(isFocused) {
-  const subtaskInput = document.getElementById("subtaskInput");
-  const inputWrapper = subtaskInput.parentElement;
-  const actionsDiv = inputWrapper.querySelector(".subtask-actions");
-
-  if (isFocused) {
-    setFocusedInputState(subtaskInput, actionsDiv);
-  } else {
-    setUnfocusedInputState(subtaskInput, actionsDiv);
-  }
-}
-
-/**
- * Sets the focused state for the subtask input
- * @param {HTMLElement} subtaskInput - The subtask input element
- * @param {HTMLElement} actionsDiv - The actions div element
- */
-function setFocusedInputState(subtaskInput, actionsDiv) {
-  subtaskInput.style.backgroundImage = 'none';
-  actionsDiv.innerHTML = `
-    <div class="edit-actions active">
-      <img src="./assets/icons/cancel.svg" alt="Cancel" onclick="clearSubtaskInput()">
-      <div class="vertical-divider"></div>
-      <img src="./assets/icons/subtasks_confirm.svg" alt="Confirm" class="" onclick="addSubtask()">
-    </div>
-  `;
-  subtaskInput.classList.add('active');
-}
-
-/**
- * Sets the unfocused state for the subtask input
- * @param {HTMLElement} subtaskInput - The subtask input element
- * @param {HTMLElement} actionsDiv - The actions div element
- */
-function setUnfocusedInputState(subtaskInput, actionsDiv) {
-  subtaskInput.style.backgroundImage = '';
-  actionsDiv.innerHTML = `
-    <img src="./assets/icons/Subtasks\ icons11.svg" alt="Add subtask" class="subtask-add-icon" onclick="focusSubtaskInput()">
-  `;
-  subtaskInput.classList.remove('active');
-}
-
-/**
- * Focuses the subtask input field
- */
-function focusSubtaskInput() {
-  const subtaskInput = document.getElementById("subtaskInput");
-  subtaskInput.focus();
+  
+  subtaskInput.onblur = function () {
+    if (!subtaskInput.value) {
+      subtaskInput.placeholder = "Add new subtask";
+    }
+  };
 }
 
 /**
@@ -111,7 +63,6 @@ function addSubtask() {
   if (subtaskText) {
     addSubtaskToList(subtaskText);
     clearSubtaskInput();
-    transformSubtaskInput(false);
   }
 }
 
@@ -136,7 +87,7 @@ function clearSubtaskInput() {
   const subtaskInput = document.getElementById("subtaskInput");
   if (subtaskInput) {
     subtaskInput.value = '';
-    transformSubtaskInput(false);
+    subtaskInput.placeholder = "Add new subtask";
   }
 }
 
@@ -181,15 +132,15 @@ function renderSubtaskItems(subtasksList) {
  */
 function createSubtaskHTML(subtask, index) {
   return `
-        <div class="subtask-content" ondblclick="editSubtask(${index})">
-            <span class="subtask-bullet">•</span>
-            <span class="subtask-text">${subtask.name}</span>
-        </div>
-        <div class="subtask-item-actions">
-            <img src="./assets/icons/edit.svg" alt="Edit" onclick="editSubtask(${index})">
-            <img src="./assets/icons/delete.svg" alt="Delete" onclick="deleteSubtask(${index})">
-        </div>
-    `;
+    <div class="subtask-content">
+      <span class="subtask-bullet">•</span>
+      <span class="subtask-text">${subtask.name}</span>
+    </div>
+    <div class="subtask-item-actions">
+      <img src="./assets/icons/edit.svg" alt="Edit" onclick="editSubtask(${index})">
+      <img src="./assets/icons/delete.svg" alt="Delete" onclick="deleteSubtask(${index})">
+    </div>
+  `;
 }
 
 /**
@@ -200,14 +151,14 @@ function createSubtaskHTML(subtask, index) {
  */
 function createEditableSubtaskHTML(subtask, index) {
   return `
-        <div class="subtask-edit-container">
-            <input type="text" class="subtask-edit-input" value="${subtask.name}" id="subtask-edit-${index}">
-            <div class="subtask-edit-actions">
-                <img src="./assets/icons/delete.svg" alt="Delete" onclick="deleteSubtask(${index})">
-                <img src="./assets/icons/subtasks_confirm.svg" alt="Save" onclick="saveSubtaskEdit(${index})">
-            </div>
-        </div>
-    `;
+    <div class="subtask-edit-container">
+      <input type="text" class="subtask-edit-input" value="${subtask.name}" id="subtask-edit-${index}" spellcheck="true">
+      <div class="subtask-edit-actions">
+        <img src="./assets/icons/delete.svg" alt="Delete" onclick="deleteSubtask(${index})">
+        <img src="./assets/icons/subtasks_confirm.svg" alt="Save" onclick="saveSubtaskEdit(${index})">
+      </div>
+    </div>
+  `;
 }
 
 /**
@@ -226,12 +177,11 @@ function editSubtask(index) {
  * @param {number} index - Index of the subtask being edited
  */
 function focusEditInput(index) {
-  setTimeout(function () {
-    var editInput = document.getElementById("subtask-edit-" + index);
-    if (editInput) {
-      editInput.focus();
-      var textLength = editInput.value.length;
-      editInput.setSelectionRange(textLength, textLength);
+  setTimeout(() => {
+    const input = document.getElementById(`subtask-edit-${index}`);
+    if (input) {
+      input.focus();
+      input.setSelectionRange(0, input.value.length);
     }
   }, 0);
 }
