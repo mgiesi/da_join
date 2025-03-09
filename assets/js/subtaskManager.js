@@ -267,3 +267,23 @@ function deleteSubtask(index) {
 
   renderSubtasks();
 }
+
+/**
+ * Gets the current subtasks array for task creation
+ * @returns {Array} Array of subtask objects
+ */
+function getSubtasks() {
+  return subtasks.map(subtask => ({
+    id: subtask.id,
+    name: subtask.name,
+    done: subtask.done
+  }));
+}
+
+/**
+ * Resets the subtasks array to an empty state
+ */
+function resetSubtasks() {
+  subtasks = [];
+  renderSubtasks();
+}
