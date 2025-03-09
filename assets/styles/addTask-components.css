@@ -6,7 +6,7 @@
 @import url('AddTask-components/contact-dropdown.css');
 @import url('AddTask-components/notifications.css');
 @import url('AddTask-components/custom-dropdown.css');
-@import url('responsive.css');
+@import url('AddTask-responsive.css');
 
 /* Buttons */
 .btn-primary,
