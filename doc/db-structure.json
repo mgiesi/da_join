@@ -1,76 +1,6 @@
 {
     "tasks": {
         "fireBaseKey1": {
-            "title": "Title 1",
-            "description": "Description 1",
-            "assignedTo": {
-                "contact1": true,
-                "contact2": true
-            },
-            "dueDate": "2025-01-30",
-            "prio": "urgent",
-            "category": "task",
-            "subtasks": {
-                "subtask1": {
-                    "name": "Sub Task 1",
-                    "done": false
-                },
-                "subtask2": {
-                    "name": "Sub Task 2",
-                    "done": false
-                }
-            }
-        },
-        "fireBaseKey2": {
-            "title": "Title 2",
-            "description": "Description 2",
-            "assignedTo": {
-                "contact2": true
-            },
-            "dueDate": "2025-02-02",
-            "prio": "low",
-            "category": "userstory",
-            "subtasks": {
-                "subtask1": {
-                    "name": "Sub Task 1",
-                    "done": true
-                }
-            }
-        },
-        "fireBaseKey3": {
-            "title": "Title 3",
-            "description": "Description 3",
-            "assignedTo": {
-                "contact2": true
-            },
-            "dueDate": "2025-02-12",
-            "prio": "medium",
-            "category": "userstory",
-            "subtasks": {}
-        },
-        "fireBaseKey4": {
-            "title": "Title 4",
-            "description": "Description 4",
-            "assignedTo": {
-                "contact2": true
-            },
-            "dueDate": "2025-02-12",
-            "prio": "medium",
-            "category": "userstory",
-            "subtasks": {}
-        },
-        "fireBaseKey5": {
-            "title": "Title 5",
-            "description": "Description 5",
-            "assignedTo": {
-                "contact2": true
-            },
-            "dueDate": "2025-02-12",
-            "prio": "medium",
-            "category": "userstory",
-            "subtasks": {}
-        },
-        "fireBaseKey6": {
             "title": "Kochwelt Page & Recipe Recommender",
             "description": "Build start page with recipe recommendation.",
             "assignedTo": {
@@ -78,7 +8,7 @@
                 "contact6": true,
                 "contact8": true
             },
-            "dueDate": "2025-02-12",
+            "dueDate": "2025-04-12",
             "prio": "medium",
             "category": "userstory",
             "subtasks": {
@@ -92,7 +22,7 @@
                 }
             }
         },
-        "fireBaseKey7": {
+        "fireBaseKey2": {
             "title": "HTML Base Template Creation",
             "description": "Create reusable HTML base templates for basic structure.",
             "assignedTo": {
@@ -100,29 +30,29 @@
                 "contact7": true,
                 "contact9": true
             },
-            "dueDate": "2025-02-12",
+            "dueDate": "2025-03-29",
             "prio": "low",
             "category": "task",
             "subtasks": {}
         },
-        "fireBaseKey8": {
+        "fireBaseKey3": {
             "title": "Daily Kochwelt Recipe",
             "description": "Implement daile recipe and portion calculation for the daily recipe.",
             "assignedTo": {
                 "contact4": true
             },
-            "dueDate": "2025-02-12",
+            "dueDate": "2025-04-15",
             "prio": "medium",
             "category": "userstory",
             "subtasks": {}
         },
-        "fireBaseKey9": {
+        "fireBaseKey4": {
             "title": "CSS Architecture Planning",
             "description": "Define CSS naming, conventions and structure of css files.",
             "assignedTo": {
                 "contact4": true
             },
-            "dueDate": "2025-02-01",
+            "dueDate": "2025-04-22",
             "prio": "urgent",
             "category": "userstory",
             "subtasks": {
@@ -139,6 +69,34 @@
                     "done": true
                 }
             }
+        },
+        "fireBaseKey5": {
+            "title": "Contact Form & Imprint",
+            "description": "Create a contact form and imprint page.",
+            "assignedTo": {
+                "contact4": true
+            },
+            "dueDate": "2025-03-31",
+            "prio": "urgent",
+            "category": "userstory",
+            "subtasks": {
+                "subtask1": {
+                    "name": "Create contact form",
+                    "done": true
+                },
+                "subtask2": {
+                    "name": "Create imprint page",
+                    "done": true
+                },
+                "subtask3": {
+                    "name": "Review changes",
+                    "done": true
+                },
+                "subtask4": {
+                    "name": "Confrim jsdoc",
+                    "done": true
+                }
+            }
         }
     },
     "boards": {
@@ -148,8 +106,7 @@
             "addtasks": true,
             "tasks": {
                 "fireBaseKey1": true,
-                "fireBaseKey4": true,
-                "fireBaseKey5": true
+                "fireBaseKey3": true
             }
         },
         "inprogress": {
@@ -158,7 +115,7 @@
             "addtasks": true,
             "tasks": {
                 "fireBaseKey2": true,
-                "fireBaseKey6": true
+                "fireBaseKey4": true
             }
         },
         "awaitfeedback": {
@@ -166,9 +123,6 @@
             "name": "Await feedback",
             "addtasks": true,
             "tasks": {
-                "fireBaseKey3": true,
-                "fireBaseKey7": true,
-                "fireBaseKey8": true
             }
         },
         "done": {
@@ -176,8 +130,7 @@
             "name": "Done",
             "addtasks": false,
             "tasks": {
-                "fireBaseKey4": true,
-                "fireBaseKey9": true
+                "fireBaseKey5": true
             }
         }
     },

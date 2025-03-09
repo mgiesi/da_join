@@ -16,6 +16,10 @@ async function initBoard() {
   modifyAddTask();
 }
 
+/**
+ * Because of importing the add-task.html content, we have to addapt some
+ * basic functions from the original page.
+ */
 function modifyAddTask() {
   addOverlayClickListeners();
   const btnCancel = document.getElementById("btn-add-task-clear");
@@ -29,9 +33,13 @@ function modifyAddTask() {
 
   document.documentElement.style.setProperty("--footer-add-task-html-bg", "#ffffff");
   document.getElementById("add-task-header").classList.add("dNone");
-  document.getElementById("form-group-category").classList.add("dNone");
 }
 
+/**
+ * Adds an click listener to the overlay content.
+ * The overlay will automatically removed, when operator clicks outside
+ * of the overlay.
+ */
 function addOverlayClickListeners() {
   const overlays = document.querySelectorAll(".overlay-background");
   overlays.forEach(function (overlay) {
@@ -152,6 +160,7 @@ function showAddTaskOverlay() {
   if (textNode) {
     textNode.textContent = "Create Task";
   }
+  document.getElementById("form-group-category").classList.remove("dNone");
   const addTaskForm = document.getElementById("add-task-form");
   addTaskForm.onsubmit = handleFormSubmit;
   resetTaskDetails();
@@ -194,6 +203,7 @@ function showAddTaskOverlay(boardName) {
   if (textNode) {
     textNode.textContent = "Create Task";
   }
+  document.getElementById("form-group-category").classList.remove("dNone");
   const addTaskForm = document.getElementById("add-task-form");
   addTaskForm.onsubmit = handleFormSubmit;
   resetTaskDetails();
@@ -218,15 +228,16 @@ function hideOverlays() {
  * Fetches the task and contacts data, then updates the overlay content with the task details.
  *
  * @async
+ * @param {string|boardName} boardName - Name of the board which this task belongs to
  * @param {string|number} taskId - The identifier of the task.
  * @returns {Promise<void>} A promise that resolves when the task details overlay has been toggled.
  */
-async function toggleTaskDetails(taskId) {
+async function toggleTaskDetails(boardName, taskId) {
   const [task, contacts] = await Promise.all([getTask(taskId), getContacts()]);
   resetTaskDetails();
   let overlay = document.getElementById("taskDetails");
   overlay.classList.toggle("dNone");
-  overlay.innerHTML = getTaskDetails(taskId, task, contacts);
+  overlay.innerHTML = getTaskDetails(taskId, task, contacts, boardName);
   if (overlay.classList.contains("dNone")) {
     closeModal();
   } else {
@@ -261,8 +272,10 @@ async function toggleEditTaskDetails(taskId) {
   let overlay = document.getElementById("overlayAddTask");
   overlay.classList.toggle("dNone");
   if (overlay.classList.contains("dNone")) {
+    document.getElementById("form-group-category").classList.remove("dNone");
     closeModal();
   } else {
+    document.getElementById("form-group-category").classList.add("dNone");
     openModal();
   }
 }
@@ -271,10 +284,12 @@ async function toggleEditTaskDetails(taskId) {
  * Delets a task with the given task id.
  *
  * @async
+ * @param {string} boardName name of the board which this task belongs to
  * @param {string} taskId task id for the tast which should be deleted
  */
-async function doDeleteTask(taskId) {
+async function doDeleteTask(boardName, taskId) {
   await deleteTask(taskId);
+  await removeTaskFromBoard(boardName, taskId);
   renderTasks();
   toggleTaskDetails();
   showDeleteMessage();

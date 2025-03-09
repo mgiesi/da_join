@@ -1,4 +1,4 @@
-function getTaskDetails(taskId, task, contacts) {
+function getTaskDetails(taskId, task, contacts, boardName) {
   if (!task) {
     return "";
   }
@@ -37,7 +37,7 @@ function getTaskDetails(taskId, task, contacts) {
             </div>
             ${displaySubTasks4TaskDetails(taskId, task)}
             <div class="detailsButton">
-                <button onclick="doDeleteTask('${taskId}')" class="endBtn">
+                <button onclick="doDeleteTask('${boardName}', '${taskId}')" class="endBtn">
                     <img class="detailsImgBtn detailsImgBtnDel" src="./assets/icons/delete.svg" alt="">Delete
                 </button>
                 <button onclick="toggleTaskDetails(); toggleEditTaskDetails('${taskId}')" class="endBtn">

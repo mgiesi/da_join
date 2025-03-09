@@ -41,7 +41,7 @@ function displayTasks(board, tasks, contacts) {
       return;
     }
     htmlContent += `
-            <div onclick="toggleTaskDetails('${taskId}')" class="board-task-container" draggable="true" ondragstart="startTaskDragging('${
+            <div onclick="toggleTaskDetails('${board.id}', '${taskId}')" class="board-task-container" draggable="true" ondragstart="startTaskDragging('${
       board.id
     }', '${taskId}')">
                 <div class="d-flex mb-24">
