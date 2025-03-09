@@ -86,19 +86,36 @@ async function includeHTML() {
  * @returns {Promise<void>} A promise that resolves when user initialization is complete.
  */
 async function initUser() {
+  await checkUser();
+  await renderUserDetails();
+}
+
+/** 
+ * Display the user informations on the header field.
+ */
+async function renderUserDetails() {
   const userName = await getActiveUserName();
   const textRef = document.getElementById("user-profile-name");
   const iconRef = document.getElementById("header-icons");
   const menuItemsRef = document.getElementById("menu-items");
   const backRef = document.getElementById("back_not_loggedin");
-
   const hideElements = !userName;
   iconRef?.classList.toggle("dNone", hideElements);
   menuItemsRef?.classList.toggle("dNone", hideElements);
   backRef?.classList.toggle("dNone", Boolean(userName));
-
   if (userName) {
     textRef.innerHTML = getInitials(userName);
+  }
+}
+
+/**
+ * Checks if a user is logged in. Otherwise we jump back to 
+ * the start page.
+ */
+async function checkUser() {
+  const userName = await getActiveUserName();
+  if (!userName) {
+    goToStart();
   }
 }
 
