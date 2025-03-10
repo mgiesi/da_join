@@ -2,6 +2,7 @@
     display: flex;
     gap: 8px;
     align-items: center;
+    z-index: 2;
 }
 
 .subtask-input .input-wrapper {
@@ -92,9 +93,48 @@
 }
 
 .subtasks-list {
-    display: flex;
+    background: #f6f7f8;
+    top: 80px;
+    padding-top: 13px;
+    display: none;
     flex-direction: column;
     gap: 8px;
+    height: auto;
+    position: absolute;
+    width: 100%;
+    max-width: 451px;
+    max-height: 62px;
+    overflow: auto;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    z-index: 1;
+    transition: max-height 0.3s ease;
+}
+
+.subtasks-list.has-items {
+    display: flex;
+}
+
+.subtasks-list.has-items:hover {
+    max-height: 132px;
+}
+
+.subtasks-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.subtasks-list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.subtasks-list::-webkit-scrollbar-thumb {
+    background: #a8a8a8;
+    border-radius: 4px;
+}
+
+.subtasks-list::-webkit-scrollbar-thumb:hover {
+    background: #888;
 }
 
 .subtask-item {
@@ -111,7 +151,8 @@
 .subtask-item.active {
     border-bottom: 2px solid #29abe2;
     outline: none;
-    .subtask-edit-input{
+
+    .subtask-edit-input {
         border-color: none !important;
     }
 }
@@ -143,7 +184,7 @@
     transition: opacity 0.2s ease-in-out;
 }
 
-.subtask-item:hover{
+.subtask-item:hover {
     cursor: pointer;
     background-color: #d1d4d6;
 }
@@ -175,4 +216,33 @@
 .subtask-item .subtask-edit-input:focus~.subtask-edit-container,
 .subtask-item:has(.subtask-edit-input:focus) {
     border-bottom: 2px solid #29abe2;
+}
+
+@media (max-width: 768px) {
+    .subtasks-list {
+        width: 100%;
+        max-width: 100%;
+        left: 0;
+        right: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .subtasks-list {
+        top: 70px;
+    }
+
+    .subtask-item {
+        padding: 2px;
+        font-size: 14px;
+    }
+
+    .subtask-text {
+        font-size: 14px;
+    }
+
+    .subtask-item-actions img {
+        width: 18px;
+        height: 18px;
+    }
 }

@@ -151,6 +151,14 @@ function renderSubtasks() {
   if (!subtasksList) return;
 
   subtasksList.innerHTML = "";
+
+  // Add or remove the has-items class based on whether there are subtasks
+  if (subtasks.length > 0) {
+    subtasksList.classList.add("has-items");
+  } else {
+    subtasksList.classList.remove("has-items");
+  }
+
   renderSubtaskItems(subtasksList);
 }
 

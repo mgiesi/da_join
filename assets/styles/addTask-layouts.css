@@ -8,6 +8,7 @@
   position: relative;
   padding-left: 232px;
   padding-top: 96px;
+  height: 100dvh;
 }
 
 .add-task-content {
@@ -46,7 +47,8 @@ h1 {
 .form-left-column,
 .form-right-column {
   flex: 1;
-  max-width: calc(50% - 16px);
+  max-width: 50%;
+  width: 50%;
 }
 
 .separator {
@@ -96,6 +98,7 @@ h1 {
   .form-left-column,
   .form-right-column {
     max-width: 100%;
+    width: 100%;
   }
 
   .separator {
