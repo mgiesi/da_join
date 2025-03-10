@@ -18,6 +18,12 @@ function initializeAll() {
   setupSelectArrows();
   initCustomDropdowns();
   initSubtaskSystem(); // Initialize subtask functionality
+
+  // Set medium priority as default
+  const mediumPriorityBtn = document.getElementById("add-task-btn-medium");
+  if (mediumPriorityBtn) {
+    activatePriorityButton(mediumPriorityBtn);
+  }
 }
 
 /**
