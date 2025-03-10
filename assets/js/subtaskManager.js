@@ -45,12 +45,64 @@ function setupSubtaskInputEvents(subtaskInput) {
   subtaskInput.onfocus = function () {
     subtaskInput.placeholder = "";
   };
-  
+
   subtaskInput.onblur = function () {
     if (!subtaskInput.value) {
       subtaskInput.placeholder = "Add new subtask";
     }
   };
+}
+
+/**
+ * Transforms the subtask input field between adding and editing modes
+ * @param {boolean} isEditing - Whether the input is in editing mode
+ */
+function transformSubtaskInput(isEditing) {
+  const subtaskInput = document.getElementById("subtaskInput");
+  if (!subtaskInput) return;
+
+  const inputWrapper = subtaskInput.parentElement;
+  const actionsDiv = inputWrapper.querySelector(".subtask-actions");
+
+  if (isEditing) {
+    // Transform to editing mode
+    actionsDiv.innerHTML = `
+      <img src="./assets/icons/delete.svg" alt="Cancel" class="subtask-cancel-icon" onclick="cancelSubtaskEdit()">
+      <img src="./assets/icons/subtasks_confirm.svg" alt="Confirm" class="subtask-confirm-icon" onclick="confirmSubtaskEdit()">
+    `;
+    subtaskInput.focus();
+  } else {
+    // Transform to adding mode
+    actionsDiv.innerHTML = `
+      <img src="./assets/icons/add.svg" alt="Add subtask" class="subtask-add-icon" onclick="addSubtask()">
+    `;
+    subtaskInput.value = '';
+    subtaskInput.placeholder = "Add new subtask";
+  }
+}
+
+/**
+ * Cancels the current subtask editing operation
+ */
+function cancelSubtaskEdit() {
+  transformSubtaskInput(false);
+}
+
+/**
+ * Confirms the current subtask editing operation
+ */
+function confirmSubtaskEdit() {
+  const subtaskInput = document.getElementById("subtaskInput");
+  const subtaskText = subtaskInput.value.trim();
+
+  if (subtaskText && editingSubtaskIndex !== null) {
+    subtasks[editingSubtaskIndex].name = subtaskText;
+    renderSubtasks();
+  }
+
+  transformSubtaskInput(false);
+  isEditingSubtask = false;
+  editingSubtaskIndex = null;
 }
 
 /**
