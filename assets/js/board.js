@@ -11,6 +11,7 @@ async function initBoard() {
   initSearchFilter();
   await renderBoardContainer();
   resetFilter();
+  initBoardDragAndDrop();
   modifyAddTask();
 }
 

@@ -1,6 +1,34 @@
 let boardFrom;
 let taskValue;
 
+function initBoardDragAndDrop() {
+    const boardContainers = document.querySelectorAll('.board-container');
+    boardContainers.forEach(boardContainer => {
+        boardContainer.dragCounter = 0;
+
+        boardContainer.addEventListener('dragenter', function(e) {
+            e.preventDefault();
+            this.dragCounter++;
+            this.classList.add("board-container-dragged");
+        });
+        boardContainer.addEventListener('dragleave', function(e) {
+            e.preventDefault();
+            this.dragCounter--;
+            if (this.dragCounter === 0) {
+                this.classList.remove("board-container-dragged");
+            }
+        });
+        boardContainer.addEventListener('drop', function(e) {
+            e.preventDefault();
+            this.dragCounter = 0;
+            this.classList.remove("board-container-dragged");
+        });
+        boardContainer.addEventListener('dragover', function(e) {
+            e.preventDefault();
+        });
+    })
+}
+
 /**
  * Starts the dragging process for a task by storing the source board and task identifier.
  *
