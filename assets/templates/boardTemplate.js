@@ -1,3 +1,6 @@
+/** Defines the maximum showing contacts in the board-task-card */
+const maxContactsOnCard = 6;
+
 function displayBoardContainer(board) {
   let addTaskContent = board.addtasks
     ? `<div onclick="showAddTaskOverlay('${board.id}')" class="board-container-titlebox-addtask d-flex justify-content-center align-items-center">+</div>`
@@ -118,17 +121,34 @@ function displayAssignedTo(task, contacts) {
     return "";
   } else {
     let contactsContent = "";
+    let displayedContacts = 0;
     Object.keys(task.assignedTo).forEach((contactId) => {
       const contact = contacts[contactId];
       if (contact === undefined || contact === null) {
         return;
       } else {
-        contactsContent += displayContact(contact);
+        displayedContacts++;
+        if (displayedContacts < maxContactsOnCard) {
+          contactsContent += displayContact(contact);
+        } 
       }
     });
+    contactsContent += displayContactCount(displayedContacts);
 
     return contactsContent;
   }
+}
+
+function displayContactCount(displayedContacts) {
+  if (displayedContacts < maxContactsOnCard) {
+    return "";
+  }
+
+  return `
+        <div class="task-contact f11" style="background: ${
+          getRandomColor()
+        }">+${displayedContacts-maxContactsOnCard+1}</div >
+        `;
 }
 
 function displayContact(contact) {
