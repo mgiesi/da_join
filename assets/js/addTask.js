@@ -18,6 +18,12 @@ function initializeAll() {
   setupSelectArrows();
   initCustomDropdowns();
   initSubtaskSystem(); // Initialize subtask functionality
+
+  // Set medium priority as default
+  const mediumPriorityBtn = document.getElementById("add-task-btn-medium");
+  if (mediumPriorityBtn) {
+    activatePriorityButton(mediumPriorityBtn);
+  }
 }
 
 /**
@@ -252,13 +258,15 @@ function clearSubtasks() {
   const subtaskInput = document.getElementById("subtaskInput");
   if (subtaskInput) {
     subtaskInput.value = "";
-    transformSubtaskInput(false); // Reset the input state
+    // Reset the input state using the newly defined function
+    if (typeof transformSubtaskInput === 'function') {
+      transformSubtaskInput(false);
+    }
   }
 
   // Re-render the empty subtasks list
   renderSubtasks();
 }
-
 /**
  * Resets validation styling and error messages
  * @returns {void}
