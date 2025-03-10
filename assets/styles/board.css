@@ -1,7 +1,6 @@
 .main-container {
   margin-left: 232px;
   margin-top: 70px;
-  height: calc(100vh - 126px);
   display: block;
   padding: 0;
 }
