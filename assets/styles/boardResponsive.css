@@ -154,7 +154,4 @@
     width: 95%;
     height: 95%;
   }
-  ::-webkit-scrollbar {
-    display: none;
-  }
 }
