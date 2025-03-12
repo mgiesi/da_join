@@ -6,6 +6,7 @@ a {
   margin-left: 232px;
   margin-top: 92px;
   height: calc(100vh - 96px);
+  overflow: hidden;
 }
 
 h2 {
@@ -68,9 +69,12 @@ h2 {
 
 .contact-sections {
   flex: 1;
-  overflow-y: auto;
   padding: 0 24px 32px 24px;
   font-family: "Inter", sans-serif;
+  max-height: 700px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #2a3647 #ffffff;
 }
 
 .contact-section {
@@ -265,6 +269,11 @@ h2 {
 .action-btn.edit {
   background: #2a3647;
   color: white;
+}
+
+.error {
+  color: red;
+  font-size: 16px;
 }
 
 .action-btn.delete {
@@ -641,4 +650,9 @@ input[type="text"]:focus {
 
 .dropdown-overlay-content a:hover {
   background-color: #1e2a3a;
+}
+
+.contact.active {
+  background-color: #2a3647;
+  color: white !important;
 }

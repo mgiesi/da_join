@@ -186,6 +186,18 @@
   .dropdown-overlay-content.show {
     display: flex;
   }
+
+  .contact-info {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  }
+
+  /* Wenn .contact.active ist, dann soll .contact-info sichtbar sein */
+  .contact.active + .contact-info {
+    visibility: visible;
+    opacity: 1;
+  }
 }
 
 @media (max-width: 1150px) {
@@ -669,6 +681,12 @@
   .dropdown-overlay-content {
     top: 520px;
     right: 80px;
+  }
+  .contact-sections {
+    width: 90%;
+  }
+  .respAddIcon {
+    margin-left: 200px;
   }
 }
 

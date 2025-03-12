@@ -80,7 +80,7 @@ function getOverlay() {
               <div onclick="toggleOverlay()" class="close-btn">×</div>
               <div class="form-container">
                 <img class="avatar" src="./assets/icons/Group 13.svg" alt="" />
-                <form>
+                <form id="contact-form">
                   <div class="form-group">
                     <input
                       id="inputName"
@@ -93,8 +93,8 @@ function getOverlay() {
                   <div class="form-group">
                     <input
                       id="inputMail"
-                      type="text"
-                      placeholder="Email"
+                      type="email"
+                      placeholder="YourEmail@example.com"
                       required
                     />
                     <i class="icon-email"></i>
@@ -102,7 +102,7 @@ function getOverlay() {
                   <div class="form-group">
                     <input
                       id="inputCall"
-                      type="text"
+                      type="phone"
                       placeholder="Phone"
                       required
                     />
@@ -116,7 +116,7 @@ function getOverlay() {
                     >
                       Cancel<img src="./assets/icons/cancel.svg" />
                     </button>
-                    <button id="addContactButton" onclick="addNewContactToFirebase()" type="button" class="create-btn">
+                    <button id="addContactButton" onclick="addNewContactToFirebase()" type="submit" class="create-btn">
                       Create contact <img src="./assets/icons/check.svg" alt="" />
                     </button>
                   </div>
@@ -147,7 +147,7 @@ function getEditOverlay(key, name, email, phone) {
               <div onclick="toggleEditOverlay()" class="close-btn">×</div>
               <div class="form-container">
                 <img class="avatar" src="./assets/icons/Group 13.svg" alt="" />
-                <form>
+                <form id="contact-form">
                   <div class="form-group">
                     <input
                       value="${name}"
@@ -197,3 +197,33 @@ function getEditOverlay(key, name, email, phone) {
           </div>
         `;
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  document.body.addEventListener("click", function (event) {
+    let contact = event.target.closest(".contact");
+    if (!contact) return;
+    document
+      .querySelectorAll(".contact.active")
+      .forEach((c) => c.classList.remove("active"));
+    contact.classList.add("active");
+  });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  const contactInfo = document.querySelector(".contact-info");
+
+  document.body.addEventListener("click", function (event) {
+    let contact = event.target.closest(".contact");
+    if (!contact) {
+      contactInfo.style.visibility = "hidden";
+      contactInfo.style.opacity = "0";
+      return;
+    }
+    document
+      .querySelectorAll(".contact.active")
+      .forEach((c) => c.classList.remove("active"));
+    contact.classList.add("active");
+    contactInfo.style.visibility = "visible";
+    contactInfo.style.opacity = "1";
+  });
+});
