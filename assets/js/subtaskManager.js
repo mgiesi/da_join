@@ -26,7 +26,7 @@ function setupSubtaskInput(subtaskInput) {
   const actionsDiv = inputWrapper.querySelector(".subtask-actions");
 
   actionsDiv.innerHTML = `
-    <img src="./assets/icons/add.svg" alt="Add subtask" class="subtask-add-icon" onclick="addSubtask()">
+    <img src="./assets/icons/plus.svg" alt="Add subtask" class="subtask-add-icon" onclick="addSubtask()">
   `;
 }
 
@@ -76,7 +76,7 @@ function transformSubtaskInput(isEditing) {
     actionsDiv.innerHTML = `
       <img src="./assets/icons/add.svg" alt="Add subtask" class="subtask-add-icon" onclick="addSubtask()">
     `;
-    subtaskInput.value = '';
+    subtaskInput.value = "";
     subtaskInput.placeholder = "Add new subtask";
   }
 }
@@ -138,7 +138,7 @@ function addSubtaskToList(subtaskText) {
 function clearSubtaskInput() {
   const subtaskInput = document.getElementById("subtaskInput");
   if (subtaskInput) {
-    subtaskInput.value = '';
+    subtaskInput.value = "";
     subtaskInput.placeholder = "Add new subtask";
   }
 }
@@ -283,10 +283,10 @@ function deleteSubtask(index) {
  * @returns {Array} Array of subtask objects
  */
 function getSubtasks() {
-  return subtasks.map(subtask => ({
+  return subtasks.map((subtask) => ({
     id: subtask.id,
     name: subtask.name,
-    done: subtask.done
+    done: subtask.done,
   }));
 }
 
