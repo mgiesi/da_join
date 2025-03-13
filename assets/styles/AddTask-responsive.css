@@ -24,6 +24,10 @@
         display: none;
     }
 
+    .date-input-wrapper [type="date"] {
+        background-position: 98% !important;
+    }
+
     .priority-buttons {
         gap: 8px;
     }
@@ -50,5 +54,12 @@
         font-size: 16px;
         line-height: 20px;
         padding: 10px 16px;
+    }
+
+    .subtasks-list {
+        top: 66px;
+        left: 0px;
+        right: 0px !important;
+        width: auto;
     }
 }

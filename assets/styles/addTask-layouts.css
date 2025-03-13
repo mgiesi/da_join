@@ -9,6 +9,7 @@
   padding-left: 232px;
   padding-top: 96px;
   height: 100dvh;
+  min-width: none;
 }
 
 .add-task-content {
