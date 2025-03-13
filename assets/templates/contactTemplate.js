@@ -195,6 +195,9 @@ function getEditOverlay(key, name, email, phone) {
                     </button>
                   </div>
                   <div><h2 id="addFont" class="f2 dNone addFont">Bitte alle Felder ausfüllen!</h2></div>
+                  <div><h2 id="nameEWarning" class="f2 dNone addFont">Please use a correct email address.</h2></div>
+                  <div><h2 id="namePhoneWarning" class="f2 dNone addFont">Please use a correct PhoneNumber.</h2></div>
+                  <div><h2 id="nameWarning" class="f2 dNone addFont">Your name must not contain numbers and must have more than 3 characters.</h2></div>
                 </form>
               </div>
             </div>
@@ -272,10 +275,60 @@ function phoneValidation() {
   let inputValue = phone.value.trim();
   let warning = document.getElementById("namePhoneWarning");
 
-  // E-Mail-Validierung mit regulärem Ausdruck
-  let emailPattern = /^[0-9]/;
+  let phonePattern = /^[0-9]/;
+
+  if (!phonePattern.test(inputValue)) {
+    warning.classList.remove("dNone");
+    warning.textContent = "Please use a correct PhoneNumber.";
+    return false;
+  }
+
+  warning.classList.add("dNone");
+  return true;
+}
+
+function editControlValidation() {
+  let name = document.getElementById("inputEditName");
+  let inputValue = name.value.trim();
+
+  if (inputValue.length < 3) {
+    document.getElementById("nameWarning").classList.remove("dNone");
+    return false;
+  }
+
+  if (/[0-9]/.test(inputValue)) {
+    document.getElementById("nameWarning").classList.remove("dNone");
+    return false;
+  }
+
+  return true;
+}
+
+function editEmailValidation() {
+  let email = document.getElementById("inputEditMail");
+  let inputValue = email.value.trim();
+  let warning = document.getElementById("nameEWarning");
+
+  let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
   if (!emailPattern.test(inputValue)) {
+    warning.classList.remove("dNone");
+    warning.textContent = "Please use a correct email adress.";
+    return false;
+  }
+
+  warning.classList.add("dNone");
+  return true;
+}
+
+function editPhoneValidation() {
+  let phone = document.getElementById("inputEditCall");
+  let inputValue = phone.value.trim();
+  let warning = document.getElementById("namePhoneWarning");
+
+  let phonePattern = /^[0-9]/;
+
+  if (!phonePattern.test(inputValue)) {
     warning.classList.remove("dNone");
     warning.textContent = "Please use a correct PhoneNumber.";
     return false;

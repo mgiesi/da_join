@@ -117,6 +117,9 @@ async function UpdateNewContactToFirebase(contactKey) {
   const phone = document.getElementById("inputEditCall").value;
 
   if (!name || !email || !phone) return showAddDialog();
+  if (!editControlValidation(name, email, phone)) return;
+  if (!editEmailValidation(name, email, phone)) return;
+  if (!editPhoneValidation(name, email, phone)) return;
   if (!contactKey) return showInvalidContactError();
   const updatedContact = createUpdatedContact(name, email, phone);
   try {
