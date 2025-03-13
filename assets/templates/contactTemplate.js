@@ -122,6 +122,8 @@ function getOverlay() {
                     </button>
                   </div>
                   <div><h2 id="addFont" class="f2 dNone addFont">please fill in all fields!</h2></div>
+                  <div><h2 id="nameEWarning" class="f2 dNone addFont">Please use a correct email address.</h2></div>
+                  <div><h2 id="namePhoneWarning" class="f2 dNone addFont">Please use a correct PhoneNumber.</h2></div>
                   <div><h2 id="nameWarning" class="f2 dNone addFont">Your name must not contain numbers and must have more than 3 characters.</h2></div>
                 </form>
               </div>
@@ -244,5 +246,41 @@ function controlValidation() {
     return false;
   }
 
+  return true;
+}
+
+function emailValidation() {
+  let email = document.getElementById("inputMail");
+  let inputValue = email.value.trim();
+  let warning = document.getElementById("nameEWarning");
+
+  // E-Mail-Validierung mit regulärem Ausdruck
+  let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+  if (!emailPattern.test(inputValue)) {
+    warning.classList.remove("dNone");
+    warning.textContent = "Please use a correct email adress.";
+    return false;
+  }
+
+  warning.classList.add("dNone");
+  return true;
+}
+
+function phoneValidation() {
+  let phone = document.getElementById("inputCall");
+  let inputValue = phone.value.trim();
+  let warning = document.getElementById("namePhoneWarning");
+
+  // E-Mail-Validierung mit regulärem Ausdruck
+  let emailPattern = /^[0-9]/;
+
+  if (!emailPattern.test(inputValue)) {
+    warning.classList.remove("dNone");
+    warning.textContent = "Please use a correct PhoneNumber.";
+    return false;
+  }
+
+  warning.classList.add("dNone");
   return true;
 }
