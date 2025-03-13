@@ -52,7 +52,7 @@ function displayTasks(board, tasks, contacts) {
                 </div>
                 <div class="mb-24">
                     <div class="mb-8">
-                        <span class="f9">${task.title}</span>
+                        <span class="board-task-title f9">${task.title}</span>
                     </div>
                     <p class="board-task-descr f3">
                         ${task.description}

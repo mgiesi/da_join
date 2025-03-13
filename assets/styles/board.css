@@ -455,6 +455,13 @@ input:required:invalid {
   cursor: pointer;
 }
 
+.board-task-title {
+  width: 100%;
+  display:block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .board-task-type {
   display: flex;
   justify-content: center;
