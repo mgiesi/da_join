@@ -87,6 +87,7 @@ function getOverlay() {
                       type="text"
                       placeholder="Name"
                       required
+                      minlength="3"
                     />
                     <i class="icon-user"></i>
                   </div>
@@ -116,11 +117,12 @@ function getOverlay() {
                     >
                       Cancel<img src="./assets/icons/cancel.svg" />
                     </button>
-                    <button id="addContactButton" onclick="addNewContactToFirebase()" type="submit" class="create-btn">
+                    <button id="addContactButton" onclick="addNewContactToFirebase()" type="button" class="create-btn">
                       Create contact <img src="./assets/icons/check.svg" alt="" />
                     </button>
                   </div>
-                  <div><h2 id="addFont" class="f2 dNone addFont">Bitte alle Felder ausfüllen!</h2></div>
+                  <div><h2 id="addFont" class="f2 dNone addFont">please fill in all fields!</h2></div>
+                  <div><h2 id="nameWarning" class="f2 dNone addFont">Your name must not contain numbers and must have more than 3 characters.</h2></div>
                 </form>
               </div>
             </div>
@@ -227,3 +229,20 @@ document.addEventListener("DOMContentLoaded", function () {
     contactInfo.style.opacity = "1";
   });
 });
+
+function controlValidation() {
+  let name = document.getElementById("inputName");
+  let inputValue = name.value.trim();
+
+  if (inputValue.length < 3) {
+    document.getElementById("nameWarning").classList.remove("dNone");
+    return false;
+  }
+
+  if (/[0-9]/.test(inputValue)) {
+    document.getElementById("nameWarning").classList.remove("dNone");
+    return false;
+  }
+
+  return true;
+}

@@ -38,7 +38,9 @@ function initPlus() {
  */
 async function addNewContactToFirebase() {
   const { name, email, phone } = getContactInput();
+  controlValidation();
   if (!validateContactInput(name, email, phone)) return;
+  if (!controlValidation(name, email, phone)) return;
 
   const newContact = createNewContact(name, email, phone);
   await saveAndLoadContact(newContact);
