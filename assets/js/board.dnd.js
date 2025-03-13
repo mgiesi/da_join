@@ -58,7 +58,8 @@ function allowDrop(event) {
  * @param {string} boardTo - The identifier of the board to which the task should be moved.
  * @returns {Promise<void>} A promise that resolves when the task has been moved.
  */
-async function moveTaskTo(boardTo) {
+async function moveTaskTo(event, boardTo) {
+    event.stopPropagation();
     await removeTaskFromBoard(boardFrom, taskValue);
     await addTaskToBoard(boardTo, taskValue);
     await renderTasks();

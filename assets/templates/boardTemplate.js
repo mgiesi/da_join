@@ -6,7 +6,7 @@ function displayBoardContainer(board) {
     ? `<div onclick="showAddTaskOverlay('${board.id}')" class="board-container-titlebox-addtask d-flex justify-content-center align-items-center">+</div>`
     : "";
   return `
-        <div class="board-container" ondrop="moveTaskTo('${board.id}')" ondragover="allowDrop(event)">
+        <div class="board-container" ondrop="moveTaskTo(event, '${board.id}')" ondragover="allowDrop(event)">
             <div class="board-container-titlebox d-flex justify-content-between align-items-center">
                 <span class="board-container-titlebox-title f10">${board.name}</span>
                 ${addTaskContent}
@@ -19,7 +19,11 @@ function displayBoardContainer(board) {
 }
 
 function displayBoardTasks(board, tasks, contacts) {
-  const taskCount = board && board.tasks ? Object.keys(board.tasks).length : 0;
+  const taskKeys = board && board.tasks 
+    ? Object.keys(board.tasks).filter(key => key !== "undefined")
+    : [];
+  const taskCount = taskKeys.length;
+  // const taskCount = board && board.tasks ? Object.keys(board.tasks).length : 0;
   if (taskCount <= 0) {
     return displayEmptyBoard(board);
   } else {
@@ -47,8 +51,9 @@ function displayTasks(board, tasks, contacts) {
             <div onclick="toggleTaskDetails('${board.id}', '${taskId}')" class="board-task-container" draggable="true" ondragstart="startTaskDragging('${
       board.id
     }', '${taskId}')">
-                <div class="d-flex mb-24">
+                <div class="d-flex justify-content-between mb-24">
                     ${displayTaskType(task.category)}
+                    <img onclick="toggleMoveTaskOverlay(event, 'board-task-overlay-${taskId}')" class="board-task-movetask" src="./assets/icons/arrow_down.svg"/>
                 </div>
                 <div class="mb-24">
                     <div class="mb-8">
@@ -67,9 +72,28 @@ function displayTasks(board, tasks, contacts) {
                       task.prio
                     }.svg" alt="">
                 </div>
+                <div id="board-task-overlay-${taskId}" class="board-task-move-overlay d-flex dNone">
+                    <div class="d-flex justify-content-between">
+                      <div class="f9">Move task to...</div>
+                      <img onclick="toggleMoveTaskOverlay(event, 'board-task-overlay-${taskId}')" class="board-task-movetask-2" src="./assets/icons/arrow_down.svg"/>
+                    </div>
+                    ${displayMoveToElements(board.id, taskId)}
+                </div>
             </div>
         `;
   });
+  return htmlContent;
+}
+
+function displayMoveToElements(boardId, taskId) {
+  let htmlContent = "";
+  for (let index = 0; index < boardNames.length; index++) {
+    const boardName = boardNames[index];
+    if (boardName === boardId) {
+      continue;
+    }
+    htmlContent += `<p class="f10" onclick="startTaskDragging('${boardId}', '${taskId}'); moveTaskTo(event, '${boardName}')">- ${boardTexts[index]}</p>`;
+  }
   return htmlContent;
 }
 
@@ -103,14 +127,12 @@ function displaySubTasks(task) {
 
 function getSubTasksDoneCount(task, subTasksCount) {
   let subTasksDoneCount = 0;
-  for (let subTaskIdx = 0; subTaskIdx < subTasksCount; subTaskIdx++) {
-    if (!task.subtasks["subtask" + (subTaskIdx + 1)]) {
-      continue;
-    }
-    if (task.subtasks["subtask" + (subTaskIdx + 1)].done) {
+  Object.keys(task.subtasks).forEach((subtaskId) => {
+    const subtask = task.subtasks[subtaskId];
+    if (subtask.done) {
       subTasksDoneCount++;
     }
-  }
+  });
   return subTasksDoneCount;
 }
 

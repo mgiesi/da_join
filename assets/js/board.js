@@ -1,4 +1,5 @@
 const boardNames = ["todo", "inprogress", "awaitfeedback", "done"];
+const boardTexts = ["To do", "In progress", "Await feedback", "Done"];
 
 /**
  * Initializes the board by setting up search filters, rendering the board container, and resetting the filter.
@@ -246,6 +247,25 @@ function showDeleteMessage() {
   setTimeout(function () {
     overlay.classList.add("dNone");
   }, 2000);
+}
+
+function toggleMoveTaskOverlay(event, elementId) {
+  event.stopPropagation();
+  hideMoveTaskOverlays(elementId);
+  const element = document.getElementById(elementId);
+  if (element) {
+    element.classList.toggle("dNone");
+  }
+}
+
+function hideMoveTaskOverlays(elementId) {
+  const overlays = document.querySelectorAll(".board-task-move-overlay");
+  overlays.forEach(function (overlay) {
+    if (overlay.id === elementId) {
+      return;
+    }
+    overlay.classList.add("dNone");
+  });
 }
 
 function loadTaskDetails(taskId, task, contactsFromDb) {
