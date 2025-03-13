@@ -121,7 +121,7 @@ function resetForm() {
   resetContactSelection();
   resetPrioritySelection();
   resetCategoryDropdown();
-  clearSubtasks(); // Use our new function
+  clearSubtasks();
   resetValidationStyling();
 }
 
@@ -267,6 +267,7 @@ function clearSubtasks() {
   // Re-render the empty subtasks list
   renderSubtasks();
 }
+
 /**
  * Resets validation styling and error messages
  * @returns {void}

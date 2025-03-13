@@ -82,47 +82,22 @@ input:required:invalid {
     color: black;
 }
 
-.date-input-wrapper {
+.date-input-wrapper [type="date"] {
     position: relative;
     width: 100%;
+    background: url(../icons/calendar.svg);
+    background-size: 30px;
+    background-repeat: no-repeat;
+    background-position: 96%;
+    content: attr(placeholder="dd/mm/yyyy") !important;
 }
 
-.date-input-wrapper input[type="text"] {
-    width: 100%;
-    padding: 12px 21px;
-    border: 1px solid rgb(209, 209, 209);
-    border-radius: 10px;
-    font-size: 20px;
-    line-height: 24px;
-    font-family: 'Inter', sans-serif;
-    background: white;
-    color: rgba(0, 0, 0, 0.87);
-    cursor: pointer;
-}
-
-.date-input-wrapper input[type="date"]::-webkit-calendar-picker-indicator {
+.date-input-wrapper [type="date"]::-webkit-calendar-picker-indicator{
     opacity: 0;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
+}
+
+.date-input-wrapper [type="date"]::-webkit-calendar-picker-indicator:hover{
     cursor: pointer;
-}
-
-.date-input-wrapper input[type="date"]:invalid {
-    color: rgba(0, 0, 0, 0.38);
-}
-
-.calendar-icon {
-    position: absolute;
-    right: 16px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 24px;
-    height: 24px;
-    pointer-events: none;
-    fill: rgba(0, 0, 0, 0.54);
 }
 
 /* Form interactions */
