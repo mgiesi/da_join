@@ -1,4 +1,10 @@
 /* Responsive styles */
+@media (max-width: 1150px) {
+    .subtasks-input-text {
+        padding-right: 23% !important;
+    }
+}
+
 @media (max-width: 1081px) {
     .form-group {
         margin-bottom: 16px !important;
@@ -56,10 +62,50 @@
         padding: 10px 16px;
     }
 
+    .subtasks-input-text {
+        padding-right: 8% !important;
+    }
+
     .subtasks-list {
         top: 66px;
         left: 0px;
         right: 0px !important;
         width: auto;
+    }
+}
+
+@media (max-width: 960px) {
+    .subtasks-input-text {
+        padding-right: 9% !important;
+    }
+}
+
+@media (max-width: 855px) {
+    .subtasks-input-text {
+        padding-right: 10% !important;
+    }
+}
+
+@media (max-width: 755px) {
+    .subtasks-input-text {
+        padding-right: 13% !important;
+    }
+}
+
+@media (max-width: 600px) {
+    .subtasks-input-text {
+        padding-right: 20% !important;
+    }
+}
+
+@media (max-width: 400px) {
+    .subtasks-input-text {
+        padding-right: 30% !important;
+    }
+}
+
+@media (max-width: 300px) {
+    .subtasks-input-text {
+        padding-right: 40% !important;
     }
 }
