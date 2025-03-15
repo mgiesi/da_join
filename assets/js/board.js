@@ -304,6 +304,9 @@ function loadTaskDetails(taskId, task, contactsFromDb) {
     document.getElementById("add-task-btn-low").classList.remove("active", "selected");
   }
   
+  document.getElementById("categorySelected").setAttribute("data-value", task.category === "userstory" ? "personal" : "work");
+  document.getElementById("category").value = task.category === "userstory" ? "User Story" : "Technical Task";
+  
   selectedContacts = [];
   const contactsCount = task && task.assignedTo ? Object.keys(task.assignedTo).length : 0;
   if (contactsCount > 0) {
