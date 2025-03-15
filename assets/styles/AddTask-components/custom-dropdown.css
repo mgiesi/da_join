@@ -73,11 +73,6 @@
   transform: rotate(180deg);
 }
 
-#subtaskInput {
-  background-position: calc(100% - 15px) center;
-  padding-right: 20px;
-}
-
 .respX {
   display: none;
   cursor: pointer;

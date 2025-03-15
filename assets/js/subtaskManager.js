@@ -69,7 +69,8 @@ function transformSubtaskInput(isEditing) {
   if (isEditing) {
     // Transform to editing mode
     actionsDiv.innerHTML = `
-      <img src="./assets/icons/delete.svg" alt="Cancel" class="subtask-cancel-icon" onclick="cancelSubtaskEdit()">
+      <img src="./assets/icons/cancel.svg" alt="Cancel" class="subtask-cancel-icon" onclick="cancelSubtaskEdit()">
+      <div class="subtask-edit-actions-devider"></div>
       <img src="./assets/icons/subtasks_confirm.svg" alt="Confirm" class="subtask-confirm-icon" onclick="confirmSubtaskEdit()">
     `;
     subtaskInput.focus();
@@ -200,6 +201,7 @@ function createSubtaskHTML(subtask, index) {
     </div>
     <div class="subtask-item-actions">
       <img src="./assets/icons/edit.svg" alt="Edit" onclick="editSubtask(${index})">
+      <div class="subtask-edit-actions-devider"></div>
       <img src="./assets/icons/delete.svg" alt="Delete" onclick="deleteSubtask(${index})">
     </div>
   `;
@@ -217,6 +219,7 @@ function createEditableSubtaskHTML(subtask, index) {
       <input type="text" class="subtask-edit-input" value="${subtask.name}" id="subtask-edit-${index}" spellcheck="true">
       <div class="subtask-edit-actions">
         <img src="./assets/icons/delete.svg" alt="Delete" onclick="deleteSubtask(${index})">
+        <div class="subtask-edit-actions-devider"></div>
         <img src="./assets/icons/subtasks_confirm.svg" alt="Save" onclick="saveSubtaskEdit(${index})">
       </div>
     </div>

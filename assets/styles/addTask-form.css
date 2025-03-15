@@ -85,11 +85,11 @@ input:required:invalid {
 .date-input-wrapper [type="date"] {
     position: relative;
     width: 100%;
+    background-color: white !important;
     background: url(../icons/calendar.svg);
     background-size: 30px;
     background-repeat: no-repeat;
     background-position: 96%;
-    content: attr(placeholder="dd/mm/yyyy") !important;
 }
 
 .date-input-wrapper [type="date"]::-webkit-calendar-picker-indicator{
