@@ -49,7 +49,7 @@ function displayContactDetails(key, name, email, phone, avatarColor) {
           </div>
         </div>
       </div>
-      <img onclick="toggleDropdown()" class="exportMenu" src="./assets/icons/Menu Contact options.svg" alt="">
+      <img onclick="toggleDropdown(event)" class="exportMenu" src="./assets/icons/Menu Contact options.svg" alt="">
       <div id="dropdownMenu" class="dropdown-overlay-content "><a onclick="toggleEditOverlay('${key}','${name}', '${email}', '${phone}')">Edit</a>
       <a onclick="deleteContactToFirebase('${key}')">Delete</a></div>
     `;

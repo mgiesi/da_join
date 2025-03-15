@@ -370,7 +370,8 @@ function addDNoneToResp() {
 /**
  * Toggles the visibility of the dropdown menu for small screens.
  */
-function toggleDropdown() {
+function toggleDropdown(event) {
+  event.stopPropagation();
   let dropdown = document.getElementById("dropdownMenu");
 
   if (window.innerWidth < 1200) {
