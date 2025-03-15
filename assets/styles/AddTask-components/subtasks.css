@@ -1,6 +1,10 @@
+.subtasks-input-text{
+padding-right: 18% !important;
+}
+
 .subtask-input {
   display: flex;
-  /* gap: 8px; */
+  gap: 8px;
   align-items: center;
   z-index: 2;
   width: 100%;
@@ -45,16 +49,14 @@
   height: 32px;
   background: white;
   border-block-end: #29abe2 !important;
-  width: auto;
-  padding-right: 5px;
+  width: 100%;
 }
 
 .subtask-edit-input {
   height: inherit;
-  width: auto !important;
+  width: 80%;
   flex: 1 !important;
   border-color: white !important;
-  min-width: none;
   padding: 0% !important;
 }
 
@@ -107,13 +109,12 @@
 .subtasks-list {
   background: #f6f7f8;
   top: 80px;
-  padding: 12px;
+  padding-inline: 8px;
   display: none;
   flex-direction: column;
   height: auto;
   position: absolute;
   max-height: 190px;
-  width: calc(100% - 16px);
   left: 8px;
   right: 8px;
   overflow-y: auto;
