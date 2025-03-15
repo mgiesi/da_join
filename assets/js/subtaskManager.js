@@ -44,11 +44,13 @@ function setupSubtaskInputEvents(subtaskInput) {
 
   subtaskInput.onfocus = function () {
     subtaskInput.placeholder = "";
+    transformSubtaskInput(true); // Transform to editing mode when focused
   };
 
   subtaskInput.onblur = function () {
     if (!subtaskInput.value) {
       subtaskInput.placeholder = "Add new subtask";
+      // Don't transform back here as it would prevent clicking the action buttons
     }
   };
 }
@@ -74,7 +76,7 @@ function transformSubtaskInput(isEditing) {
   } else {
     // Transform to adding mode
     actionsDiv.innerHTML = `
-      <img src="./assets/icons/add.svg" alt="Add subtask" class="subtask-add-icon" onclick="addSubtask()">
+      <img src="./assets/icons/plus.svg" alt="Add subtask" class="subtask-add-icon" onclick="addSubtask()">
     `;
     subtaskInput.value = "";
     subtaskInput.placeholder = "Add new subtask";

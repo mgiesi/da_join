@@ -74,7 +74,6 @@
 }
 
 #subtaskInput {
-  background: white url(/assets/icons/Subtasks\ icons11.svg) right no-repeat;
   background-position: calc(100% - 15px) center;
   padding-right: 20px;
 }
