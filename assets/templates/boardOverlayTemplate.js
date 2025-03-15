@@ -52,8 +52,15 @@ function displayTaskDueDate(dueDate) {
   const date = new Date(dueDate);
   const options = { day: "2-digit", month: "2-digit", year: "numeric" };
   let formattedDate = date.toLocaleDateString("de-DE", options);
-  formattedDate = formattedDate.replace(/\./g, "/");
   return formattedDate;
+}
+
+function getTaskDueDate4InputField(dueDate) {
+  const date = new Date(dueDate);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
 }
 
 function displayAssignedTo4TaskDetails(task, contacts) {

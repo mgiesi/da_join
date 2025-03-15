@@ -249,6 +249,9 @@ function showDeleteMessage() {
   }, 2000);
 }
 
+/**
+ * Shows a overlay to move a task from one board to another.
+ */
 function toggleMoveTaskOverlay(event, elementId) {
   event.stopPropagation();
   hideMoveTaskOverlays(elementId);
@@ -258,6 +261,11 @@ function toggleMoveTaskOverlay(event, elementId) {
   }
 }
 
+/**
+ * Hides all move-task-to overlays on the board.
+ * 
+ * @param {string} elementId 
+ */
 function hideMoveTaskOverlays(elementId) {
   const overlays = document.querySelectorAll(".board-task-move-overlay");
   overlays.forEach(function (overlay) {
@@ -268,47 +276,33 @@ function hideMoveTaskOverlays(elementId) {
   });
 }
 
+/**
+ * Loads the task details for the edit-task overlay.
+ * 
+ * @param {string} taskId 
+ * @param {object} task 
+ * @param {object} contactsFromDb 
+ */
 function loadTaskDetails(taskId, task, contactsFromDb) {
   document.getElementById("title").value = task.title;
   document.getElementById("description").value = task.description;
-  document.getElementById("dueDate").value = displayTaskDueDate(task.dueDate);
+  document.getElementById("dueDate").value = getTaskDueDate4InputField(task.dueDate);
 
   if (task.prio === "urgent") {
-    document
-      .getElementById("add-task-btn-urgent")
-      .classList.add("active", "selected");
+    document.getElementById("add-task-btn-urgent").classList.add("active", "selected");
   } else {
-    document
-      .getElementById("add-task-btn-urgent")
-      .classList.remove("active", "selected");
+    document.getElementById("add-task-btn-urgent").classList.remove("active", "selected");
   }
   if (task.prio === "medium") {
-    document
-      .getElementById("add-task-btn-medium")
-      .classList.add("active", "selected");
+    document.getElementById("add-task-btn-medium").classList.add("active", "selected");
   } else {
-    document
-      .getElementById("add-task-btn-medium")
-      .classList.remove("active", "selected");
+    document.getElementById("add-task-btn-medium").classList.remove("active", "selected");
   }
   if (task.prio === "low") {
-    document
-      .getElementById("add-task-btn-low")
-      .classList.add("active", "selected");
+    document.getElementById("add-task-btn-low").classList.add("active", "selected");
   } else {
-    document
-      .getElementById("add-task-btn-low")
-      .classList.remove("active", "selected");
+    document.getElementById("add-task-btn-low").classList.remove("active", "selected");
   }
-
-  document
-    .getElementById("categorySelected")
-    .setAttribute(
-      "data-value",
-      task.category === "userstory" ? "personal" : "work"
-    );
-  document.getElementById("category").value =
-    task.category === "userstory" ? "User Story" : "Technical Task";
   
   selectedContacts = [];
   const contactsCount = task && task.assignedTo ? Object.keys(task.assignedTo).length : 0;
@@ -332,20 +326,17 @@ function loadTaskDetails(taskId, task, contactsFromDb) {
   renderSubtasks();
 }
 
+/**
+ * Resets the input fields of the task details overlay.
+ */
 function resetTaskDetails() {
   document.getElementById("title").value = "";
   document.getElementById("description").value = "";
   document.getElementById("dueDate").value = "";
 
-  document
-    .getElementById("add-task-btn-urgent")
-    .classList.remove("active", "selected");
-  document
-    .getElementById("add-task-btn-medium")
-    .classList.remove("active", "selected");
-  document
-    .getElementById("add-task-btn-low")
-    .classList.remove("active", "selected");
+  document.getElementById("add-task-btn-urgent").classList.remove("active", "selected");
+  document.getElementById("add-task-btn-medium").classList.add("active", "selected");
+  document.getElementById("add-task-btn-low").classList.remove("active", "selected");
 
   selectedContacts = [];
   updateSelectedAvatars();
