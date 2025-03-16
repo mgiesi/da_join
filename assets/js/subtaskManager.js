@@ -71,7 +71,7 @@ function transformSubtaskInput(isEditing) {
     actionsDiv.innerHTML = `
       <img src="./assets/icons/cancel.svg" alt="Cancel" class="subtask-cancel-icon" onclick="cancelSubtaskEdit()">
       <div class="subtask-edit-actions-devider"></div>
-      <img src="./assets/icons/subtasks_confirm.svg" alt="Confirm" class="subtask-confirm-icon" onclick="confirmSubtaskEdit()">
+      <img src="./assets/icons/plus.svg" alt="Confirm" class="subtask-confirm-icon" onclick="addSubtask()">
     `;
     subtaskInput.focus();
   } else {
