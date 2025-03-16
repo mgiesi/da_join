@@ -656,3 +656,7 @@ input[type="text"]:focus {
   background-color: #2a3647;
   color: white !important;
 }
+
+.visHid {
+  visibility: hidden;
+}

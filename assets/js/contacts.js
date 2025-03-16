@@ -364,7 +364,7 @@ function showAddMessage() {
  */
 function addDNoneToResp() {
   let info = document.getElementById("contact-info");
-  if (window.innerWidth <= 1200) info.classList.add("dNone");
+  if (window.innerWidth <= 1200) info.classList.add("visHid");
 }
 
 /**
