@@ -108,34 +108,21 @@ padding-right: 20% !important;
 
 .subtasks-list {
   background: #f6f7f8;
-  top: 80px;
   padding-inline: 8px;
   display: none;
   flex-direction: column;
   height: auto;
-  position: absolute;
-  max-height: 190px;
-  left: 8px;
-  right: 8px;
+  position: relative;
   overflow-y: auto;
   border-radius: 10px;
-  z-index: 1;
   transition: max-height 0.3s ease;
 }
 
 .subtasks-list.has-items {
   display: flex;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  height: 62px;
-  overflow: hidden;
-  transition: height 0.3s ease, max-height 0.3s ease;
-}
-
-.subtasks-list.has-items:hover {
   height: auto;
-  max-height: 130px;
-  overflow-y: auto;
+  max-height: 100px;
+  overflow: auto;
 }
 
 .subtasks-list::-webkit-scrollbar {
@@ -164,7 +151,6 @@ padding-right: 20% !important;
   font-size: 16px;
   width: 100%;
   flex: 1;
-  margin-top: 8px;
 }
 
 .subtask-item:focus,

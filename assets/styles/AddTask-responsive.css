@@ -66,12 +66,6 @@
         padding-right: 8% !important;
     }
 
-    .subtasks-list {
-        top: 66px;
-        left: 0px;
-        right: 0px !important;
-        width: auto;
-    }
 }
 
 @media (max-width: 960px) {
