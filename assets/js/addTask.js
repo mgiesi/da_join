@@ -189,13 +189,19 @@ function uncheckAllContactBoxes() {
 }
 
 /**
- * Resets priority selection state
+ * Resets priority selection state and sets medium priority as default
  * @returns {void}
  */
 function resetPrioritySelection() {
   resetPriorityButtons();
   if (typeof currentPriority !== "undefined") {
     currentPriority = null;
+  }
+
+  // Set medium priority as default after reset
+  const mediumPriorityBtn = document.getElementById("add-task-btn-medium");
+  if (mediumPriorityBtn) {
+    activatePriorityButton(mediumPriorityBtn);
   }
 }
 

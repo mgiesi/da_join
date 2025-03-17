@@ -6,7 +6,21 @@ function initFormValidation() {
     const requiredFields = form.querySelectorAll('[required]');
     form.setAttribute('novalidate', '');
     requiredFields.forEach(field => setupFieldValidation(field));
+    setupDateValidation();
     form.onsubmit = e => handleFormSubmit(e);
+}
+
+/**
+ * Sets up date field validation to check for past dates
+ */
+function setupDateValidation() {
+    const dateField = document.getElementById('dueDate');
+    if (dateField) {
+        // Use input event instead of change for immediate feedback
+        dateField.addEventListener('input', function () {
+            validateDueDate();
+        });
+    }
 }
 
 /**
@@ -55,6 +69,7 @@ async function validateAndSubmitForm(event) {
     event.preventDefault();
     if (!validateFormFields(event.target)) return false;
     if (!validatePriority()) return false;
+    if (!validateDueDate()) return false;
 
     const taskData = gatherTaskData();
     return await submitNewTask(taskData);
@@ -119,6 +134,7 @@ async function validateAndSubmitForm4Edit(event, taskId) {
     event.preventDefault();
     if (!validateFormFields(event.target)) return false;
     if (!validatePriority()) return false;
+    if (!validateDueDate()) return false;
 
     const taskData = gatherTaskData();
     return await submitEditedTask(taskData, taskId);
@@ -161,6 +177,69 @@ function validateRequiredFields(requiredFields) {
     return isValid;
 }
 
+/**
+ * Validates that the due date is not in the past
+ * @returns {boolean} True if due date is valid
+ */
+function validateDueDate() {
+    const dueDateField = document.getElementById('dueDate');
+    if (!dueDateField || !dueDateField.value) return true;
+
+    // Get the date value directly from the input
+    const selectedDate = new Date(dueDateField.value);
+    const today = new Date();
+
+    // Reset time parts for accurate comparison
+    selectedDate.setHours(0, 0, 0, 0);
+    today.setHours(0, 0, 0, 0);
+
+    if (selectedDate < today) {
+        dueDateField.style.borderColor = 'red';
+        showErrorMessage(dueDateField, 'Due date cannot be in the past');
+        return false;
+    } else {
+        dueDateField.style.borderColor = '';
+        hideErrorMessage(dueDateField);
+        return true;
+    }
+}
+
+/**
+ * Shows error message for a field
+ * @param {HTMLElement} field - Field with error
+ * @param {string} message - Error message to display
+ */
+function showErrorMessage(field, message) {
+    let errorMsg = field.parentNode.querySelector('.error-message');
+    if (errorMsg) {
+        errorMsg.textContent = message;
+        errorMsg.style.display = 'block';
+    }
+}
+
+/**
+ * Hides error message for a field
+ * @param {HTMLElement} field - Field to hide error for
+ */
+function hideErrorMessage(field) {
+    const errorMsg = field.parentNode.querySelector('.error-message');
+    if (errorMsg) {
+        errorMsg.style.display = 'none';
+    }
+}
+
+/**
+ * Shows error message for date field
+ * @param {HTMLElement} field - Date field with error
+ */
+function showDateError(field) {
+    field.style.borderColor = 'red';
+    const errorMsg = field.parentNode.querySelector('.error-message');
+    if (errorMsg) {
+        errorMsg.textContent = 'Due date cannot be in the past';
+        errorMsg.style.display = 'block';
+    }
+}
 /**
  * Collects all task data from the form
  * @returns {Object} Object containing task data
