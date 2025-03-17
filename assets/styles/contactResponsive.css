@@ -570,6 +570,9 @@
     top: 100px;
     left: 70px;
   }
+  .contact-details {
+    padding-left: 16px;
+  }
 }
 
 @media (max-width: 501px) {
@@ -622,7 +625,7 @@
   .exportMenu {
     display: flex;
     margin-top: 180px !important;
-    margin-left: 300px !important;
+    margin-left: 250px !important;
   }
   .dropdown-overlay-content {
     top: 520px;
@@ -650,7 +653,7 @@
     cursor: pointer;
     width: 32px;
     height: 32px;
-    margin-left: 300px;
+    margin-left: 250px;
   }
   .contact-info-header {
     margin-bottom: 12px;
@@ -675,7 +678,7 @@
   .exportMenu {
     display: flex;
     margin-top: 180px;
-    margin-left: 300px;
+    margin-left: 250px;
   }
   .dropdown-overlay-content {
     top: 520px;
@@ -707,7 +710,7 @@
   .exportMenu {
     display: flex;
     margin-top: 180px;
-    margin-left: 300px;
+    margin-left: 250px;
   }
   .dropdown-overlay-content {
     top: 520px;
@@ -819,7 +822,7 @@
   .exportMenu {
     display: flex;
     margin-top: 30px;
-    margin-left: 250px;
+    margin-left: 200px !important;
   }
   .dropdown-overlay-content {
     top: 360px;

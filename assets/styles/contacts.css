@@ -34,6 +34,7 @@ h2 {
   justify-content: center;
   align-items: center;
   padding: 32px 24px;
+  height: 90vh;
 }
 
 .contact-list-header {
@@ -68,13 +69,13 @@ h2 {
 }
 
 .contact-sections {
-  flex: 1;
+  flex-grow: 1;
+  min-height: 0;
+  overflow-y: auto;
   padding: 0 24px 32px 24px;
   font-family: "Inter", sans-serif;
-  max-height: 700px;
-  overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: #2a3647 #ffffff;
+  scrollbar-color: #2a3647;
 }
 
 .contact-section {
