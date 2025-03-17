@@ -219,20 +219,37 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function () {
   const contactInfo = document.querySelector(".contact-info");
 
-  document.body.addEventListener("click", function (event) {
-    let contact = event.target.closest(".contact");
-    if (!contact) {
-      contactInfo.style.visibility = "hidden";
-      contactInfo.style.opacity = "0";
-      return;
-    }
+  function showContactInfo(contact) {
     document
       .querySelectorAll(".contact.active")
       .forEach((c) => c.classList.remove("active"));
     contact.classList.add("active");
     contactInfo.style.visibility = "visible";
     contactInfo.style.opacity = "1";
-  });
+  }
+
+  function hideContactInfo() {
+    contactInfo.style.visibility = "hidden";
+    contactInfo.style.opacity = "0";
+  }
+
+  function handleContactClick(event) {
+    let contact = event.target.closest(".contact");
+    contact ? showContactInfo(contact) : hideContactInfo();
+  }
+
+  function checkScreenSize() {
+    if (window.innerWidth <= 1530) {
+      document.body.addEventListener("click", handleContactClick);
+    } else {
+      document.body.removeEventListener("click", handleContactClick);
+      contactInfo.style.visibility = "visible";
+      contactInfo.style.opacity = "1";
+    }
+  }
+
+  checkScreenSize();
+  window.addEventListener("resize", checkScreenSize);
 });
 
 function controlValidation() {
@@ -257,7 +274,6 @@ function emailValidation() {
   let inputValue = email.value.trim();
   let warning = document.getElementById("nameEWarning");
 
-  // E-Mail-Validierung mit regulärem Ausdruck
   let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
   if (!emailPattern.test(inputValue)) {
