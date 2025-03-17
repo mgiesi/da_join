@@ -185,18 +185,34 @@ function updateSelectedDisplay() {
  * Updates the display of selected contact avatars
  * @returns {void}
  */
+/**
+ * Updates the display of selected contact avatars (max 5 + counter)
+ * @returns {void}
+ */
 function updateSelectedAvatars() {
   const avatarDiv = document.getElementById("selectedContactsAvatar");
   if (!avatarDiv) return;
   avatarDiv.innerHTML = "";
-  selectedContacts.forEach((contactId) => {
-    const contact = contacts[contactId];
-    if (contact) {
-      const initials = getInitials(contact.name);
-      const avatarElement = createAvatarElement(contact, initials);
-      avatarDiv.appendChild(avatarElement);
+
+  const maxToShow = 5;
+  const total = selectedContacts.length;
+
+  // Display first 5 avatars
+  selectedContacts.slice(0, maxToShow).forEach(id => {
+    if (contacts[id]) {
+      const initials = getInitials(contacts[id].name);
+      avatarDiv.appendChild(createAvatarElement(contacts[id], initials));
     }
   });
+
+  // Add counter avatar if needed
+  if (total > maxToShow) {
+    const counter = document.createElement("div");
+    counter.className = "contact-avatar-selected";
+    counter.style.backgroundColor = "#2A3647";
+    counter.textContent = "+" + (total - maxToShow);
+    avatarDiv.appendChild(counter);
+  }
 }
 
 /**
