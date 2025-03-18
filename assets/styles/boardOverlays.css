@@ -1,13 +1,13 @@
 .overlay {
-    position: absolute;
-    bottom: -50px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: rgba(0, 0, 0, 0);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 999;
+  position: absolute;
+  bottom: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
 }
 
 .overlay .message {
@@ -79,7 +79,7 @@
   flex-direction: column;
   width: 90%;
   max-width: 900px;
-  height: 90%; 
+  height: 90%;
   background: #fff;
   border-radius: 10px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
@@ -92,4 +92,5 @@
   padding-bottom: 48px;
   padding-left: 40px;
   gap: 24px;
+  max-height: 1200px;
 }
