@@ -617,6 +617,8 @@ input[type="text"]:focus {
 .exportMenu {
   display: none;
   cursor: pointer;
+  width: 56px;
+  height: 56px;
 }
 
 .dropdown-overlay {
@@ -631,8 +633,6 @@ input[type="text"]:focus {
 
 .dropdown-overlay-content {
   position: absolute;
-  top: 800px;
-  right: 200px;
   display: none;
   flex-direction: column;
   background-color: #2a3647;

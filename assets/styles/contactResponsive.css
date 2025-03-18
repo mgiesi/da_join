@@ -49,10 +49,10 @@
     display: flex;
     justify-content: center;
     position: fixed;
-    bottom: 100px;
+    bottom: 82px;
+    right: 20px;
     width: 56px;
     height: 56px;
-    margin-left: 300px;
   }
 
   .contact.info {
@@ -103,15 +103,20 @@
     display: none;
   }
   .respArrow {
+    position: absolute;
     display: flex !important;
     cursor: pointer;
     width: 32px;
     height: 32px;
-    margin-left: 400px;
+    right: 20px;
   }
-  .exportMenu {
+  .exportMenu {    
+    position: absolute;
     display: flex;
-    margin-left: 360px;
+    margin-top: 0;
+    margin-left: 0;
+    right: 20px;
+    bottom: 20px;
   }
   .overlay {
     position: absolute;
@@ -175,8 +180,8 @@
     margin-top: 60px;
   }
   .dropdown-overlay-content {
-    top: 800px;
-    right: 400px;
+    bottom: 20px;
+    right: 0;
   }
   .dropdown-overlay-content {
     display: none;
@@ -209,10 +214,6 @@
     padding-left: 380px;
     padding-bottom: 0;
   }
-  .dropdown-overlay-content {
-    top: 800px;
-    right: 350px;
-  }
   .overlay {
     top: 100px;
     left: 370px;
@@ -229,9 +230,9 @@
     padding-left: 350px;
     padding-bottom: 0;
   }
-  .dropdown-overlay-content {
-    top: 800px;
-    right: 350px;
+
+  .contact-list {
+    height: calc(100vh - 160px);
   }
 }
 
@@ -244,10 +245,6 @@
     height: calc(90vh - 80px);
     padding-left: 300px;
     padding-bottom: 0;
-  }
-  .dropdown-overlay-content {
-    top: 800px;
-    right: 350px;
   }
   .overlay {
     top: 100px;
@@ -265,10 +262,6 @@
     padding-left: 300px;
     padding-bottom: 0;
   }
-  .dropdown-overlay-content {
-    top: 800px;
-    right: 300px;
-  }
   .overlay {
     top: 100px;
     left: 300px;
@@ -285,10 +278,6 @@
     padding-left: 250px;
     padding-bottom: 0;
   }
-  .dropdown-overlay-content {
-    top: 800px;
-    right: 300px;
-  }
   .overlay {
     top: 100px;
     left: 300px;
@@ -304,10 +293,6 @@
     height: calc(90vh - 80px);
     padding-left: 250px;
     padding-bottom: 0;
-  }
-  .dropdown-overlay-content {
-    top: 800px;
-    right: 250px;
   }
   .overlay {
     top: 100px;
@@ -340,10 +325,6 @@
     height: calc(90vh - 80px);
     padding-left: 200px;
     padding-bottom: 0;
-  }
-  .dropdown-overlay-content {
-    top: 800px;
-    right: 200px;
   }
   .overlay {
     top: 100px;
@@ -469,15 +450,6 @@
   .contact-info {
     padding-left: 150px;
   }
-  .exportMenu {
-    display: flex;
-    margin-top: 80px;
-    margin-left: 300px;
-  }
-  .dropdown-overlay-content {
-    top: 500px;
-    right: 300px;
-  }
 }
 
 @media (max-width: 701px) {
@@ -489,10 +461,6 @@
     height: calc(90vh - 80px);
     padding-left: 150px;
     padding-bottom: 0;
-  }
-  .dropdown-overlay-content {
-    top: 800px;
-    right: 150px;
   }
   .overlay {
     top: 100px;
@@ -509,10 +477,6 @@
     height: calc(90vh - 80px);
     padding-left: 100px;
     padding-bottom: 0;
-  }
-  .dropdown-overlay-content {
-    top: 800px;
-    right: 150px;
   }
   .overlay {
     top: 100px;
@@ -547,10 +511,6 @@
     padding-left: 50px;
     padding-bottom: 0;
   }
-  .dropdown-overlay-content {
-    top: 800px;
-    right: 150px;
-  }
 }
 
 @media (max-width: 551px) {
@@ -561,10 +521,6 @@
     width: 100%;
     height: calc(90vh - 80px);
     padding: 12px;
-  }
-  .dropdown-overlay-content {
-    top: 800px;
-    right: 150px;
   }
   .overlay {
     top: 100px;
@@ -588,22 +544,14 @@
     top: 100px;
     left: 50px;
   }
-  .dropdown-overlay-content {
-    top: 750px;
-    right: 70px;
+  .respAddIcon {
+    right: 10px;
+  }
+  .exportMenu {    
+    right: 10px;
   }
   .respArrow {
-    display: flex !important
-;
-    cursor: pointer;
-    width: 32px;
-    height: 32px;
-    margin-left: 300px;
-  }
-  .exportMenu {
-    display: flex;
-    margin-top: 300px;
-    margin-left: 300px;
+    right: 20px;
   }
 }
 
@@ -622,15 +570,6 @@
     overflow: hidden;
     border-radius: 30px;
   }
-  .exportMenu {
-    display: flex;
-    margin-top: 180px !important;
-    margin-left: 250px !important;
-  }
-  .dropdown-overlay-content {
-    top: 520px;
-    right: 100px;
-  }
 
   .contact-info {
     position: absolute;
@@ -647,14 +586,6 @@
     font-size: 24px;
   }
 
-  .respArrow {
-    display: flex !important
-;
-    cursor: pointer;
-    width: 32px;
-    height: 32px;
-    margin-left: 250px;
-  }
   .contact-info-header {
     margin-bottom: 12px;
   }
@@ -675,20 +606,8 @@
     overflow: hidden;
     border-radius: 30px;
   }
-  .exportMenu {
-    display: flex;
-    margin-top: 180px;
-    margin-left: 250px;
-  }
-  .dropdown-overlay-content {
-    top: 520px;
-    right: 80px;
-  }
   .contact-sections {
     width: 90%;
-  }
-  .respAddIcon {
-    margin-left: 200px;
   }
 }
 
@@ -706,15 +625,6 @@
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     border-radius: 30px;
-  }
-  .exportMenu {
-    display: flex;
-    margin-top: 180px;
-    margin-left: 250px;
-  }
-  .dropdown-overlay-content {
-    top: 520px;
-    right: 60px;
   }
   .contact-sections {
     padding: 0 !important;
@@ -786,15 +696,6 @@
   .contact-sections {
     padding: 0 !important;
   }
-  .exportMenu {
-    display: flex;
-    margin-top: 10px !important;
-    margin-left: 250px !important;
-  }
-  .dropdown-overlay-content {
-    top: 330px;
-    right: 100px;
-  }
 }
 
 @media (max-width: 361px) {
@@ -819,15 +720,6 @@
     justify-content: start;
   }
 
-  .exportMenu {
-    display: flex;
-    margin-top: 30px;
-    margin-left: 200px !important;
-  }
-  .dropdown-overlay-content {
-    top: 360px;
-    right: 80px;
-  }
   .overlay-left .logo1 {
     display: none;
   }

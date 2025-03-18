@@ -205,6 +205,7 @@ async function deleteContactToFirebase(key) {
     await loadContactsFromFirebase();
     const contactInfoContainer = document.querySelector(".contact-info");
     contactInfoContainer.innerHTML = "";
+    onHideContactInfoClicked();
   } catch (error) {
     console.error("Fehler beim Löschen des Kontakts:", error);
   }
@@ -226,6 +227,7 @@ async function deleteContactToFirebaseWithDialogRemove(key) {
     overlay.classList.add("dNone");
     const contactInfoContainer = document.querySelector(".contact-info");
     contactInfoContainer.innerHTML = "";
+    onHideContactInfoClicked();
   } catch (error) {
     console.error("Fehler beim Löschen des Kontakts:", error);
   }
@@ -406,4 +408,17 @@ async function addActiveUserToContacts() {
   };
   await addOrUpdateContact(activeUserKey, userContact);
   await loadContactsFromFirebase();
+}
+
+function onContactInfoClicked(event) {
+  event.stopPropagation();
+  let dropdown = document.getElementById("dropdownMenu");
+  dropdown?.classList.remove("show");
+}
+
+function onHideContactInfoClicked() {
+  addDNoneToResp();
+  let info = document.getElementById("contact-info");
+  info.style.visibility = "hidden";
+  info.style.opacity = "0";
 }

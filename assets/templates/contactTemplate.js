@@ -10,7 +10,7 @@ function displayContactDetails(key, name, email, phone, avatarColor) {
           <span class="header-subtitle">Better with a team</span>
           
         </div>
-        <img onclick="addDNoneToResp()" class="respArrow" src="./assets/icons/arrow-left-line.svg" alt="">
+        <img onclick="onHideContactInfoClicked()" class="respArrow" src="./assets/icons/arrow-left-line.svg" alt="">
       </div>
       <div class="contact-details">
         <div class="profile-section">
