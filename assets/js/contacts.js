@@ -39,6 +39,7 @@ function initPlus() {
 async function addNewContactToFirebase() {
   const { name, email, phone } = getContactInput();
   controlValidation();
+  validateInputs();
   if (!validateContactInput(name, email, phone)) return;
   if (!controlValidation(name, email, phone)) return;
   if (!emailValidation(name, email, phone)) return;
@@ -67,7 +68,6 @@ function getContactInput() {
  */
 function validateContactInput(name, email, phone) {
   if (!name || !email || !phone) {
-    document.getElementById("addFont").classList.remove("dNone");
     return false;
   }
   return true;
@@ -116,10 +116,13 @@ async function UpdateNewContactToFirebase(contactKey) {
   const email = document.getElementById("inputEditMail").value;
   const phone = document.getElementById("inputEditCall").value;
 
-  if (!name || !email || !phone) return showAddDialog();
+  if (!validateEditInputs()) return;
+
   if (!editControlValidation(name, email, phone)) return;
   if (!editEmailValidation(name, email, phone)) return;
   if (!editPhoneValidation(name, email, phone)) return;
+  editControlValidation();
+
   if (!contactKey) return showInvalidContactError();
   const updatedContact = createUpdatedContact(name, email, phone);
   try {

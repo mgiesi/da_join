@@ -94,6 +94,9 @@ h2 {
   background: #d1d1d1;
   margin: 8px 0;
 }
+.fS {
+  font-size: 12px;
+}
 
 .contact {
   display: flex;

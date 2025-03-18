@@ -90,6 +90,7 @@ function getOverlay() {
                       minlength="3"
                     />
                     <i class="icon-user"></i>
+                    <div><h2 id="nameWarning" class="fS dNone addFont">Name: at least 3 letters, no numbers.</h2></div>
                   </div>
                   <div class="form-group">
                     <input
@@ -99,6 +100,7 @@ function getOverlay() {
                       required
                     />
                     <i class="icon-email"></i>
+                    <div><h2 id="nameEWarning" class="fS dNone addFont">Please use a correct email address.</h2></div>
                   </div>
                   <div class="form-group">
                     <input
@@ -108,6 +110,7 @@ function getOverlay() {
                       required
                     />
                     <i class="icon-phone"></i>
+                    <div><h2 id="namePhoneWarning" class="fS dNone addFont">Please use a correct PhoneNumber.</h2></div>
                   </div>
                   <div class="button-group">
                     <button
@@ -121,10 +124,6 @@ function getOverlay() {
                       Create contact <img src="./assets/icons/check.svg" alt="" />
                     </button>
                   </div>
-                  <div><h2 id="addFont" class="f2 dNone addFont">please fill in all fields!</h2></div>
-                  <div><h2 id="nameEWarning" class="f2 dNone addFont">Please use a correct email address.</h2></div>
-                  <div><h2 id="namePhoneWarning" class="f2 dNone addFont">Please use a correct PhoneNumber.</h2></div>
-                  <div><h2 id="nameWarning" class="f2 dNone addFont">Your name must not contain numbers and must have more than 3 characters.</h2></div>
                 </form>
               </div>
             </div>
@@ -161,6 +160,7 @@ function getEditOverlay(key, name, email, phone) {
                       required
                     />
                     <i class="icon-user"></i>
+                    <div><h2 id="nameWarning" class="fS dNone addFont">Name: at least 3 letters, no numbers.</h2></div>
                   </div>
                   <div class="form-group">
                     <input
@@ -171,6 +171,7 @@ function getEditOverlay(key, name, email, phone) {
                       required
                     />
                     <i class="icon-email"></i>
+                    <div><h2 id="nameEWarning" class="fS dNone addFont">Please use a correct email address.</h2></div>
                   </div>
                   <div class="form-group">
                     <input
@@ -181,6 +182,7 @@ function getEditOverlay(key, name, email, phone) {
                       required
                     />
                     <i class="icon-phone"></i>
+                    <div><h2 id="namePhoneWarning" class="fS dNone addFont">Please use a correct PhoneNumber.</h2></div>
                   </div>
                   <div class="button-group">
                     <button
@@ -194,10 +196,9 @@ function getEditOverlay(key, name, email, phone) {
                       Save <img src="./assets/icons/check.svg" alt="" />
                     </button>
                   </div>
-                  <div><h2 id="addFont" class="f2 dNone addFont">Bitte alle Felder ausfüllen!</h2></div>
-                  <div><h2 id="nameEWarning" class="f2 dNone addFont">Please use a correct email address.</h2></div>
-                  <div><h2 id="namePhoneWarning" class="f2 dNone addFont">Please use a correct PhoneNumber.</h2></div>
-                  <div><h2 id="nameWarning" class="f2 dNone addFont">Your name must not contain numbers and must have more than 3 characters.</h2></div>
+                  
+                  
+                  
                 </form>
               </div>
             </div>
@@ -256,12 +257,7 @@ function controlValidation() {
   let name = document.getElementById("inputName");
   let inputValue = name.value.trim();
 
-  if (inputValue.length < 3) {
-    document.getElementById("nameWarning").classList.remove("dNone");
-    return false;
-  }
-
-  if (/[0-9]/.test(inputValue)) {
+  if (/[0-9]/.test(inputValue) || /^[A-Za-z]{1,2}$/.test(inputValue)) {
     document.getElementById("nameWarning").classList.remove("dNone");
     return false;
   }
@@ -307,12 +303,7 @@ function editControlValidation() {
   let name = document.getElementById("inputEditName");
   let inputValue = name.value.trim();
 
-  if (inputValue.length < 3) {
-    document.getElementById("nameWarning").classList.remove("dNone");
-    return false;
-  }
-
-  if (/[0-9]/.test(inputValue)) {
+  if (/[0-9]/.test(inputValue) || /^[A-Za-z]{1,2}$/.test(inputValue)) {
     document.getElementById("nameWarning").classList.remove("dNone");
     return false;
   }

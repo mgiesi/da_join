@@ -1,0 +1,72 @@
+function validateInputs() {
+  const fields = ["inputCall", "inputName", "inputMail"];
+  let allValid = true;
+
+  fields.forEach((id) => {
+    const input = document.getElementById(id);
+    const errorDiv = getOrCreateErrorDiv(id, input);
+    if (!validateField(input, errorDiv)) allValid = false;
+  });
+
+  return allValid;
+}
+
+function getOrCreateErrorDiv(id, input) {
+  let errorDiv = document.getElementById(id + "-error");
+  if (!errorDiv) {
+    errorDiv = document.createElement("div");
+    errorDiv.id = id + "-error";
+    errorDiv.style.color = "red";
+    errorDiv.style.fontSize = "12px";
+    input.parentNode.appendChild(errorDiv);
+  }
+  return errorDiv;
+}
+
+function validateField(input, errorDiv) {
+  if (input.value.trim() === "") {
+    errorDiv.textContent = "This field is required";
+    return false;
+  }
+  errorDiv.textContent = "";
+  return true;
+}
+
+function validateEditInputs() {
+  const fields = ["inputEditCall", "inputEditName", "inputEditMail"];
+  let allValid = true;
+
+  fields.forEach((id) => {
+    const input = document.getElementById(id);
+    const errorDiv = getOrCreateEditErrorDiv(id, input);
+    if (!validateEditField(input, errorDiv)) allValid = false;
+  });
+
+  return allValid;
+}
+
+function getOrCreateEditErrorDiv(id, input) {
+  let errorDiv = document.getElementById(id + "-error");
+  if (!errorDiv) {
+    errorDiv = createEditErrorDiv(id);
+    input.parentNode.appendChild(errorDiv);
+  }
+  return errorDiv;
+}
+
+function createEditErrorDiv(id) {
+  const errorDiv = document.createElement("div");
+  errorDiv.id = id + "-error";
+  errorDiv.style.color = "red";
+  errorDiv.style.fontSize = "12px";
+  return errorDiv;
+}
+
+function validateEditField(input, errorDiv) {
+  if (input.value.trim() === "") {
+    errorDiv.textContent = "This field is required";
+    return false;
+  }
+  errorDiv.textContent = "";
+  return true;
+}
