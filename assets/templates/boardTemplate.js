@@ -44,7 +44,6 @@ function displayTasks(board, tasks, contacts) {
   let htmlContent = "";
 
   Object.keys(board.tasks).forEach((taskId) => {
-    handleVisibility();
     const task = tasks[taskId];
     if (task === undefined || task === null) {
       return;
@@ -57,7 +56,7 @@ function displayTasks(board, tasks, contacts) {
     }', '${taskId}')">
                 <div class="d-flex justify-content-between mb-24">
                     ${displayTaskType(task.category)}
-                    <img id="moveTaskOverlay" onclick="toggleMoveTaskOverlay(event, 'board-task-overlay-${taskId}')" class="board-task-movetask" src="./assets/icons/arrow_down.svg"/>
+                    <img onclick="toggleMoveTaskOverlay(event, 'board-task-overlay-${taskId}')" class="board-task-movetask" src="./assets/icons/arrow_down.svg"/>
                 </div>
                 <div class="mb-24">
                     <div class="mb-8">
@@ -200,9 +199,9 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function handleVisibility() {
-  const elements = document.querySelectorAll("#moveTaskOverlay");
+  const elements = document.querySelectorAll(".board-task-movetask");
   elements.forEach((element) => {
-    if (window.innerWidth < 1200) {
+    if (window.innerWidth < 1500) {
       element.style.display = "block";
     } else {
       element.style.display = "none";

@@ -89,6 +89,7 @@ async function renderTasks() {
       contacts
     );
   }
+  handleVisibility();
 }
 
 /**
