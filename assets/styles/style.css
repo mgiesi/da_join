@@ -22,15 +22,6 @@ a {
   padding: 40px;
 }
 
-#back_not_loggedin {
-  width: 32px;
-  height: 32px;
-  position: fixed;
-  right: 98px;
-  top: 180px;
-  cursor: pointer;
-}
-
 body.modal-open {
   overflow: hidden;
 }

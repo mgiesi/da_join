@@ -99,10 +99,12 @@ async function renderUserDetails() {
   const iconRef = document.getElementById("header-icons");
   const menuItemsRef = document.getElementById("menu-items");
   const backRef = document.getElementById("back_not_loggedin");
+  const footerLinksRef = document.getElementById("footer_links");
   const hideElements = !userName;
   iconRef?.classList.toggle("dNone", hideElements);
   menuItemsRef?.classList.toggle("dNone", hideElements);
   backRef?.classList.toggle("dNone", Boolean(userName));
+  footerLinksRef?.classList.toggle("logged_in", Boolean(userName));
   if (userName) {
     textRef.innerHTML = getInitials(userName);
   }
@@ -111,9 +113,16 @@ async function renderUserDetails() {
 /**
  * Checks if a user is logged in. Otherwise we jump back to
  * the start page.
+ * This is required for all pages except legal notice and privacy policy.
  */
 async function checkUser() {
   const userName = await getActiveUserName();
+  if (!userName) {
+    if (window.location.pathname.endsWith('legal_notice.html') == false &&
+        window.location.pathname.endsWith('privacy_policy.html') == false) {
+      goToStart();
+    }
+  }
 }
 
 /**
