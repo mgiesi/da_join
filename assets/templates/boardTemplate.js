@@ -19,9 +19,10 @@ function displayBoardContainer(board) {
 }
 
 function displayBoardTasks(board, tasks, contacts) {
-  const taskKeys = board && board.tasks 
-    ? Object.keys(board.tasks).filter(key => key !== "undefined")
-    : [];
+  const taskKeys =
+    board && board.tasks
+      ? Object.keys(board.tasks).filter((key) => key !== "undefined")
+      : [];
   const taskCount = taskKeys.length;
   // const taskCount = board && board.tasks ? Object.keys(board.tasks).length : 0;
   if (taskCount <= 0) {
@@ -43,17 +44,20 @@ function displayTasks(board, tasks, contacts) {
   let htmlContent = "";
 
   Object.keys(board.tasks).forEach((taskId) => {
+    handleVisibility();
     const task = tasks[taskId];
     if (task === undefined || task === null) {
       return;
     }
     htmlContent += `
-            <div onclick="toggleTaskDetails('${board.id}', '${taskId}')" class="board-task-container" draggable="true" ondragstart="startTaskDragging('${
+            <div onclick="toggleTaskDetails('${
+              board.id
+            }', '${taskId}')" class="board-task-container" draggable="true" ondragstart="startTaskDragging('${
       board.id
     }', '${taskId}')">
                 <div class="d-flex justify-content-between mb-24">
                     ${displayTaskType(task.category)}
-                    <img onclick="toggleMoveTaskOverlay(event, 'board-task-overlay-${taskId}')" class="board-task-movetask" src="./assets/icons/arrow_down.svg"/>
+                    <img id="moveTaskOverlay" onclick="toggleMoveTaskOverlay(event, 'board-task-overlay-${taskId}')" class="board-task-movetask" src="./assets/icons/arrow_down.svg"/>
                 </div>
                 <div class="mb-24">
                     <div class="mb-8">
@@ -152,7 +156,7 @@ function displayAssignedTo(task, contacts) {
         displayedContacts++;
         if (displayedContacts < maxContactsOnCard) {
           contactsContent += displayContact(contact);
-        } 
+        }
       }
     });
     contactsContent += displayContactCount(displayedContacts);
@@ -167,9 +171,9 @@ function displayContactCount(displayedContacts) {
   }
 
   return `
-        <div class="task-contact f11" style="background: ${
-          getRandomColor()
-        }">+${displayedContacts-maxContactsOnCard+1}</div >
+        <div class="task-contact f11" style="background: ${getRandomColor()}">+${
+    displayedContacts - maxContactsOnCard + 1
+  }</div >
         `;
 }
 
@@ -194,3 +198,16 @@ document.addEventListener("DOMContentLoaded", function () {
   checkScreenSize();
   window.addEventListener("resize", checkScreenSize);
 });
+
+function handleVisibility() {
+  const elements = document.querySelectorAll("#moveTaskOverlay");
+  elements.forEach((element) => {
+    if (window.innerWidth < 1200) {
+      element.style.display = "block";
+    } else {
+      element.style.display = "none";
+    }
+  });
+}
+handleVisibility();
+window.addEventListener("resize", handleVisibility);
