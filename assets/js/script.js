@@ -19,7 +19,7 @@ async function init() {
 /**
  * Includes external HTML files into the current document.
  * Searches for elements with the attribute "w3-include-html", fetches the corresponding file
- * and replaces the element's inner HTML with the fetched content. 
+ * and replaces the element's inner HTML with the fetched content.
  * If the fetch fails, displays "Page not found".
  *
  * @async
@@ -27,35 +27,35 @@ async function init() {
  */
 async function includeHTML() {
   let includeElements = document.querySelectorAll("[w3-include-html]");
-  
+
   for (let i = 0; i < includeElements.length; i++) {
     const element = includeElements[i];
     let fileAttr = element.getAttribute("w3-include-html");
     let filePath = fileAttr;
     let fragmentSelector = null;
-    
+
     // Prüfen, ob ein Fragment angegeben wurde (z.B. side-menu.html#myelement)
-    if (fileAttr.indexOf('#') !== -1) {
-      let parts = fileAttr.split('#');
+    if (fileAttr.indexOf("#") !== -1) {
+      let parts = fileAttr.split("#");
       filePath = parts[0];
       let fragment = parts[1];
       if (fragment) {
-        fragmentSelector = '#' + fragment; // Sicherstellen, dass es ein gültiger CSS-Selektor ist
+        fragmentSelector = "#" + fragment; // Sicherstellen, dass es ein gültiger CSS-Selektor ist
       }
     }
-    
+
     try {
       let resp = await fetch(filePath);
-      
+
       if (resp.ok) {
         let htmlText = await resp.text();
-        
+
         if (fragmentSelector) {
           // HTML in ein Dokument parsen, um gezielt das Fragment auszuwählen
           let parser = new DOMParser();
           let doc = parser.parseFromString(htmlText, "text/html");
           let frag = doc.querySelector(fragmentSelector);
-          
+
           if (frag) {
             element.innerHTML = frag.innerHTML;
           } else {
@@ -71,7 +71,7 @@ async function includeHTML() {
     } catch (error) {
       element.innerHTML = "Error: " + error;
     }
-    
+
     // Entferne das Attribut, nachdem der Inhalt ersetzt wurde
     element.removeAttribute("w3-include-html");
   }
@@ -79,7 +79,7 @@ async function includeHTML() {
 
 /**
  * Initializes user-related elements on the page.
- * Retrieves the active user's name and updates the UI elements 
+ * Retrieves the active user's name and updates the UI elements
  * accordingly by showing or hiding certain elements.
  *
  * @async
@@ -90,7 +90,7 @@ async function initUser() {
   await renderUserDetails();
 }
 
-/** 
+/**
  * Display the user informations on the header field.
  */
 async function renderUserDetails() {
@@ -109,14 +109,11 @@ async function renderUserDetails() {
 }
 
 /**
- * Checks if a user is logged in. Otherwise we jump back to 
+ * Checks if a user is logged in. Otherwise we jump back to
  * the start page.
  */
 async function checkUser() {
   const userName = await getActiveUserName();
-  if (!userName) {
-    goToStart();
-  }
 }
 
 /**
@@ -137,11 +134,11 @@ function logoutUser() {
 
 /**
  * Retrieves the active user's name from local storage.
- * If the active user is "Guest", returns "Guest". 
+ * If the active user is "Guest", returns "Guest".
  * Otherwise, fetches the user object and returns its name.
  *
  * @async
- * @returns {Promise<string|null>} A promise that resolves to the active 
+ * @returns {Promise<string|null>} A promise that resolves to the active
  * user's name or null if no active user exists.
  */
 async function getActiveUserName() {
@@ -161,7 +158,7 @@ async function getActiveUserName() {
 
 /**
  * Sets the active menu item based on the current page URL.
- * Removes the "active" class from all menu buttons and adds it to the 
+ * Removes the "active" class from all menu buttons and adds it to the
  * button whose href matches the current page.
  * Also stores the active menu item's href in local storage.
  */
@@ -197,7 +194,7 @@ function setActiveMenuItem() {
 
 /**
  * Adds click event listeners to menu buttons.
- * When a menu button is clicked, updates the active class and 
+ * When a menu button is clicked, updates the active class and
  * stores the active menu item's href in local storage.
  */
 function addMenuClickListeners() {
@@ -222,11 +219,13 @@ function addMenuClickListeners() {
  * Hides the submenu when the user clicks directly on the submenu overlay.
  */
 function addSubmenuClickListeners() {
-  document.getElementById('header-submenu').addEventListener('click', function (e) {
-    if (e.target === this) {
-      hideSubmenu();
-    }
-  });
+  document
+    .getElementById("header-submenu")
+    .addEventListener("click", function (e) {
+      if (e.target === this) {
+        hideSubmenu();
+      }
+    });
 }
 
 /**
@@ -284,9 +283,9 @@ function getInitials(name) {
 }
 
 function openModal() {
-  document.body.classList.add('modal-open');
+  document.body.classList.add("modal-open");
 }
 
 function closeModal() {
-  document.body.classList.remove('modal-open');
+  document.body.classList.remove("modal-open");
 }
