@@ -1,6 +1,6 @@
-let users = [
-  { name: "Markus Giesinger", email: "test@web.de", password: "test" },
-];
+function initLogin() {
+  logoutUser();
+}
 
 /**
  * Navigates to the sign-up page.
