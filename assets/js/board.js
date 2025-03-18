@@ -106,7 +106,7 @@ function showAddTaskOverlay() {
   document.getElementById("form-group-category").classList.remove("dNone");
   const addTaskForm = document.getElementById("add-task-form");
   addTaskForm.onsubmit = handleFormSubmit;
-  resetTaskDetails();
+  resetEditTaskContent();
   let overlay = document.getElementById("overlayAddTask");
   overlay.classList.remove("dNone");
   openModal();
@@ -125,7 +125,7 @@ function removeAddTaskOverlay() {
   }
   const addTaskForm = document.getElementById("add-task-form");
   addTaskForm.onsubmit = handleFormSubmit;
-  resetTaskDetails();
+  resetEditTaskContent();
   let overlay = document.getElementById("overlayAddTask");
   overlay.classList.add("dNone");
   closeModal();
@@ -149,7 +149,7 @@ function showAddTaskOverlay(boardName) {
   document.getElementById("form-group-category").classList.remove("dNone");
   const addTaskForm = document.getElementById("add-task-form");
   addTaskForm.onsubmit = handleFormSubmit;
-  resetTaskDetails();
+  resetEditTaskContent();
   let overlay = document.getElementById("overlayAddTask");
   overlay.classList.remove("dNone");
   openModal();
@@ -167,7 +167,7 @@ function hideOverlays() {
 }
 
 /**
- * Toggles the task details overlay for a given task.
+ * Shows the task details overlay for a given task.
  * Fetches the task and contacts data, then updates the overlay content with the task details.
  *
  * @async
@@ -175,31 +175,39 @@ function hideOverlays() {
  * @param {string|number} taskId - The identifier of the task.
  * @returns {Promise<void>} A promise that resolves when the task details overlay has been toggled.
  */
-async function toggleTaskDetails(boardName, taskId) {
-  const [task, contacts] = await Promise.all([getTask(taskId), getContacts()]);
-  resetTaskDetails();
+async function showTaskDetails(boardName, taskId) {
   let overlay = document.getElementById("taskDetails");
-  overlay.classList.toggle("dNone");
+  resetEditTaskContent();
+  const [task, contacts] = await Promise.all([getTask(taskId), getContacts()]);
   overlay.innerHTML = getTaskDetails(taskId, task, contacts, boardName);
-  if (overlay.classList.contains("dNone")) {
-    closeModal();
-  } else {
-    openModal();
-  }
+  overlay.classList.remove("dNone");
+  openModal();
 }
 
 /**
- * Toggles the edit task details overlay for a given task.
+ * Hides the task details overlay.
+ */
+function hideTaskDetails() {
+  let overlay = document.getElementById("taskDetails");
+  overlay.classList.add("dNone");
+  closeModal();
+}
+
+/**
+ * Shows the edit task details overlay for a given task.
  * Fetches the task and contacts data, then updates the overlay content with the edit task template.
  *
  * @async
  * @param {string|number} taskId - The identifier of the task to be edited.
  * @returns {Promise<void>} A promise that resolves when the edit task details overlay has been toggled.
  */
-async function toggleEditTaskDetails(taskId) {
+async function showEditTaskDetails(taskId) {
+  let overlay = document.getElementById("overlayAddTask");
+  
+  document.getElementById("form-group-category").classList.add("dNone");
   const [task, contacts] = await Promise.all([getTask(taskId), getContacts()]);
 
-  loadTaskDetails(taskId, task, contacts);
+  loadTaskEditContent(taskId, task, contacts);
   const addTaskForm = document.getElementById("add-task-form");
   addTaskForm.onsubmit = function (event) {
     handleFormSubmit4Edit(event, taskId);
@@ -211,16 +219,18 @@ async function toggleEditTaskDetails(taskId) {
   if (textNode) {
     textNode.textContent = "Ok";
   }
+  overlay.classList.remove("dNone");
+  openModal();
+}
 
+/**
+ * Hides the edit task details overlay.
+ */
+function hideEditTaskDetails() {
   let overlay = document.getElementById("overlayAddTask");
-  overlay.classList.toggle("dNone");
-  if (overlay.classList.contains("dNone")) {
-    document.getElementById("form-group-category").classList.remove("dNone");
-    closeModal();
-  } else {
-    document.getElementById("form-group-category").classList.add("dNone");
-    openModal();
-  }
+  overlay.classList.add("dNone");
+  document.getElementById("form-group-category").classList.remove("dNone");
+  closeModal();
 }
 
 /**
@@ -234,7 +244,7 @@ async function doDeleteTask(boardName, taskId) {
   await deleteTask(taskId);
   await removeTaskFromBoard(boardName, taskId);
   renderTasks();
-  toggleTaskDetails();
+  hideTaskDetails();
   showDeleteMessage();
 }
 
@@ -283,7 +293,7 @@ function hideMoveTaskOverlays(elementId) {
  * @param {object} task 
  * @param {object} contactsFromDb 
  */
-function loadTaskDetails(taskId, task, contactsFromDb) {
+function loadTaskEditContent(taskId, task, contactsFromDb) {
   document.getElementById("title").value = task.title;
   document.getElementById("description").value = task.description;
   document.getElementById("dueDate").value = getTaskDueDate4InputField(task.dueDate);
@@ -332,7 +342,7 @@ function loadTaskDetails(taskId, task, contactsFromDb) {
 /**
  * Resets the input fields of the task details overlay.
  */
-function resetTaskDetails() {
+function resetEditTaskContent() {
   document.getElementById("title").value = "";
   document.getElementById("description").value = "";
   document.getElementById("dueDate").value = "";

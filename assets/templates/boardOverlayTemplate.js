@@ -8,7 +8,7 @@ function getTaskDetails(taskId, task, contacts, boardName) {
                     ${displayTaskType(
                       task.category
                     )}
-                <img onclick="toggleTaskDetails()" class="close-btn" src="./assets/icons/cancel.svg" alt="">
+                <img onclick="hideTaskDetails()" class="close-btn" src="./assets/icons/cancel.svg" alt="">
             </div>
             <div class="taskHeadline">
                 <h1 class="f1">${task.title}</h1>
@@ -40,7 +40,7 @@ function getTaskDetails(taskId, task, contacts, boardName) {
                 <button onclick="doDeleteTask('${boardName}', '${taskId}')" class="endBtn">
                     <img class="detailsImgBtn detailsImgBtnDel" src="./assets/icons/delete.svg" alt="">Delete
                 </button>
-                <button onclick="toggleTaskDetails(); toggleEditTaskDetails('${taskId}')" class="endBtn">
+                <button onclick="hideTaskDetails(); showEditTaskDetails('${taskId}')" class="endBtn">
                     <img class="detailsImgBtn detailsImgBtnEdit" src="./assets/icons/edit.svg" alt="">Edit
                 </button>
             </div>
