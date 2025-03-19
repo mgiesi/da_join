@@ -1,3 +1,7 @@
+.gap0{
+  gap: 0px !important;
+}
+
 .subtasks-input-text{
 padding-right: 20% !important;
 }
@@ -108,20 +112,12 @@ padding-right: 20% !important;
 .subtasks-list {
   background: #f6f7f8;
   padding-inline: 8px;
-  display: none;
   flex-direction: column;
-  height: auto;
+  height: 100px;
   position: relative;
   overflow-y: auto;
   border-radius: 10px;
   transition: max-height 0.3s ease;
-}
-
-.subtasks-list.has-items {
-  display: flex;
-  height: auto;
-  max-height: 100px;
-  overflow: auto;
 }
 
 .subtasks-list::-webkit-scrollbar {
@@ -150,6 +146,7 @@ padding-right: 20% !important;
   font-size: 16px;
   width: 100%;
   flex: 1;
+  margin-block: 6px;
 }
 
 .subtask-item:focus,
