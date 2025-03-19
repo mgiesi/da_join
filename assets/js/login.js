@@ -122,6 +122,8 @@ function handleLoginError(error) {
 async function addUser() {
   const { name, email, password, confirmPassword } = getUserInput();
   if (!validateInput(name, email, password, confirmPassword)) return;
+  if (!emailValidation(email)) return;
+  emailValidation();
   if (!validatePassword(password, confirmPassword)) return;
 
   const newUser = { name, email, password };

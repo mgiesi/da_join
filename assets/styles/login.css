@@ -27,6 +27,14 @@ body {
   width: 80px;
   height: 100px;
 }
+.dNone {
+  display: none;
+}
+.errorNote {
+  font-size: 14px;
+  color: red;
+  margin: 0;
+}
 
 .login-box {
   background-color: #ffffff;
@@ -60,7 +68,6 @@ body {
 .login-box input[type="password"] {
   width: 95%;
   padding: 10px;
-  margin-bottom: 15px;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
@@ -122,15 +129,19 @@ footer {
   margin-top: 250px;
   text-align: center;
 }
+.inputBorder {
+  margin-bottom: 24px;
+}
 
 footer a {
   color: #777;
   text-decoration: none;
+  font-weight: bold;
   margin: 24px;
 }
 
 footer a:hover {
-  font-size: 17px;
+  font-size: 16px;
   font-weight: bold;
   color: #29abe2;
 }
@@ -280,6 +291,10 @@ footer a:hover {
   border-radius: 10px;
 }
 
+.formHeight {
+  min-height: 60px;
+}
+
 .overlay.animate {
   animation: slideIn 1s forwards;
 }
@@ -312,7 +327,7 @@ footer a:hover {
 
 .dialogSignUp {
   color: red;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .dialogLogin {
