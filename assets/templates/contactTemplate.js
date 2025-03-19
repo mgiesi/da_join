@@ -90,7 +90,7 @@ function getOverlay() {
                       minlength="3"
                     />
                     <i class="icon-user"></i>
-                    <div><h2 id="nameWarning" class="fS dNone addFont">Name: at least 3 letters, no numbers.</h2></div>
+                    <div><p id="nameWarning" class="dNone addFont">Name: at least 3 letters, no numbers.</p></div>
                   </div>
                   <div class="form-group">
                     <input
@@ -100,7 +100,7 @@ function getOverlay() {
                       required
                     />
                     <i class="icon-email"></i>
-                    <div><h2 id="nameEWarning" class="fS dNone addFont">Please use a correct email address.</h2></div>
+                    <div><p id="nameEWarning" class="fS dNone addFont">Please use a correct email address.</p></div>
                   </div>
                   <div class="form-group">
                     <input
@@ -110,7 +110,7 @@ function getOverlay() {
                       required
                     />
                     <i class="icon-phone"></i>
-                    <div><h2 id="namePhoneWarning" class="fS dNone addFont">Please use a correct PhoneNumber.</h2></div>
+                    <div><p id="namePhoneWarning" class="fS dNone addFont">Please use a correct PhoneNumber.</p></div>
                   </div>
                   <div class="button-group">
                     <button
@@ -160,7 +160,7 @@ function getEditOverlay(key, name, email, phone) {
                       required
                     />
                     <i class="icon-user"></i>
-                    <div><h2 id="nameWarning" class="fS dNone addFont">Name: at least 3 letters, no numbers.</h2></div>
+                    <div><p id="nameWarning" class="fS dNone addFont">Name: at least 3 letters, no numbers.</p></div>
                   </div>
                   <div class="form-group">
                     <input
@@ -171,7 +171,7 @@ function getEditOverlay(key, name, email, phone) {
                       required
                     />
                     <i class="icon-email"></i>
-                    <div><h2 id="nameEWarning" class="fS dNone addFont">Please use a correct email address.</h2></div>
+                    <div><p id="nameEWarning" class="fS dNone addFont">Please use a correct email address.</p></div>
                   </div>
                   <div class="form-group">
                     <input
@@ -182,7 +182,7 @@ function getEditOverlay(key, name, email, phone) {
                       required
                     />
                     <i class="icon-phone"></i>
-                    <div><h2 id="namePhoneWarning" class="fS dNone addFont">Please use a correct PhoneNumber.</h2></div>
+                    <div><p id="namePhoneWarning" class="fS dNone addFont">Please use a correct PhoneNumber.</p></div>
                   </div>
                   <div class="button-group">
                     <button
@@ -287,7 +287,7 @@ function phoneValidation() {
   let inputValue = phone.value.trim();
   let warning = document.getElementById("namePhoneWarning");
 
-  let phonePattern = /^[0-9]/;
+  let phonePattern = /^[0-9]{3,}$/;
 
   if (!phonePattern.test(inputValue)) {
     warning.classList.remove("dNone");
