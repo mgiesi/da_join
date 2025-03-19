@@ -5,9 +5,7 @@ function getTaskDetails(taskId, task, contacts, boardName) {
   return `
         <div class="overlay-taskDetails">
             <div class="topDetails">
-                    ${displayTaskType(
-                      task.category
-                    )}
+                    ${displayTaskType(task.category)}
                 <img onclick="hideTaskDetails()" class="close-btn" src="./assets/icons/cancel.svg" alt="">
             </div>
             <div class="taskHeadline">
@@ -58,8 +56,8 @@ function displayTaskDueDate(dueDate) {
 function getTaskDueDate4InputField(dueDate) {
   const date = new Date(dueDate);
   const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
   return `${year}-${month}-${day}`;
 }
 
