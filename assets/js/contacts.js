@@ -123,12 +123,12 @@ async function UpdateNewContactToFirebase(contactKey) {
   if (!editEmailValidation(name, email, phone)) return;
   if (!editPhoneValidation(name, email, phone)) return;
   editControlValidation();
-  onHideContactInfoClicked();
   if (!contactKey) return showInvalidContactError();
   const updatedContact = createUpdatedContact(name, email, phone);
+  const avatarColor = getRandomColor();
   try {
     await saveContactToFirebase(contactKey, updatedContact);
-    finalizeUpdate();
+    finalizeUpdate(contactKey, name, email, phone, avatarColor);
   } catch (error) {
     handleUpdateError(error);
   }
@@ -176,9 +176,9 @@ async function saveContactToFirebase(contactKey, updatedContact) {
 /**
  * Finalizes the contact update process by reloading the contact list and hiding the edit overlay.
  */
-async function finalizeUpdate() {
+async function finalizeUpdate(key, name, email, phone, avatarColor) {
   toggleEditOverlay();
-  document.querySelector(".contact-info").innerHTML = "";
+  displayContactDetails(key, name, email, phone, avatarColor);
   await loadContactsFromFirebase();
 }
 
@@ -419,11 +419,8 @@ function onContactInfoClicked(event) {
 function onHideContactInfoClicked() {
   addDNoneToResp();
   let info = document.getElementById("contact-info");
-
-  if (window.innerWidth <= 800) {
-    info.style.visibility = "hidden";
-    info.style.opacity = "0";
-  }
+  info.style.visibility = "hidden";
+  info.style.opacity = "0";
 }
 
 function showContactInfo() {
