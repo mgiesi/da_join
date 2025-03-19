@@ -123,7 +123,7 @@ async function UpdateNewContactToFirebase(contactKey) {
   if (!editEmailValidation(name, email, phone)) return;
   if (!editPhoneValidation(name, email, phone)) return;
   editControlValidation();
-
+  onHideContactInfoClicked();
   if (!contactKey) return showInvalidContactError();
   const updatedContact = createUpdatedContact(name, email, phone);
   try {
@@ -206,7 +206,6 @@ async function deleteContactToFirebase(key) {
     await loadContactsFromFirebase();
     const contactInfoContainer = document.querySelector(".contact-info");
     contactInfoContainer.innerHTML = "";
-    onHideContactInfoClicked();
   } catch (error) {
     console.error("Fehler beim Löschen des Kontakts:", error);
   }
@@ -420,6 +419,17 @@ function onContactInfoClicked(event) {
 function onHideContactInfoClicked() {
   addDNoneToResp();
   let info = document.getElementById("contact-info");
-  info.style.visibility = "hidden";
-  info.style.opacity = "0";
+
+  if (window.innerWidth <= 800) {
+    info.style.visibility = "hidden";
+    info.style.opacity = "0";
+  }
+}
+
+function showContactInfo() {
+  let contactInfo = document.getElementById("contact-info");
+  if (contactInfo) {
+    contactInfo.style.opacity = "1";
+    contactInfo.style.visibility = "visible";
+  }
 }
