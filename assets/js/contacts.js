@@ -206,6 +206,7 @@ async function deleteContactToFirebase(key) {
     await loadContactsFromFirebase();
     const contactInfoContainer = document.querySelector(".contact-info");
     contactInfoContainer.innerHTML = "";
+    addDNoneToResp();
   } catch (error) {
     console.error("Fehler beim Löschen des Kontakts:", error);
   }

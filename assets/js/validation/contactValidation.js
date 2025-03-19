@@ -107,3 +107,12 @@ function phoneEditValidation() {
   warning.classList.add("dNone");
   return true;
 }
+
+function hideContactInfoOnLargeScreens() {
+  let info = document.getElementById("contact-info");
+
+  if (window.innerWidth > 1200) {
+    info.style.visibility = "hidden";
+    info.style.opacity = "0";
+  }
+}
