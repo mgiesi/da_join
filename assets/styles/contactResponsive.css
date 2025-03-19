@@ -26,6 +26,7 @@
   }
   .contact-list {
     width: 100%;
+    padding-bottom: 100px !important;
   }
   .respIcon {
     display: flex !important;
@@ -110,7 +111,7 @@
     height: 32px;
     right: 20px;
   }
-  .exportMenu {    
+  .exportMenu {
     position: absolute;
     display: flex;
     margin-top: 0;
@@ -203,6 +204,11 @@
     opacity: 1;
   }
 }
+@media (max-width: 1300px) {
+  .contact-list {
+    padding-bottom: 0;
+  }
+}
 
 @media (max-width: 1150px) {
   .contact-info {
@@ -212,7 +218,6 @@
     width: 100%;
     height: calc(90vh - 80px);
     padding-left: 380px;
-    padding-bottom: 0;
   }
   .overlay {
     top: 100px;
@@ -233,6 +238,7 @@
 
   .contact-list {
     height: calc(100vh - 160px);
+    padding-bottom: 0;
   }
 }
 
@@ -329,6 +335,9 @@
   .overlay {
     top: 100px;
     left: 230px;
+  }
+  .contact-list {
+    padding-bottom: 0 !important;
   }
 }
 
@@ -547,7 +556,7 @@
   .respAddIcon {
     right: 10px;
   }
-  .exportMenu {    
+  .exportMenu {
     right: 10px;
   }
   .respArrow {
@@ -588,6 +597,12 @@
 
   .contact-info-header {
     margin-bottom: 12px;
+  }
+  .form-group {
+    min-height: 70px !important;
+  }
+  .button-group {
+    margin-top: 0 !important;
   }
 }
 
@@ -695,6 +710,10 @@
   }
   .contact-sections {
     padding: 0 !important;
+  }
+  .exportMenu {
+    right: 13px;
+    bottom: 30px;
   }
 }
 
