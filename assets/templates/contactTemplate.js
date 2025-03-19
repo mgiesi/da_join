@@ -182,7 +182,7 @@ function getEditOverlay(key, name, email, phone) {
                       required
                     />
                     <i class="icon-phone"></i>
-                    <div><p id="namePhoneWarning" class="fS dNone addFont">Please use a correct PhoneNumber.</p></div>
+                    <div><p id="nameEPhoneWarning" class="fS dNone addFont">Please use a correct PhoneNumber.</p></div>
                   </div>
                   <div class="button-group">
                     <button
@@ -331,9 +331,9 @@ function editEmailValidation() {
 function editPhoneValidation() {
   let phone = document.getElementById("inputEditCall");
   let inputValue = phone.value.trim();
-  let warning = document.getElementById("namePhoneWarning");
+  let warning = document.getElementById("nameEPhoneWarning");
 
-  let phonePattern = /^[0-9]/;
+  let phonePattern = /^[0-9]{3,}$/;
 
   if (!phonePattern.test(inputValue)) {
     warning.classList.remove("dNone");

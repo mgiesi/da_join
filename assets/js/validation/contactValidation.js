@@ -90,3 +90,20 @@ function validateEditField(input, errorDiv) {
   errorDiv.textContent = "";
   return true;
 }
+
+function phoneEditValidation() {
+  let phone = document.getElementById("inputEditCall");
+  let inputValue = phone.value.trim();
+  let warning = document.getElementById("namePhoneWarning");
+
+  let phonePattern = /^[0-9]{3,}$/;
+
+  if (!phonePattern.test(inputValue)) {
+    warning.classList.remove("dNone");
+    warning.textContent = "Please use a correct PhoneNumber.";
+    return false;
+  }
+
+  warning.classList.add("dNone");
+  return true;
+}
