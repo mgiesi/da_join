@@ -1,6 +1,6 @@
 /**
  * Base URL for tasks, composed of the database base URL and the "tasks/" path.
- * Ensure that DB_BASE_URL is available by including db.js.
+ * Ensure that DB_BASE_URL is available by including script.js.
  * @constant {string}
  */
 const TASKS_URL = DB_BASE_URL + "tasks/";

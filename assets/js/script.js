@@ -1,3 +1,5 @@
+const DB_BASE_URL = "https://da-join-629d2-default-rtdb.europe-west1.firebasedatabase.app/"; // URL von Markus
+
 /**
  * Initializes the join webpage by including external HTML content, setting up menu interactions,
  * and initializing user-related elements.

@@ -1,6 +1,6 @@
 /**
  * Base URL for users, composed of the database base URL and the "users/" path.
- * Ensure that DB_BASE_URL is available by including db.js.
+ * Ensure that DB_BASE_URL is available by including script.js.
  * @constant {string}
  */
 const USERS_URL = DB_BASE_URL + "user/";

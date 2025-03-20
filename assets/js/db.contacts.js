@@ -1,6 +1,6 @@
 /**
  * Base URL for contacts, composed of the database base URL and the "contacts/" path.
- * Ensure that DB_BASE_URL is available by including db.js.
+ * Ensure that DB_BASE_URL is available by including script.js.
  * @constant {string}
  */
 const CONTACTS_URL = DB_BASE_URL + "contacts/";
