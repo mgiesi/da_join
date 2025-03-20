@@ -182,10 +182,6 @@ function updateSelectedDisplay() {
 }
 
 /**
- * Updates the display of selected contact avatars
- * @returns {void}
- */
-/**
  * Updates the display of selected contact avatars (max 5 + counter)
  * @returns {void}
  */
@@ -198,21 +194,39 @@ function updateSelectedAvatars() {
   const total = selectedContacts.length;
 
   // Display first 5 avatars
-  selectedContacts.slice(0, maxToShow).forEach(id => {
-    if (contacts[id]) {
-      const initials = getInitials(contacts[id].name);
-      avatarDiv.appendChild(createAvatarElement(contacts[id], initials));
-    }
-  });
+  displayVisibleAvatars(avatarDiv, maxToShow);
 
   // Add counter avatar if needed
   if (total > maxToShow) {
-    const counter = document.createElement("div");
-    counter.className = "contact-avatar-selected";
-    counter.style.backgroundColor = "#2A3647";
-    counter.textContent = "+" + (total - maxToShow);
-    avatarDiv.appendChild(counter);
+    addCounterAvatar(avatarDiv, total - maxToShow);
   }
+}
+
+/**
+ * Displays the visible contact avatars
+ * @param {HTMLElement} container - Container for avatars
+ * @param {number} maxToShow - Maximum number of avatars to show
+ */
+function displayVisibleAvatars(container, maxToShow) {
+  selectedContacts.slice(0, maxToShow).forEach(id => {
+    if (contacts[id]) {
+      const initials = getInitials(contacts[id].name);
+      container.appendChild(createAvatarElement(contacts[id], initials));
+    }
+  });
+}
+
+/**
+ * Adds a counter avatar showing additional contacts
+ * @param {HTMLElement} container - Container for avatars
+ * @param {number} count - Number of additional contacts
+ */
+function addCounterAvatar(container, count) {
+  const counter = document.createElement("div");
+  counter.className = "contact-avatar-selected";
+  counter.style.backgroundColor = "#2A3647";
+  counter.textContent = "+" + count;
+  container.appendChild(counter);
 }
 
 /**

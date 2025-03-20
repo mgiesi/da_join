@@ -1,34 +1,48 @@
 /**
+ * Updates the text content of the notification
+ * @param {HTMLElement} notification - The notification element
+ * @param {string} message - The message to display
+ */
+function updateNotificationText(notification, message) {
+    const textElement = notification.querySelector('span');
+    if (textElement) {
+        textElement.textContent = message;
+    }
+}
+
+/**
+ * Shows the notification element
+ * @param {HTMLElement} notification - The notification element
+ */
+function displayNotification(notification) {
+    notification.classList.add('show');
+}
+
+/**
+ * Hides notification and redirects to board
+ * @param {HTMLElement} notification - The notification element
+ * @param {number} delay - Delay in milliseconds before redirect
+ */
+function hideAndRedirect(notification, delay) {
+    setTimeout(() => {
+        if (notification) notification.classList.remove('show');
+        window.location.href = 'board.html';
+    }, delay);
+}
+
+/**
  * Shows a notification that a task has been added to the board
  * @param {string} message - Optional custom message to display (defaults to "Task added to board")
  */
 function showTaskAddedNotification(message = "Task added to board") {
     const notification = document.getElementById('taskAddedNotification');
-
     if (notification) {
-        // Find the span element within the notification
-        const textElement = notification.querySelector('span');
-
-        // Only set textContent if the element exists
-        if (textElement) {
-            textElement.textContent = message;
-        }
-
-        // Show the notification
-        notification.classList.add('show');
-
-        // Hide the notification and redirect after 3 seconds
-        setTimeout(() => {
-            notification.classList.remove('show');
-            // Redirect to board.html after notification is hidden
-            window.location.href = 'board.html';
-        }, 3000);
+        updateNotificationText(notification, message);
+        displayNotification(notification);
+        hideAndRedirect(notification, 3000);
     } else {
         console.warn('Notification element not found in the DOM');
-        // Redirect anyway if notification element doesn't exist
-        setTimeout(() => {
-            window.location.href = 'board.html';
-        }, 1000);
+        hideAndRedirect(null, 1000);
     }
 }
 

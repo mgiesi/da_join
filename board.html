@@ -41,6 +41,10 @@
     <script src="./assets/js/addTask.js"></script>
     <script src="./assets/js/notification.js"></script>
     <script src="./assets/js/customDropdown.js"></script>
+
+    <script src="./assets/js/boardTaskOverlay.js"></script>
+    <script src="./assets/js/boardTaskEdit.js"></script>
+    <script src="./assets/js/boardTaskDetails.js"></script>
 </head>
 
 <body onload="initBoard()">
@@ -57,7 +61,7 @@
         <div id="taskDetails" class="overlay-background dNone"></div>
         <div class="overlay dNone" id="overlay">
             <div class="message">
-              Task deleted
+                Task deleted
             </div>
         </div>
 
@@ -75,7 +79,7 @@
                         <button id="board-task-add-1" onclick="showAddTaskOverlay()" class="addTaskBtn f6">Add task <img
                                 src="./assets/icons/add.svg" class="boardIconAdd" alt=""></button>
                         <button id="board-task-add-2" onclick="showAddTaskOverlay()" class="addTaskBtn f6"><img
-                                    src="./assets/icons/add.svg" class="boardIconAdd" alt=""></button>
+                                src="./assets/icons/add.svg" class="boardIconAdd" alt=""></button>
                     </div>
                 </div>
             </div>
@@ -86,7 +90,7 @@
                     class="search-icon">
             </div>
             <div id="boards-container" class="board-contents d-flex justify-content-start">
-                
+
 
             </div>
         </div>

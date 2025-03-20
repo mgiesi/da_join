@@ -18,8 +18,13 @@
 
   <script src="./assets/js/script.js"></script>
   <script src="./assets/js/db.js"></script>
+  <script src="./assets/js/db.board.js"></script>
   <script src="./assets/js/db.contacts.js"></script>
   <script src="./assets/js/db.users.js"></script>
+
+  <script src="./assets/js/contactsUI.js"></script>
+  <script src="./assets/js/contactsFirebase.js"></script>
+  <script src="./assets/js/contactsValidation.js"></script>
   <script src="./assets/js/contacts.js"></script>
   <script src="./assets/templates/contactTemplate.js"></script>
   <script src="./assets/js/validation/contactValidation.js"></script>
@@ -30,13 +35,13 @@
   <header w3-include-html=".\assets\templates\header.html"></header>
   <div class="overlayContactSuccess dNone" id="overlayContactSuccess">
     <img class="contactsucces" src="./assets/icons/Conyact succ.. created overlay (1).svg" alt="">
-</div>
+  </div>
   <div class="main-container">
     <div w3-include-html=".\assets\templates\side-menu.html"></div>
 
     <div id="overlayAddContact" class="overlay-background dNone"></div>
     <div id="overlayEditContact" class="overlay-background dNone"></div>
-    
+
 
     <div class="contacts-content">
       <div class="contact-list">
@@ -47,21 +52,22 @@
         <div class="contact-sections">
           <div class="contact-section"></div>
         </div>
-        <div class="respAddIcon"><img onclick="toggleOverlay()" src="./assets/icons/Secondary mobile contact V1.svg" alt=""></div>
-        
+        <div class="respAddIcon"><img onclick="toggleOverlay()" src="./assets/icons/Secondary mobile contact V1.svg"
+            alt=""></div>
+
       </div>
       <div onclick="onContactInfoClicked(event)" id="contact-info" class="contact-info">
         <div class="contact-info-header">
           <h1>Contacts</h1>
           <div class="header-divider"></div>
           <span class="header-subtitle">Better with a team</span>
-          
+
         </div>
 
       </div>
       <div id="contactsContainer"></div>
-      
-      
+
+
 </body>
 
 </html>

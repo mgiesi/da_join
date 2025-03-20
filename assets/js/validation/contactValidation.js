@@ -1,3 +1,7 @@
+/**
+ * Validates all required input fields for contact form
+ * @returns {boolean} True if all fields are valid, false otherwise
+ */
 function validateInputs() {
   const fields = ["inputCall", "inputName", "inputMail"];
   let allValid = true;
@@ -11,6 +15,12 @@ function validateInputs() {
   return allValid;
 }
 
+/**
+ * Gets an existing error div or creates a new one if it doesn't exist
+ * @param {string} id - The ID of the input field
+ * @param {HTMLElement} input - The input DOM element
+ * @returns {HTMLElement} The error div element
+ */
 function getOrCreateErrorDiv(id, input) {
   let errorDiv = document.getElementById(id + "-error");
   if (!errorDiv) {
@@ -23,6 +33,12 @@ function getOrCreateErrorDiv(id, input) {
   return errorDiv;
 }
 
+/**
+ * Validates a specific input field based on its ID
+ * @param {HTMLElement} input - The input DOM element to validate
+ * @param {HTMLElement} errorDiv - The error div to display validation messages
+ * @returns {boolean} True if field is valid, false otherwise
+ */
 function validateField(input, errorDiv) {
   const value = input.value.trim();
 
@@ -42,6 +58,10 @@ function validateField(input, errorDiv) {
   return true;
 }
 
+/**
+ * Validates all required input fields for contact edit form
+ * @returns {boolean} True if all fields are valid, false otherwise
+ */
 function validateEditInputs() {
   const fields = ["inputEditCall", "inputEditName", "inputEditMail"];
   let allValid = true;
@@ -55,6 +75,12 @@ function validateEditInputs() {
   return allValid;
 }
 
+/**
+ * Gets an existing error div or creates a new one for edit form
+ * @param {string} id - The ID of the input field
+ * @param {HTMLElement} input - The input DOM element
+ * @returns {HTMLElement} The error div element
+ */
 function getOrCreateEditErrorDiv(id, input) {
   let errorDiv = document.getElementById(id + "-error");
   if (!errorDiv) {
@@ -64,6 +90,11 @@ function getOrCreateEditErrorDiv(id, input) {
   return errorDiv;
 }
 
+/**
+ * Creates a new error div for edit form
+ * @param {string} id - The ID of the input field
+ * @returns {HTMLElement} The newly created error div
+ */
 function createEditErrorDiv(id) {
   const errorDiv = document.createElement("div");
   errorDiv.id = id + "-error";
@@ -72,6 +103,12 @@ function createEditErrorDiv(id) {
   return errorDiv;
 }
 
+/**
+ * Validates a specific input field in edit form based on its ID
+ * @param {HTMLElement} input - The input DOM element to validate
+ * @param {HTMLElement} errorDiv - The error div to display validation messages
+ * @returns {boolean} True if field is valid, false otherwise
+ */
 function validateEditField(input, errorDiv) {
   const value = input.value.trim();
 
@@ -91,6 +128,10 @@ function validateEditField(input, errorDiv) {
   return true;
 }
 
+/**
+ * Validates phone number format in edit form
+ * @returns {boolean} True if phone number is valid, false otherwise
+ */
 function phoneEditValidation() {
   let phone = document.getElementById("inputEditCall");
   let inputValue = phone.value.trim();
@@ -108,6 +149,10 @@ function phoneEditValidation() {
   return true;
 }
 
+/**
+ * Hides contact information panel on large screens (width > 1200px)
+ * @returns {void}
+ */
 function hideContactInfoOnLargeScreens() {
   let info = document.getElementById("contact-info");
 

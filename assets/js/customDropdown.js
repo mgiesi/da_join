@@ -14,40 +14,66 @@ function initCustomDropdowns() {
  */
 function setupCustomDropdown(dropdown) {
     const selected = dropdown.querySelector('.custom-dropdown-selected');
-    const options = dropdown.querySelector('.custom-dropdown-options');
     const optionItems = dropdown.querySelectorAll('.custom-dropdown-option:not(.custom-dropdown-header)');
-    const hiddenInput = dropdown.querySelector('input[type="hidden"]');
 
-    // Toggle dropdown on click
-    selected.addEventListener('click', () => {
+    handleSelectedClick(dropdown, selected);
+    setupOptionItems(dropdown, selected, optionItems);
+    setupOutsideClickHandler(dropdown);
+}
+
+/**
+ * Handles click on the selected dropdown element
+ */
+function handleSelectedClick(dropdown, selected) {
+    selected.onclick = () => {
         dropdown.classList.toggle('open');
-    });
+    };
+}
 
-    // Handle option selection
+/**
+ * Sets up click handlers for dropdown options
+ */
+function setupOptionItems(dropdown, selected, optionItems) {
     optionItems.forEach(option => {
-        option.addEventListener('click', () => {
-            const value = option.getAttribute('data-value');
-            const text = option.textContent.trim();
-
-            // Update the selected text and hidden input value
-            selected.textContent = text;
-            selected.setAttribute('data-value', value);
-
-            if (hiddenInput) {
-                hiddenInput.value = value;
-                // Trigger validation if needed
-                const event = new Event('input', { bubbles: true });
-                hiddenInput.dispatchEvent(event);
-            }
-
-            dropdown.classList.remove('open');
-        });
+        option.onclick = () => {
+            updateDropdownValue(dropdown, selected, option);
+        };
     });
+}
 
-    // Close dropdown when clicking outside
-    document.addEventListener('click', (e) => {
+/**
+ * Updates dropdown value when option is selected
+ */
+function updateDropdownValue(dropdown, selected, option) {
+    const value = option.getAttribute('data-value');
+    const text = option.textContent.trim();
+
+    selected.textContent = text;
+    selected.setAttribute('data-value', value);
+
+    updateHiddenInput(dropdown, value);
+    dropdown.classList.remove('open');
+}
+
+/**
+ * Updates hidden input field if it exists
+ */
+function updateHiddenInput(dropdown, value) {
+    const hiddenInput = dropdown.querySelector('input[type="hidden"]');
+    if (hiddenInput) {
+        hiddenInput.value = value;
+        const event = new Event('input', { bubbles: true });
+        hiddenInput.dispatchEvent(event);
+    }
+}
+
+/**
+ * Sets up handler to close dropdown when clicking outside
+ */
+function setupOutsideClickHandler(dropdown) {
+    document.onclick = (e) => {
         if (!dropdown.contains(e.target)) {
             dropdown.classList.remove('open');
         }
-    });
+    };
 }

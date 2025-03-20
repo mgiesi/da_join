@@ -34,6 +34,18 @@ function setGreetingAnimation() {
 }
 
 /**
+ * Determines the appropriate greeting based on the time of day.
+ * 
+ * @returns {string} The greeting text based on the current hour.
+ */
+function getGreetingByTime() {
+  const hours = new Date().getHours();
+  if (hours < 11) return "Good morning";
+  if (hours < 17) return "Good afternoon";
+  return "Good evening";
+}
+
+/**
  * Updates the greeting text based on the current time of day.
  * If a username is provided, appends a comma after the greeting.
  *
@@ -42,17 +54,11 @@ function setGreetingAnimation() {
 function refreshGreetingText(username) {
   const greetingTextRef = document.getElementById("summary-greeting-text");
   const greetingText2Ref = document.getElementById("summary-greeting-text2");
-  const hours = new Date().getHours();
-  if (hours < 11) {
-    greetingTextRef.innerHTML = "Good morning";
-    greetingText2Ref.innerHTML = "Good morning";
-  } else if (hours < 17) {
-    greetingTextRef.innerHTML = "Good afternoon";
-    greetingText2Ref.innerHTML = "Good afternoon";
-  } else {
-    greetingTextRef.innerHTML = "Good evening";
-    greetingText2Ref.innerHTML = "Good evening";
-  }
+  const greeting = getGreetingByTime();
+
+  greetingTextRef.innerHTML = greeting;
+  greetingText2Ref.innerHTML = greeting;
+
   if (username !== null) {
     greetingTextRef.innerHTML += ",";
     greetingText2Ref.innerHTML += ",";
