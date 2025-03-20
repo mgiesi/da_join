@@ -45,6 +45,8 @@
 
   #board-task-add-2 {
     display: flex;
+    width: 40px;
+    height: 40px;
   }
 
   .board-title {
@@ -94,9 +96,6 @@
     padding: 20px;
     border-radius: 10px;
   }
-  .f1 {
-    font-size: 42px;
-  }
 }
 
 @media (max-width: 600px) {
@@ -132,19 +131,12 @@
     width: 100%;
     justify-content: end;
   }
-  .f1 {
-    font-size: 16px !important;
-  }
   .topDetails {
     width: 100%;
   }
 }
 
 @media (max-width: 450px) {
-  .f1 {
-    font-size: 24px;
-    font-weight: 700;
-  }
   .f2 {
     font-size: 16px !important;
   }
