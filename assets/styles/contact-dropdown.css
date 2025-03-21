@@ -50,7 +50,6 @@
     z-index: 1;
 }
 
-/* Add styling for selected contacts */
 .contact-item:has(.check-button-container.selected) {
     background-color: #2A3647;
     border-radius: 8px;

@@ -93,7 +93,6 @@ function showTaskAddedNotification() {
     const notification = document.getElementById('taskAddedNotification');
 
     if (!notification) {
-        // Fallback if notification element doesn't exist
         alert('Task added to board');
         window.location.href = 'board.html';
         return false;

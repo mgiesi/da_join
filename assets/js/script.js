@@ -9,7 +9,6 @@ const DB_BASE_URL = "https://da-join-629d2-default-rtdb.europe-west1.firebasedat
  */
 async function init() {
   await includeHTML();
-  // Add a small delay to ensure DOM is updated
   setTimeout(() => {
     setActiveMenuItem();
     addMenuClickListeners();

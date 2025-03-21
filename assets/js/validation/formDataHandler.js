@@ -45,7 +45,7 @@ function getCategoryValue() {
 
     if (categoryValue === 'work') return 'task';
     if (categoryValue === 'personal') return 'userstory';
-    return 'task'; // Default
+    return 'task'; 
 }
 
 /**

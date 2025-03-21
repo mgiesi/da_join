@@ -128,7 +128,7 @@
 }
 
 #RespLogo {
-  width: 150px; /* Größe des Logos anpassen */
+  width: 150px;
   transition: transform 1s ease-in-out, opacity 0.5s ease-in-out;
 }
 

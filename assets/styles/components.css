@@ -23,7 +23,6 @@
     border-radius: 30px;
 }
 
-/* Date Input Field Styles */
 .date-field-container {
     display: flex;
     flex-direction: column;

@@ -100,7 +100,6 @@ input:required:invalid {
     cursor: pointer;
 }
 
-/* Form interactions */
 .form-group input:hover,
 .form-group textarea:hover,
 .form-group select:hover,

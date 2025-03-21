@@ -46,7 +46,6 @@ function toggleContactDropdown() {
 
   if (dropdown.classList.contains("open")) {
     contactList.style.display = "block";
-    // Apply current filter
     const searchInput = document.getElementById("contactSearch");
     filterContactsList(searchInput.value);
   } else {
@@ -193,10 +192,8 @@ function updateSelectedAvatars() {
   const maxToShow = 5;
   const total = selectedContacts.length;
 
-  // Display first 5 avatars
   displayVisibleAvatars(avatarDiv, maxToShow);
 
-  // Add counter avatar if needed
   if (total > maxToShow) {
     addCounterAvatar(avatarDiv, total - maxToShow);
   }

@@ -20,7 +20,6 @@ function initFormValidation() {
 function setupDateValidation() {
     const dateField = document.getElementById('dueDate');
     if (dateField) {
-        // Use input event instead of change for immediate feedback
         dateField.addEventListener('input', function () {
             validateDueDate();
         });
@@ -106,11 +105,9 @@ function validateDueDate() {
     const dueDateField = document.getElementById('dueDate');
     if (!dueDateField || !dueDateField.value) return true;
 
-    // Get the date value directly from the input
     const selectedDate = new Date(dueDateField.value);
     const today = new Date();
 
-    // Reset time parts for accurate comparison
     selectedDate.setHours(0, 0, 0, 0);
     today.setHours(0, 0, 0, 0);
 

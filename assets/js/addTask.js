@@ -17,9 +17,8 @@ function initializeAll() {
   setupPrioritySystem();
   setupSelectArrows();
   initCustomDropdowns();
-  initSubtaskSystem(); // Initialize subtask functionality
+  initSubtaskSystem(); 
 
-  // Set medium priority as default
   const mediumPriorityBtn = document.getElementById("add-task-btn-medium");
   if (mediumPriorityBtn) {
     activatePriorityButton(mediumPriorityBtn);
@@ -82,7 +81,6 @@ function resetSinglePriorityButton(btn) {
   btn.style.color = "";
   btn.style.borderColor = "";
 
-  // Reset any SVG icons inside the buttons if they have custom colors
   const svgIcons = btn.querySelectorAll("svg, img");
   svgIcons.forEach((icon) => {
     icon.style.filter = "";
@@ -198,7 +196,6 @@ function resetPrioritySelection() {
     currentPriority = null;
   }
 
-  // Set medium priority as default after reset
   const mediumPriorityBtn = document.getElementById("add-task-btn-medium");
   if (mediumPriorityBtn) {
     activatePriorityButton(mediumPriorityBtn);
@@ -254,23 +251,19 @@ function resetCategoryValue() {
  * @returns {void}
  */
 function clearSubtasks() {
-  // Clear the subtasks array
   subtasks = [];
 
-  // Clear the visual elements
   const subtasksList = document.querySelector(".subtasks-list");
   if (subtasksList) subtasksList.innerHTML = "";
 
   const subtaskInput = document.getElementById("subtaskInput");
   if (subtaskInput) {
     subtaskInput.value = "";
-    // Reset the input state using the newly defined function
     if (typeof transformSubtaskInput === 'function') {
       transformSubtaskInput(false);
     }
   }
 
-  // Re-render the empty subtasks list
   renderSubtasks();
 }
 

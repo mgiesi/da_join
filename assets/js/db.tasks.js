@@ -1,58 +1,50 @@
 /**
  * Base URL for tasks, composed of the database base URL and the "tasks/" path.
- * Ensure that DB_BASE_URL is available by including script.js.
  * @constant {string}
  */
 const TASKS_URL = DB_BASE_URL + "tasks/";
 
-/** Optional flag to add a task to different board. This flag will be reset after use. */
+/** Optional flag to add a task to different board. */
 let addTaskToBoardName;
 
 /**
- * Retrieves tasks from the database, optionally filtering them based on the provided text.
- *
- * This function sends a GET request to the tasks endpoint and returns the tasks in JSON format.
- * If a filterText is provided and is not empty, the function filters the tasks by checking if the
- * lowercased filter text is included in the task's title or description.
- *
+ * Retrieves tasks from the database with optional filtering.
  * @async
- * @function getTasks
- * @param {string} [filterText] - Optional text to filter tasks by their title or description.
- * @returns {Promise<Object>} A promise that resolves to an object containing all tasks or only those
- * matching the filter criteria.
+ * @param {string} [filterText] - Optional text to filter tasks.
+ * @returns {Promise<Object>} Tasks matching the criteria.
  */
 async function getTasks(filterText) {
     const response = await fetch(TASKS_URL + ".json");
-    const responseToJson = await response.json();
+    const tasks = await response.json();
+    return filterText ? filterTasksByText(tasks, filterText) : tasks;
+}
 
-    if (!filterText || filterText.trim() === "") {
-        return responseToJson;
-    }
+/**
+ * Filters tasks by matching text in title or description.
+ * @param {Object} tasks - Tasks to filter.
+ * @param {string} filterText - Text to match.
+ * @returns {Object} Filtered tasks.
+ */
+function filterTasksByText(tasks, filterText) {
+    const lowerCaseFilterText = filterText.toLowerCase().trim();
+    if (lowerCaseFilterText === "") return tasks;
 
-    const lowerCaseFilterText = filterText.toLowerCase();
     const filteredTasks = {};
-    for (const [key, task] of Object.entries(responseToJson)) {
+    for (const [key, task] of Object.entries(tasks)) {
         const title = task.title ? task.title.toLowerCase() : "";
         const descr = task.description ? task.description.toLowerCase() : "";
-
         if (title.includes(lowerCaseFilterText) || descr.includes(lowerCaseFilterText)) {
             filteredTasks[key] = task;
         }
     }
-
     return filteredTasks;
 }
 
 /**
  * Retrieves a specific task by its ID.
- *
- * This function sends a GET request to the tasks endpoint for the specified task ID and returns
- * the task data in JSON format.
- *
  * @async
- * @function getTask
- * @param {string} taskid - The unique identifier of the task to be retrieved.
- * @returns {Promise<Object>} A promise that resolves to an object containing the task details.
+ * @param {string} taskid - Task identifier.
+ * @returns {Promise<Object>} Task details.
  */
 async function getTask(taskid) {
     let response = await fetch(TASKS_URL + taskid + ".json");
@@ -61,60 +53,47 @@ async function getTask(taskid) {
 }
 
 /**
- * Counts the number of tasks with a specific priority.
- *
- * This function sends a GET request to retrieve all tasks from the tasks endpoint, then iterates
- * through the tasks to count how many have a priority that matches the provided prio value.
- *
+ * Counts tasks with a specific priority.
  * @async
- * @function getTasksCount
- * @param {string} prio - The priority value to filter tasks by.
- * @returns {Promise<number>} A promise that resolves to the count of tasks with the specified priority.
+ * @param {string} prio - Priority value.
+ * @returns {Promise<number>} Count of matching tasks.
  */
 async function getTasksCount(prio) {
     let response = await fetch(TASKS_URL + ".json");
-    let responseToJson = await response.json();
+    let tasks = await response.json();
+    if (!tasks) return 0;
 
-    if (!responseToJson) {
-        return 0;
-    }
-
-    let filteredTasksCount = 0;
-    Object.keys(responseToJson).forEach(task => {
-        if (responseToJson[task].prio === prio) {
-            filteredTasksCount++;
-        }
-    });
-
-    return filteredTasksCount;
+    return countTasksByPriority(tasks, prio);
 }
 
 /**
- * Retrieves the next upcoming due date from a collection of tasks, excluding those marked as completed.
- *
- * This function iterates over each task in the `tasks` object, skipping tasks that are already present in the `done` board.
- * For each remaining task, it compares the task's due date to find the earliest one. The due date is expected to be stored
- * in a property called `dueDate` in each task object.
- *
- * @function getNextUpcomingDate
- * @param {Object} tasks - An object containing task objects keyed by task IDs. Each task object should have a `dueDate` property.
- * @param {Object} boardDone - An object with a `tasks` property (an object) that holds task IDs for tasks that have been completed.
- * @returns {Date|undefined} The earliest upcoming due date as a Date object, or `undefined` if no applicable due date is found.
+ * Counts tasks with a specific priority.
+ * @param {Object} tasks - Tasks to count.
+ * @param {string} prio - Priority to match.
+ * @returns {number} Count of matching tasks.
+ */
+function countTasksByPriority(tasks, prio) {
+    let count = 0;
+    Object.keys(tasks).forEach(task => {
+        if (tasks[task].prio === prio) count++;
+    });
+    return count;
+}
+
+/**
+ * Gets the next upcoming due date from tasks.
+ * @param {Object} tasks - Tasks to check.
+ * @param {Object} boardDone - Done board with completed tasks.
+ * @returns {Date|undefined} Earliest upcoming date.
  */
 function getNextUpcomingDate(tasks, boardDone) {
     let nextTaskDate;
     Object.keys(tasks).forEach(taskId => {
-        if (Object.keys(boardDone.tasks).includes(taskId)) {
-            return;
-        }
+        if (Object.keys(boardDone.tasks).includes(taskId)) return;
 
         let taskDate = new Date(tasks[taskId].dueDate);
-        if (!nextTaskDate) {
+        if (!nextTaskDate || nextTaskDate.getTime() > taskDate.getTime()) {
             nextTaskDate = taskDate;
-        } else {
-            if (nextTaskDate.getTime() > taskDate.getTime()) {
-                nextTaskDate = taskDate;
-            }
         }
     });
     return nextTaskDate;
@@ -122,48 +101,14 @@ function getNextUpcomingDate(tasks, boardDone) {
 
 /**
  * Creates a new task in the database.
- *
  * @async
- * @function createTask
- * @param {Object} taskData - The task data to be saved
- * @param {string} taskData.title - The title of the task
- * @param {string} taskData.description - The description of the task
- * @param {string} taskData.assignedTo - The assigned person
- * @param {string} taskData.dueDate - The due date of the task
- * @param {string} taskData.prio - The priority of the task
- * @param {string} taskData.category - The category of the task
- * @param {Array} taskData.subtasks - Array of subtask objects
- * @returns {Promise<Object>} A promise that resolves to the created task data
+ * @param {Object} taskData - Task data to save.
+ * @returns {Promise<Object>} Created task data.
  */
 async function createTask(taskData) {
     try {
-        const response = await fetch(TASKS_URL + ".json", {
-            method: 'POST',
-            body: JSON.stringify({
-                title: taskData.title,
-                description: taskData.description,
-                assignedTo: taskData.assignedTo,
-                dueDate: taskData.dueDate,
-                prio: taskData.prio,
-                category: taskData.category,
-                subtasks: taskData.subtasks
-            })
-        });
-
-        if (!response.ok) {
-            throw new Error('Failed to create task');
-        }
-
-        const result = await response.json();
-
-        // After creating the task, add it to the "todo" board
-        let boardName = addTaskToBoardName;
-        if (!addTaskToBoardName) {
-            boardName = 'todo';
-        }
-        addTaskToBoardName = null;
-        await addTaskToBoard(boardName, result.name); // result.name contains the Firebase key
-
+        const result = await postTaskToDatabase(taskData);
+        await addTaskToBoardAfterCreation(result.name);
         return result;
     } catch (error) {
         console.error('Error creating task:', error);
@@ -172,41 +117,48 @@ async function createTask(taskData) {
 }
 
 /**
- * Updates an existing task in the database by overwriting it with the provided data.
- *
- * @param {string} taskId - The unique identifier of the task to update.
- * @param {Object} taskData - The data to update the task with.
- * @param {string} taskData.title - The title of the task.
- * @param {string} taskData.description - The description of the task.
- * @param {string} taskData.assignedTo - The person assigned to the task.
- * @param {string} taskData.dueDate - The due date of the task.
- * @param {string} taskData.prio - The priority of the task.
- * @param {string} taskData.category - The category of the task.
- * @param {Array} taskData.subtasks - An array of subtasks.
- * @returns {Promise<Object>} A promise that resolves to the updated task data.
- * @throws Will throw an error if the task update fails.
+ * Posts task data to the database.
+ * @async
+ * @param {Object} taskData - Task data to post.
+ * @returns {Promise<Object>} Response data.
+ */
+async function postTaskToDatabase(taskData) {
+    const response = await fetch(TASKS_URL + ".json", {
+        method: 'POST',
+        body: JSON.stringify(taskData)
+    });
+
+    if (!response.ok) throw new Error('Failed to create task');
+    return await response.json();
+}
+
+/**
+ * Adds newly created task to appropriate board.
+ * @async
+ * @param {string} taskId - ID of created task.
+ */
+async function addTaskToBoardAfterCreation(taskId) {
+    let boardName = addTaskToBoardName || 'todo';
+    addTaskToBoardName = null;
+    await addTaskToBoard(boardName, taskId);
+}
+
+/**
+ * Updates an existing task in the database.
+ * @async
+ * @param {string} taskId - Task identifier.
+ * @param {Object} taskData - Updated task data.
+ * @returns {Promise<Object>} Updated task data.
  */
 async function updateTask(taskId, taskData) {
     try {
         const response = await fetch(TASKS_URL + "/" + taskId + ".json", {
-            method: 'PUT', // PUT überschreibt den gesamten Eintrag
-            body: JSON.stringify({
-                title: taskData.title,
-                description: taskData.description,
-                assignedTo: taskData.assignedTo,
-                dueDate: taskData.dueDate,
-                prio: taskData.prio,
-                category: taskData.category,
-                subtasks: taskData.subtasks
-            })
+            method: 'PUT',
+            body: JSON.stringify(taskData)
         });
 
-        if (!response.ok) {
-            throw new Error('Failed to update task');
-        }
-
-        const result = await response.json();
-        return result;
+        if (!response.ok) throw new Error('Failed to update task');
+        return await response.json();
     } catch (error) {
         console.error('Error updating task:', error);
         throw error;
@@ -214,9 +166,11 @@ async function updateTask(taskId, taskData) {
 }
 
 /**
- * Adds a task to a specific board
- * @param {string} boardId - The ID of the board
- * @param {string} taskId - The ID of the task
+ * Adds a task to a specific board.
+ * @async
+ * @param {string} boardId - Board identifier.
+ * @param {string} taskId - Task identifier.
+ * @returns {Promise<Object>} Response data.
  */
 async function addTaskToBoard(boardId, taskId) {
     try {
@@ -225,10 +179,7 @@ async function addTaskToBoard(boardId, taskId) {
             body: JSON.stringify(true)
         });
 
-        if (!response.ok) {
-            throw new Error('Failed to add task to board');
-        }
-
+        if (!response.ok) throw new Error('Failed to add task to board');
         return await response.json();
     } catch (error) {
         console.error('Error adding task to board:', error);
@@ -237,48 +188,54 @@ async function addTaskToBoard(boardId, taskId) {
 }
 
 /**
- * Toggles the "done" property of a specific subtask stored in Firebase.
- * The function retrieves the subtask, toggles its "done" value (if true, sets to false; if false, sets to true),
- * writes the updated subtask back to the database, and returns the updated object.
- *
+ * Toggles a subtask's done status.
  * @async
- * @param {string} taskId - The ID of the task.
- * @param {string} subtaskId - The ID of the subtask to be toggled.
- * @returns {Promise<Object>} A promise that resolves to the updated subtask object.
+ * @param {string} taskId - Task identifier.
+ * @param {string} subtaskId - Subtask identifier.
  */
 async function toggleTaskDone(taskId, subtaskId) {
-    let response = await fetch(TASKS_URL + taskId + "/subtasks/" + subtaskId + ".json");
-    let subtask = await response.json();
-  
+    const subtask = await fetchSubtask(taskId, subtaskId);
     subtask.done = !subtask.done;
-  
-    await fetch(TASKS_URL + taskId + "/subtasks/" + subtaskId + ".json", {
-      method: "PUT", // Alternatively, use "PATCH" to update only the "done" field
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(subtask)
-    });
-
+    await updateSubtask(taskId, subtaskId, subtask);
     renderTasks();
-  }
-  
+}
+
 /**
- * Deletes a task from the database by sending a DELETE request.
- *
- * This function sends an HTTP DELETE request to the Firebase database for the specified task ID.
- * The request targets the task resource at TASKS_URL and removes it from the database.
- *
+ * Fetches a subtask from the database.
  * @async
- * @param {string} taskId - The identifier of the task to delete.
- * @returns {Promise<void>} A promise that resolves when the task has been deleted.
+ * @param {string} taskId - Task identifier.
+ * @param {string} subtaskId - Subtask identifier.
+ * @returns {Promise<Object>} Subtask data.
  */
-  async function deleteTask(taskId) {
-    const response = await fetch(TASKS_URL + "/" + taskId + ".json", {
+async function fetchSubtask(taskId, subtaskId) {
+    const response = await fetch(TASKS_URL + taskId + "/subtasks/" + subtaskId + ".json");
+    return await response.json();
+}
+
+/**
+ * Updates a subtask in the database.
+ * @async
+ * @param {string} taskId - Task identifier.
+ * @param {string} subtaskId - Subtask identifier.
+ * @param {Object} subtask - Updated subtask data.
+ */
+async function updateSubtask(taskId, subtaskId, subtask) {
+    await fetch(TASKS_URL + taskId + "/subtasks/" + subtaskId + ".json", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(subtask)
+    });
+}
+
+/**
+ * Deletes a task from the database.
+ * @async
+ * @param {string} taskId - Task identifier.
+ */
+async function deleteTask(taskId) {
+    await fetch(TASKS_URL + "/" + taskId + ".json", {
         method: "Delete",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(),
-      });
-  }
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify()
+    });
+}
