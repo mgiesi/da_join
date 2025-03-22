@@ -24,7 +24,7 @@
     background: white;
     width: 100%;
     height: calc(90vh - 80px);
-    padding-left: 400px;
+    padding-left: 650px;
     padding-bottom: 0;
   }
   .contact-list {
@@ -193,6 +193,8 @@
 
   .dropdown-overlay-content.show {
     display: flex;
+    right: 480px;
+    bottom: 50px;
   }
 
   .contact-info {
@@ -201,15 +203,96 @@
     transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
   }
 
-  /* Wenn .contact.active ist, dann soll .contact-info sichtbar sein */
   .contact.active + .contact-info {
     visibility: visible;
     opacity: 1;
+  }
+  .contact-sections {
+    width: 100%;
+    padding-left: 250px;
+  }
+  .respArrow {
+    right: 450px;
+  }
+  .exportMenu {
+    right: 450px;
+  }
+}
+
+@media (max-width: 1480px) {
+  .contact-info {
+    padding-left: 620px;
+  }
+  .respArrow {
+    right: 420px;
+  }
+  .exportMenu {
+    right: 420px;
+  }
+  .dropdown-overlay-content.show {
+    right: 450px;
+  }
+}
+
+@media (max-width: 1430px) {
+  .contact-info {
+    padding-left: 590px;
+  }
+  .respArrow {
+    right: 370px;
+  }
+  .exportMenu {
+    right: 370px;
+  }
+  .dropdown-overlay-content.show {
+    right: 400px;
+  }
+}
+@media (max-width: 1350px) {
+  .contact-info {
+    padding-left: 550px;
+  }
+  .respArrow {
+    right: 330px;
+  }
+  .exportMenu {
+    right: 330px;
+  }
+  .dropdown-overlay-content.show {
+    right: 360px;
   }
 }
 @media (max-width: 1300px) {
   .contact-list {
     padding-bottom: 0;
+  }
+}
+@media (max-width: 1270px) {
+  .contact-info {
+    padding-left: 520px;
+  }
+  .respArrow {
+    right: 300px;
+  }
+  .exportMenu {
+    right: 300px;
+  }
+  .dropdown-overlay-content.show {
+    right: 330px;
+  }
+}
+@media (max-width: 1200px) {
+  .contact-info {
+    padding-left: 480px;
+  }
+  .respArrow {
+    right: 270px;
+  }
+  .exportMenu {
+    right: 270px;
+  }
+  .dropdown-overlay-content.show {
+    right: 300px;
   }
 }
 
@@ -242,6 +325,13 @@
   .contact-list {
     height: calc(100vh - 160px);
     padding-bottom: 0;
+  }
+}
+
+@media (max-width: 1080px) {
+  .contact-sections {
+    width: 100%;
+    padding-left: 0;
   }
 }
 
@@ -293,6 +383,18 @@
   }
 }
 
+@media (max-width: 910px) {
+  .respArrow {
+    right: 230px;
+  }
+  .exportMenu {
+    right: 230px;
+  }
+  .dropdown-overlay-content.show {
+    right: 260px;
+  }
+}
+
 @media (max-width: 900px) {
   .contact-info {
     position: absolute;
@@ -306,6 +408,18 @@
   .overlay {
     top: 100px;
     left: 280px;
+  }
+}
+
+@media (max-width: 870px) {
+  .respArrow {
+    right: 180px;
+  }
+  .exportMenu {
+    right: 180px;
+  }
+  .dropdown-overlay-content.show {
+    right: 210px;
   }
 }
 
@@ -464,6 +578,18 @@
   }
 }
 
+@media (max-width: 715px) {
+  .respArrow {
+    right: 100px;
+  }
+  .exportMenu {
+    right: 100px;
+  }
+  .dropdown-overlay-content.show {
+    right: 130px;
+  }
+}
+
 @media (max-width: 701px) {
   .contact-info {
     position: absolute;
@@ -565,13 +691,16 @@
   .respArrow {
     right: 20px;
   }
+  .dropdown-overlay-content.show {
+    right: 40px;
+  }
 }
 
 @media (max-width: 432px) {
   .overlay {
     position: absolute;
     top: 50px;
-    left: 24px;
+    left: 20px;
     display: flex;
     flex-direction: column;
     width: 396px;
@@ -613,7 +742,7 @@
   .overlay {
     position: absolute;
     top: 50px;
-    left: 12px;
+    left: 10px;
     display: flex;
     flex-direction: column;
     width: 396px;
@@ -633,7 +762,7 @@
   .overlay {
     position: absolute;
     top: 50px;
-    left: 12px;
+    left: 18px;
     display: flex;
     flex-direction: column;
     width: 360px;
@@ -656,7 +785,7 @@
   .overlay {
     position: absolute;
     top: 10px;
-    left: 12px;
+    left: 25px;
     display: flex;
     flex-direction: column;
     width: 330px;
@@ -713,10 +842,14 @@
   }
   .contact-sections {
     padding: 0 !important;
+    width: 100%;
   }
   .exportMenu {
     right: 13px;
     bottom: 30px;
+  }
+  .dropdown-overlay-content.show {
+    right: 43px;
   }
 }
 
@@ -724,7 +857,7 @@
   .overlay {
     position: absolute;
     top: 10px;
-    left: 12px;
+    left: 15px;
     display: flex;
     flex-direction: column;
     width: 330px;
