@@ -121,13 +121,14 @@ function handleLoginError(error) {
  */
 async function addUser() {
   const { name, email, password, confirmPassword } = getUserInput();
-  validateInputs();
-  emailValidation();
+
+  // Validierungen durchführen
+  if (!validateInput(name, email, password, confirmPassword)) return;
   if (!emailValidation(email)) return;
   if (!validateInputs(name, email)) return;
-  if (!validateInput(name, email, password, confirmPassword)) return;
   if (!validatePassword(password, confirmPassword)) return;
 
+  // Wenn alle Felder validiert sind, speichere den neuen Benutzer
   const newUser = { name, email, password };
   await saveUser(newUser);
 }
@@ -148,10 +149,14 @@ function getUserInput() {
  * Validates the user input fields for name, email, password, and confirmPassword.
  */
 function validateInput(name, email, password, confirmPassword) {
+  const errorDiv = document.getElementById("FieldsSignUp");
+
   if (!name || !email || !password || !confirmPassword) {
-    document.getElementById("FieldsSignUp").classList.remove("dNone");
+    errorDiv.classList.remove("dNone");
     return false;
   }
+
+  errorDiv.classList.add("dNone");
   return true;
 }
 

@@ -1,7 +1,7 @@
 /**
  * Validates all required input fields in the sign-up form.
  * Currently validates only the name input field.
- * 
+ *
  * @returns {boolean} Returns true if all fields are valid, false otherwise.
  */
 function validateInputs() {
@@ -26,7 +26,7 @@ function validateInputs() {
 /**
  * Validates a specific input field based on its ID.
  * Currently handles name validation with a regex pattern.
- * 
+ *
  * @param {HTMLElement} input - The input element to validate
  * @param {HTMLElement} errorDiv - The div element to display error messages
  * @returns {boolean} Returns true if the field is valid, false otherwise
@@ -51,7 +51,7 @@ function validateField(input, errorDiv) {
 /**
  * Validates the email input field using a regex pattern.
  * Shows or hides an error message based on validation result.
- * 
+ *
  * @returns {boolean} Returns true if the email is valid, false otherwise
  */
 function emailValidation() {
@@ -69,3 +69,13 @@ function emailValidation() {
   warning.classList.add("dNone");
   return true;
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  document
+    .getElementById("inputMail")
+    .addEventListener("blur", emailValidation);
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  document.getElementById("inputName").addEventListener("blur", validateInputs);
+});

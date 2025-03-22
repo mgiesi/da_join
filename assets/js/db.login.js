@@ -3,8 +3,6 @@
  * Ensure that DB_BASE_URL is available by including script.js.
  * @constant {string}
  */
-const DB_BASE_URL =
-  "https://da-join-629d2-default-rtdb.europe-west1.firebasedatabase.app/";
 const USER_URL = DB_BASE_URL + "user/";
 
 /**
