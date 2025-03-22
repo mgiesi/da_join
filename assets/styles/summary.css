@@ -1,145 +1,151 @@
 .main-container {
-    margin-left: 232px;
-    margin-top: 110px;
+  margin-left: 232px;
+  margin-top: 110px;
 }
 
 .summary-content {
-    margin-left: 96px;
-    margin-top: 206px;
+  margin-left: 96px;
+  margin-top: 206px;
 }
 
 .summary-title {
-    margin-bottom: 56px;
-    gap: 28px;
+  margin-bottom: 56px;
+  gap: 28px;
 }
 
 .summary-box-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: start;
-    gap: 28px;
-    width: 560px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  gap: 28px;
+  width: 560px;
 }
 
 .summary-box {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 18px;
-    transition: all 0.2s ease;
-    cursor: pointer;
-    height: 168px;
-    width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  height: 168px;
+  width: 100%;
 }
 
 .summary-box-row a {
-    flex: 1;
+  flex: 1;
 }
 
 .summary-box:hover {
-    background: #2c3747;
-    color: #ffffff;
-    transform: scale(1.02);
+  background: #2c3747;
+  color: #ffffff;
+  transform: scale(1.02);
 }
 
 .summary-box:hover .summary-box-icon {
-    background-color: #FFFFFF;
+  background-color: #ffffff;
 }
 
 .summary-box:hover .summary-box-icon_red {
-    background-color: #FF3D00;
+  background-color: #ff3d00;
 }
 
 .summary-box:hover .summary-box-icon_todo {
-    content: url('../icons/edit.svg');
-    color: #ffffff;
-    transform: scale(1.02);
+  content: url("../icons/edit.svg");
+  color: #ffffff;
+  transform: scale(1.02);
 }
 
 .summary-box:hover .summary-box-icon_done {
-    content: url('../icons/done.svg');
-    color: #ffffff;
-    transform: scale(1.02);
+  content: url("../icons/done.svg");
+  color: #ffffff;
+  transform: scale(1.02);
 }
 
 .summary-box-row {
-    width: 100%;
-    gap: 32px;
+  width: 100%;
+  gap: 32px;
 }
 
 .summary-box-icon {
-    width: 69px;
-    height: 69px;
-    border-radius: 50%;
-    background-color: #2A3647;
+  width: 69px;
+  height: 69px;
+  border-radius: 50%;
+  background-color: #2a3647;
 }
 
 .summary-box-icon_red {
-    width: 69px;
-    height: 69px;
-    border-radius: 50%;
-    background-color: #FF3D00;
+  width: 69px;
+  height: 69px;
+  border-radius: 50%;
+  background-color: #ff3d00;
 }
 
 .summary-box-text {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .summary-box-text span {
-    margin-left: 18px;
-    margin-right: 18px;
+  margin-left: 18px;
+  margin-right: 18px;
 }
 
 .summary-box-deadline {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: start;
-    gap: 13px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  gap: 13px;
 }
 
 .summary-icon {
-    width: 32px;
-    height: 32px;
+  width: 32px;
+  height: 32px;
 }
 
-
 .summary-vrule-blue {
-    width: 3px;
-    height: 59px;
-    border-radius: 1.5px;
-    background: #29ABE2;
+  width: 3px;
+  height: 59px;
+  border-radius: 1.5px;
+  background: #29abe2;
 }
 
 .summary-vrule-gray {
-    width: 2px;
-    height: 102px;
-    border-radius: 1.5px;
-    margin-left: 24px;
-    margin-right: 61px;
-    background: #D1D1D1;
+  width: 2px;
+  height: 102px;
+  border-radius: 1.5px;
+  margin-left: 24px;
+  margin-right: 61px;
+  background: #d1d1d1;
 }
 
 .summary-greeting {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
-    margin-left: 80px;
+  margin-left: 80px;
 }
 
 .summary-greeting-overlay {
-    position: fixed;
-    display: flex;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: #FFFFFF;
+  position: fixed;
+  display: flex;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+}
+
+.jCenter {
+  justify-content: center;
+}
+.aCenter {
+  align-items: center;
 }

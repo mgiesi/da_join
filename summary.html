@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Summary - Join</title>
 
-    <link rel="shortcut icon" href="./assets/icons/favicon.png" type="image/x-icon">
-    <link rel="stylesheet" href="./assets/styles/fonts.css">
-    <link rel="stylesheet" href="./assets/styles/fontsResponsive.css">
-    <link rel="stylesheet" href="./assets/styles/style.css">
-    <link rel="stylesheet" href="./assets/styles/components.css">
-    <link rel="stylesheet" href="./assets/styles/layout.css">
+    <link
+      rel="shortcut icon"
+      href="./assets/icons/favicon.png"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="./assets/styles/fonts.css" />
+    <link rel="stylesheet" href="./assets/styles/fontsResponsive.css" />
+    <link rel="stylesheet" href="./assets/styles/style.css" />
+    <link rel="stylesheet" href="./assets/styles/components.css" />
+    <link rel="stylesheet" href="./assets/styles/layout.css" />
 
-    <link rel="stylesheet" href="./assets/styles/summary.css">
-    <link rel="stylesheet" href="./assets/styles/summaryResponsive.css">
+    <link rel="stylesheet" href="./assets/styles/summary.css" />
+    <link rel="stylesheet" href="./assets/styles/summaryResponsive.css" />
 
     <script src="./assets/js/script.js"></script>
     <script src="./assets/js/db.board.js"></script>
@@ -22,102 +25,125 @@
     <script src="./assets/js/db.users.js"></script>
     <script src="./assets/js/summary.js"></script>
     <script src="./assets/js/board.js"></script>
-</head>
+  </head>
 
-<body onload="init(); initSummary()">
+  <body onload="init(); initSummary()">
     <header w3-include-html=".\assets\templates\header.html"></header>
     <div class="main-container">
-        <div w3-include-html=".\assets\templates\side-menu.html"></div>
+      <div w3-include-html=".\assets\templates\side-menu.html"></div>
 
-        <div class="summary-content">
-            <div id="summary-greeting-overlay" class="summary-greeting-overlay">
-                <span id="summary-greeting-text2" class="f7"></span>
-                <span id="summary-greeting-name2" class="f8 tc-blue"></span>
-            </div>
-
-            <div class="summary-title d-flex align-items-center">
-                <span class="f1">Join 360</span>
-                <div class="summary-vrule-blue"></div>
-                <span class="f4">Key Metrics at a Glance</span>
-            </div>
-            <div class="d-flex justify-content-start align-items-center w100">
-                <div class="summary-box-content">
-                    <div class="summary-box-row d-flex">
-                        <a href="board.html">
-                            <div class="summary-box rd-box">
-                                <div class="summary-box-icon d-flex justify-content-center align-items-center">
-                                    <img class="summary-box-icon_todo" src="./assets/icons/edit_white.svg" alt="To-Do">
-                                </div>
-                                <div class="summary-box-text">
-                                    <span id="summary-taskscount-todo" class="f5">0</span>
-                                    <span class="f2">To-do</span>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="board.html">
-                            <div class="summary-box rd-box">
-                                <div class="summary-box-icon d-flex justify-content-center align-items-center">
-                                    <img class="summary-box-icon_done" src="./assets/icons/done_white.svg" alt="Done">
-                                </div>
-                                <div class="summary-box-text">
-                                    <span id="summary-taskscount-done" class="f5">0</span>
-                                    <span class="f2">Done</span>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="summary-box-row d-flex">
-                        <a href="board.html">
-                            <div class="summary-box rd-box">
-                                <div class="summary-box-icon_red d-flex justify-content-center align-items-center">
-                                    <img src="./assets/icons/prio-urgent-white.svg" alt="Urgent">
-                                </div>
-                                <div class="summary-box-text">
-                                    <span id="summary-taskscount-urgent" class="f5">0</span>
-                                    <span class="f3">Urgent</span>
-                                </div>
-                                <div class="summary-vrule-gray"></div>
-                                <div class="summary-box-deadline">
-                                    <span id="summary-upcoming-deadline" class="f6">Februar 16, 2025</span>
-                                    <span class="f3">Upcoming Deadline</span>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="summary-box-row d-flex">
-                        <a href="board.html">
-                            <div class="summary-box rd-box">
-                                <div class="summary-box-text">
-                                    <span id="summary-taskscount-board" class="f5">0</span>
-                                    <span class="f2 text-center">Tasks in Board</span>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="board.html">
-                            <div class="summary-box rd-box">
-                                <div class="summary-box-text">
-                                    <span id="summary-taskscount-inprogress" class="f5">0</span>
-                                    <span class="f2 text-center">Tasks in Progress</span>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="board.html">
-                            <div class="summary-box rd-box">
-                                <div class="summary-box-text">
-                                    <span id="summary-taskscount-awaitfeedback" class="f5">0</span>
-                                    <span class="f2 text-center">Awaiting Feedback</span>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="summary-greeting">
-                    <span id="summary-greeting-text" class="f7"></span>
-                    <span id="summary-greeting-name" class="f8 tc-blue"></span>
-                </div>
-            </div>
+      <div class="summary-content">
+        <div id="summary-greeting-overlay" class="summary-greeting-overlay">
+          <span id="summary-greeting-text2" class="f7"></span>
+          <span id="summary-greeting-name2" class="f8 tc-blue"></span>
         </div>
-    </div>
-</body>
 
+        <div id="respSummary" class="summary-title d-flex align-items-center">
+          <span class="f1">Join 360</span>
+          <div class="summary-vrule-blue"></div>
+          <span class="f4">Key Metrics at a Glance</span>
+        </div>
+        <div
+          id="respSummary2"
+          class="d-flex justify-content-start align-items-center w100"
+        >
+          <div class="summary-box-content">
+            <div class="summary-box-row d-flex">
+              <a href="board.html">
+                <div class="summary-box rd-box">
+                  <div
+                    class="summary-box-icon d-flex justify-content-center align-items-center"
+                  >
+                    <img
+                      class="summary-box-icon_todo"
+                      src="./assets/icons/edit_white.svg"
+                      alt="To-Do"
+                    />
+                  </div>
+                  <div class="summary-box-text">
+                    <span id="summary-taskscount-todo" class="f5">0</span>
+                    <span class="f2">To-do</span>
+                  </div>
+                </div>
+              </a>
+              <a href="board.html">
+                <div class="summary-box rd-box">
+                  <div
+                    class="summary-box-icon d-flex justify-content-center align-items-center"
+                  >
+                    <img
+                      class="summary-box-icon_done"
+                      src="./assets/icons/done_white.svg"
+                      alt="Done"
+                    />
+                  </div>
+                  <div class="summary-box-text">
+                    <span id="summary-taskscount-done" class="f5">0</span>
+                    <span class="f2">Done</span>
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="summary-box-row d-flex">
+              <a href="board.html">
+                <div class="summary-box rd-box">
+                  <div
+                    class="summary-box-icon_red d-flex justify-content-center align-items-center"
+                  >
+                    <img
+                      src="./assets/icons/prio-urgent-white.svg"
+                      alt="Urgent"
+                    />
+                  </div>
+                  <div class="summary-box-text">
+                    <span id="summary-taskscount-urgent" class="f5">0</span>
+                    <span class="f3">Urgent</span>
+                  </div>
+                  <div class="summary-vrule-gray"></div>
+                  <div class="summary-box-deadline">
+                    <span id="summary-upcoming-deadline" class="f6"
+                      >Februar 16, 2025</span
+                    >
+                    <span class="f3">Upcoming Deadline</span>
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="summary-box-row d-flex">
+              <a href="board.html">
+                <div class="summary-box rd-box">
+                  <div class="summary-box-text">
+                    <span id="summary-taskscount-board" class="f5">0</span>
+                    <span class="f2 text-center">Tasks in Board</span>
+                  </div>
+                </div>
+              </a>
+              <a href="board.html">
+                <div class="summary-box rd-box">
+                  <div class="summary-box-text">
+                    <span id="summary-taskscount-inprogress" class="f5">0</span>
+                    <span class="f2 text-center">Tasks in Progress</span>
+                  </div>
+                </div>
+              </a>
+              <a href="board.html">
+                <div class="summary-box rd-box">
+                  <div class="summary-box-text">
+                    <span id="summary-taskscount-awaitfeedback" class="f5"
+                      >0</span
+                    >
+                    <span class="f2 text-center">Awaiting Feedback</span>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="summary-greeting">
+            <span id="summary-greeting-text" class="f7"></span>
+            <span id="summary-greeting-name" class="f8 tc-blue"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
