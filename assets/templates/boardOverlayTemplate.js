@@ -9,12 +9,14 @@
 function getTaskDetails(taskId, task, contacts, boardName) {
   if (!task) return "";
   return `
-        <div class="overlay-taskDetails">
+        <div class="overlay-taskDetailsContainer">
             ${getTaskDetailsHeader(task)}
-            ${getTaskDetailsContent(task)}
-            ${getTaskDetailsPriority(task)}
-            ${getTaskDetailsAssignedTo(task, contacts)}
-            ${displaySubTasks4TaskDetails(taskId, task)}
+            <div class="overlay-taskDetails">
+              ${getTaskDetailsContent(task)}
+              ${getTaskDetailsPriority(task)}
+              ${getTaskDetailsAssignedTo(task, contacts)}
+              ${displaySubTasks4TaskDetails(taskId, task)}
+            </div>
             ${getTaskDetailsButtons(boardName, taskId)}
         </div>
     `;
@@ -32,7 +34,7 @@ function getTaskDetailsHeader(task) {
         <img onclick="hideTaskDetails()" class="close-btn" src="./assets/icons/cancel.svg" alt="">
     </div>
     <div class="taskHeadline">
-        <h1 class="f1">${task.title}</h1>
+        <p class="f1">${task.title}</p>
     </div>
     <div class="description f2">
         <p>${task.description}</p>

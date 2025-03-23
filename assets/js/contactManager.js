@@ -9,9 +9,7 @@ let selectedContacts = [];
  */
 async function fetchContacts() {
   try {
-    const response = await fetch(
-      "https://da-join-629d2-default-rtdb.europe-west1.firebasedatabase.app/contacts.json"
-    );
+    const response = await fetch(DB_BASE_URL + "contacts.json");
     if (!response.ok) {
       throw new Error("Failed to fetch contacts");
     }

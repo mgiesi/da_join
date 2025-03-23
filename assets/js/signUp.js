@@ -1,7 +1,3 @@
-let users = [
-  { name: "Markus Giesinger", email: "test@web.de", password: "test" },
-];
-
 /**
  * Navigates to the sign-up page.
  */
@@ -57,8 +53,7 @@ async function login() {
   const email = document.getElementById("inputMail").value;
   const password = document.getElementById("inputLock").value;
 
-  const dbUrl =
-    "https://da-join-629d2-default-rtdb.europe-west1.firebasedatabase.app/user.json";
+  const dbUrl = DB_BASE_URL + "user.json";
 
   try {
     const users = await fetchUserData(dbUrl);
@@ -198,9 +193,7 @@ async function saveUser(newUser) {
  * Gets the total count of users in the database.
  */
 async function getUserCount() {
-  const response = await fetch(
-    "https://da-join-629d2-default-rtdb.europe-west1.firebasedatabase.app/user.json"
-  );
+  const response = await fetch(DB_BASE_URL + "user.json");
   if (!response.ok) throw new Error(`Fetch error: ${response.status}`);
   const users = await response.json();
   return users ? Object.keys(users).length : 0;
@@ -211,7 +204,7 @@ async function getUserCount() {
  */
 async function saveToDatabase(user, key) {
   const response = await fetch(
-    `https://da-join-629d2-default-rtdb.europe-west1.firebasedatabase.app/user/${key}.json`,
+    `${DB_BASE_URL}user/${key}.json`,
     {
       method: "PUT",
       headers: { "Content-Type": "application/json" },

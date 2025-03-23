@@ -95,7 +95,7 @@ function validateAllEditInputs(name, email, phone) {
  */
 async function saveContactToFirebase(contactKey, updatedContact) {
     const response = await fetch(
-        `https://da-join-629d2-default-rtdb.europe-west1.firebasedatabase.app/contacts/${contactKey}.json`,
+        `${DB_BASE_URL}contacts/${contactKey}.json`,
         {
             method: "PUT",
             headers: { "Content-Type": "application/json" },

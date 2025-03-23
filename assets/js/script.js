@@ -1,4 +1,4 @@
-const DB_BASE_URL = "https://da-join-629d2-default-rtdb.europe-west1.firebasedatabase.app/"; // URL von Markus
+const DB_BASE_URL = "https://da-join-629d2-default-rtdb.europe-west1.firebasedatabase.app/";
 
 /**
  * Initializes the join webpage by including external HTML content, setting up menu interactions,
@@ -308,10 +308,16 @@ function getInitials(name) {
     .join("");
 }
 
+/**
+ * Function to enable the background for a modal overlay.
+ */
 function openModal() {
   document.body.classList.add("modal-open");
 }
 
+/**
+ * Function to disable the background for a modal overlay.
+ */
 function closeModal() {
   document.body.classList.remove("modal-open");
 }

@@ -95,26 +95,12 @@
   height: 36px;
 }
 
-.taskHeadline {
-  width: 445;
-  height: 219;
-}
-
-.description {
-  width: 445;
-  height: 24;
-}
-
 .dueDate {
-  width: 445;
-  height: 24;
   gap: 25px;
   display: flex;
 }
 
 .priority {
-  width: 445;
-  height: 24;
   gap: 25px;
   display: flex;
 }
@@ -139,8 +125,6 @@
 }
 
 .taskContactDetails {
-  width: 445;
-  height: 56;
   display: flex;
   justify-content: space-between;
   border-radius: 10px;
@@ -165,7 +149,6 @@
 
 .oneSubTask {
   display: flex;
-  width: 344;
   height: 32px;
   padding-top: 6px;
   padding-right: 16px;
