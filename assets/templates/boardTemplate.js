@@ -320,7 +320,9 @@ function setMoveTaskArrowsVisibility() {
   });
 }
 
-// Initialize responsive elements
+/**
+ * Initialize responsive elements
+ */
 window.onload = function () {
   checkResponsiveElements();
   setMoveTaskArrowsVisibility();
