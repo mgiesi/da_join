@@ -10,14 +10,15 @@ function getTaskDetails(taskId, task, contacts, boardName) {
   if (!task) return "";
   return `
         <div class="overlay-taskDetailsContainer">
-            ${getTaskDetailsHeader(task)}
+              ${getTaskDetailsHeader(task)}
             <div class="overlay-taskDetails">
+              ${getTaskDetailsDescr(task)}
               ${getTaskDetailsContent(task)}
               ${getTaskDetailsPriority(task)}
               ${getTaskDetailsAssignedTo(task, contacts)}
               ${displaySubTasks4TaskDetails(taskId, task)}
             </div>
-            ${getTaskDetailsButtons(boardName, taskId)}
+              ${getTaskDetailsButtons(boardName, taskId)}
         </div>
     `;
 }
@@ -36,6 +37,16 @@ function getTaskDetailsHeader(task) {
     <div class="taskHeadline">
         <p class="f1">${task.title}</p>
     </div>
+  `;
+}
+
+/**
+ * Generates HTML for task details header section
+ * @param {Object} task - Task data object
+ * @returns {string} HTML content for task header
+ */
+function getTaskDetailsDescr(task) {
+  return `
     <div class="description f2">
         <p>${task.description}</p>
     </div>
