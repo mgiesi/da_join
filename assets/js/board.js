@@ -70,7 +70,8 @@ async function renderTasks() {
     getContacts(),
   ]);
   renderTasksToBoards(boards, tasks, contacts);
-  handleVisibility();
+  checkResponsiveElements();
+  setMoveTaskArrowsVisibility();
 }
 
 /**
