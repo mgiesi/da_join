@@ -102,7 +102,8 @@
   .overlay-taskDetailsContainer {
   }
 
-  .overlay-taskDetails {    
+  .overlay-taskDetails {   
+    padding-bottom: 32px; 
   }
 
   .detailsButton {
@@ -142,5 +143,6 @@
   .overlay-taskDetails {
     overflow-y: auto;
     scrollbar-width: none;
+    padding-bottom: 24px;
   }
 }

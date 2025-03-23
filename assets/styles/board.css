@@ -107,7 +107,6 @@
 
 .assignedTo {
   width: 100%;
-  height: 150px;
   gap: 8px;
   flex-grow: 1;
 }
@@ -119,7 +118,7 @@
 
 .assignedContacts {
   width: 100%;
-  height: calc(100% - 24px);
+  max-height: 168px;
   overflow-y: auto;
   gap: 4px;
 }
@@ -136,13 +135,12 @@
 
 .subTasks {
   width: 100%;
-  height: 150px;
   gap: 8px;
   flex-grow: 1;
 }
 
 .checkedSubTasks {
-  height: calc(100% - 24px);
+  max-height: 160px;
   overflow-y: auto;
   gap: 4px;
 }
@@ -460,7 +458,7 @@ input:required:invalid {
   background-color: #0038ff;
 }
 
-.task-type-technicaltask {
+.task-type-task {
   background-color: #1fd7c1;
 }
 

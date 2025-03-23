@@ -92,6 +92,7 @@
 .overlay-taskDetails {  
   display: flex;
   flex-direction: column;
-  overflow: hidden;  
+  overflow: auto; 
+  scrollbar-width: none; 
   gap: 24px;
 }

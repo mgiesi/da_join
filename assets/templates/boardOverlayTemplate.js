@@ -187,7 +187,7 @@ function displaySubTasks4TaskDetails(taskId, task) {
   if (subTasksCount <= 0) return "";
   return `
     <div class="subTasks">
-        <p class="topAssigned">Subtasks</p>
+        <p class="topAssigned f2">Subtasks</p>
         <div class="checkedSubTasks">
             ${getSubtasksContent(taskId, task)}
         </div>
@@ -226,14 +226,4 @@ function displaySubTask4TaskDetails(taskId, task, subtaskId, subtask) {
             <p class="f3">${subtask.name}</p>
         </div>
     `;
-}
-
-/**
- * Generates HTML for task category type
- * @param {string} category - Category name
- * @returns {string} HTML content for category
- */
-function displayTaskType(category) {
-  const categoryClass = category.toLowerCase().replace(/\s+/g, '');
-  return `<div class="board-task-type task-type-${categoryClass}">${category}</div>`;
 }

@@ -183,7 +183,7 @@ function displayTaskType(taskCategory) {
   if ("userstory" === taskCategory) {
     return `<div class="board-task-type task-type-userstory f3">User Story</div>`;
   } else {
-    return `<div class="board-task-type task-type-technicaltask f3">Technical Task</div>`;
+    return `<div class="board-task-type task-type-task f3">Technical Task</div>`;
   }
 }
 
