@@ -93,8 +93,7 @@
     margin-top: 250px;
   }
 }
-
-@media (max-width: 375px) {
+@media (max-width: 390px) {
   .footerSignUp {
     margin-top: 50px;
   }
@@ -103,12 +102,18 @@
   }
 }
 
-@media (max-width: 390px) {
+@media (max-width: 376px) {
   .footerSignUp {
     margin-top: 50px;
   }
   footer {
     margin-top: 48px;
+  }
+  .formWidth {
+    width: 100%;
+  }
+  .topBox {
+    padding-right: 0;
   }
 }
 

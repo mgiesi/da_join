@@ -122,13 +122,11 @@ function handleLoginError(error) {
 async function addUser() {
   const { name, email, password, confirmPassword } = getUserInput();
 
-  // Validierungen durchführen
   if (!validateInput(name, email, password, confirmPassword)) return;
   if (!emailValidation(email)) return;
   if (!validateInputs(name, email)) return;
   if (!validatePassword(password, confirmPassword)) return;
 
-  // Wenn alle Felder validiert sind, speichere den neuen Benutzer
   const newUser = { name, email, password };
   await saveUser(newUser);
 }
@@ -163,13 +161,24 @@ function validateInput(name, email, password, confirmPassword) {
 /**
  * Validates if the password and confirmPassword match.
  */
-function validatePassword(password, confirmPassword) {
+function validatePassword() {
+  const password = document.getElementById("inputLock").value;
+  const confirmPassword = document.getElementById("inputConfirm").value;
+  const errorMessage = document.getElementById("passwordSignUp");
+
   if (password !== confirmPassword) {
-    document.getElementById("passwordSignUp").classList.remove("dNone");
+    errorMessage.classList.remove("dNone");
     return false;
+  } else {
+    errorMessage.classList.add("dNone");
+    return true;
   }
-  return true;
 }
+document.addEventListener("DOMContentLoaded", function () {
+  document
+    .getElementById("inputConfirm")
+    .addEventListener("blur", validatePassword);
+});
 
 /**
  * Saves a new user to the database.
@@ -210,4 +219,20 @@ async function saveToDatabase(user, key) {
     }
   );
   if (!response.ok) throw new Error(`Save error: ${response.status}`);
+}
+
+/**
+ * Hides the error message if the checkbox is checked.
+ *
+ * This function checks whether the checkbox with the ID "checkbox" is checked.
+ * If it is checked, the element with the ID "dialogSignUp" will be hidden by
+ * adding the "dNone" class.
+ */
+function hideMessageIfChecked() {
+  let checkbox = document.getElementById("checkbox");
+  let dialogSignUp = document.getElementById("dialogSignUp");
+
+  if (checkbox && checkbox.checked) {
+    dialogSignUp.classList.add("dNone");
+  }
 }

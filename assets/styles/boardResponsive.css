@@ -134,6 +134,9 @@
   .topDetails {
     width: 100%;
   }
+  .taskHeadline h1 {
+    font-size: 28px;
+  }
 }
 
 @media (max-width: 450px) {
