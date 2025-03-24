@@ -66,20 +66,6 @@ function handleContactClick(event, contactInfo) {
 }
 
 /**
- * Shows contact info and marks contact as active
- * @param {HTMLElement} contact - The contact element
- * @param {HTMLElement} contactInfo - The contact info container
- */
-function showContactInfo(contact, contactInfo) {
-  document
-    .querySelectorAll(".contact.active")
-    .forEach((c) => c.classList.remove("active"));
-  contact.classList.add("active");
-  contactInfo.style.visibility = "visible";
-  contactInfo.style.opacity = "1";
-}
-
-/**
  * Hides the contact info panel
  * @param {HTMLElement} contactInfo - The contact info container
  */
@@ -96,17 +82,6 @@ function scrollToTop() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 }
-
-document.addEventListener("DOMContentLoaded", function () {
-  document.body.addEventListener("click", function (event) {
-    let contact = event.target.closest(".contact");
-    if (!contact) return;
-    document
-      .querySelectorAll(".contact.active")
-      .forEach((c) => c.classList.remove("active"));
-    contact.classList.add("active");
-  });
-});
 
 /**
  * Initializes event listeners when the DOM is fully loaded.
@@ -127,12 +102,10 @@ function setupContactClickHandler() {
  * Handles the click event on a contact element.
  * @param {Event} event - The click event.
  */
-function handleContactClick(event) {
-  let contact = event.target.closest(".contact");
-  if (!contact) return;
-  resetActiveContacts();
-  markContactActive(contact);
-}
+/**
+ * Handles the click event on a contact element.
+ * @param {Event} event - The click event.
+ */
 
 /**
  * Removes active and highlighted classes from all contact elements.
@@ -161,6 +134,6 @@ function injectHighlightStyle() {
   if (existingStyle) return;
   const style = document.createElement("style");
   style.id = "contact-email-style";
-  style.textContent = `.contact-email.highlight { color: #007CEE !important; }`;
+  style.textContent = ".contact-email.highlight { color: #007CEE !important; }";
   document.head.appendChild(style);
 }
