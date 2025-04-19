@@ -1,5 +1,4 @@
-const DB_BASE_URL =
-  "https://join-heuft-default-rtdb.europe-west1.firebasedatabase.app/";
+const DB_BASE_URL = "https://da-join-629d2-default-rtdb.europe-west1.firebasedatabase.app/";
 
 /**
  * Initializes the join webpage by including external HTML content, setting up menu interactions,
@@ -20,7 +19,7 @@ async function init() {
 
 /**
  * Includes external HTML files into the current document.
- *
+ * 
  * @async
  * @returns {Promise<void>} A promise that resolves when all external HTML content has been included.
  */
@@ -36,7 +35,7 @@ async function includeHTML() {
 
 /**
  * Parses the w3-include-html attribute to extract file path and fragment selector.
- *
+ * 
  * @param {Element} element - The element with the w3-include-html attribute.
  * @returns {Object} An object containing filePath and fragmentSelector.
  */
@@ -58,7 +57,7 @@ function parseIncludeAttribute(element) {
 
 /**
  * Processes an include element by fetching and inserting HTML content.
- *
+ * 
  * @async
  * @param {Element} element - The element to process.
  * @param {string} filePath - The path to the HTML file.
@@ -80,7 +79,7 @@ async function processIncludeElement(element, filePath, fragmentSelector) {
 
 /**
  * Inserts HTML content into an element, optionally selecting a fragment.
- *
+ * 
  * @param {Element} element - The element to insert content into.
  * @param {string} htmlText - The HTML content.
  * @param {string|null} fragmentSelector - Optional CSS selector for a fragment.
@@ -135,10 +134,8 @@ async function renderUserDetails() {
 async function checkUser() {
   const userName = await getActiveUserName();
   if (!userName) {
-    if (
-      window.location.pathname.endsWith("legal_notice.html") == false &&
-      window.location.pathname.endsWith("privacy_policy.html") == false
-    ) {
+    if (window.location.pathname.endsWith('legal_notice.html') == false &&
+      window.location.pathname.endsWith('privacy_policy.html') == false) {
       goToStart();
     }
   }
@@ -199,21 +196,21 @@ function setActiveMenuItem() {
 
 /**
  * Removes the "active" class from all menu buttons.
- *
+ * 
  * @param {NodeList} menuButtons - The collection of menu buttons.
  */
 function resetActiveMenuItems(menuButtons) {
-  menuButtons.forEach((button) => button.classList.remove("active"));
+  menuButtons.forEach(button => button.classList.remove("active"));
 }
 
 /**
  * Sets the active menu item based on the current page.
- *
+ * 
  * @param {NodeList} menuButtons - The collection of menu buttons.
  * @param {string} currentPage - The current page filename.
  */
 function setActiveMenuItemByCurrentPage(menuButtons, currentPage) {
-  menuButtons.forEach((button) => {
+  menuButtons.forEach(button => {
     const href = button.getAttribute("href");
     const hrefPage = href.split("/").pop();
     if (currentPage === hrefPage) {
@@ -225,13 +222,13 @@ function setActiveMenuItemByCurrentPage(menuButtons, currentPage) {
 
 /**
  * Sets the active menu item from localStorage if no current page matches.
- *
+ * 
  * @param {NodeList} menuButtons - The collection of menu buttons.
  */
 function setActiveMenuItemFromStorage(menuButtons) {
   const activeMenuItem = localStorage.getItem("activeMenuItem");
   if (activeMenuItem) {
-    menuButtons.forEach((button) => {
+    menuButtons.forEach(button => {
       if (button.getAttribute("href") === activeMenuItem) {
         button.classList.add("active");
       }
@@ -244,7 +241,7 @@ function setActiveMenuItemFromStorage(menuButtons) {
  */
 function addMenuClickListeners() {
   const menuButtons = document.querySelectorAll(".menu-button");
-  menuButtons.forEach((button) => {
+  menuButtons.forEach(button => {
     button.addEventListener("click", function () {
       resetActiveMenuItems(menuButtons);
       this.classList.add("active");
@@ -307,7 +304,7 @@ function hideSubmenu() {
 function getInitials(name) {
   return name
     .split(" ")
-    .map((n) => n.charAt(0).toUpperCase())
+    .map(n => n.charAt(0).toUpperCase())
     .join("");
 }
 
